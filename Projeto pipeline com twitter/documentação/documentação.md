@@ -64,7 +64,9 @@ Iremos utilizar uma virtualização no Windows, chamada WSL 2, que não possuí 
      ```powershell
      dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
      ```
-     ---
+     
+   ### Reinicie o computador para concluir a instalação do WSL e a atualização para o WSL 2.     
+---
      
    - Etapa 4 – Baixar o pacote de atualização do kernel do Linux
    
