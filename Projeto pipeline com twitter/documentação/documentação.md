@@ -96,6 +96,11 @@ Iremos utilizar uma virtualização no Windows, chamada WSL 2, que não possuí 
 
    - Em seguida, você precisará criar uma conta de usuário e uma senha para sua nova distribuição do Linux.
    
-   
-   
+   ![image](https://user-images.githubusercontent.com/57469401/135000594-26d754ea-a2d4-4451-8b77-ee0da3326204.png)
+
+   - Instalação finalizada e distribuição Linux totalmente integrada ao sistema operacional Windows.
+
+## Fim do bloco I para virtualização do Linux no Windows.
+
+---
      
