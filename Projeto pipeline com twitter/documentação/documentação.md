@@ -161,7 +161,7 @@ sudo apt-get install python3-pip
 ```
 ---
 
-6º - Execute o comando abaixo no terminal do Linux para verificar se a instalação do pip foi concluída com sucesso, onde está instalado e para qual versão do Python. Notar que o (V) co mando é maiúsculo.
+6º - Execute o comando abaixo no terminal do Linux para verificar se a instalação do pip foi concluída com sucesso, onde está instalado e para qual versão do Python. Notar que o (V) do comando é maiúsculo.
 ```linux
 pip -V
 ```
