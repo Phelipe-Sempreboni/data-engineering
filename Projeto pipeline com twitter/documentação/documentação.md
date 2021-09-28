@@ -214,9 +214,15 @@ rm -r env
 ```
 
 Para criar e ativar a virtualenv, execute novamente os passos de criação e ativação.
+
+Nota: Recrie e ative a virtualenv, pois iremos utilizá-la.
+
 ---
 
-12º - 
+12º - Criação de um repositório para alocar a instalação do Apache Airflow.
+
+
+---
 
 
 
