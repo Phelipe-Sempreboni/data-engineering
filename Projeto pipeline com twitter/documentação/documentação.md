@@ -99,10 +99,42 @@ Iremos utilizar uma virtualização no Windows, chamada WSL 2, que não possuí 
    - Em seguida, você precisará criar uma conta de usuário e uma senha para sua nova distribuição do Linux.
    
    ![image](https://user-images.githubusercontent.com/57469401/135000594-26d754ea-a2d4-4451-8b77-ee0da3326204.png)
-
+ 
+  3. Abra a Microsoft Store e procure por "Windows Terminal", clique em "Obter" e "Instalar". Com esse terminal é possível rodar a distribuição que foi feita o download no item (1) anterior e é um terminal mais prático e acessível para quem está começando.
+  
    - Instalação finalizada e distribuição Linux totalmente integrada ao sistema operacional Windows.
+
+Documentação de referência: https://docs.microsoft.com/pt-br/windows/wsl/install-manual
 
 ## Fim do bloco I para virtualização do Linux no Windows.
 
 ---
-     
+
+## Inicio do bloco II para configurações no ambiente Linux.
+
+1º - Abra o Windows Terminal como administrador.
+
+---
+
+2º - Deixe uma guia aberta com o PowerShell e uma com Ubuntu ou a distribuição que foi feita a instalação de sua escolha.
+
+---
+
+3º - Configurando e ajustando os parâmetos conexão com a internet, onde neste caso, configuraremos pensando que na máquina utilizada possua uma VPN, que hoje em dia é comum, porém, se sua máquina não iver VPN é capaz que as configurações padrões de instalação do WSL funcionem.
+
+Antes de executar as linhas de código abaixo, execute o comando abaixo.
+
+
+
+---
+
+4º - Digite o comando abaixo para atualizar e realizar um upgrade se necessário no ambiente virtualizado do Linux.
+```linux
+sudo apt update && sudo apt upgrade
+```
+Notar que também podemos executar os comandos separadamente conforme abaixo:
+```linux
+sudo apt-get update
+sudo apt-get upgrade
+```
+---
