@@ -155,7 +155,7 @@ sudo apt-get upgrade
 ```
 ---
 
-5º - Instação do pip para o Python, que por padrão não vem instalado no Linux. Execute o comando abaixo no terminal do Linux. Notar que estamos diretamente o Python na linha da versão 3, pois, por indicação é bom manter e utilizar a linha da versão 3, pois, por exemplo, nas máquinas virtuais da AWS, o padrão é o Python na linha das versões 3.
+5º - Instalação do pip para o Python, que por padrão não vem instalado no Linux. Execute o comando abaixo no terminal do Linux. Notar que estamos diretamente o Python na linha da versão 3, pois, por indicação é bom manter e utilizar a linha da versão 3, pois, por exemplo, nas máquinas virtuais da AWS, o padrão é o Python na linha das versões 3.
 ```linux
 sudo apt-get install python3-pip
 ```
