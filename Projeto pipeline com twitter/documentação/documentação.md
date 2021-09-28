@@ -8,11 +8,11 @@
 
 ---
 
-## Inicio do bloco I para virtualização do Linux no Windows.
+## Inicio do bloco para virtualização do Linux no Windows.
 
-Iremos utilizar uma virtualização no Windows, chamada WSL 2, que não possuí todas distribuições do Linux como uma Hyper-V, porém, irá atender este projeto.
+Iremos utilizar uma virtualização no Windows chamada WSL 2, que não possuí todas distribuições do Linux como um Hyper-V ou uma máquina virtual convencional, porém, irá atender este projeto.
 
-1º - Instalação da WSL 2 para virtualização do Linux no Windows da maneira mais prática e simplista para caso você esteja com a versão mais recente do build do Windows. Caso tenha essa última versão, é só executar o comando abaixo e que executa as seguintes opções:
+1º - Instalação da WSL 2 para virtualização do Linux no Windows, da maneira mais prática e simplista para caso você esteja com a versão mais recente do build do Windows. Caso tenha essa última versão, é só executar o comando abaixo e que executa as seguintes opções:
   - Habilita os componentes opcionais WSL e Plataforma de Máquina Virtual.
   - Baixa e instala o kernel do Linux mais recente.
   - Define WSL 2 como o padrão.
@@ -108,11 +108,11 @@ Iremos utilizar uma virtualização no Windows, chamada WSL 2, que não possuí 
 
 Documentação de referência: https://docs.microsoft.com/pt-br/windows/wsl/install-manual
 
-## Fim do bloco I para virtualização do Linux no Windows.
+## Fim do bloco para virtualização do Linux no Windows.
 
 ---
 
-## Inicio do bloco II para configurações no ambiente Linux.
+## Inicio do bloco para configurações no ambiente Linux.
 
 1º - Abra o Windows Terminal como administrador.
 
@@ -129,7 +129,7 @@ I. Realizar um teste de conexão com o comando abaixo no terminal do Linux. Caso
 ping google.com
 ```
 
-II. Abra o PowerShell e execute os comandos abaixo no terminal do Ububtu ou distribuição escolhida na instalação.
+II. Abra o PowerShell e execute os comandos abaixo.
 ```powershell
 Get-NetIPInterface -InterfaceAlias "vEthernet (WSL)" | Set-NetIPInterface -InterfaceMetric 1  #Esta linha seta a interface do WSL como uma das principais.
 Get-NetAdapter | Where-Object {$_.InterfaceDescription -Match "Cisco AnyConnect"} | Set-NetIPInterface -InterfaceMetric 6000  #Esta linha diminui a prioridade da rede VPN, para ficar menor do que a rede virtual WSL.
@@ -154,3 +154,58 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 ---
+
+5º - Instação do pip para o Python, que por padrão não vem instalado no Linux. Execute o comando abaixo no terminal do Linux. Notar que estamos diretamente o Python na linha da versão 3, pois, por indicação é bom manter e utilizar a linha da versão 3, pois, por exemplo, nas máquinas virtuais da AWS, o padrão é o Python na linha das versões 3.
+```linux
+sudo apt-get install python3-pip
+```
+---
+
+6º - Execute o comando abaixo no terminal do Linux para verificar se a instalação do pip foi concluída com sucesso, onde está instalado e para qual versão do Python. Notar que o (V) co mando é maiúsculo.
+```linux
+pip -V
+```
+---
+
+7º - Instalação da virtualenv para construir o ambiente virtual do Python. Execute o comando abaixo no terminal do Linux.
+```linux
+sudo pip3 install virtualenv
+```
+
+8º - Criação de um repositório (pasta) em algum local de sua preferência, mas neste caso iremos criar na área de trabalho para melhorar a didática. Podemos criar manualmente e diretamente na área de trabalho, ou pelo terminal do Linux. Neste caso iremos criar pelo terminal. Execute os comandos pelo terminal do Linux.
+```linux
+cd Desktop
+mkdir Projeto
+cd Projeto
+mkdir Pipeline
+cd Pipeline
+```
+
+Pronto, agora temos os repositórios criados.
+
+---
+
+9º - Criação da virtualenv no repositório (Pipeline), que foi criado no passo anterior. O nome do repositório, neste caso, será (env). Execute o comando abaixo no terminal do Linux.
+```linux
+sudo virtualenv env
+```
+---
+
+10º - Verificar se temos o repositório (env) no repositório que destinamos a criação. Este comando verifica os repositórios abaixo do atual. Execute o comando abaixo no terminal do Linux.
+```linux
+ls
+```
+---
+
+11º - Ativação da virtualenv para utilização. Notar que após executar o comando, aparecerá em parenteses (env) ou o nome do repositório na linha de comando principal, querendo dizer que qualquer comando python executado a partir de agora irá rodar na virtual env. Execute o comando abaixo no terminal do Linux.
+```linux
+source env/bin/activate
+```
+---
+
+
+
+
+
+
+
