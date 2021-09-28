@@ -201,8 +201,22 @@ ls
 ```linux
 source env/bin/activate
 ```
+
+Para desativar uma virtualenv, certifique-se que elá está ativada na linha de comando e execute o comando abaixo no terminal do Linux.
+```linux
+deactivate
+```
+
+Para exluir a virtualenv (tem que ser depois da desativação), você não pode estar no repositório da virtualenv, neste caso o (env), logo, é necessário voltar um repositório. Iremos considerar os repositórios criados para didática. Execute o comando abaixo no terminal do Linux.
+```linux
+cd ..
+rm -r env
+```
+
+Para criar e ativar a virtualenv, execute novamente os passos de criação e ativação.
 ---
 
+12º - 
 
 
 
