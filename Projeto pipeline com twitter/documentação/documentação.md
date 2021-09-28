@@ -104,6 +104,8 @@ Iremos utilizar uma virtualização no Windows, chamada WSL 2, que não possuí 
   
    - Instalação finalizada e distribuição Linux totalmente integrada ao sistema operacional Windows.
 
+   - Nota: Se você quiser desinstalar a WSL 2 e a distribuição do Ubuntu, é só desinstalar como um programa convencional do Windows no Painel de Controle.
+
 Documentação de referência: https://docs.microsoft.com/pt-br/windows/wsl/install-manual
 
 ## Fim do bloco I para virtualização do Linux no Windows.
@@ -120,15 +122,29 @@ Documentação de referência: https://docs.microsoft.com/pt-br/windows/wsl/inst
 
 ---
 
-3º - Configurando e ajustando os parâmetos conexão com a internet, onde neste caso, configuraremos pensando que na máquina utilizada possua uma VPN, que hoje em dia é comum, porém, se sua máquina não iver VPN é capaz que as configurações padrões de instalação do WSL funcionem.
+3º - Configurando e ajustando os parâmetos conexão com a internet, onde neste caso, configuraremos pensando que na máquina utilizada possua uma VPN, que hoje em dia é comum, porém, se sua máquina não tiver VPN é capaz que as configurações padrões de instalação do WSL funcionem, logo, execute o passo I. Se não obtiver sucesso, execute o passo II.
 
-Antes de executar as linhas de código abaixo, execute o comando abaixo.
+I. Realizar um teste de conexão com o comando abaixo no terminal do Linux. Caso o comando seja executado com sucesso e com retorno de rede, não será necessário executar o passo II.
+```linux
+ping google.com
+```
 
+II. Abra o PowerShell e execute os comandos abaixo no terminal do Ububtu ou distribuição escolhida na instalação.
+```powershell
+Get-NetIPInterface -InterfaceAlias "vEthernet (WSL)" | Set-NetIPInterface -InterfaceMetric 1  #Esta linha seta a interface do WSL como uma das principais.
+Get-NetAdapter | Where-Object {$_.InterfaceDescription -Match "Cisco AnyConnect"} | Set-NetIPInterface -InterfaceMetric 6000  #Esta linha diminui a prioridade da rede VPN, para ficar menor do que a rede virtual WSL.
+```
+Após executar esses dois comandos no PowerShell, abra o temrinal do Linux e realize um teste de conexão com os comandos abaixo.
+```linux
+ping google.com
+ping minha.intranet #Nesta linha em vez de executar uma url como o google, teste uma url que só funciona conectado a VPN.
+```
 
+Caso os comandos e os testes sejam executados com sucesso, agora estamos com acesso a rede e podemos seguir para os próximos passos.
 
 ---
 
-4º - Digite o comando abaixo para atualizar e realizar um upgrade se necessário no ambiente virtualizado do Linux.
+4º - Abra o terminal Linux e digite o comando abaixo para atualizar e realizar um upgrade se necessário no ambiente virtualizado do Linux.
 ```linux
 sudo apt update && sudo apt upgrade
 ```
