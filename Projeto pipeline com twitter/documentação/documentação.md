@@ -219,27 +219,6 @@ Nota: Recrie e ative a virtualenv, pois iremos utilizá-la.
 
 ---
 
-12º - Criação de um repositório para alocar a instalação do Apache Airflow. Neste caso iremos continuar seguindo os repositórios criados no Desktop visando melhorar a didática. Execute o comando abaixo no terminal do Linux.
-```linux
-mkdir airflow
-```
----
-
-13º - Entrar no repositório que foi criado para o airflow. Execute o comando abaixo no terminal do Linux.
-```linux
-cd airflow
-```
----
-
-14º - 
-
+12º - 
 
 ---
-
-
-
-
-
-
-
-
