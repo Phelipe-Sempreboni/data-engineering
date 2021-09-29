@@ -2,9 +2,19 @@
 
 ---
 
-#### Este projeto tem o intuito de construir, do zero, um projeto com o Twitter e o Apache Airflow.
+- [x] - Sobre a documentação:
 
-#### Falaremos desde como virtualizar um Linux no Windows, até a alimentação dos dados em um Datalake.
+Documentação para virtualizar com o WSL 2 o Linux no Windows. Essa é uma virtualização que fica mais leve, principalmente para máquinas que tem um valor igual ou menor de 8GB de RAM e não tem uma performance tão boa com máquinas virtuais, como um Hyper-V do próprio Windows ou uma VirtualBox da Oracle. 
+
+---
+
+- [x] - Sobre o projeto:
+
+Este projeto tem o intuito de construir, do zero, um projeto com o Twitter e o Apache Airflow. 
+
+Falaremos desde como virtualizar um Linux no Windows com o WSL 2, até a alimentação dos dados em um Datalake.
+
+Ressaltamos que iremos utilizar um Linux, no caso um Ubumtu, pois, o Apache Airflow só roda em Linux e MacOs.
 
 ---
 
@@ -185,13 +195,13 @@ Pronto, agora temos os repositórios criados.
 
 ---
 
-9º - Criação da virtualenv no repositório (Pipeline), que foi criado no passo anterior. O nome do repositório, neste caso, será (env). Execute o comando abaixo no terminal do Linux.
+9º - Criação da virtualenv no repositório (Pipeline), que foi criado no passo anterior. O nome do repositório, neste caso, será (venv). Execute o comando abaixo no terminal do Linux.
 ```linux
-sudo virtualenv env
+sudo virtualenv venv
 ```
 ---
 
-10º - Verificar se temos o repositório (env) no repositório que destinamos a criação. Este comando verifica os repositórios abaixo do atual. Execute o comando abaixo no terminal do Linux.
+10º - Verificar se temos o repositório (venv) no repositório que destinamos a criação. Este comando verifica os repositórios abaixo do atual. Execute o comando abaixo no terminal do Linux.
 ```linux
 ls
 ```
@@ -199,7 +209,7 @@ ls
 
 11º - Ativação da virtualenv para utilização. Notar que após executar o comando, aparecerá em parenteses (env) ou o nome do repositório na linha de comando principal, querendo dizer que qualquer comando python executado a partir de agora irá rodar na virtual env. Execute o comando abaixo no terminal do Linux.
 ```linux
-source env/bin/activate
+source venv/bin/activate
 ```
 
 Para desativar uma virtualenv, certifique-se que elá está ativada na linha de comando e execute o comando abaixo no terminal do Linux.
@@ -215,10 +225,16 @@ rm -r env
 
 Para criar e ativar a virtualenv, execute novamente os passos de criação e ativação.
 
-Nota: Recrie e ative a virtualenv, pois iremos utilizá-la.
-
+Nota: Recrie e ative a virtualenv, pois iremos utilizá-la. Lembre-se de manter o caminho de repositório que neste caso seria algo parecido com isso: 
+```
+(venv) usuario@local:/mnt/c/Users/zézinho/Desktop/Projeto/Pipeline$
+```
 ---
 
-12º - 
-
+12º - Iremos utilizar o comando abaixo para exportar o airflow. Por padrão ele irá para o repositório raíz do local de instalação, porém, neste caso iremos mantê-lo no repositório (/Pipeline), que é onde está alocada a virtualenv.
+```linux
+export AIRFLOW_HOME=$(pwd)/airflow
+```
 ---
+
+13º - 
