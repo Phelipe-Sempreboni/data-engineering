@@ -246,7 +246,9 @@ Documentação de referência: https://airflow.apache.org/docs/apache-airflow/st
 
 ---
 
-13º - Iremos utilizar os comandos abaixo para instalar o Apache Airflow. Neste caso e na escrita dessa documentação, este é o Apache Airflow mais atual. Aconselho sempre a verificar na documentação qual é a versão mais atual, porém, observe também a versão que está mais estável para utilização. 
+13º - Iremos utilizar os comandos abaixo para instalar o Apache Airflow. Neste caso e na escrita dessa documentação, este é o Apache Airflow mais atual. Aconselho sempre a verificar na documentação qual é a versão mais atual, porém, observe também a versão que está mais estável para utilização. Execute o comando abaixo no terminal do Linux.
+
+Nota: Aqui o processo de instalação pode demorar um pouco, então aguarde e não cancele a execução.
 ```linux
 AIRFLOW_VERSION=2.1.4
 PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
@@ -255,4 +257,14 @@ pip3 install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL
 ```
 ---
 
-14º - 
+14º - Iremos utilizar o comando abaixo para inicializar o banco de dados. Notar que neste tutorial iremos utilizar o banco de dados padrão da instalação, que é um SQLite, porém, você pode instalar um banco de dados especifico. Essa informação fica no repositório do (airflow) criado anteriormente, e o nome do arquivo é (airflow.db). Execute o comando abaixo no terminal do Linux.
+```linux
+airflow db init
+```
+---
+
+15º - 
+
+
+
+
