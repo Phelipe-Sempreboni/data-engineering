@@ -263,8 +263,25 @@ airflow db init
 ```
 ---
 
-15º - 
+15º - Iremos utilizar o comando abaixo para criar um usuário e senha para acessar o Apache Airflow na interface web. Podemos executar em dois modelos conforme abaixo. Preencha com as informações de sua escolha e guarde em segurança essas informações. Execute o comando abaixo no terminal do Linux.
 
+Após executar os comandos será solicitado que seja realizado a inserção e confirmação de uma senha. Se o comando for executado corretamente, devemos uma receber uma mensagem parecidado com (Admin user admin created).
 
+1º modelo de execução:
+```linux
+airflow users create --username admin --firstname Zezinho --lastname Pitanga --role Admin --email zezinho_pitanga.org
+```
 
+2º modelo de execução:
+```linux
+airflow users create \
+    --username admin \
+    --firstname Joao \
+    --lastname Meteoro \
+    --role Admin \
+    --email joao_meteoro.org
+```
+---
+
+16º - 
 
