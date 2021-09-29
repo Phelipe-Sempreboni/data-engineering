@@ -207,9 +207,14 @@ ls
 ```
 ---
 
-11º - Ativação da virtualenv para utilização. Notar que após executar o comando, aparecerá em parenteses (env) ou o nome do repositório na linha de comando principal, querendo dizer que qualquer comando python executado a partir de agora irá rodar na virtual env. Execute o comando abaixo no terminal do Linux.
+11º - Ativação da virtualenv para utilização. Notar que após executar o comando, aparecerá em parenteses (venv) ou o nome do repositório na linha de comando principal, querendo dizer que qualquer comando python executado a partir de agora irá rodar na virtual env. Execute o comando abaixo no terminal do Linux.
 ```linux
 source venv/bin/activate
+```
+
+Ficará algo parecido com isso caso ocorra corretamente a ativação da virtualenv: 
+```
+(venv) usuario@local:/mnt/c/Users/zézinho/Desktop/Projeto/Pipeline$
 ```
 
 Para desativar uma virtualenv, certifique-se que elá está ativada na linha de comando e execute o comando abaixo no terminal do Linux.
@@ -231,7 +236,7 @@ Nota: Recrie e ative a virtualenv, pois iremos utilizá-la. Lembre-se de manter 
 ```
 ---
 
-12º - Iremos utilizar o comando abaixo para exportar o airflow. Por padrão ele irá para o repositório raíz do local de instalação, porém, neste caso iremos mantê-lo no repositório (/Pipeline), que é onde está alocada a virtualenv. Execute o comando abaixo no terminal do Linux.
+12º - Iremos utilizar o comando abaixo para exportar o airflow. Por padrão ele irá para o repositório raíz do local de instalação, porém, neste caso iremos mantê-lo no repositório (/Pipeline), que é onde está alocada a virtualenv. Um ponto a destacar é que o repositório (airflow) não existe, e o comando abaixo irá criar esse repositório e alocar os arquivos necessários. Execute o comando abaixo no terminal do Linux.
 ```linux
 export AIRFLOW_HOME=$(pwd)/airflow
 ```
