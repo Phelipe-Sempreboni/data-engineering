@@ -231,10 +231,23 @@ Nota: Recrie e ative a virtualenv, pois iremos utilizá-la. Lembre-se de manter 
 ```
 ---
 
-12º - Iremos utilizar o comando abaixo para exportar o airflow. Por padrão ele irá para o repositório raíz do local de instalação, porém, neste caso iremos mantê-lo no repositório (/Pipeline), que é onde está alocada a virtualenv.
+12º - Iremos utilizar o comando abaixo para exportar o airflow. Por padrão ele irá para o repositório raíz do local de instalação, porém, neste caso iremos mantê-lo no repositório (/Pipeline), que é onde está alocada a virtualenv. Execute o comando abaixo no terminal do Linux.
 ```linux
 export AIRFLOW_HOME=$(pwd)/airflow
 ```
+
+Documentação de referência: https://airflow.apache.org
+Documentação de referência: https://airflow.apache.org/docs/apache-airflow/stable/start/local.html
+
 ---
 
-13º - 
+13º - Iremos utilizar os comandos abaixo para instalar o Apache Airflow. Neste caso e na escrita dessa documentação, este é o Apache Airflow mais atual. Aconselho sempre a verificar na documentação qual é a versão mais atual, porém, observe também a versão que está mais estável para utilização. 
+```linux
+AIRFLOW_VERSION=2.1.4
+PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+pip3 install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+```
+---
+
+14º - 
