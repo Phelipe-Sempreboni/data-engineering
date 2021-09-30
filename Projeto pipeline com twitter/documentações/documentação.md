@@ -132,7 +132,29 @@ Documentação de referência: https://docs.microsoft.com/pt-br/windows/wsl/inst
 
 ---
 
-3º - Configurando e ajustando os parâmetos conexão com a internet. Pontos importantes abaixo:
+3º - Com os terminais abertos no modo administrador, iremos conectar o usuário (root) no terminal do Linux, pois, realizando testes com o usuário convencional na minha máquina, notei que pacotes de instalação estavam falhando e impedindo o funcionamento do Apache Airflow, logo, ao tentar com o usuário (root) funcionou perfeitamento. Passos abaixo para acessar o usuário (root) pela primeira vez.
+
+  - No terminal digite o comando abaixo:
+```linux
+sudo passwd root # Primeiramente é necessário alterar a senha para uma de sua preferência.
+```
+
+  - Após alterar a senha utilize o comando abaixo para entrar no usuário (root). É um comando bem simples mesmo para acessar:
+```linux
+su # Após alterar a senha, utilize este comando para acessar o usuário root.
+```
+
+  - Para sair do usuário (root) e voltar ao usuário convencional digite o comando abaixo:
+```linux
+exit
+ou
+CTRL+D
+```
+
+## Nota: Todo o processo á partir de agora será relizado com o usuário (root) visando garantir o sucesso da instalação. Permaneça com o usuário (root).
+---
+
+4º - Configurando e ajustando os parâmetos conexão com a internet. Pontos importantes abaixo:
 
    - Máquinas que possuem VPN, como por exemplo uma Cisco, é possível que a internet não funcione de primeira, porém, por exemplo, na minha máquina, após utilização frequente do WSL, passou a funcionar, mas de primeira não foi assim.
    
@@ -162,7 +184,7 @@ Caso os comandos e os testes sejam executados com sucesso, agora estamos com ace
 
 ---
 
-4º - Abra o terminal Linux e digite o comando abaixo para atualizar e realizar um upgrade se necessário no ambiente virtualizado do Linux.
+5º - Abra o terminal Linux e digite o comando abaixo para atualizar e realizar um upgrade se necessário no ambiente virtualizado do Linux.
 ```linux
 sudo apt update && sudo apt upgrade
 ```
@@ -173,24 +195,24 @@ sudo apt-get upgrade
 ```
 ---
 
-5º - Instalação do pip para o Python, que por padrão não vem instalado no Linux. Execute o comando abaixo no terminal do Linux. Notar que estamos diretamente indicando o Python na linha da versão 3, pois, por indicação é bom manter e utilizar a linha da versão 3, pois, por exemplo, nas máquinas virtuais da AWS, o padrão é o Python na linha das versões 3.
+6º - Instalação do pip para o Python, que por padrão não vem instalado no Linux. Execute o comando abaixo no terminal do Linux. Notar que estamos diretamente indicando o Python na linha da versão 3, pois, por indicação é bom manter e utilizar a linha da versão 3, pois, por exemplo, nas máquinas virtuais da AWS, o padrão é o Python na linha das versões 3.
 ```linux
 sudo apt-get install python3-pip
 ```
 ---
 
-6º - Execute o comando abaixo no terminal do Linux para verificar se a instalação do pip foi concluída com sucesso, onde está instalado e para qual versão do Python. Notar que o (V) do comando é maiúsculo.
+7º - Execute o comando abaixo no terminal do Linux para verificar se a instalação do pip foi concluída com sucesso, onde está instalado e para qual versão do Python. Notar que o (V) do comando é maiúsculo.
 ```linux
 pip -V
 ```
 ---
 
-7º - Instalação da virtualenv para construir o ambiente virtual do Python. Execute o comando abaixo no terminal do Linux.
+8º - Instalação da virtualenv para construir o ambiente virtual do Python. Execute o comando abaixo no terminal do Linux.
 ```linux
 sudo pip3 install virtualenv
 ```
 
-8º - Criação de um repositório (pasta) em algum local de sua preferência, mas neste caso iremos criar na área de trabalho para melhorar a didática. Podemos criar manualmente e diretamente na área de trabalho, ou pelo terminal do Linux. Neste caso iremos criar pelo terminal. Execute os comandos pelo terminal do Linux.
+9º - Criação de um repositório (pasta) em algum local de sua preferência, mas neste caso iremos criar na área de trabalho para melhorar a didática. Podemos criar manualmente e diretamente na área de trabalho, ou pelo terminal do Linux. Neste caso iremos criar pelo terminal. Execute os comandos pelo terminal do Linux.
 ```linux
 cd Desktop
 mkdir Projeto
@@ -203,19 +225,19 @@ Pronto, agora temos os repositórios criados.
 
 ---
 
-9º - Criação da virtualenv no repositório (Pipeline), que foi criado no passo anterior. O nome do repositório, neste caso, será (venv). Execute o comando abaixo no terminal do Linux.
+10º - Criação da virtualenv no repositório (Pipeline), que foi criado no passo anterior. O nome do repositório, neste caso, será (venv). Execute o comando abaixo no terminal do Linux.
 ```linux
 sudo virtualenv venv
 ```
 ---
 
-10º - Verificar se temos o repositório (venv) no repositório que destinamos a criação. Este comando verifica os repositórios abaixo do atual. Execute o comando abaixo no terminal do Linux.
+11º - Verificar se temos o repositório (venv) no repositório que destinamos a criação. Este comando verifica os repositórios abaixo do atual. Execute o comando abaixo no terminal do Linux.
 ```linux
 ls
 ```
 ---
 
-11º - Ativação da virtualenv para utilização. Notar que após executar o comando, aparecerá em parenteses (venv) ou o nome do repositório na linha de comando principal, querendo dizer que qualquer comando python executado a partir de agora irá rodar na virtual env. Execute o comando abaixo no terminal do Linux.
+12º - Ativação da virtualenv para utilização. Notar que após executar o comando, aparecerá em parenteses (venv) ou o nome do repositório na linha de comando principal, querendo dizer que qualquer comando python executado a partir de agora irá rodar na virtual env. Execute o comando abaixo no terminal do Linux.
 ```linux
 source venv/bin/activate
 ```
@@ -244,7 +266,7 @@ Nota: Recrie e ative a virtualenv, pois iremos utilizá-la. Lembre-se de manter 
 ```
 ---
 
-12º - Iremos utilizar o comando abaixo para exportar o airflow. Por padrão ele irá para o repositório raíz do local de instalação, porém, neste caso iremos mantê-lo no repositório (/Pipeline), que é onde está alocada a virtualenv. Um ponto a destacar é que o repositório (airflow) não existe, e o comando abaixo irá criar esse repositório e alocar os arquivos necessários. Execute o comando abaixo no terminal do Linux.
+13º - Iremos utilizar o comando abaixo para exportar o airflow. Por padrão ele irá para o repositório raíz do local de instalação, porém, neste caso iremos mantê-lo no repositório (/Pipeline), que é onde está alocada a virtualenv. Um ponto a destacar é que o repositório (airflow) não existe, e o comando abaixo irá criar esse repositório e alocar os arquivos necessários. Execute o comando abaixo no terminal do Linux.
 ```linux
 export AIRFLOW_HOME=$(pwd)/airflow
 ```
@@ -254,7 +276,7 @@ Documentação de referência: https://airflow.apache.org/docs/apache-airflow/st
 
 ---
 
-13º - Iremos utilizar os comandos abaixo para instalar o Apache Airflow. Neste caso e na escrita dessa documentação, este é o Apache Airflow mais atual. Aconselho sempre a verificar na documentação qual é a versão mais atual, porém, observe também a versão que está mais estável para utilização. Execute o comando abaixo no terminal do Linux.
+14º - Iremos utilizar os comandos abaixo para instalar o Apache Airflow. Neste caso e na escrita dessa documentação, este é o Apache Airflow mais atual. Aconselho sempre a verificar na documentação qual é a versão mais atual, porém, observe também a versão que está mais estável para utilização. Execute o comando abaixo no terminal do Linux.
 
 Nota: Aqui o processo de instalação pode demorar um pouco, então aguarde e não cancele a execução.
 ```linux
@@ -265,13 +287,13 @@ pip3 install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL
 ```
 ---
 
-14º - Iremos utilizar o comando abaixo para inicializar o banco de dados. Notar que neste tutorial iremos utilizar o banco de dados padrão da instalação, que é um SQLite, porém, você pode instalar um banco de dados especifico. Essa informação fica no repositório do (airflow) criado anteriormente, e o nome do arquivo é (airflow.db). Execute o comando abaixo no terminal do Linux.
+15º - Iremos utilizar o comando abaixo para inicializar o banco de dados. Notar que neste tutorial iremos utilizar o banco de dados padrão da instalação, que é um SQLite, porém, você pode instalar um banco de dados especifico. Essa informação fica no repositório do (airflow) criado anteriormente, e o nome do arquivo é (airflow.db). Execute o comando abaixo no terminal do Linux.
 ```linux
 airflow db init
 ```
 ---
 
-15º - Iremos utilizar o comando abaixo para criar um usuário e senha para acessar o Apache Airflow na interface web. Podemos executar em dois modelos conforme abaixo. Preencha com as informações de sua escolha e guarde em segurança essas informações. Execute o comando abaixo no terminal do Linux.
+16º - Iremos utilizar o comando abaixo para criar um usuário e senha para acessar o Apache Airflow na interface web. Podemos executar em dois modelos conforme abaixo. Preencha com as informações de sua escolha e guarde em segurança essas informações. Execute o comando abaixo no terminal do Linux.
 
 Após executar os comandos será solicitado que seja realizado a inserção e confirmação de uma senha. Se o comando for executado corretamente, devemos uma receber uma mensagem parecidado com (Admin user admin created).
 
@@ -291,5 +313,5 @@ airflow users create \
 ```
 ---
 
-16º -  
+17º -  
 
