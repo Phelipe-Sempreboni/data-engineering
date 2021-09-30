@@ -18,7 +18,7 @@ Ressaltamos que iremos utilizar um Linux, no caso um Ubumtu, pois, o Apache Airf
 
 ---
 
-## Inicio do bloco para virtualização do Linux no Windows.
+## Inicio do bloco para virtualização do Linux no Windows com WSL (Subsistema do Windows para Linux).
 
 Iremos utilizar uma virtualização no Windows chamada WSL 2, que não possuí todas distribuições do Linux como um Hyper-V ou uma máquina virtual convencional, porém, irá atender este projeto.
 
@@ -75,7 +75,7 @@ Iremos utilizar uma virtualização no Windows chamada WSL 2, que não possuí t
      dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
      ```
      
-   ### Reinicie o computador para concluir a instalação do WSL e a atualização para o WSL 2.     
+   ## Reinicie o computador para concluir a instalação do WSL e a atualização para o WSL 2.     
 ---
      
    - Etapa 4 – Baixar o pacote de atualização do kernel do Linux
@@ -132,7 +132,15 @@ Documentação de referência: https://docs.microsoft.com/pt-br/windows/wsl/inst
 
 ---
 
-3º - Configurando e ajustando os parâmetos conexão com a internet, onde neste caso, configuraremos pensando que na máquina utilizada possua uma VPN, que hoje em dia é comum, porém, se sua máquina não tiver VPN é capaz que as configurações padrões de instalação do WSL funcionem, logo, execute o passo I. Se não obtiver sucesso, execute o passo II.
+3º - Configurando e ajustando os parâmetos conexão com a internet. Pontos importantes abaixo:
+
+   - Máquinas que possuem VPN, como por exemplo uma Cisco, é possível que a internet não funcione de primeira, porém, por exemplo, na minha máquina, após utilização frequente do WSL, passou a funcionar, mas de primeira não foi assim.
+   
+   - Caso o item abaixo (I) ocorra com sucesso, não será necessário a execução do item (II). 
+
+   - Caso o item abaixo (I) não ocorra com sucesso por conta da VPN, será necessário a execução do item (II), que fará uma configuração.
+
+   - Faça o item abaixo (I) tanto com a VPN ligada, quanto com a VPN desligada, pois, em alguns casos a conexão com a internet só funciona com um desses tipos (VPN ligada ou desligada).
 
 I. Realizar um teste de conexão com o comando abaixo no terminal do Linux. Caso o comando seja executado com sucesso e com retorno de rede, não será necessário executar o passo II.
 ```linux
@@ -144,7 +152,7 @@ II. Abra o PowerShell e execute os comandos abaixo.
 Get-NetIPInterface -InterfaceAlias "vEthernet (WSL)" | Set-NetIPInterface -InterfaceMetric 1  #Esta linha seta a interface do WSL como uma das principais.
 Get-NetAdapter | Where-Object {$_.InterfaceDescription -Match "Cisco AnyConnect"} | Set-NetIPInterface -InterfaceMetric 6000  #Esta linha diminui a prioridade da rede VPN, para ficar menor do que a rede virtual WSL.
 ```
-Após executar esses dois comandos no PowerShell, abra o temrinal do Linux e realize um teste de conexão com os comandos abaixo.
+Após executar esses dois comandos no PowerShell, abra o temrinal do Linux e realize um teste de conexão com os comandos abaixo. Notar que não é obrigatório testar a linha com (ping minha.intranet), pois, como iremos utilizar o Apache Airflow local, não seria necessário conexão com essa rede, porém, se você possuir VPN e quiser testar fique á vontade, porém, o que realmente importa é que linha (ping google.com) funcione com retorno de rede.
 ```linux
 ping google.com
 ping minha.intranet #Nesta linha em vez de executar uma url como o google, teste uma url que só funciona conectado a VPN.
