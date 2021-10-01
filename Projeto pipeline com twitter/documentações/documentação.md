@@ -302,9 +302,8 @@ cd Área de trabalho/Projeto/Pipeline/Airflow # Caso seja no Linux em uma máqui
 rm -r logs
 ```
 
-```
-Documentação de refeerência: https://stackoverflow.com/questions/57515434/why-do-i-get-no-such-table-error-when-installing-apache-airflow-on-mac
-```
+Documentação de referência: https://stackoverflow.com/questions/57515434/why-do-i-get-no-such-table-error-when-installing-apache-airflow-on-mac
+
 
 ### Reinicie o sistema.
 ---
