@@ -309,8 +309,29 @@ Documentação de referência: https://stackoverflow.com/questions/57515434/why-
 ---
 
 18º - Após reiniciar o sistema, siga os passos abaixo para entraar novamente no ambiente.
-    - 
 
+I. Abra o Windows Terminal no modo administrador e selecione a distribuição Linux que você instalou.
+
+II. Teste a conexão com a internet utilizando o comando abaixo. Você pode voltar e consultar o passo (4) deste bloco que é sobre a configuração da internet. Se a comunição estiver funcionando, prossiga para o próximo passo.
+```linux
+ping google.com
+```
+
+III. Entre novamente com o usuário (root). Digite o comando abaixo e digite a senha que será solicitada.
+```linux
+su
+```
+
+IV. Entrar no repositório da virtualenv, chamado (venv) e ativar novamente. Iremos utilizar os repositórios criados neste projeto.
+```linux
+cd Desktop/Projeto/Pipeline # Para utilizar na WSL 2.
+ou
+cd Área de trabalho/Projeto/Pipeline # Para utilizar caso esteja em uma máquina virtual no Linux.
+
+source venv/bin/activate # Para ativar novamente a virtualenv.
+```
+
+#### Prossiga para o próximo passo se tudo ocorrer com sucesso.
 ---
 
 19º - Iremos utilizar o comando abaixo para inicializar o banco de dados. Notar que neste tutorial iremos utilizar o banco de dados padrão da instalação, que é um SQLite, porém, você pode instalar um banco de dados especifico. Essa informação fica no repositório do (airflow) criado anteriormente, e o nome do arquivo é (airflow.db). Execute o comando abaixo no terminal do Linux.
@@ -339,5 +360,29 @@ airflow users create \
 ```
 ---
 
-21º -  
+21º -  Iremos utilizar o comando abaixo para iniciar o serviço do Apache Airflow na web. Este serviço será iniciado de forma local. 
+```linux
+airflow webserver --port 8080
+```
+
+Após executado comando, abra uma página da web na sua máquina e digite o endereço abaixo. Será solicitado o login e senha do usuário que foi criado no (20º) passo. Insira essas informações para prosseguir.
+```linux
+http://localhost:8080
+```
+
+---
+
+22º - Iremos utilizar o comando abaixo para executar o agendador (scheduler) do Apache Airflow. Sua ativação é necessária para conseguirmos agenda os jobs.
+```linux
+airflow scheduler
+```
+
+---
+
+
+
+
+
+
+
 
