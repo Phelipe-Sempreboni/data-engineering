@@ -287,13 +287,36 @@ pip3 install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL
 ```
 ---
 
-15º - Iremos utilizar o comando abaixo para inicializar o banco de dados. Notar que neste tutorial iremos utilizar o banco de dados padrão da instalação, que é um SQLite, porém, você pode instalar um banco de dados especifico. Essa informação fica no repositório do (airflow) criado anteriormente, e o nome do arquivo é (airflow.db). Execute o comando abaixo no terminal do Linux.
+17º - Após realizar a instalação e ser concluída com sucesso, sem nenhum erro, é necessário reiniciar o computador para quem estiver utilizando o (WSL 2) ou reiniciar o ambiente da máquina virtual para quem estiver utilizando, por exempo, Hyper-V ou VirtualBox. Lembrando que esse passo é muito importante, pois, caso não seja reiniciado, irá ocorrer um erro na inicialização do comando (airflow db init) e consequentemente o comando (airflow webserver --8080) e (airflow scheduler). Reinicie o sistema.
+
+Caso você tenha seguido e não reiniciado o sistema e tenha ocorrido um erro, será criado um repositório chamado (logs) no repositório (airflow) e a partir de agora você não conseguirá rodar sem que ocorra erros. Pode ser que esse repositório esteja em uma pasta mais pra dentro, logo, procure essa pasta de logs antes. Siga os passos abaixo para tentar resolver esse problema.
+
+1º - Entrar no repositório do airflow. Aqui seguiremos o que foi criado e utilizado neste projeto. Notar que excluíremos a pasta por linha de comando, pois, pode ocorrer erro ao tentar excluir manualmente, visto que o repositório foi criado com o usuário (root).
+```linux
+cd Desktop/Projeto/Pipeline/Airflow # Caso seja no (WSL 2)
+rm -r logs
+
+ou
+
+cd Área de trabalho/Projeto/Pipeline/Airflow # Caso seja no Linux em uma máquina virtual (VM).
+rm -r logs
+```
+
+### Reinicie o sistema.
+---
+
+18º - Após reiniciar o sistema, siga os passos abaixo para entraar novamente no ambiente.
+    - 
+
+---
+
+19º - Iremos utilizar o comando abaixo para inicializar o banco de dados. Notar que neste tutorial iremos utilizar o banco de dados padrão da instalação, que é um SQLite, porém, você pode instalar um banco de dados especifico. Essa informação fica no repositório do (airflow) criado anteriormente, e o nome do arquivo é (airflow.db). Execute o comando abaixo no terminal do Linux.
 ```linux
 airflow db init
 ```
 ---
 
-16º - Iremos utilizar o comando abaixo para criar um usuário e senha para acessar o Apache Airflow na interface web. Podemos executar em dois modelos conforme abaixo. Preencha com as informações de sua escolha e guarde em segurança essas informações. Execute o comando abaixo no terminal do Linux.
+20º - Iremos utilizar o comando abaixo para criar um usuário e senha para acessar o Apache Airflow na interface web. Podemos executar em dois modelos conforme abaixo. Preencha com as informações de sua escolha e guarde em segurança essas informações. Execute o comando abaixo no terminal do Linux.
 
 Após executar os comandos será solicitado que seja realizado a inserção e confirmação de uma senha. Se o comando for executado corretamente, devemos uma receber uma mensagem parecidado com (Admin user admin created).
 
@@ -313,5 +336,5 @@ airflow users create \
 ```
 ---
 
-17º -  
+21º -  
 
