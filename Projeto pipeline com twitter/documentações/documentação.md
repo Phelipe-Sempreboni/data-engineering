@@ -207,9 +207,11 @@ pip -V
 ```
 ---
 
-8º - Instalação da virtualenv para construir o ambiente virtual do Python. Execute o comando abaixo no terminal do Linux.
+8º - Instalação da virtualenv para construir o ambiente virtual do Python e mais duas extensões para garantir o funcionamento das bibliotecas. Execute o comando abaixo no terminal do Linux.
 ```linux
 sudo pip3 install virtualenv
+sudo apt-get install python3-dev
+pip3 install wheel
 ```
 
 9º - Criação de um repositório (pasta) em algum local de sua preferência, mas neste caso iremos criar na área de trabalho para melhorar a didática. Podemos criar manualmente e diretamente na área de trabalho, ou pelo terminal do Linux. Neste caso iremos criar pelo terminal. Execute os comandos pelo terminal do Linux.
@@ -228,6 +230,8 @@ Pronto, agora temos os repositórios criados.
 10º - Criação da virtualenv no repositório (Pipeline), que foi criado no passo anterior. O nome do repositório, neste caso, será (venv). Execute o comando abaixo no terminal do Linux.
 ```linux
 sudo virtualenv venv
+ou
+python3 -m virtualenv venv
 ```
 ---
 
@@ -287,7 +291,13 @@ pip3 install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL
 ```
 ---
 
-17º - Após realizar a instalação e ser concluída com sucesso, sem nenhum erro, é necessário reiniciar o computador para quem estiver utilizando o (WSL 2) ou reiniciar o ambiente da máquina virtual para quem estiver utilizando, por exempo, Hyper-V ou VirtualBox. Lembrando que esse passo é muito importante, pois, caso não seja reiniciado, irá ocorrer um erro na inicialização do comando (airflow db init) e consequentemente o comando (airflow webserver --8080) e (airflow scheduler). Reinicie o sistema.
+15º - Após finalizar a instalação, vamos utilizar o comando abaixo para verificar se o Apache Airflow foi instalado corretamente e de acordo com as espeficicações, como os repositórios que foram destinados.
+```linux
+airflow info
+```
+---
+
+16º - Após realizar a instalação e ser concluída com sucesso, sem nenhum erro, é necessário reiniciar o computador para quem estiver utilizando o (WSL 2) ou reiniciar o ambiente da máquina virtual para quem estiver utilizando, por exempo, Hyper-V ou VirtualBox. Lembrando que esse passo é muito importante, pois, caso não seja reiniciado, irá ocorrer um erro na inicialização do comando (airflow db init) e consequentemente o comando (airflow webserver --8080) e (airflow scheduler). Reinicie o sistema.
 
 Caso você tenha seguido e não reiniciado o sistema e tenha ocorrido um erro, será criado um repositório chamado (logs) no repositório (airflow) e a partir de agora você não conseguirá rodar sem que ocorra erros. Pode ser que esse repositório esteja em uma pasta mais pra dentro, logo, procure essa pasta de logs antes. Siga os passos abaixo para tentar resolver esse problema.
 
@@ -308,18 +318,18 @@ Documentação de referência: https://stackoverflow.com/questions/57515434/why-
 ### Reinicie o sistema.
 ---
 
-18º - Após reiniciar o sistema, siga os passos abaixo para entraar novamente no ambiente.
+17º - Após reiniciar o sistema, siga os passos abaixo para entrar novamente no ambiente.
 
 I. Abra o Windows Terminal no modo administrador e selecione a distribuição Linux que você instalou.
 
-II. Teste a conexão com a internet utilizando o comando abaixo. Você pode voltar e consultar o passo (4) deste bloco que é sobre a configuração da internet. Se a comunição estiver funcionando, prossiga para o próximo passo.
-```linux
-ping google.com
-```
-
-III. Entre novamente com o usuário (root). Digite o comando abaixo e digite a senha que será solicitada.
+II. Entre novamente com o usuário (root). Digite o comando abaixo e digite a senha que será solicitada.
 ```linux
 su
+```
+
+III. Teste a conexão com a internet utilizando o comando abaixo. Você pode voltar e consultar o passo (4) deste bloco que é sobre a configuração da internet. Se a comunição estiver funcionando, prossiga para o próximo passo.
+```linux
+ping google.com
 ```
 
 IV. Entrar no repositório da virtualenv, chamado (venv) e ativar novamente. Iremos utilizar os repositórios criados neste projeto.
@@ -334,13 +344,13 @@ source venv/bin/activate # Para ativar novamente a virtualenv.
 #### Prossiga para o próximo passo se tudo ocorrer com sucesso.
 ---
 
-19º - Iremos utilizar o comando abaixo para inicializar o banco de dados. Notar que neste tutorial iremos utilizar o banco de dados padrão da instalação, que é um SQLite, porém, você pode instalar um banco de dados especifico. Essa informação fica no repositório do (airflow) criado anteriormente, e o nome do arquivo é (airflow.db). Execute o comando abaixo no terminal do Linux.
+18º - Iremos utilizar o comando abaixo para inicializar o banco de dados. Notar que neste tutorial iremos utilizar o banco de dados padrão da instalação, que é um SQLite, porém, você pode instalar um banco de dados especifico. Essa informação fica no repositório do (airflow) criado anteriormente, e o nome do arquivo é (airflow.db). Execute o comando abaixo no terminal do Linux.
 ```linux
 airflow db init
 ```
 ---
 
-20º - Iremos utilizar o comando abaixo para criar um usuário e senha para acessar o Apache Airflow na interface web. Podemos executar em dois modelos conforme abaixo. Preencha com as informações de sua escolha e guarde em segurança essas informações. Execute o comando abaixo no terminal do Linux.
+19º - Iremos utilizar o comando abaixo para criar um usuário e senha para acessar o Apache Airflow na interface web. Podemos executar em dois modelos conforme abaixo. Preencha com as informações de sua escolha e guarde em segurança essas informações. Execute o comando abaixo no terminal do Linux.
 
 Após executar os comandos será solicitado que seja realizado a inserção e confirmação de uma senha. Se o comando for executado corretamente, devemos uma receber uma mensagem parecidado com (Admin user admin created).
 
@@ -360,7 +370,7 @@ airflow users create \
 ```
 ---
 
-21º -  Iremos utilizar o comando abaixo para iniciar o serviço do Apache Airflow na web. Este serviço será iniciado de forma local. 
+20º -  Iremos utilizar o comando abaixo para iniciar o serviço do Apache Airflow na web. Este serviço será iniciado de forma local. 
 ```linux
 airflow webserver --port 8080
 ```
@@ -372,7 +382,7 @@ http://localhost:8080
 
 ---
 
-22º - Iremos utilizar o comando abaixo para executar o agendador (scheduler) do Apache Airflow. Sua ativação é necessária para conseguirmos agenda os jobs.
+21º - Iremos utilizar o comando abaixo para executar o agendador (scheduler) do Apache Airflow. Sua ativação é necessária para conseguirmos agenda os jobs.
 ```linux
 airflow scheduler
 ```
