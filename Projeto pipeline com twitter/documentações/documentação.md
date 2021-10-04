@@ -382,17 +382,8 @@ http://localhost:8080
 
 ---
 
-21º - Iremos utilizar o comando abaixo para executar o agendador (scheduler) do Apache Airflow. Sua ativação é necessária para conseguirmos agenda os jobs.
+21º - Iremos utilizar o comando abaixo para executar o agendador (scheduler) do Apache Airflow. Aqui será necessário abrir uma nova aba e executar os comandos do (17º) passo, juntamente do comando abaixo. Sua ativação é necessária para conseguirmos agendar os jobs.
 ```linux
 airflow scheduler
 ```
-
 ---
-
-
-
-
-
-
-
-
