@@ -1,10 +1,14 @@
-### Projeto de pipeline com o twitter
+# Projeto de pipeline com o twitter
 
 ---
 
 - [x] - Sobre a documentação:
 
 Documentação para virtualizar com o WSL 2 o Linux no Windows. Essa é uma virtualização que fica mais leve, principalmente para máquinas que tem um valor igual ou menor de 8GB de RAM e não tem uma performance tão boa com máquinas virtuais, como um Hyper-V do próprio Windows ou uma VirtualBox da Oracle. 
+
+Notar que você deve estar executando o Windows 10 versão 2004 e superior (Build 19041 e superior) ou o Windows 11.
+
+### Nota: Este tutorial também pode ser executado utilizando uma máquina virtual como o Hyper-V ou VirtualBox, pois, os comandos são muito semelhantes.
 
 ---
 
@@ -17,6 +21,16 @@ Falaremos desde como virtualizar um Linux no Windows com o WSL 2, até a aliment
 Ressaltamos que iremos utilizar um Linux, no caso um Ubumtu, pois, o Apache Airflow só roda em Linux e MacOs.
 
 ---
+
+## Pré Requisitos para utilização da WLS 2:
+
+* Você deve estar executando o Windows 10 versão 2004 e superior (Build 19041 e superior) ou o Windows 11.
+
+* Para verificar a versão e o número de build do seu Windows, selecione a tecla do logotipo do Windows + R, digite winver e selecione OK. Você pode atualizar para a versão mais recente do Windows no menu Configurações ou usando o Assistente do Windows Update.
+
+* Se você estiver executando um build mais antigo ou simplesmente prefere não usar o comando para instalar e quer instruções passo a passo, confira Etapas de instalação manual do WSL para versões mais antigas, que estão nessa documentação.
+
+--- 
 
 ## Inicio do bloco para virtualização do Linux no Windows com WSL (Subsistema do Windows para Linux).
 
@@ -118,7 +132,7 @@ Iremos utilizar uma virtualização no Windows chamada WSL 2, que não possuí t
 
 Documentação de referência: https://docs.microsoft.com/pt-br/windows/wsl/install-manual
 
-## Fim do bloco para virtualização do Linux no Windows.
+## Fim do bloco para virtualização do Linux no Windows com WSL (Subsistema do Windows para Linux).
 
 ---
 
