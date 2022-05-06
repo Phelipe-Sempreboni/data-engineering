@@ -83,7 +83,9 @@ Ferramentas que o download será realizado:
 
 ---
 
-9º - 
+9º - Dentro da pasta do "Pentaho", crie mais duas pastas, uma chamada "Downloads" e uma chamada "Softwares", ou outras duas de sua preferência, onde na pasta "Downaloads" teremos os arquivos baixados, e na pasta "Softwares" os arquivos descompactados.
+
+![image](https://user-images.githubusercontent.com/57469401/167126527-ff4dc2ad-3c61-4c01-81f8-d1afeebe50ac.png)
 
 ---
 
