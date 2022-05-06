@@ -51,7 +51,7 @@ Ferramentas que o download será realizado:
 
 ---
 
-6º - Em "client-tools", procure pelas ferramentas abaixo, clique em cada uma e aguarde o início do download.
+6º - Em "client-tools", procure pelas ferramentas abaixo, clique em cada uma, aguarde o início e término do download.
 
   - Pentaho Data Integration (pdi-ce-9.2.0.0-290.zip - 1.9 GB) - Ferramenta de ETL.
   - Pentaho Report Designer (prd-ce-9.2.0.0-290.zip - 1.7 GB) - Relatórios.
@@ -65,9 +65,27 @@ Ferramentas que o download será realizado:
 
 ---
 
+7º - Enquanto o downloado é realizado, vá até algum repositório de sua preferência de sua máquina, e crie uma pasta como repositório chamada "Pentaho" ou de sua preferência.
 
+![image](https://user-images.githubusercontent.com/57469401/167058873-73508eb9-45a1-4316-a9de-378d4b350ce6.png)
 
+---
 
+8º - 
+
+---
+
+9º - 
+
+---
+
+10º - 
+
+---
+
+_Espero ajudar_ :smiley:
+
+---
 
 
 
