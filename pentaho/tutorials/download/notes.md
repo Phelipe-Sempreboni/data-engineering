@@ -39,4 +39,35 @@ Ferramentas que o download será realizado:
 
 ---
 
-4º - 
+4º - Em "Files", clique em "Pentaho-9.2", que no momento deste tutorial teve sua última data de modificação em "2021-08-02".
+
+![image](https://user-images.githubusercontent.com/57469401/167057809-5d3bbf2e-a580-452f-af66-b95f35b34e5e.png)
+
+---
+
+5º - Em "Pentaho-9.2", clique em "client-tools", onde iremos realizar o download de três ferramentas.
+
+![image](https://user-images.githubusercontent.com/57469401/167057911-2acc5f94-c836-4036-9cdd-62f97fcfa1c0.png)
+
+---
+
+6º - Em "client-tools", procure pelas ferramentas abaixo, clique em cada uma e aguarde o início do download.
+
+  - Pentaho Data Integration (pdi-ce-9.2.0.0-290.zip - 1.9 GB) - Ferramenta de ETL.
+  - Pentaho Report Designer (prd-ce-9.2.0.0-290.zip - 1.7 GB) - Relatórios.
+  - Pentaho Schema Workbench (psw-ce-9.2.0.0-290.zip - 26.4 MB) - Desenho de OLAPs.
+
+![image](https://user-images.githubusercontent.com/57469401/167058180-9a3c1c74-783b-4df7-97b1-7a2aef80b315.png)
+
+![image](https://user-images.githubusercontent.com/57469401/167058244-edd85a66-65a7-4fd4-a895-806482ee254f.png)
+
+![image](https://user-images.githubusercontent.com/57469401/167058298-58e2abc1-3867-4870-b8e3-cde465fd8b3a.png)
+
+---
+
+
+
+
+
+
+
