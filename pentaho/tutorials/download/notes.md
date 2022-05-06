@@ -65,13 +65,21 @@ Ferramentas que o download será realizado:
 
 ---
 
-7º - Enquanto o downloado é realizado, vá até algum repositório de sua preferência de sua máquina, e crie uma pasta como repositório chamada "Pentaho" ou de sua preferência.
+7º - Em "server", procure pela ferramenta abaixo, clique nela, aguarde o início e término do download.
 
-![image](https://user-images.githubusercontent.com/57469401/167058873-73508eb9-45a1-4316-a9de-378d4b350ce6.png)
+  - Pentaho Server (pentaho-server-ce-9.2.0.0-290.zip - 2.1 GB) - Servidor.
+
+![image](https://user-images.githubusercontent.com/57469401/167059180-ff7a5e2a-f15d-4084-bd92-7fbf11064d19.png)
+
+![image](https://user-images.githubusercontent.com/57469401/167059227-7639662d-db11-4bd5-92bb-68c6281ba407.png)
+
+![image](https://user-images.githubusercontent.com/57469401/167059293-7cdd2032-75bd-4d3e-9d43-ee0765f64abd.png)
 
 ---
 
-8º - 
+8º - Enquanto o downloado é realizado, vá até algum repositório de sua preferência de sua máquina, e crie uma pasta como repositório chamada "Pentaho" ou de sua preferência.
+
+![image](https://user-images.githubusercontent.com/57469401/167058873-73508eb9-45a1-4316-a9de-378d4b350ce6.png)
 
 ---
 
