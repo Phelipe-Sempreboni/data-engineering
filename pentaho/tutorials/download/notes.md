@@ -1,4 +1,4 @@
-## Tutorial para download do Pentaho.
+## Tutorial para download e instalação do Pentaho.
 
 ---
 
