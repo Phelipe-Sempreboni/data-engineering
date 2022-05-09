@@ -10,7 +10,7 @@
 
 ---
 
-Ferramentas que o download será realizado:
+Ferramentas que o download será realizado, onde essas são as ferramentas referente ao Pentaho:
 
 - Nota1: As versões podem ser atualizadas à qualquer momento, logo, realize o download da versão que lhe atende ou da última versão.
 - Nota2: Neste tutorial iremos utilizar o "Pentaho-9.2" da data de modificação "2021-08-02".
@@ -20,6 +20,12 @@ Ferramentas que o download será realizado:
   - [x] Pentaho Server (pentaho-server-ce-9.2.0.0-290.zip - 2.1 GB) - Servidor.
   - [x] Pentaho Report Designer (prd-ce-9.2.0.0-290.zip - 1.7 GB) - Relatórios.
   - [x] Pentaho Schema Workbench (psw-ce-9.2.0.0-290.zip - 26.4 MB) - Desenho de OLAPs.
+
+---
+
+Ferramentas que o download será realizado, onde essas são as ferramentas auxiliares, que são necessárias para o funcionamento correto do Pentaho:
+
+  - [x] 
 
 ---
 
