@@ -25,7 +25,10 @@ Ferramentas que o download será realizado, onde essas são as ferramentas refer
 
 Ferramentas que o download será realizado, onde essas são as ferramentas auxiliares, que são necessárias para o funcionamento correto do Pentaho:
 
-  - [x] 
+- Nota1: Dependendo da fontes de dados que o Pentaho for se conectar, por exemplo, um Microsoft SQL Server ou um MySQL, será necessário realizar o download de um conector nos sites oficiais das ferramentas, logo, caso ocorra erro na conexão com o Pentaho, procure se a ferramenta da fontes de dados possuí um conector Java para instalação e integração entre fonte de dados e Pentaho.
+
+  - [x] Java (JRE - Java Runtime Environment) - Para conectar o Pentaho nas fontes de dados, onde é viável baixar a versão mais recente disponível.
+  - [x] Procure no Google, por exemplo, "Java Runtime Environment jre download" e verifique se o site é o oficial do Java. 
 
 ---
 
