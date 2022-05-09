@@ -6,6 +6,10 @@
 
 ---
 
+#### Este tutorial foi criado em Maio de 2022, logo, as versões que foram utilizadas como referência para download são desse período. Temos a possibilidade que quando você chegar neste tutorial, hajam novas versões disponíveis. Por favor, pedimos atentar.
+
+---
+
 Ferramentas que o download será realizado:
 
 - Nota1: As versões podem ser atualizadas à qualquer momento, logo, realize o download da versão que lhe atende ou da última versão.
