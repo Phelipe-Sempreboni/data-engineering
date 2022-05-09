@@ -90,19 +90,27 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
 
 ---
 
-8º - Enquanto o downloado é realizado, vá até algum repositório de sua preferência de sua máquina, e crie uma pasta como repositório chamada "Pentaho" ou de sua preferência.
+8º - Realizar o download do "Java (JRE - Java Runtime Environment)" em sua versão mais recente se for possível. Procure no Google, por exemplo, por "Java Runtime Environment jre download", onde possivelmente irá ser redirecionado para o site "https://www.java.com/pt-BR/download/manual.jsp" oficial do Java. Realize do downaload da versão da plataforma que lhe atende melhor.
+
+![image](https://user-images.githubusercontent.com/57469401/167516002-6382cac5-c006-44af-a367-4bba24685177.png)
+
+![image](https://user-images.githubusercontent.com/57469401/167516015-f56a1b83-5cff-46f6-a254-3a8b8c70a06e.png)
+
+---
+
+9º - Enquanto o downloado é realizado, vá até algum repositório de sua preferência de sua máquina, e crie uma pasta como repositório chamada "Pentaho" ou de sua preferência.
 
 ![image](https://user-images.githubusercontent.com/57469401/167058873-73508eb9-45a1-4316-a9de-378d4b350ce6.png)
 
 ---
 
-9º - Dentro da pasta do "Pentaho", crie mais duas pastas, uma chamada "Downloads" e uma chamada "Softwares", ou outras duas de sua preferência, onde na pasta "Downaloads" teremos os arquivos baixados, e na pasta "Softwares" os arquivos descompactados.
+10º - Dentro da pasta do "Pentaho", crie mais duas pastas, uma chamada "Downloads" e uma chamada "Softwares", ou outras duas de sua preferência, onde na pasta "Downaloads" teremos os arquivos baixados, e na pasta "Softwares" os arquivos descompactados.
 
 ![image](https://user-images.githubusercontent.com/57469401/167126527-ff4dc2ad-3c61-4c01-81f8-d1afeebe50ac.png)
 
 ---
 
-10º - 
+11º - 
 
 ---
 
