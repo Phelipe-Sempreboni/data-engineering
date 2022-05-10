@@ -118,7 +118,29 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
 
 ---
 
-12º - 
+12º - Após instalação do Java, será necessário realizar a criação de umva variável de ambiente, a mesma que o Pentaho irá utilizar e que sua fonte será o Java instalado na máquina. Siga os paasos abaixo:
+
+  - Pesquise no iniciar por "Painel de Controle";
+  - Clique em "Sistema e Segurança";
+  - Clique em "Sistema";
+  - Clique em "Configurações avançadas do sistema";
+  - Clique em "Variáveis de Ambiente";
+  - Em "Variáveis do Sistema" clique em "Novo...";
+  - Em "Nome da variável", dê o nome de "PENTAHO_JAVA_HOME";
+  - Em "Valor da variável" é necessário que seja inserido o diretório raiz que o Java foi instalado, que em nosso caso está no repositório padrão.
+  - Repositório padrão do Java, por exemplo "C:\Program Files\Java\jre1.8.0_333", que em sua máquina pode estar em outro local. 
+  - Insira esse valor em "Valor da variável" e pressione "Ok".
+
+
+![image](https://user-images.githubusercontent.com/57469401/167520126-0f310260-c9d2-4859-b889-91a1483f0f44.png)
+
+![image](https://user-images.githubusercontent.com/57469401/167520160-8bf07869-7dab-449d-aaf5-45b82e0c5567.png)
+
+![image](https://user-images.githubusercontent.com/57469401/167520234-27210494-2f7b-458c-ab78-5c8ec8ff7d89.png)
+
+![image](https://user-images.githubusercontent.com/57469401/167520477-f43af836-b097-4b6d-b99a-f4b2e784e29f.png)
+
+![image](https://user-images.githubusercontent.com/57469401/167520495-d3de8117-b5af-4dcf-b291-fa4d32ffef6f.png)
 
 ---
 
