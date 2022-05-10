@@ -32,13 +32,25 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
 
 ---
 
-1º - Entrar no endereço ao lado, onde este site é um repositório para ferramentas Open Source: https://sourceforge.net/
+1º -  Antes de iniciar o processo, vá até algum repositório de sua preferência de sua máquina, e crie uma pasta como repositório chamada "Pentaho" ou de sua preferência.
+
+![image](https://user-images.githubusercontent.com/57469401/167058873-73508eb9-45a1-4316-a9de-378d4b350ce6.png)
+
+---
+
+2º - Dentro da pasta do "Pentaho", crie mais duas pastas, uma chamada "Downloads" e uma chamada "Softwares", ou outras duas de sua preferência, onde na pasta "Downaloads" teremos os arquivos baixados, e na pasta "Softwares" os arquivos descompactados.
+
+![image](https://user-images.githubusercontent.com/57469401/167126527-ff4dc2ad-3c61-4c01-81f8-d1afeebe50ac.png)
+
+---
+
+3º - Entrar no endereço ao lado, onde este site é um repositório para ferramentas Open Source: https://sourceforge.net/
 
 ![image](https://user-images.githubusercontent.com/57469401/167056123-df50fa5e-d5a4-4c95-bfb2-350544898c86.png)
 
 ---
 
-2º - Na aba de pesquisa, procurar por "Pentaho" e selecione a opção "Pentaho from Hitachi Vantara".
+4º - Na aba de pesquisa, procurar por "Pentaho" e selecione a opção "Pentaho from Hitachi Vantara".
 
 ![image](https://user-images.githubusercontent.com/57469401/167056279-770b2616-df6f-4871-957e-72046ddecbb1.png)
 
@@ -46,25 +58,25 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
 
 ---
 
-3º - Nas abas abaixo, clique em "Files".
+5º - Nas abas abaixo, clique em "Files".
 
 ![image](https://user-images.githubusercontent.com/57469401/167056501-6656924d-7e8c-49d7-950b-b11ed58dd46e.png)
 
 ---
 
-4º - Em "Files", clique em "Pentaho-9.2", que no momento deste tutorial teve sua última data de modificação em "2021-08-02".
+6º - Em "Files", clique em "Pentaho-9.2", que no momento deste tutorial teve sua última data de modificação em "2021-08-02".
 
 ![image](https://user-images.githubusercontent.com/57469401/167057809-5d3bbf2e-a580-452f-af66-b95f35b34e5e.png)
 
 ---
 
-5º - Em "Pentaho-9.2", clique em "client-tools", onde iremos realizar o download de três ferramentas.
+7º - Em "Pentaho-9.2", clique em "client-tools", onde iremos realizar o download de três ferramentas.
 
 ![image](https://user-images.githubusercontent.com/57469401/167057911-2acc5f94-c836-4036-9cdd-62f97fcfa1c0.png)
 
 ---
 
-6º - Em "client-tools", procure pelas ferramentas abaixo, clique em cada uma, aguarde o início e término do download.
+8º - Em "client-tools", procure pelas ferramentas abaixo, clique em cada uma, aguarde o início e término do download.
 
   - Pentaho Data Integration (pdi-ce-9.2.0.0-290.zip - 1.9 GB) - Ferramenta de ETL.
   - Pentaho Report Designer (prd-ce-9.2.0.0-290.zip - 1.7 GB) - Relatórios.
@@ -78,7 +90,7 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
 
 ---
 
-7º - Em "server", procure pela ferramenta abaixo, clique nela, aguarde o início e término do download.
+9º - Em "server", procure pela ferramenta abaixo, clique nela, aguarde o início e término do download.
 
   - Pentaho Server (pentaho-server-ce-9.2.0.0-290.zip - 2.1 GB) - Servidor.
 
@@ -90,7 +102,7 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
 
 ---
 
-8º - Realizar o download do "Java (JRE - Java Runtime Environment)" em sua versão mais recente se for possível. Procure no Google, por exemplo, por "Java Runtime Environment jre download", onde possivelmente irá ser redirecionado para o site "https://www.java.com/pt-BR/download/manual.jsp" oficial do Java. Realize do downaload da versão da plataforma que lhe atende melhor.
+10º - Realizar o download do "Java (JRE - Java Runtime Environment)" em sua versão mais recente se for possível. Procure no Google, por exemplo, por "Java Runtime Environment jre download", onde possivelmente irá ser redirecionado para o site "https://www.java.com/pt-BR/download/manual.jsp" oficial do Java. Realize do downaload da versão da plataforma que lhe atende melhor.
 
 ![image](https://user-images.githubusercontent.com/57469401/167516002-6382cac5-c006-44af-a367-4bba24685177.png)
 
@@ -98,25 +110,22 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
 
 ---
 
-9º - Enquanto o downloado é realizado, vá até algum repositório de sua preferência de sua máquina, e crie uma pasta como repositório chamada "Pentaho" ou de sua preferência.
+11º - Com os downloads realizados, iremos iniciar a instalação pelo "Java (JRE - Java Runtime Environment)" que no caso e na data de gravação deste tutoriak é a versão "jre-8u333-windows-x64".
 
-![image](https://user-images.githubusercontent.com/57469401/167058873-73508eb9-45a1-4316-a9de-378d4b350ce6.png)
+- Execute a instalação do Java como adminstrador do sistema, visando que a instalação seja realizada corretamente. Se tudo ocorrer com êxito, irá concretizar a instalação com a imagem abaixo.
 
----
-
-10º - Dentro da pasta do "Pentaho", crie mais duas pastas, uma chamada "Downloads" e uma chamada "Softwares", ou outras duas de sua preferência, onde na pasta "Downaloads" teremos os arquivos baixados, e na pasta "Softwares" os arquivos descompactados.
-
-![image](https://user-images.githubusercontent.com/57469401/167126527-ff4dc2ad-3c61-4c01-81f8-d1afeebe50ac.png)
+![image](https://user-images.githubusercontent.com/57469401/167519650-ececd225-578a-4f5e-8dcd-ca6500e97031.png)
 
 ---
 
-11º - 
+12º - 
+
+---
+
+13º - 
 
 ---
 
 _Espero ajudar_ :smiley:
 
 ---
-
-
-
