@@ -144,7 +144,11 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
 
 ---
 
-13º - 
+13º - Antes de prosseguir, por favor, instale um aplicativo descompactador de arquivos, podendo ser um 7zip ou um WinRAR. Não realize as descompactações dos passos abaixo com o próprio descompactador do Windows, pois, pode ocorrer erro.
+
+---
+
+14º - 
 
 ---
 
