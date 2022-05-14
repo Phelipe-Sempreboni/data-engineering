@@ -148,7 +148,15 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
 
 ---
 
-14º - 
+14º - Vá até a pasta de downloads do seu computador, copie os arquivos do Pentaho, vá até a pasta que você criou, onde se você seguiu o exemplo deste tutorial, o caminho irá estar "/Pentaho/Downloads" e "/Pentaho/Softwares". Com os arquivos copiados, cole em "/Pentaho/Downloads", onde aqui ainda não realizarmos a descompactação.
+
+---
+
+15º - Vamos iniciar a instalação dos softwares do Pentaho.
+
+---
+
+16º - Vamos iniciar pelo Pentaho Server. 
 
 ---
 
