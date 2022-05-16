@@ -196,7 +196,23 @@ Notas:
 
 ---
 
-18º - 
+18º - Siga os passos abaixo para instalação do Pentaho Report Designer.
+
+  - Vá até pasta "/Pentaho/Downloads".
+  - Copie o arquivo "prd-ce-9.2.0.0-290.zip".
+  - Vá até a pasta "/Pentaho/Softwares". 
+  - Cole o arquivo "prd-ce-9.2.0.0-290.zip".
+  - Clique com o direito e "extrair aqui" ou "extrair tudo", onde os arquivos deverão ser descompatados e ficar nessa pasta "/Pentaho/Softwares".
+  - Com o arquivo totalmente descompactado, exclua o arquivo "prd-ce-9.2.0.0-290.zip" da pasta "/Pentaho/Softwares".
+  - Ficará somente nesta pasta o descompactado do Pentaho Report Designer.
+  - No caminho "Pentaho\Softwares\report-designer", temos um arquivo chamado "report-designer.bat". Clique com o direito neste arquivo e clique em editar e procure um editor de texto, e se possível dê preferência para um "Notepad++" ou um "Sublime Text", que são editores mais voltados para desenvolvimento.
+  - Na linha "start "Pentaho Report Designer" "%PENTAHO_JAVA%" -Dswing.useSystemFontSettings=false -Xms1024m -Xmx2048m"" temos esses dois parâmetros, que são a indicação de quanto de memória miníma e máxima o sistema poderá utilizar.
+  - Aqui você pode mudar de acordo com a memória que sua máquina possuí, ou pode manter o padrão que é este "start "Pentaho Report Designer" "%PENTAHO_JAVA%" -Dswing.useSystemFontSettings=false -Xms1024m -Xmx2048m".
+  - Para máquinas menos potentes, é interessante diminuir estes parâmetros.
+
+Notas:
+  
+  - Nota: No caminho Pentaho\Softwares\report-designer\lib\jdbc" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
 
 ---
 
