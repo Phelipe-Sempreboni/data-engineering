@@ -236,6 +236,10 @@ Notas:
 
 ---
 
+20º - Instalação finalizada.
+
+---
+
 _Espero ajudar_ :smiley:
 
 ---
