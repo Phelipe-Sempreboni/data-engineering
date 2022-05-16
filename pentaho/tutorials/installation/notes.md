@@ -165,14 +165,14 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
   - Clique com o direito e "extrair aqui" ou "extrair tudo", onde os arquivos deverão ser descompatados e ficar nessa pasta "/Pentaho/Softwares".
   - Com o arquivo totalmente descompactado, exclua o arquivo "pentaho-server-ce-9.2.0.0-290.zip" da pasta "/Pentaho/Softwares".
   - Ficará somente nesta pasta o descompactado do Pentaho Server.
-  - No caminho "Pentaho\Softwares\pentaho-server", temos um arquivo chamado "start-pentaho.bat". Clique com o direito neste arquivo e clique em editar e procure um editor de texto, e se possível dê preferência para um "Notepad++" ou um "Sublime Text", que são editores mais voltados para desenvolvimento.
+  - No caminho "\Pentaho\Softwares\pentaho-server", temos um arquivo chamado "start-pentaho.bat". Clique com o direito neste arquivo e clique em editar e procure um editor de texto, e se possível dê preferência para um "Notepad++" ou um "Sublime Text", que são editores mais voltados para desenvolvimento.
   - Na linha "set CATALINA_OPTS=-Xms2048m -Xmx6144m" temos esses dois parâmetros, que são a indicação de quanto de memória miníma e máxima o sistema poderá utilizar.
   - Aqui você pode mudar de acordo com a memória que sua máquina possuí, ou pode manter o padrão que é este "set CATALINA_OPTS=-Xms2048m -Xmx6144m".
   - Para máquinas menos potentes, é interessante diminuir estes parâmetros.
 
 Notas:
   
-  - Nota: No caminho "Pentaho\Softwares\pentaho-server\tomcat\lib" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+  - Nota: No caminho "\Pentaho\Softwares\pentaho-server\tomcat\lib" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
 
 ---
 
@@ -185,14 +185,14 @@ Notas:
   - Clique com o direito e "extrair aqui" ou "extrair tudo", onde os arquivos deverão ser descompatados e ficar nessa pasta "/Pentaho/Softwares".
   - Com o arquivo totalmente descompactado, exclua o arquivo "pdi-ce-9.2.0.0-290.zip" da pasta "/Pentaho/Softwares".
   - Ficará somente nesta pasta o descompactado do Pentaho Data Integration.
-  - No caminho "Pentaho\Softwares\data-integration", temos um arquivo chamado "Spoon.bat". Clique com o direito neste arquivo e clique em editar e procure um editor de texto, e se possível dê preferência para um "Notepad++" ou um "Sublime Text", que são editores mais voltados para desenvolvimento.
+  - No caminho "\Pentaho\Softwares\data-integration", temos um arquivo chamado "Spoon.bat". Clique com o direito neste arquivo e clique em editar e procure um editor de texto, e se possível dê preferência para um "Notepad++" ou um "Sublime Text", que são editores mais voltados para desenvolvimento.
   - Na linha "if "%PENTAHO_DI_JAVA_OPTIONS%"=="" set PENTAHO_DI_JAVA_OPTIONS="-Xms1024m" "-Xmx2048m"" temos esses dois parâmetros, que são a indicação de quanto de memória miníma e máxima o sistema poderá utilizar.
   - Aqui você pode mudar de acordo com a memória que sua máquina possuí, ou pode manter o padrão que é este "if "%PENTAHO_DI_JAVA_OPTIONS%"=="" set PENTAHO_DI_JAVA_OPTIONS="-Xms1024m" "-Xmx2048m"".
   - Para máquinas menos potentes, é interessante diminuir estes parâmetros.
 
 Notas:
   
-  - Nota: No caminho "Pentaho\Softwares\data-integration\lib" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+  - Nota: No caminho "\Pentaho\Softwares\data-integration\lib" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
 
 ---
 
@@ -205,16 +205,34 @@ Notas:
   - Clique com o direito e "extrair aqui" ou "extrair tudo", onde os arquivos deverão ser descompatados e ficar nessa pasta "/Pentaho/Softwares".
   - Com o arquivo totalmente descompactado, exclua o arquivo "prd-ce-9.2.0.0-290.zip" da pasta "/Pentaho/Softwares".
   - Ficará somente nesta pasta o descompactado do Pentaho Report Designer.
-  - No caminho "Pentaho\Softwares\report-designer", temos um arquivo chamado "report-designer.bat". Clique com o direito neste arquivo e clique em editar e procure um editor de texto, e se possível dê preferência para um "Notepad++" ou um "Sublime Text", que são editores mais voltados para desenvolvimento.
+  - No caminho "\Pentaho\Softwares\report-designer", temos um arquivo chamado "report-designer.bat". Clique com o direito neste arquivo e clique em editar e procure um editor de texto, e se possível dê preferência para um "Notepad++" ou um "Sublime Text", que são editores mais voltados para desenvolvimento.
   - Na linha "start "Pentaho Report Designer" "%PENTAHO_JAVA%" -Dswing.useSystemFontSettings=false -Xms1024m -Xmx2048m"" temos esses dois parâmetros, que são a indicação de quanto de memória miníma e máxima o sistema poderá utilizar.
   - Aqui você pode mudar de acordo com a memória que sua máquina possuí, ou pode manter o padrão que é este "start "Pentaho Report Designer" "%PENTAHO_JAVA%" -Dswing.useSystemFontSettings=false -Xms1024m -Xmx2048m".
   - Para máquinas menos potentes, é interessante diminuir estes parâmetros.
 
 Notas:
   
-  - Nota: No caminho Pentaho\Softwares\report-designer\lib\jdbc" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+  - Nota: No caminho "\Pentaho\Softwares\report-designer\lib\jdbc" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
 
 ---
+
+19º - Siga os passos abaixo para instalação do Pentaho Schema Workbench.
+
+  - Vá até pasta "/Pentaho/Downloads".
+  - Copie o arquivo "psw-ce-9.2.0.0-290.zip".
+  - Vá até a pasta "/Pentaho/Softwares". 
+  - Cole o arquivo "psw-ce-9.2.0.0-290.zip".
+  - Clique com o direito e "extrair aqui" ou "extrair tudo", onde os arquivos deverão ser descompatados e ficar nessa pasta "/Pentaho/Softwares".
+  - Com o arquivo totalmente descompactado, exclua o arquivo "psw-ce-9.2.0.0-290.zip" da pasta "/Pentaho/Softwares".
+  - Ficará somente nesta pasta o descompactado do Pentaho Schema Workbench.
+  - No caminho "\Pentaho\Softwares\schema-workbench", temos um arquivo chamado "workbench.bat". Clique com o direito neste arquivo e clique em editar e procure um editor de texto, e se possível dê preferência para um "Notepad++" ou um "Sublime Text", que são editores mais voltados para desenvolvimento.
+  - Na linha "%PENTAHO_JAVA%" -Xms1024m -Xmx2048m temos esses dois parâmetros, que são a indicação de quanto de memória miníma e máxima o sistema poderá utilizar.
+  - Aqui você pode mudar de acordo com a memória que sua máquina possuí, ou pode manter o padrão que é este "%PENTAHO_JAVA%" -Xms1024m -Xmx2048m".
+  - Para máquinas menos potentes, é interessante diminuir estes parâmetros.
+
+Notas:
+  
+  - Nota: No caminho "\Pentaho\Softwares\schema-workbench\lib" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
 
 _Espero ajudar_ :smiley:
 
