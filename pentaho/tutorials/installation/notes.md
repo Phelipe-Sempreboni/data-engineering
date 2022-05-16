@@ -234,6 +234,8 @@ Notas:
   
   - Nota: No caminho "\Pentaho\Softwares\schema-workbench\lib" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
 
+---
+
 _Espero ajudar_ :smiley:
 
 ---
