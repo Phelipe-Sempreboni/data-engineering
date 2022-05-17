@@ -172,7 +172,9 @@ Ferramentas que o download será realizado, onde essas são as ferramentas auxil
 
 Notas:
   
-  - Nota: No caminho "\Pentaho\Softwares\pentaho-server\tomcat\lib" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+  - Nota 1: No caminho "\Pentaho\Softwares\pentaho-server\tomcat\lib" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+
+  - Nota 2: Em meu caso, irei utilizar o MySQL, logo, em meu caminho havia o arquivo "mysql-connector-java-5.1.17.jar" e realizei a alteração para a versão mais recente "mysql-connector-java-8.0.29.jar".
 
 ---
 
@@ -192,7 +194,9 @@ Notas:
 
 Notas:
   
-  - Nota: No caminho "\Pentaho\Softwares\data-integration\lib" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+  - Nota 1: No caminho "\Pentaho\Softwares\data-integration\lib" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+
+  - Nota 2: Em meu caso, irei utilizar o MySQL, logo, em meu caminho havia o arquivo "mysql-connector-java-5.1.17.jar" e realizei a alteração para a versão mais recente "mysql-connector-java-8.0.29.jar".
 
 ---
 
@@ -212,7 +216,9 @@ Notas:
 
 Notas:
   
-  - Nota: No caminho "\Pentaho\Softwares\report-designer\lib\jdbc" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+  - Nota 1: No caminho "\Pentaho\Softwares\report-designer\lib\jdbc" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+
+  - Nota 2: Em meu caso, irei utilizar o MySQL, logo, em meu caminho havia o arquivo "mysql-connector-java-5.1.17.jar" e realizei a alteração para a versão mais recente "mysql-connector-java-8.0.29.jar".
 
 ---
 
@@ -232,7 +238,9 @@ Notas:
 
 Notas:
   
-  - Nota: No caminho "\Pentaho\Softwares\schema-workbench\drivers" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+  - Nota 1: No caminho "\Pentaho\Softwares\schema-workbench\drivers" é onde ficam os conectores para realizar a conexão entre plataformas, como um MySQL do conector (mysql-connector-java-5.1.17.jar), PostgreSQL do conector (postgresql-42.2.5.jar), entre outros. Notar que se caso ocorra um erro de conexão, possivelmente é porquê o conector dentro deste caminho está desatualizado. Você pode tentar baixar o conectaor atualizado na Web, no site oficial da ferramenta, por exemplo, do MySQL e colocar nessa pasta, apagando o conector antigo. 
+
+  - Nota 2: Em meu caso, irei utilizar o MySQL, logo, em meu caminho havia o arquivo "mysql-connector-java-5.1.17.jar" e realizei a alteração para a versão mais recente "mysql-connector-java-8.0.29.jar".
 
 ---
 
