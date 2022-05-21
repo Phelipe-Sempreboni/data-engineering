@@ -148,7 +148,85 @@
     </index>
    </folder>
   </table>
+  <table id="TAB40" populated="true" UUID="1ac63b3a-17b4-4412-9138-cbad6a85644c" name="Categoria" objectType="TABLE" physicalName="Dim_Categoria" >
+   <remarks>Tabela da dimensão Categoria.</remarks>
+   <folder id="FOLTAB401" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL41" populated="true" UUID="6ff55977-008c-4b8b-a70e-22e9e2b49270" autoIncrement="false" autoIncrementSequenceName="Dim_Categoria_Cod_Categoria_seq" defaultValue="" name="Código da Categoria" nullable="0" physicalName="Cod_Categoria" precision="50" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-9" userDefinedTypeUUID="087a20b8-b387-474a-b9c8-55eb87aff017" >
+     <remarks></remarks>
+    </column>
+    <column id="COL42" populated="true" UUID="e33db7d6-fec9-488c-b2bb-824e2d1235be" autoIncrement="false" autoIncrementSequenceName="Dim_Categoria_Desc_Categoria_seq" defaultValue="" name="Descrição da Categoria" nullable="0" physicalName="Desc_Categoria" precision="250" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-9" userDefinedTypeUUID="087a20b8-b387-474a-b9c8-55eb87aff017" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB403" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB402" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB404" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX43" populated="true" UUID="577de58e-fbf1-46ae-ad08-78e9b49c9926" clustered="false" name="Dim_Categoria_pk" physicalName="Dim_Categoria_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC44" populated="true" UUID="99d7cc55-e46c-4f44-99ff-b1fc5ef67600" ascendingOrDescending="UNSPECIFIED" column-ref="COL41" name="Código da Categoria" physicalName="Cod_Categoria" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB45" populated="true" UUID="1b05ab73-ffe0-457e-ad3f-ba44200e5972" name="Marca" objectType="TABLE" physicalName="Dim_Marca" >
+   <remarks>Tabela da dimensão Marca.</remarks>
+   <folder id="FOLTAB451" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL46" populated="true" UUID="450a87f8-f3c5-4d49-b20e-988cf562d806" autoIncrement="false" autoIncrementSequenceName="Dim_Marca_Cod_Marca_seq" defaultValue="" name="Código da Marca" nullable="0" physicalName="Cod_Marca" precision="50" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-9" userDefinedTypeUUID="087a20b8-b387-474a-b9c8-55eb87aff017" >
+     <remarks></remarks>
+    </column>
+    <column id="COL47" populated="true" UUID="aa6d7a07-4ce6-4654-9ddf-b3070a9eebcb" autoIncrement="false" autoIncrementSequenceName="Dim_Marca_Desc_Marca_seq" defaultValue="" name="Descrição da Marca" nullable="0" physicalName="Desc_Marca" precision="250" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-9" userDefinedTypeUUID="087a20b8-b387-474a-b9c8-55eb87aff017" >
+     <remarks></remarks>
+    </column>
+    <column id="COL48" populated="true" UUID="754b544c-8214-4ca3-a628-9038f10c4de4" autoIncrement="false" autoIncrementSequenceName="Dim_Marca_Cod_Categoria_seq" defaultValue="" name="Código da Categoria" nullable="0" physicalName="Cod_Categoria" precision="50" referenceCount="2" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-9" userDefinedTypeUUID="087a20b8-b387-474a-b9c8-55eb87aff017" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB453" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB452" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB454" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX49" populated="true" UUID="9285bdb2-c8cd-4154-82ec-a86912ab7d9d" clustered="false" name="Dim_Marca_pk" physicalName="Dim_Marca_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC50" populated="true" UUID="9c6743e6-af87-4591-b012-7862696979f3" ascendingOrDescending="UNSPECIFIED" column-ref="COL46" name="Código da Marca" physicalName="Cod_Marca" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB51" populated="true" UUID="dc745272-8291-489b-a0a4-8e51c1dcbd68" name="Produto" objectType="TABLE" physicalName="Dim_Produto" >
+   <remarks>Tabela da dimensão Produto.	</remarks>
+   <folder id="FOLTAB511" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL52" populated="true" UUID="4d13ce2d-adff-4d90-9ad8-3bf32f9a1b46" autoIncrement="false" autoIncrementSequenceName="Dim_Produto_Cod_Produto_seq" defaultValue="" name="Código do Produto" nullable="0" physicalName="Cod_Produto" precision="50" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-9" userDefinedTypeUUID="087a20b8-b387-474a-b9c8-55eb87aff017" >
+     <remarks></remarks>
+    </column>
+    <column id="COL53" populated="true" UUID="8c07f618-2e94-46b2-8312-2a094f12af3b" autoIncrement="false" autoIncrementSequenceName="Dim_Produto_Desc_Produto_seq" defaultValue="" name="Descrição do Produto" nullable="0" physicalName="Desc_Produto" precision="250" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-9" userDefinedTypeUUID="087a20b8-b387-474a-b9c8-55eb87aff017" >
+     <remarks></remarks>
+    </column>
+    <column id="COL54" populated="true" UUID="baacfbd8-de60-475c-98f6-7224ee6cf159" autoIncrement="false" autoIncrementSequenceName="Dim_Produto_Cod_Marca_seq" defaultValue="" name="Código da Marca" nullable="0" physicalName="Cod_Marca" precision="50" referenceCount="2" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-9" userDefinedTypeUUID="087a20b8-b387-474a-b9c8-55eb87aff017" >
+     <remarks></remarks>
+    </column>
+    <column id="COL55" populated="true" UUID="97d218a9-fa5d-4d99-b15f-2fcc91010b26" autoIncrement="false" autoIncrementSequenceName="Dim_Produto_Atr_Tamanho_seq" defaultValue="" name="Atributo de Tamanho" nullable="0" physicalName="Atr_Tamanho" precision="250" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-9" userDefinedTypeUUID="087a20b8-b387-474a-b9c8-55eb87aff017" >
+     <remarks></remarks>
+    </column>
+    <column id="COL56" populated="true" UUID="b9aba3b9-8934-45f1-8f3f-923adc646152" autoIncrement="false" autoIncrementSequenceName="Dim_Produto_Atr_Sabor_seq" defaultValue="" name="Atributo de Sabor" nullable="0" physicalName="Atr_Sabor" precision="250" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-9" userDefinedTypeUUID="087a20b8-b387-474a-b9c8-55eb87aff017" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB513" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB512" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB514" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX57" populated="true" UUID="ab1a611e-2d47-414e-8e20-3fb1c239db0e" clustered="false" name="Dim_Produto_pk" physicalName="Dim_Produto_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC58" populated="true" UUID="c860c80a-5076-4208-85ec-44a861240166" ascendingOrDescending="UNSPECIFIED" column-ref="COL52" name="Código do Produto" physicalName="Cod_Produto" />
+    </index>
+   </folder>
+  </table>
   <relationships>
+   <relationship id="REL59" populated="true" UUID="c183d4a7-a211-44d2-b235-bc2bee160281" deferrability="7" deleteRule="3" fk-table-ref="TAB45" fkCardinality="7" identifying="false" name="Dim_Categoria_Dim_Marca_fk" physicalName="Dim_Categoria_Dim_Marca_fk" pk-table-ref="TAB40" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP60" populated="true" UUID="bc05b2ec-c635-4cd1-9a4d-2b6cf0d09f4b" fk-column-ref="COL48" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL41" />
+   </relationship>
+   <relationship id="REL61" populated="true" UUID="af4ff935-26c4-4fbb-8f64-9f9cc0819715" deferrability="7" deleteRule="3" fk-table-ref="TAB51" fkCardinality="7" identifying="false" name="Dim_Marca_Dim_Produto_fk" physicalName="Dim_Marca_Dim_Produto_fk" pk-table-ref="TAB45" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP62" populated="true" UUID="cc2e841d-9062-47d5-8622-b189eb9d35de" fk-column-ref="COL54" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL46" />
+   </relationship>
   </relationships>
  </target-database>
  <ddl-generator type="ca.sqlpower.architect.ddl.GenericDDLGenerator" allow-connection="true"> </ddl-generator>
@@ -158,6 +236,11 @@
   <table-pane table-ref="TAB9" x="87" y="65" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>
   <table-pane table-ref="TAB14" x="86" y="158" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>
   <table-pane table-ref="TAB27" x="86" y="364" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>
+  <table-pane table-ref="TAB40" x="818" y="75" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>
+  <table-pane table-ref="TAB45" x="822" y="309" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>
+  <table-pane table-ref="TAB51" x="829" y="550" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>
+  <table-link relationship-ref="REL59" pkConnection="0.5054945054945055" fkConnection="0.4910394265232975" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-link relationship-ref="REL61" pkConnection="0.5018315018315018" fkConnection="0.48484848484848486" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">
