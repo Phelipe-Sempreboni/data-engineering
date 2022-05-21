@@ -280,7 +280,7 @@
   <table id="TAB78" populated="true" UUID="3c208922-2f79-40e1-bf33-fa4a87742933" name="Fato da Presiência" objectType="TABLE" physicalName="Fato_Presidencia" >
    <remarks>Tabela de fato da Presidência.</remarks>
    <folder id="FOLTAB781" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL79" populated="true" UUID="2ea94c22-3aff-4ffb-9bbc-b646e7315d04" autoIncrement="false" autoIncrementSequenceName="Fabrica_ID_Fabrica_seq" defaultValue="" name="Identificador da Fábrica" nullable="0" physicalName="ID_Fabrica" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+    <column id="COL79" populated="true" UUID="2ea94c22-3aff-4ffb-9bbc-b646e7315d04" autoIncrement="false" autoIncrementSequenceName="Fato_Presidencia_ID_Fabrica_seq" defaultValue="" name="Identificador da Fábrica" nullable="0" physicalName="ID_Fabrica" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL80" populated="true" UUID="d20e7cd4-210d-432a-91b7-53c5911e1080" autoIncrement="false" autoIncrementSequenceName="Fato_Presidencia_ID_Tempo_seq" defaultValue="" name="Identificador do Tempo" nullable="0" physicalName="ID_Tempo" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
@@ -364,7 +364,7 @@
   <table-pane table-ref="TAB42" x="1054" y="658" bgColor="0xdfedce" fgColor="0x000000" rounded="true" dashed="false"/>
   <table-pane table-ref="TAB56" x="583" y="55" bgColor="0xdfedce" fgColor="0x000000" rounded="true" dashed="false"/>
   <table-pane table-ref="TAB68" x="1116" y="213" bgColor="0xdfedce" fgColor="0x000000" rounded="true" dashed="false"/>
-  <table-pane table-ref="TAB78" x="577" y="424" bgColor="0xbfd6ff" fgColor="0x000000" rounded="true" dashed="false"/>
+  <table-pane table-ref="TAB78" x="577" y="424" bgColor="0xc7d0df" fgColor="0x000000" rounded="true" dashed="false"/>
   <table-link relationship-ref="REL101" pkConnection="0.9626865671641791" fkConnection="0.20218579234972678" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="40"/>
   <table-link relationship-ref="REL107" pkConnection="0.889763779527559" fkConnection="0.25888324873096447" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="18"/>
   <table-link relationship-ref="REL103" pkConnection="0.07650273224043716" fkConnection="0.3222748815165877" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="18"/>
