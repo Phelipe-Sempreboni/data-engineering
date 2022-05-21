@@ -4,8 +4,8 @@
  <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
  <project-data-sources>
   <data-source id="DS0">
+   <property key="Logical" value="Datawarehouse" />
    <property key="Connection Type" value="MySQL" />
-   <property key="Logical" value="PlayPen Database" />
    <property key="JDBC URL" value="jdbc:mysql://localhost:3306/" />
    <property key="UID" value="root" />
    <property key="PWD" value="7A62gb@54@41!nAj*" />
@@ -16,8 +16,8 @@
    <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
   </data-source>
   <data-source id="DS0">
+   <property key="Logical" value="Datawarehouse" />
    <property key="Connection Type" value="MySQL" />
-   <property key="Logical" value="PlayPen Database" />
    <property key="JDBC URL" value="jdbc:mysql://localhost:3306/" />
    <property key="UID" value="root" />
    <property key="PWD" value="7A62gb@54@41!nAj*" />
@@ -29,7 +29,7 @@
   </data-source>
  </project-data-sources>
  <source-databases>
-  <database id="DB0" populated="true" UUID="88624793-cb8c-4be4-ac95-beffd240872b" dbcs-ref="DS0" name="PlayPen Database" physicalName="Datawarehouse" >
+  <database id="DB0" populated="true" UUID="88624793-cb8c-4be4-ac95-beffd240872b" dbcs-ref="DS0" name="Datawarehouse" physicalName="Datawarehouse" >
    <catalog id="CAT1" populated="false" UUID="30b5a00f-1095-4f6d-8eb3-06b1103a0e25" name="information_schema" nativeTerm="database" physicalName="information_schema" >
    </catalog>
    <catalog id="CAT2" populated="false" UUID="ba3b1dc1-9559-4d05-b7b8-3452f066e066" name="mysql" nativeTerm="database" physicalName="mysql" >
