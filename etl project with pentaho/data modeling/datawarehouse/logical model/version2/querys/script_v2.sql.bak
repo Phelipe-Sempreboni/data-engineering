@@ -1,22 +1,4 @@
-# ----------------------------------------------------------------------------------------------------------------------------- #
-
-USE dw_sucos;
-
-DROP TABLE fato_001;
-DROP TABLE fato_002;
-DROP TABLE fato_003;
-DROP TABLE fato_004;
-DROP TABLE fato_005;
-DROP TABLE dim_categoria;
-DROP TABLE dim_cliente;
-DROP TABLE dim_marca;
-DROP TABLE dim_oraganizacional;
-DROP TABLE dim_produto;
-DROP TABLE dim_tempo;
-
-# ----------------------------------------------------------------------------------------------------------------------------- #
-
-USE dw_sucos;
+USE datawarehouse;
 
 CREATE TABLE Dim_Oraganizacional (
                 Cod_Organizacional NVARCHAR(50) NOT NULL,
@@ -286,5 +268,3 @@ FOREIGN KEY (Cod_Fabrica)
 REFERENCES Dim_Fabrica (Cod_Fabrica)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION;
-
-# ----------------------------------------------------------------------------------------------------------------------------- #
