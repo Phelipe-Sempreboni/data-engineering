@@ -1,5 +1,3 @@
-USE dm_presidencia;
-
 
 CREATE TABLE Dim_Organizacional (
                 ID_Vendedor INT NOT NULL,
