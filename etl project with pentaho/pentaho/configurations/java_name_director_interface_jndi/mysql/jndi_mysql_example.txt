@@ -1,0 +1,5 @@
+dwsucos/type=javax.sql.DataSource
+dwsucos/driver=com.mysql.jdbc.Driver
+dwsucos/url=jdbc:mysql://localhost:3306/dwsucos
+dwsucos/user=root
+dwsucos/password=root
