@@ -20,8 +20,8 @@ conn.execute('''CREATE TABLE producao (
 conn.commit()
 conn.close()
 
-# Abre o arquivo CSV com os dados de produção de alimentos
-with open('producao_alimentos.csv', 'r') as file:
+# Abre o arquivo CSV com os dados de produção de alimentos e infica o arquivo como UTF-8 para não ocorrer erro em caracteres com acentos e/ou especiais. 
+with open('producao_alimentos.csv', 'r', encoding='utf-8') as file:
     
     # Cria um leitor de CSV para ler o arquivo
     reader = csv.reader(file)
