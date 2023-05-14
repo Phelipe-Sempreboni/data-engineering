@@ -6,8 +6,8 @@
 import csv
 import sqlite3
 
-# Abre o arquivo CSV com os dados da produção de alimentos
-with open('producao_alimentos.csv', 'r') as file:
+# Abre o arquivo CSV com os dados de produção de alimentos e infica o arquivo como UTF-8 para não ocorrer erro em caracteres com acentos e/ou especiais. 
+with open('producao_alimentos.csv', 'r', encoding='utf-8') as file:
     
     # Cria um leitor de CSV para ler o arquivo
     reader = csv.reader(file)
@@ -16,7 +16,7 @@ with open('producao_alimentos.csv', 'r') as file:
     next(reader)
 
     # Conecta ao banco de dados
-    conn = sqlite3.connect('dsadb.db')
+    conn = sqlite3.connect('database.db')
 
     # Deleta a tabela existente, se houver
     conn.execute('DROP TABLE IF EXISTS producao')
