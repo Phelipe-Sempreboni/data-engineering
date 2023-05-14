@@ -6,7 +6,7 @@ import csv
 import sqlite3
 
 # Cria um novo banco de dados
-conn = sqlite3.connect('dsadb.db')
+conn = sqlite3.connect('database.db')
 
 # Cria uma tabela para armazenar os dados de produção de alimentos
 conn.execute('''CREATE TABLE producao (
@@ -30,7 +30,7 @@ with open('producao_alimentos.csv', 'r') as file:
     next(reader)
 
     # Conecta ao banco de dados
-    conn = sqlite3.connect('dsadb.db')
+    conn = sqlite3.connect('database.db')
 
     # Insere cada linha do arquivo na tabela do banco de dados
     for row in reader:
@@ -40,4 +40,3 @@ with open('producao_alimentos.csv', 'r') as file:
     conn.close()
 
 print("Job Concluído com Sucesso!")
-
