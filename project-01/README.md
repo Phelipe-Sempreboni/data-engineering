@@ -22,7 +22,7 @@ _**job-v5.py**_: Este quinto job importa as bibliotecas, cria uma função para 
 
 ---
 
-Para utilizar o projeto:
+_**Para utilizar o projeto**_:
 
 1º - Realize o download e/ou recrie os arquivos desse diretório em um local que você prefira.
 
