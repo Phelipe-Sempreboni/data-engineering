@@ -32,13 +32,13 @@ Para utilizar o projeto:
 
 4º - Abra o terminal de sua máquina, navegue até o diretório que você criou os arquivos.
 
-5º - No terminal você digitar _**python nome_job**_, assim você conseguirá executar o job e testar se está funcionando.
+5º - No terminal você deve digitar _**python nome_job**_, assim você conseguirá executar o job e testar se está funcionando.
 
 6º - Abra o DB Brownser for SQLite e procure pelo banco de dados que foi criado pelo Python, que está no diretório que você criou.
 
 7º - Com o DB Brownser for SQLite aberto, será possível executar um comando para visualizar os dados na tabela após execução de cada job.
 
-6º - Pronto, você está apto a reproduzir esse projeto,
+6º - Pronto, você está apto a reproduzir esse projeto.
 
 ---
 
