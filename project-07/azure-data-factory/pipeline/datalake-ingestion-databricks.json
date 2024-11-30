@@ -13,7 +13,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/phelipe.utsempreboni@outlook.com/data-engineering/project-07/02-inbound-to-bronze"
+				},
+				"linkedServiceName": {
+					"referenceName": "databricks_data_factory_link",
+					"type": "LinkedServiceReference"
+				}
 			},
 			{
 				"name": "bronze-to-silver",
@@ -33,7 +40,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/phelipe.utsempreboni@outlook.com/data-engineering/project-07/03-bronze-to-silver"
+				},
+				"linkedServiceName": {
+					"referenceName": "databricks_data_factory_link",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
