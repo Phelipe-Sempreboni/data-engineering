@@ -2,5 +2,5 @@
 
 Nesse projeto utilizamos:
   - Cloud da Azure
-  - Data Factory
+  - Data Factory na Azure
   - Databricks na Azure
