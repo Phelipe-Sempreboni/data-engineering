@@ -1,0 +1,9 @@
+{
+	"name": "data-factory-datalake-databricks",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b47f48ab-b7dd-4e5d-8005-05fc7bf42c29",
+		"tenantId": "41ed6404-4bb5-4d9e-9c3b-45b3ab5c43e0"
+	}
+}
