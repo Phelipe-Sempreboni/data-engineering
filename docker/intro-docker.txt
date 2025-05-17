@@ -1,0 +1,65 @@
+# Introdução ao Docker
+
+
+# 1. Hello World
+docker run hello-world
+
+
+# 2. Criando um Servidor Web
+docker run -d -p 8080:80 nginx
+
+
+# 3. Customizando a Criação de Um Banco de Dados
+docker run --name database -p 5435:5432 -e POSTGRES_USER=dsa -e POSTGRES_PASSWORD=dsa1010 -e POSTGRES_DB=dsadb -d postgres:16.0
+
+
+# 4. Usando Dockerfile
+
+# 4.1. Crie um arquivo chamado Dockerfile e coloque o conteúdo abaixo:
+
+FROM python:3.11-slim
+
+COPY testedsa.py /testedsa.py
+
+CMD ["python", "/testedsa.py"]
+
+# 4.2. Crie um arquivo chamado testedsa.py com o seguinte conteúdo:
+
+print("Olá, Bem-Vindo(a) ao Docker com a DSA!")
+
+# 4.3. Agora, construa a imagem:
+
+docker build -t dsa-image .
+
+# 4.4. Execute o contêiner:
+
+docker run --name dsacontainer dsa-image
+
+
+# 5. Usando Docker Compose
+
+# 5.1. Crie um arquivo chamado docker-compose.yml com o conteúdo abaixo:
+
+version: '3'
+
+services:
+  web1:
+    image: nginx
+    ports:
+      - "8080:80"
+
+  web2:
+    image: nginx
+    ports:
+      - "8081:80"
+
+# 5.2. Execute no terminal os comandos abaixo:
+
+docker-compose up -d
+
+docker-compose down
+
+
+
+
+
