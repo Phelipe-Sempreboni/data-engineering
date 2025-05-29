@@ -1,0 +1,25 @@
+# Lab 7 - Orquestração de Containers Docker Para Escalabilidade de Web App e Banco de Dados
+
+name: dsa-container-lab7
+
+services:
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    image: lab7-web:v1
+
+  redis:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    image: lab7-redis
+
+  web2:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    volumes:
+      - .:/code
+    image: lab7-web:v2

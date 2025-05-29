@@ -1,0 +1,75 @@
+# Data Science Academy
+# Administração de Sistema Operacional Linux com Docker e Kubernetes
+# Lab 7 - Orquestração de Containers Docker Para Escalabilidade de Web App e Banco de Dados
+
+# 1- Instale o Docker Desktop.
+
+# ATENÇÃO: Abra a janela do Docker Desktop e mantenha aberta para inicializar o motor de execução Docker.
+
+# 2- Abra o terminal ou prompt de comando, navegue até a pasta com o Dockerfile e execute o comando abaixo, para criar primeiro as imagens:
+
+docker compose build
+
+# 3- Inicialize o swarm com o comando abaixo:
+
+docker swarm init
+
+--> Docker Swarm é uma ferramenta nativa do Docker que permite criar, gerenciar e orquestrar clusters de contêineres distribuídos em múltiplos hosts físicos ou virtuais. É a solução integrada do Docker para gerenciar contêineres em grande escala, garantindo alta disponibilidade, balanceamento de carga e escalabilidade automática das aplicações. O comando docker swarm init inicializa um novo cluster do Docker Swarm e transforma o host atual em um nó gerenciador (manager node). Ao executar este comando, o Docker cria um cluster Swarm de um único nó, onde o nó atual passa a coordenar e gerenciar a execução dos contêineres distribuídos.
+
+# 4- Crie a rede pra o swarm:
+
+docker network create --driver overlay lab7
+
+--> Este comando cria uma nova rede com o file system overlay do Docker chamada "lab7" que pode ser usada por serviços no swarm. Uma rede overlay permite que os serviços se comuniquem entre si em vários engines do Docker. A opção --driver especifica o tipo de rede a ser criada, neste caso, é uma rede overlay.
+
+# 5- Crie um serviço para a aplicação web:
+
+docker service create --name dsawebapp --network lab7 --replicas 3 -p 8000:5000 lab7-web:v1
+
+--> Este comando cria um novo serviço chamado "dsawebapp" que executa a imagem "lab7-web". A opção --name especifica o nome do serviço, a opção --network especifica a rede à qual o serviço deve se conectar, a opção --replicas especifica o número de réplicas (containers) do serviço que deve estar em execução e a opção -p especifica as portas do mapeamento. O serviço está sendo executado na porta 5000 e está mapeado para a porta 8000 do host, portanto, estará acessível na porta 8000 da máquina host.
+
+# 6- Crie o serviço para o banco de dados:
+
+docker service create --name dsadb --network lab7 --replicas 3 lab7-redis
+
+Este comando cria um novo serviço chamado "dsadb" que executa a imagem "lab7-redis". A opção --name especifica o nome do serviço, a opção --network especifica a rede à qual o serviço deve se conectar, a opção --replicas especifica o número de réplicas do serviço que deve estar em execução.
+
+
+--> Abra o navegador e acesse a aplicação: http://localhost:8000
+
+
+# 7- Vamos escalar (aumentar) o número de ráplicas da aplicação web para suportar uma nova onda de acessos:
+
+docker service scale dsawebapp=5
+
+--> Este comando aumenta o número de réplicas do serviço "dsawebapp" para 5. Ele adicionará mais 2 réplicas ao serviço.
+
+# 8- Vamos atualizar a imagem dos containers da web app em tempo real:
+
+docker service update --image lab7-web:v2 dsawebapp
+
+--> Este comando atualiza o serviço "dsawebapp" para usar uma nova versão da imagem. A opção --image especifica a nova imagem a ser usada e o argumento dsawebapp especifica o nome do serviço a ser atualizado.
+
+# 9- No Docker Desktop, delete alguns containers e veja o que acontece!!!
+
+# 10- Vamos inspecionar os serviços:
+
+docker service ls
+docker service inspect --pretty dsawebapp
+docker service inspect --pretty dsadb
+
+# 11- Parar e remover os serviços:
+
+docker service rm dsawebapp
+docker service rm dsadb
+
+--> Estes comandos removem os serviços, interrompendo todas as réplicas em execução de cada serviço e removendo do swarm (cluster).
+
+# 12- Para remover este host do Swarm:
+
+docker swarm leave --force
+
+
+
+
+

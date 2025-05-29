@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-streamlit-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-streamlit
+  template:
+    metadata:
+      labels:
+        app: ai-streamlit
+    spec:
+      containers:
+      - name: ai-streamlit-container
+        image: ai-streamlit-app:v1  # imagem local
+        imagePullPolicy: Never      # não tenta baixar do Docker Hub
+        ports:
+        - containerPort: 8501

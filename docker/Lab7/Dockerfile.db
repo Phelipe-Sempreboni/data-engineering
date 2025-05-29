@@ -1,0 +1,4 @@
+# Lab 7 - Orquestração de Containers Docker Para Escalabilidade de Web App e Banco de Dados
+
+# Cria imagem a partir da versão Alpine do Redis
+FROM "redis:alpine"
