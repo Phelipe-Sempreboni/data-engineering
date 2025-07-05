@@ -105,8 +105,3 @@ lsof -i :8501
 
 # Deletar a rede
 docker network rm rede_lab4
-
-
-
-
-
