@@ -1,0 +1,43 @@
+# Lab 6 - Deploy de API Para Aplicação de IA com Ollama, Streamlit e Docker Compose
+
+name: dsa-container-lab6
+
+services:
+  
+  ollama:
+    image: ollama/ollama:latest
+    container_name: dsa_backend_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    entrypoint: ["sh", "-c"]
+    command: |
+      "ollama serve &
+      sleep 10 &&
+      ollama pull llama3.2:1b &&
+      wait"
+
+  api:
+    build: ./dsa_api
+    container_name: dsa_api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_HOST=ollama
+      - OLLAMA_PORT=11434
+
+  streamlit:
+    build: ./dsa_streamlit_app
+    container_name: dsa_frontend_streamlit
+    ports:
+      - "8502:8501"
+    depends_on:
+      - api
+    environment:
+      - API_URL=http://api:8000
+
+volumes:
+  ollama_data:

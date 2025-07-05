@@ -1,0 +1,15 @@
+# Data Science Academy
+# Administração de Sistema Operacional Linux com Docker e Kubernetes
+# Lab 2 - Deploy de Aplicação de Machine Learning com Docker e Streamlit
+
+# Instale o Docker Desktop.
+
+# ATENÇÃO: Abra a janela do Docker Desktop e mantenha aberta para inicializar o motor de execução Docker.
+
+# Abra o terminal ou prompt de comando, navegue até a pasta com o Dockerfile e execute o comando abaixo para criar a imagem:
+
+docker build -t dsa-img-lab2 .
+
+# Execute o comando abaixo para criar o container:
+
+docker run -dit --name dsa-container-lab2 -p 8501:8501 dsa-img-lab2

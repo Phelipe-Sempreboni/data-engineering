@@ -1,0 +1,76 @@
+# Data Science Academy
+# Administração de Sistema Operacional Linux com Docker e Kubernetes
+# Lab 8 - Deploy e Orquestração de Aplicação de IA com Docker e Kubernetes
+
+# Instale o Docker Desktop.
+
+# ATENÇÃO: Abra a janela do Docker Desktop e mantenha aberta para inicializar o motor de execução Docker.
+
+# Instale o Kubectl na sua máquina host. Acesse o link abaixo e veja o procedimento de instalação de acordo com seu sistema operacional host:
+https://kubernetes.io/pt-br/docs/tasks/tools/
+
+# Valide a instalação checando a versão com o comando:
+kubectl version --client
+
+# Enquanto não visualizar a versão do kubectl não adianta seguir em frente. Primeiro instale o kubectl na máquina host.
+
+# Instale o minikube
+https://minikube.sigs.k8s.io/docs/start
+
+# Verifica a versão do Minikube instalada
+minikube version
+
+# Enquanto não visualizar a versão do Minikube não adianta seguir em frente. Primeiro instale o Minikube na máquina host.
+
+# Inicia o cluster Kubernetes local com Minikube
+minikube start
+
+# Exibe informações sobre o cluster Kubernetes atual
+kubectl cluster-info
+
+# Cria a imagem Docker local da aplicação Streamlit
+docker build -t ai-streamlit-app:v1 .
+
+# Carrega a imagem Docker local diretamente no ambiente Minikube
+minikube image load ai-streamlit-app:v1
+
+# Aplica o manifesto YAML para criar o deployment Kubernetes
+kubectl apply -f k8s/deployment.yaml 
+
+# Aplica o manifesto YAML para criar o serviço Kubernetes
+kubectl apply -f k8s/service.yaml 
+
+# Lista os pods existentes no Kubernetes e seus status
+kubectl get pods
+
+# Lista os serviços ativos e mostra seus detalhes (porta, IP)
+kubectl get services
+
+# Abre automaticamente o serviço da aplicação no navegador usando Minikube
+minikube service ai-streamlit-service
+
+# Escala o deployment para rodar com 4 réplicas (pods) simultaneamente
+kubectl scale deployment ai-streamlit-deployment --replicas=4
+
+# Exibe o status atual dos pods após escalar a aplicação
+kubectl get pods
+
+# Deleta manualmente um pod específico para testar recuperação automática (pegue o nome do container a partir do comando anterior)
+kubectl delete pod ai-streamlit-deployment-7d75cd987d-wtlcv
+
+# Lista novamente os pods; o Kubernetes recriará automaticamente o pod deletado
+kubectl get pods  
+
+# Exibe informações detalhadas sobre um pod específico
+kubectl describe pod ai-streamlit-deployment-7d75cd987d-729tr
+
+# Abre um terminal interativo (bash) dentro de um pod específico
+kubectl exec -it ai-streamlit-deployment-7d75cd987d-729tr -- bash
+
+# Desligando o cluster Kubernetes
+minikube stop
+
+# Deletando o cluster
+minikube delete
+
+

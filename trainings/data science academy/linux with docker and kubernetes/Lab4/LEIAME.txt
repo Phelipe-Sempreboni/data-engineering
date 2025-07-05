@@ -1,0 +1,112 @@
+# Data Science Academy
+# Administração de Sistema Operacional Linux com Docker e Kubernetes
+# Lab 4 - Trabalhando em Rede com Docker e Linux
+
+# Inicia um container Ubuntu em segundo plano, de forma interativa e alocando um terminal
+docker run -dit ubuntu
+
+# Inicia um container Ubuntu com um nome específico (dsa-container-lab4)
+docker run -dit --name dsa-container-lab4 ubuntu
+
+# Lista todas as redes Docker disponíveis
+docker network ls
+
+# Exibe informações detalhadas sobre o container dsa-container-lab4
+docker inspect dsa-container-lab4
+
+# Exibe apenas as configurações de rede do container em formato JSON
+docker inspect dsa-container-lab4  -f "{{json .NetworkSettings.Networks }}"
+
+# Lista os containers em execução com um formato personalizado, mostrando ID, nome e redes
+docker ps --format '{{ .ID }} {{ .Names }} {{ json .Networks }}'
+
+# Exibe informações detalhadas sobre a rede bridge
+docker network inspect bridge
+
+# Cria uma nova rede chamada rede_lab4
+docker network create rede_lab4
+
+# Remove o container dsa-container-lab4, forçando a remoção mesmo se estiver em execução
+docker rm -f dsa-container-lab4
+
+# Inicia um novo container Ubuntu conectado à rede personalizada rede_lab4
+docker run -dit --network rede_lab4 --name dsa-container-lab4 ubuntu
+
+# Exibe novamente as configurações de rede do container para verificar a nova rede
+docker inspect dsa-container-lab4 -f "{{json .NetworkSettings.Networks }}"
+
+# Lista novamente os containers em execução com detalhes de suas redes
+docker ps --format '{{ .ID }} {{ .Names }} {{ json .Networks }}'
+
+# Inspeciona o container para conferir sua configuração atual
+docker inspect dsa-container-lab4
+
+# Exibe informações sobre a rede rede_lab4
+docker network inspect rede_lab4
+
+# Desconecta o container da rede rede_lab4
+docker network disconnect rede_lab4 dsa-container-lab4
+
+# Conecta o container à rede bridge
+docker network connect bridge dsa-container-lab4
+
+# Lista os containers em execução com suas redes atualizadas
+docker ps --format '{{ .ID }} {{ .Names }} {{ json .Networks }}'
+
+# Exibe novamente as configurações de rede do container
+docker inspect dsa-container-lab4 -f "{{json .NetworkSettings.Networks }}"
+
+# Exibe as configurações das interfaces de rede do sistema
+ifconfig
+
+# Atualiza os pacotes e instala ferramentas de rede essenciais
+apt-get update && apt-get install net-tools iputils-ping nmap iproute2 lsof -y
+
+# Exibe novamente as configurações de rede após a instalação das ferramentas
+ifconfig
+
+# Comando de teste de ping 
+ping 172.17.0.3
+
+# Inspeciona a rede bridge novamente para verificar conexões de containers
+docker network inspect bridge
+
+# Obtém os endereços IP dos containers na rede bridge usando jq
+docker network inspect bridge | jq '.[0].Containers | to_entries[] | {id: .key, ip: .value.IPv4Address}'
+
+# Obtém os endereços IP dos containers na rede bridge usando grep e awk
+docker network inspect bridge | grep '"IPv4Address"' | awk -F '"' '{print $4}'
+
+# Lista os nomes e endereços IP dos containers usando docker inspect
+docker ps -q | xargs docker inspect --format '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
+
+# Alterna o container entre redes: desconecta da bridge e conecta à rede_lab4
+docker network disconnect bridge dsa-container-lab4
+docker network connect rede_lab4 dsa-container-lab4
+
+# Alterna o container novamente para a rede bridge
+docker network disconnect rede_lab4 dsa-container-lab4
+docker network connect bridge dsa-container-lab4
+
+# Lista as portas abertas e conexões ativas
+netstat -tuln
+
+# Escaneia o IP para verificar portas abertas com nmap
+nmap 172.17.0.3
+
+# Escaneia todas as portas do IP 
+nmap -p- 172.17.0.3
+
+# Faz uma varredura detalhada usando SYN Scan e detecção de versão dos serviços
+nmap -sS -sV -p- 172.17.0.3
+
+# Lista processos que estão usando a porta 8501
+lsof -i :8501
+
+# Deletar a rede
+docker network rm rede_lab4
+
+
+
+
+

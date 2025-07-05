@@ -1,0 +1,17 @@
+# Data Science Academy
+# Administração de Sistema Operacional Linux com Docker e Kubernetes
+# Lab 6 - Deploy de API Para Aplicação de IA com Ollama, Streamlit e Docker Compose
+
+# Instale o Docker Desktop.
+
+# ATENÇÃO: Abra a janela do Docker Desktop e mantenha aberta para inicializar o motor de execução Docker.
+
+# Abra o terminal ou prompt de comando, navegue até a pasta com o Dockerfile e execute o comando abaixo, que constrói e executa os serviços definidos no docker-compose em segundo plano:
+
+docker compose up --build -d
+
+# ATENÇÃO: Aguarde cerca de 5 minutos antes de acessar a app pela primeira vez (tempo para baixar o SLM na primeira execução).
+
+# Se necessário, desliga os containers e recria o ambiente (no caso de alteração nos arquivos)
+
+docker-compose down && docker compose up --build -d
