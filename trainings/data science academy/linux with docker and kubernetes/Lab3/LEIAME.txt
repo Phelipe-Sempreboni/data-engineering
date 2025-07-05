@@ -5,7 +5,7 @@
 # 1- Bind Mount (LEMBRE-SE DE ALTERAR "/Users/dmpm/Downloads" PARA UMA PASTA NO SEU COMPUTADOR. NO WINDOWS USE CONTRA-BARRA AO INVÉS DE BARRA.)
 
 # Criando um container e montando um diretório do host usando bind mount
-docker run -it --name lab3-exemplo1 --mount type=bind,source=/Users/dmpm/Downloads,target=/mnt/dsacademy ubuntu
+docker run -it --name lab3-exemplo1 --mount type=bind,source=D:/Virtualization/docker/files,target=/mnt/dsacademy ubuntu
 
 # Acessando o diretório montado dentro do container
 cd /mnt/dsacademy
@@ -26,7 +26,7 @@ cat exemplo1.txt
 exit
 
 # Criando outro container com bind mount de forma simplificada (-v)
-docker run -it --name lab3-exemplo2 -v /Users/dmpm/Downloads:/mnt/dsacademy ubuntu
+docker run -it --name lab3-exemplo2 -v D:/Virtualization/docker/files:/mnt/dsacademy ubuntu
 
 # Acessando o diretório montado
 cd /mnt/dsacademy
@@ -120,7 +120,7 @@ docker rmi ubuntu
 docker volume rm ds_academy
 
 # Criando um novo container e montando um diretório do host
-docker run -dit --name dsa-container-lab3 --mount type=bind,source=/Users/dmpm/Downloads,target=/mnt/dsacademy ubuntu
+docker run -dit --name dsa-container-lab3 --mount type=bind,source=D:/Virtualization/docker/files,target=/mnt/dsacademy ubuntu
 
 # Acessando o container em execução
 docker exec -it dsa-container-lab3 /bin/bash
@@ -152,6 +152,9 @@ grep "Docker" /mnt/dsacademy/testedsa.txt
 # Buscando a palavra 'Teste' dentro do arquivo
 grep "Teste" /mnt/dsacademy/testedsa.txt
 
+# Buscando a palavra 'Testando' dentro do arquivo
+grep "Testando" /mnt/dsacademy/testedsa.txt
+
 # Verificando o uso do espaço em disco
 df -h
 
@@ -166,5 +169,3 @@ stat /mnt/dsacademy/testedsa.txt
 
 # Saindo do container
 exit
-
-
