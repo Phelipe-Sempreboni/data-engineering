@@ -72,5 +72,3 @@ minikube stop
 
 # Deletando o cluster
 minikube delete
-
-

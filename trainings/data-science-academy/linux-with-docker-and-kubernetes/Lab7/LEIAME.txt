@@ -68,8 +68,3 @@ docker service rm dsadb
 # 12- Para remover este host do Swarm:
 
 docker swarm leave --force
-
-
-
-
-
