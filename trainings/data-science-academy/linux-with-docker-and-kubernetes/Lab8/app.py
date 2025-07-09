@@ -64,4 +64,3 @@ if st.button("Prever"):
     st.subheader("Probabilidade por classe:")
     st.write(f"- **Máquina OK:** {prediction_proba[0]*100:.2f}%")
     st.write(f"- **Manutenção Necessária:** {prediction_proba[1]*100:.2f}%")
-

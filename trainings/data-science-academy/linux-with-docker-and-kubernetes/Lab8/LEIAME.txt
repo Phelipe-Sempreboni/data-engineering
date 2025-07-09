@@ -35,10 +35,10 @@ docker build -t ai-streamlit-app:v1 .
 minikube image load ai-streamlit-app:v1
 
 # Aplica o manifesto YAML para criar o deployment Kubernetes
-kubectl apply -f k8s/deployment.yaml 
+kubectl apply -f k8s/deployment.yaml
 
 # Aplica o manifesto YAML para criar o serviço Kubernetes
-kubectl apply -f k8s/service.yaml 
+kubectl apply -f k8s/service.yaml
 
 # Lista os pods existentes no Kubernetes e seus status
 kubectl get pods
