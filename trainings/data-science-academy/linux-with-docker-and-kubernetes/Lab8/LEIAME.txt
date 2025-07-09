@@ -65,7 +65,7 @@ kubectl get pods
 kubectl describe pod ai-streamlit-deployment-7d75cd987d-729tr
 
 # Abre um terminal interativo (bash) dentro de um pod específico
-kubectl exec -it ai-streamlit-deployment-7d75cd987d-729tr -- bash
+kubectl exec -it ai-streamlit-deployment-7d75cd987d-4gtvx -- bash
 
 # Desligando o cluster Kubernetes
 minikube stop
