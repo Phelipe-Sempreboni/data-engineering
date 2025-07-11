@@ -1,0 +1,7 @@
+terraform init
+
+terraform plan -var 'instance_type=t2.micro' -var 'ami=ami-0a0d9cf81c479446a' -out lab2-plan.txt
+
+terraform apply -var 'instance_type=t2.micro' -var 'ami=ami-0a0d9cf81c479446a'
+
+terraform destroy -var 'instance_type=t2.micro' -var 'ami=ami-0a0d9cf81c479446a'
