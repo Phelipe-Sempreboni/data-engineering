@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "us-east-2"
+}
+
 module "dsa_ec2_instances" {
   
   source = "./modules/ec2-instances"
