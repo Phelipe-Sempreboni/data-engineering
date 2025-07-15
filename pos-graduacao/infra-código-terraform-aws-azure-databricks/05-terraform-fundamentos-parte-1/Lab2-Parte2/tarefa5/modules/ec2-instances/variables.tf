@@ -15,5 +15,5 @@ variable "instance_type" {
 
 variable "subnet_id" {
   description = "Subnet ID para as instâncias EC2"
-  type        = string
+  type        = stringls
 }
