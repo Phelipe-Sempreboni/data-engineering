@@ -7,4 +7,3 @@ module "dsa_ec2_instances" {
   instance_type  = "t2.micro"
   subnet_id      = "subnet-01e1af37d8c9c9495"
 }
-
