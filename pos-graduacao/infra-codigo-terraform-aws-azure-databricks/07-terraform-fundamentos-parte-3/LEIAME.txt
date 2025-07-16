@@ -9,9 +9,12 @@ docker build -t dsa-terraform-image:lab3 .
 # Execute o comando abaixo para criar o container Docker
 
 docker run -dit --name dsa-lab3 -v ./Lab3:/lab3 dsa-terraform-image:lab3 /bin/bash
+
 docker run -dit --name dsa-lab3 -v C:\Users\pheli\Desktop\github\data-engineering\pos-graduacao\infra-codigo-terraform-aws-azure-databricks\07-terraform-fundamentos-parte-3:/lab3 dsa-terraform-image:lab3
 docker run -dit --name dsa-lab3 -v D:/Virtualization/docker/volumes:/scripts dsa-terraform-image:lab3
-docker run -dit --name dsa-container-lab5 -v C:/Users/pheli/Desktop/github/data-engineering/trainings/data-science-academy/linux-with-docker-and-kubernetes/Lab5/scripts:/scripts dsa-img-lab5
+
+docker run -dit --name dsa-lab3 --mount type=bind,source=D:/Virtualization/docker/volumes,target=/scripts dsa-terraform-image:lab3
+docker run -it --name lab3-exemplo1 --mount type=bind,source=D:/Virtualization/docker/files,target=/mnt/dsacademy ubuntu
 
 NOTA: No Windows você deve substituir ./Lab3 pelo caminho completo da pasta, por exemplo: C:\DSA\Cap07\Lab3
 
