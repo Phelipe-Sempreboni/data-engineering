@@ -18,7 +18,7 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
     rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
 # Criar a pasta /lab1 como um ponto de montagem para um volume
-RUN mkdir /lab3
+RUN mkdir /dsa
 VOLUME /dsa
 
 # Criar a pasta Downloads e instalar o AWS CLI (para acessar a AWS)
