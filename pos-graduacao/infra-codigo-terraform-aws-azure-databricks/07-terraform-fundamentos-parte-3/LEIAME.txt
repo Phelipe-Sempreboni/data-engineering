@@ -10,7 +10,7 @@ docker build -t dsa-terraform-image:lab3 .
 
 docker run -dit --name dsa-lab3 -v ./Lab3:/lab3 dsa-terraform-image:lab3 /bin/bash
 
-docker run -dit --name dsa-lab3 -v C:\Users\pheli\Desktop\github\data-engineering\pos-graduacao\infra-codigo-terraform-aws-azure-databricks\07-terraform-fundamentos-parte-3:/lab3 dsa-terraform-image:lab3
+docker run -dit --name dsa-lab3 -v C:/Users/pheli/Desktop/github/data-engineering/pos-graduacao/infra-codigo-terraform-aws-azure-databricks/07-terraform-fundamentos-parte-3:/dsa dsa-terraform-image:lab3
 docker run -dit --name dsa-lab3 -v D:/Virtualization/docker/volumes:/scripts dsa-terraform-image:lab3
 
 docker run -dit --name dsa-lab3 --mount type=bind,source=D:/Virtualization/docker/volumes,target=/scripts dsa-terraform-image:lab3
