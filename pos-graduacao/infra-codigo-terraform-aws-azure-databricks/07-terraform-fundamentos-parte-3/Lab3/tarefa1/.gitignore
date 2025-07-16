@@ -1,4 +1,6 @@
-.terraform.lock.hcl
 /.terraform
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
 ip_dsa_instance.txt
 terraform.tfstate
+terraform.tfstate.backup
