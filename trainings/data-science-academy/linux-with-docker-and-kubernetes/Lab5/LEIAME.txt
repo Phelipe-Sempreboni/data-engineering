@@ -14,6 +14,7 @@ docker build -t dsa-img-lab5 .
 
 docker run -dit --name dsa-container-lab5 -v $(pwd)/scripts:/scripts dsa-img-lab5
 docker run -dit --name dsa-container-lab5 -v C:/Users/pheli/Desktop/github/data-engineering/trainings/data-science-academy/linux-with-docker-and-kubernetes/Lab5/scripts:/scripts dsa-img-lab5
+docker run -dit --name dsa-container-lab5 -v C:/Users/pheli/Desktop/github/data-engineering/trainings/data-science-academy/linux-with-docker-and-kubernetes/Lab5/scripts:/scripts2 dsa-img-lab5
 
 # O comando abaixo (no terminal da máquina host) ajusta a permissão dos arquivos:
 
