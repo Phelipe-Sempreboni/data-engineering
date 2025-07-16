@@ -1,0 +1,4 @@
+.terraform.lock.hcl
+/.terraform
+ip_dsa_instance.txt
+terraform.tfstate
