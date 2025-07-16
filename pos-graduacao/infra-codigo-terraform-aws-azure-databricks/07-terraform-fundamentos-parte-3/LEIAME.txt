@@ -20,5 +20,5 @@ NOTA: No Windows você deve substituir ./Lab3 pelo caminho completo da pasta, po
 
 # Verifique as versões do Terraform e do AWS CLI com os comandos abaixo
 
-terraform version
+terraform --version
 aws --version
