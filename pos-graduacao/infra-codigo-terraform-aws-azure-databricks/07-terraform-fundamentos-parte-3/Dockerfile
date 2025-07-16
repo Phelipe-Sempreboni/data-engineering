@@ -19,7 +19,7 @@ RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
 
 # Criar a pasta /lab1 como um ponto de montagem para um volume
 RUN mkdir /lab3
-VOLUME /lab3
+VOLUME /dsa
 
 # Criar a pasta Downloads e instalar o AWS CLI (para acessar a AWS)
 RUN mkdir Downloads && \
