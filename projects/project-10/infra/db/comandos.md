@@ -12,7 +12,8 @@
   - ***_-f dockerfile.app_***: Especifica o nome do Dockerfile, onde poderia ser somente Dockerfile, mas usamos nome um customizado com (.app) no final, facilitando a identificação do arquivo
   - ***_. (ponto no final do comando)_***:  Define o contexto de build como o diretório atual, ou seja, onde está o arquivo para construção da imagem no momento da execução do comando
 
-```docker build -t apps-image:v1 -f dockerfile.app .
+```
+docker build -t apps-image:v1 -f dockerfile.app .
 ```
 
 ---
