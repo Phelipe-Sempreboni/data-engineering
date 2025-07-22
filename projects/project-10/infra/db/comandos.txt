@@ -1,0 +1,99 @@
+# Comandos manuais para a construção da imagem, ou seja, sem utilizar o docker compose
+# Navegue até o diretório criado e que está o arquivo do dockerfile
+# Execute o comando abaixo para construção da imagem no Docker
+
+# docker build -> Comando para construir a imagem
+# -t projeto/sqlserver-db -> Dá um nome (tag) para a imagem | - Tag: v2 (define a versão atual do container e útil para identificar versões específicas)
+# -f dockerfile.db -> Especifica o nome do Dockerfile (poderia ser Dockerfile, mas usamos nome customizado)
+# . -> 	Define o contexto de build como o diretório atual, ou seja, onde está o arquivo para construção
+# Instalação do Python, AWS CLI e Terraform
+docker build -t apps-image:v1 -f dockerfile.app .
+
+# Abra o terminal ou prompt de comando, navegue até a pasta com o Dockerfile e execute o comando abaixo, que constrói e executa os serviços definidos no docker-compose em segundo plano:
+docker compose up --build -d
+
+# ATENÇÃO: Aguarde cerca de 5 minutos antes de acessar a app pela primeira vez (tempo para baixar o SLM na primeira execução).
+# Se necessário, desliga os containers e recria o ambiente (no caso de alteração nos arquivos)
+docker-compose down && docker compose up --build -d
+
+# Validar se os pacotes instalados estão corretos e suas versões
+# Execute dentro do docker ou terminal instanciado em algum local, como o VSCode, mas precisa ser a partir de dentro do container
+python3 --version
+aws --version
+terraform --version
+
+# para ver a versão do sql server, você precisa entrar no banco e executar a seguinte consulta sql
+# você pode, por exemplo, conferir pelo dbeaver, extensão do sql server no vscode, azure data studio, ou diretamente pelo terminal do container do docker, ou instanciado no vscode
+select @@version
+
+#listar todas as redes no docker
+docker network ls
+
+#inspecionar uma rede específica
+docker network inspect sirius_net01
+
+#ping no container do serviço do sqlserver
+ping sqlserver
+
+#teste na porta sql server, que está no serviço do container do sqlserver
+telnet sqlserver 1433
+
+#instalar o pyodbc no serviço do container apps
+python3.11 -m pip install pyodbc
+
+#validar se o conector ODBC (ODBC Driver 17 for SQL Server) está instalado no container do serviço (apps)
+#caso não esteja instalado, irá retornar uma mensagem de não encontrado
+#odbcinst: é o utilitário de linha de comando para gerenciar drivers e fontes de dados ODBC no Linux.
+#-q: query (consulta) – pede ao utilitário para listar algo.
+#-d: drivers – especifica que queremos consultar os drivers ODBC instalados no sistema.
+#Liste todos os drivers ODBC disponíveis configurados no sistema
+odbcinst -q -d
+
+#executar o script de teste para ler dados do container (sqlserver) pelo container (apps)
+python3.11 teste-con-sqlserver.py
+
+#acessar o sql server diretamente pelo terminal do container do serviço (sqlserver)
+#/opt/mssql-tools18/bin/sqlcmd	Caminho completo para o executável do cliente sqlcmd
+#-S localhost	Define o servidor de destino como localhost (ou seja, o próprio container onde o SQL Server está rodando)
+#-U sa	Usuário de autenticação (sa = System Administrator padrão do SQL Server)
+#-P 'senha'	Senha correspondente ao usuário sa
+#-N	Usa uma conexão criptografada (SSL)
+#-C	Confirma o certificado do servidor mesmo se não for confiável (usado com -N)
+/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'Ap4312856847!*' -N -C
+
+#teste uma consulta direto no terminal do container do serviço (sqlserver)
+#se for utilizado (;) depois do (go), é como se você estivesse informando ao sql server que ainda virá outro comando, logo, o resultado não irá aparecer
+#por exemplo, se você digitar as duas consultas abaixo, uma abaixo da outra e só utilizar o (go) depois, as duas consultas serão retornadas em conjunto
+select @@version;
+go
+
+#outro exemplo
+select name from sys.databases;
+go
+
+#outro exemplo
+select @@version;
+select name from sys.databases;
+go
+
+#para sair do modo interativo do terminal com (sqlcmd)
+quit
+ctrl+c
+
+#permissões no par de chaves de instâncias ec2 para conseguir conectar remotamente
+chmod 400 aws-instances-key-modulo-iactaad.pem .
+
+#entrar em uma máquina ec2 na aws via terminal do linux dentro de um container no docker
+ssh -i aws-instances-key-modulo-iactaad.pem ec2-user@<ip-public>
+ssh -i aws-instances-key-modulo-iactaad.pem ec2-user@18.217.43.98
+
+#testar conexão com a internet externa da máquina ec2 via terminal do linux dentro de um container no docker, usando o protocolo (ICMP)
+#se somente protocolos de (TCP) estiverem configurados, então haverá erro, pois essa chamada utiliza (ICMP)
+ping -c 4 8.8.8.8
+
+#testar conexão com a internet externa da máquina ec2 via terminal do linux dentro de um container no docker, usando o protocolo (TCP)
+#retorno esperado: HTTP/2 200
+curl -I https://www.google.com
+
+#visualizar grupos de segurança na aws via terminal do linux dentro de um container no docker
+aws ec2 describe-security-groups --group-ids sg-0a432d4557fb73d0f

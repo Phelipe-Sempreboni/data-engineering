@@ -1,0 +1,35 @@
+name: sirius
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${SA_PASSWORD}
+      - MSSQL_PID=Developer
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - net01
+
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile.app
+    container_name: apps
+    volumes:
+      - data-quality:/projeto-dq
+    depends_on:
+      - sqlserver
+    networks:
+      - net01
+
+volumes:
+  sqlserver_data:
+  data-quality:
+
+networks:
+  net01:
