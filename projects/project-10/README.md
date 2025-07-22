@@ -79,6 +79,10 @@ Vamos de Sirius Hub Educação !
 
 ---
 
+#### Trilha de aprendizado do módulo: 3. Construção e deploy do ambiente local com Docker para a Cloud na AWS
+
+---
+
 Ao decorrer dessa trilha, também falaremos sobre conceitos e boas práticas de Engenharia de Dados, Engenharia de Analytics, Engenharia de Software e Clean Code, como:
 
 | Área                             | Aplicação no Projeto                                                              |
