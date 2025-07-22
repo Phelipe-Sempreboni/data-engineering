@@ -1,0 +1,27 @@
+# Instruções do Lab 4
+
+
+# Abra o terminal ou prompt de comando e navegue até a pasta onde você colocou os arquivos do Lab3 (não use espaço ou acento em nome de pasta)
+
+
+# Execute o comando abaixo para criar a imagem Docker
+
+docker build -t dsa-terraform-image:lab4 .
+
+
+# Execute o comando abaixo para criar o container Docker
+
+docker run -dit --name dsa-lab4 -v ./IaC:/iac dsa-terraform-image:lab4 /bin/bash
+
+NOTA: No Windows você deve substituir ./IaC pelo caminho completo da pasta, por exemplo: C:\DSA\Cap08\IaC
+
+
+# Verifique as versões do Terraform e do AWS CLI com os comandos abaixo
+
+terraform version
+aws --version
+
+
+
+
+# ATENÇÃO: VOCÊ PRECISA TER O ANACONDA PYTHON INSTALADO LOCALMENTE PARA FAZER O DEPLOY LOCAL.
