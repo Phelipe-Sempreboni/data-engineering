@@ -27,6 +27,7 @@ docker build -t apps-image:v1 -f dockerfile.app .
 docker compose up --build -d
 ```
 
+- Se quisermos construir os containers com um nome pré-definido, por exemplo: sirius 
 - Esse nome (sirius) define o prefixo da stack usada para o nome da rede, volumes e containers.
 - Por padrão, se você rodasse docker compose up -p sirius, isso padronizaria os nomes internos como:
   - sirius_sqlserver
@@ -45,6 +46,11 @@ docker compose up -p sirius
 
 ```
 docker-compose down && docker compose up --build -d
+```
+
+- Se quisermos reconstruir os containers com um nome pré-definido, por exemplo: sirius
+```
+docker-compose down && docker compose up -p sirius
 ```
 
 ---
