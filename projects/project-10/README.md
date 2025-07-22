@@ -19,14 +19,14 @@ Vamos de Sirius Hub Educação !
 
 ---
 
-Trilha de aprendizado do módulo: 1. Construção do ambiente local com Docker
+#### Trilha de aprendizado do módulo: 1. Construção do ambiente local com Docker   
     - Criação e navegação pela conta na Cloud na AWS
     - Criação e navegação pela conta do Github
     - Aprender a instalar e sincronizar o Github Desktop
     - Dicas sobre a conta na AWS e Github
 ---
 
-Trilha de aprendizado do módulo: 2. Construção do ambiente local com Docker
+#### Trilha de aprendizado do módulo: 2. Construção do ambiente local com Docker
 
 1. Criação do dockerfile.app com:
    - SQL Server local
