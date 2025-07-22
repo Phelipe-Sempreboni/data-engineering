@@ -1,29 +1,29 @@
-# Comandos manuais para a construção da imagem, ou seja, sem utilizar o docker compose
-# Navegue até o diretório criado e que está o arquivo do dockerfile
-# Execute o comando abaixo para construção da imagem no Docker
+#Comandos manuais para a construção da imagem, ou seja, sem utilizar o docker compose
+#Navegue até o diretório criado e que está o arquivo do dockerfile
+#Execute o comando abaixo para construção da imagem no Docker
 
-# docker build -> Comando para construir a imagem
-# -t projeto/sqlserver-db -> Dá um nome (tag) para a imagem | - Tag: v2 (define a versão atual do container e útil para identificar versões específicas)
-# -f dockerfile.db -> Especifica o nome do Dockerfile (poderia ser Dockerfile, mas usamos nome customizado)
-# . -> 	Define o contexto de build como o diretório atual, ou seja, onde está o arquivo para construção
-# Instalação do Python, AWS CLI e Terraform
+#docker build -> Comando para construir a imagem
+#-t projeto/sqlserver-db -> Dá um nome (tag) para a imagem | - Tag: v2 (define a versão atual do container e útil para identificar versões específicas)
+#-f dockerfile.db -> Especifica o nome do Dockerfile (poderia ser Dockerfile, mas usamos nome customizado)
+#. -> 	Define o contexto de build como o diretório atual, ou seja, onde está o arquivo para construção
+#Instalação do Python, AWS CLI e Terraform
 docker build -t apps-image:v1 -f dockerfile.app .
 
-# Abra o terminal ou prompt de comando, navegue até a pasta com o Dockerfile e execute o comando abaixo, que constrói e executa os serviços definidos no docker-compose em segundo plano:
+#Abra o terminal ou prompt de comando, navegue até a pasta com o Dockerfile e execute o comando abaixo, que constrói e executa os serviços definidos no docker-compose em segundo plano:
 docker compose up --build -d
 
-# ATENÇÃO: Aguarde cerca de 5 minutos antes de acessar a app pela primeira vez (tempo para baixar o SLM na primeira execução).
-# Se necessário, desliga os containers e recria o ambiente (no caso de alteração nos arquivos)
+#ATENÇÃO: Aguarde cerca de 5 minutos antes de acessar a app pela primeira vez (tempo para baixar o SLM na primeira execução).
+#Se necessário, desliga os containers e recria o ambiente (no caso de alteração nos arquivos)
 docker-compose down && docker compose up --build -d
 
-# Validar se os pacotes instalados estão corretos e suas versões
-# Execute dentro do docker ou terminal instanciado em algum local, como o VSCode, mas precisa ser a partir de dentro do container
+#Validar se os pacotes instalados estão corretos e suas versões
+#Execute dentro do docker ou terminal instanciado em algum local, como o VSCode, mas precisa ser a partir de dentro do container
 python3 --version
 aws --version
 terraform --version
 
-# para ver a versão do sql server, você precisa entrar no banco e executar a seguinte consulta sql
-# você pode, por exemplo, conferir pelo dbeaver, extensão do sql server no vscode, azure data studio, ou diretamente pelo terminal do container do docker, ou instanciado no vscode
+#para ver a versão do sql server, você precisa entrar no banco e executar a seguinte consulta sql
+#você pode, por exemplo, conferir pelo dbeaver, extensão do sql server no vscode, azure data studio, ou diretamente pelo terminal do container do docker, ou instanciado no vscode
 select @@version
 
 #listar todas as redes no docker
