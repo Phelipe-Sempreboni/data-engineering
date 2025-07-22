@@ -66,9 +66,16 @@ terraform --version
 ```
 ---
 
-#para ver a versão do sql server, você precisa entrar no banco e executar a seguinte consulta sql
-#você pode, por exemplo, conferir pelo dbeaver, extensão do sql server no vscode, azure data studio, ou diretamente pelo terminal do container do docker, ou instanciado no vscode
+5. Para conseguir visualizar a versão do SQL Server, é necessário realizar algumas etapas para conseguir entrar no banco de dados dentro do container
+
+
+
+5. Para visualizar a versão do SQL Server, você precisará entrar no banco de dados e executar uma consulta
+- Você pode, por exemplo, conferir pelo DBeaver, extensão do sql server no Visual Studio Code, Azure Data Studio, ou diretamente por um terminal de sua preferência
+- Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
 select @@version
+
+---
 
 #listar todas as redes no docker
 docker network ls
