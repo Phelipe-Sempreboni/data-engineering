@@ -18,12 +18,36 @@ docker build -t apps-image:v1 -f dockerfile.app .
 
 ---
 
-#Abra o terminal ou prompt de comando, navegue até a pasta com o Dockerfile e execute o comando abaixo, que constrói e executa os serviços definidos no docker-compose em segundo plano:
-docker compose up --build -d
+2. Comandos manuais para a construção do container a partir da imagem e com o arquivo do Docker Compose
+- Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
+- Navegue até a pasta com onde está o arquivo docker-compose.yml
+- Execute o comando abaixo para construir e executar os serviços definidos no arquivo do Docker Compose:
 
-#ATENÇÃO: Aguarde cerca de 5 minutos antes de acessar a app pela primeira vez (tempo para baixar o SLM na primeira execução).
-#Se necessário, desliga os containers e recria o ambiente (no caso de alteração nos arquivos)
+```
+docker compose up --build -d
+```
+
+- Esse nome (sirius) define o prefixo da stack usada para o nome da rede, volumes e containers.
+- Por padrão, se você rodasse docker compose up -p sirius, isso padronizaria os nomes internos como:
+  - sirius_sqlserver
+  - sirius_apps
+  - sirius_net01
+
+```
+docker compose up -p sirius
+```
+
+---
+
+3. Comandos manuais para a reconstrução do container a partir da imagem e com o arquivo do Docker Compose
+- Aguarde cerca de 5 minutos antes de acessar a app pela primeira vez (tempo para baixar o SLM na primeira execução)
+- Caso seja necessário reconstruir os containers, execute o comando abaixo, que desliga e reconstrói os serviços
+
+```
 docker-compose down && docker compose up --build -d
+```
+
+---
 
 #Validar se os pacotes instalados estão corretos e suas versões
 #Execute dentro do docker ou terminal instanciado em algum local, como o VSCode, mas precisa ser a partir de dentro do container
