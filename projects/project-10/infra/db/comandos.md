@@ -55,11 +55,16 @@ docker-compose down && docker compose up -p sirius
 
 ---
 
-#Validar se os pacotes instalados estão corretos e suas versões
-#Execute dentro do docker ou terminal instanciado em algum local, como o VSCode, mas precisa ser a partir de dentro do container
+4. Validar se os pacotes foram instalados corretamente e quais as suas versões
+- Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
+- Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
+- Execute os comandos abaixo
+```
 python3 --version
 aws --version
 terraform --version
+```
+---
 
 #para ver a versão do sql server, você precisa entrar no banco e executar a seguinte consulta sql
 #você pode, por exemplo, conferir pelo dbeaver, extensão do sql server no vscode, azure data studio, ou diretamente pelo terminal do container do docker, ou instanciado no vscode
