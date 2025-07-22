@@ -1,13 +1,13 @@
-#Comandos manuais para a construção da imagem, ou seja, sem utilizar o docker compose
-#Navegue até o diretório criado e que está o arquivo do dockerfile
-#Execute o comando abaixo para construção da imagem no Docker
+- Comandos manuais para a construção da imagem, ou seja, sem utilizar o docker compose - instalação do python, aws cli e terraform
+    - Navegue até o diretório criado e que está o arquivo do dockerfile
+    - Execute o comando abaixo para construção da imagem no Docker
+    - Mas antes, uma explicação breve sobre o que os comandos querem dizer:
+        - docker build -> Comando para construir a imagem
+        - -t projeto/sqlserver-db -> Dá um nome (tag) para a imagem | - Tag: v2 (define a versão atual do container e útil para identificar versões específicas)
+        - -f dockerfile.db -> Especifica o nome do Dockerfile (poderia ser Dockerfile, mas usamos nome customizado)
+        - . -> 	Define o contexto de build como o diretório atual, ou seja, onde está o arquivo para construção
 
-#docker build -> Comando para construir a imagem
-#-t projeto/sqlserver-db -> Dá um nome (tag) para a imagem | - Tag: v2 (define a versão atual do container e útil para identificar versões específicas)
-#-f dockerfile.db -> Especifica o nome do Dockerfile (poderia ser Dockerfile, mas usamos nome customizado)
-#. -> 	Define o contexto de build como o diretório atual, ou seja, onde está o arquivo para construção
-#Instalação do Python, AWS CLI e Terraform
-docker build -t apps-image:v1 -f dockerfile.app .
+```docker build -t apps-image:v1 -f dockerfile.app .
 
 #Abra o terminal ou prompt de comando, navegue até a pasta com o Dockerfile e execute o comando abaixo, que constrói e executa os serviços definidos no docker-compose em segundo plano:
 docker compose up --build -d
