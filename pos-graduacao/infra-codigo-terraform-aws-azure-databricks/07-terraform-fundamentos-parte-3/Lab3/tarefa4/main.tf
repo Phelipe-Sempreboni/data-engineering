@@ -34,7 +34,7 @@ resource "aws_instance" "dsa_instance" {
 
   vpc_security_group_ids = [aws_security_group.permite_ssh_2.id]
   
-  key_name = "dsa-lab3"
+  key_name = "aws-instances-key-modulo-iactaad"
 
   tags = {
     Name = "lab3-t4-terraform"
@@ -47,7 +47,7 @@ resource "aws_instance" "dsa_instance" {
     connection {
       type     = "ssh"
       user     = "ec2-user"
-      private_key = file("dsa-lab3.pem")
+      private_key = file("aws-instances-key-modulo-iactaad.pem")
       host     = self.public_ip
     }
   }
@@ -59,7 +59,7 @@ resource "aws_instance" "dsa_instance" {
     connection {
       type     = "ssh"
       user     = "ec2-user"
-      private_key = file("dsa-lab3.pem")
+      private_key = file("aws-instances-key-modulo-iactaad.pem")
       host     = self.public_ip
     }
   }

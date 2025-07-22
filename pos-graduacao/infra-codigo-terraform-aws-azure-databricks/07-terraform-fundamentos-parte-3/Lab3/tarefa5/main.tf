@@ -38,6 +38,8 @@ resource "aws_instance" "dsa_instance" {
   
   vpc_security_group_ids = [aws_security_group.sg_permite_http.id]
 
+  key_name = "aws-instances-key-modulo-iactaad"
+
   user_data = <<-EOF
               #!/bin/bash
               sudo yum update -y

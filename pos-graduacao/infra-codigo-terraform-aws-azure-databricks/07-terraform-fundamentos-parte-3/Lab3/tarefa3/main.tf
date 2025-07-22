@@ -32,7 +32,7 @@ resource "aws_instance" "dsa_instance" {
   
   instance_type = var.instance_type
   
-  key_name = "dsa-lab3"
+  key_name = "aws-instances-key-modulo-iactaad"
 
   tags = {
     Name = "lab3-t3-terraform"
@@ -48,7 +48,7 @@ resource "aws_instance" "dsa_instance" {
     connection {
       type     = "ssh"
       user     = "ec2-user"
-      private_key = file("dsa-lab3.pem")
+      private_key = file("aws-instances-key-modulo-iactaad.pem")
       host     = self.public_ip
     }
   }

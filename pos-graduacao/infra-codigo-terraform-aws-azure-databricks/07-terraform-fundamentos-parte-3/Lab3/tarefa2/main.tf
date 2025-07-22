@@ -1,6 +1,6 @@
 resource "aws_instance" "dsa_instance" {
   
-  ami = "ami-0a0d9cf81c479446a"  
+  ami = "ami-0a0d9cf81c479446a"
   
   instance_type = var.instance_type
   
