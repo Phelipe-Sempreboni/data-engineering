@@ -28,7 +28,7 @@ Vamos de Sirius Hub Educação !
 
 #### Trilha de aprendizado do módulo: 2. Construção do ambiente local com Docker
 
-1. Criação do dockerfile.app com:
+- 1. Criação do dockerfile.app com:
    - SQL Server local
    - Terraform
    - AWS CLI
@@ -37,45 +37,45 @@ Vamos de Sirius Hub Educação !
    - Boa prática: imagem leve, performática e com ponto de entrada via /bin/bash
    - Mapeamento de volumes locais
 
-2. Criação do dockerfile.flow com:
+- 2. Criação do dockerfile.flow com:
    - Apache Airflow
    - Mesmo stack de ferramentas do dockerfile.app + Apache Airflow
 
-3. docker-compose.yml para orquestração:
+- 3. docker-compose.yml para orquestração:
    - Container 1: SQL Server
    - Container 2: Apache Airflow
    - Container 3: Python, AWS CLI e Terraform
    - Comunicação entre os três via rede interna no Docker
    - Mapeamento de volumes locais
 
-4. Versionamento de código com GitHub e CI/CD com GitHub Actions:
+- 4. Versionamento de código com GitHub e CI/CD com GitHub Actions:
    - Build automático das imagens
    - Execução de testes unitários
    - Deploy e recriação dos containers
 
-5. Criação de ETL em Python para:
+- 5. Criação de ETL em Python para:
    - Ingestão de dados abertos do Gov.br para o SQL Server
    - Validação de schema/tabelas (testes unitários)
    - Organização modular seguindo boas práticas de Clean Code e SOLID
 
-6. Integração com Apache Airflow:
+- 6. Integração com Apache Airflow:
    - Orquestração do pipeline de ingestão e testes
    - Job DAGs organizados e legíveis (SoC e modularidade)
 
-7. Aplicação de framework de Qualidade de Dados:
+- 7. Aplicação de framework de Qualidade de Dados:
    - DQX e Great Expectations para comparação
    - Escolha do mais completo com base nos critérios técnicos
    - Scripts e validações reais
 
-8. docker-compose final:
+- 8. docker-compose final:
    - Orquestração dos três ambientes
    - Infraestrutura como código (IaC)
 
-9. Desenho da arquitetura geral do projeto
+- 9. Desenho da arquitetura geral do projeto
 
-10. Estrutura de diretórios e repositórios (com boas práticas)
+- 10. Estrutura de diretórios e repositórios (com boas práticas)
 
-11. Avaliação crítica do projeto (notas, sugestões e recomendações)
+- 11. Avaliação crítica do projeto (notas, sugestões e recomendações)
 
 ---
 
