@@ -18,7 +18,7 @@ services:
   app:
     build:
       context: C:/Users/pheli/Desktop/github/data-engineering/projects/project-10/infra/apps
-      dockerfile: dockerfile.app
+      dockerfile: Dockerfile.app
     container_name: apps
     volumes:
       - data-quality:/projeto-dq
