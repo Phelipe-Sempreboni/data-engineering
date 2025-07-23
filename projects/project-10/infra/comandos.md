@@ -40,10 +40,20 @@ docker compose up --build -d
   - ***_sirius_sqlserver_***
   - ***_sirius_apps_***
   - ***_sirius_net01_***
+- No nosso caso já definimos um nome do próprio arquivo do Docker Compose, logo, não iremos utilizar esse tipo de ação nesse projeto
 
 ```
-docker compose up -p sirius
+docker compose -p sirius up --build -d
 ```
+
+- Uma breve explicação sobe os comandos:
+
+| Comando                                  | O que faz                                            |
+| ---------------------------------------- | ---------------------------------------------------- |
+| `docker compose up -d`                   | Sobe os containers em segundo plano                  |
+| `docker compose up --build -d`           | Reconstrói as imagens antes de subir os containers   |
+| `docker compose -p sirius up -d`         | Usa o nome de projeto `sirius` (prefixando recursos) |
+| `docker compose -p sirius up --build -d` | Reconstrói e sobe, com nome do projeto `sirius`      |
 
 ---
 
