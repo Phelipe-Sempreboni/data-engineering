@@ -30,9 +30,9 @@ docker compose up --build -d
 - Se quisermos construir os containers com um nome pré-definido, por exemplo: sirius 
 - Esse nome (sirius) define o prefixo da stack usada para o nome da rede, volumes e containers.
 - Por padrão, se você rodasse docker compose up -p sirius, isso padronizaria os nomes internos como:
-  - sirius_sqlserver
-  - sirius_apps
-  - sirius_net01
+  - ***_sirius_sqlserver_***
+  - ***_sirius_apps_***
+  - ***_sirius_net01_***
 
 ```
 docker compose up -p sirius
@@ -66,98 +66,43 @@ terraform --version
 ```
 ---
 
-5. Para conseguir visualizar a versão do SQL Server, é necessário realizar algumas etapas para conseguir entrar no banco de dados dentro do container
-
-- Liste todas as redes existentes no Docker
+5. Para conseguir visualizar a versão do banco de dados do (SQL Server) via o container do serviço (sqlserver), ou seja, onde está instanciado o banco de dados, é necessário realizar algumas etapas
+- Será necessário entrar no banco de dados e executar uma consulta sql
+- Os comandos precisam ser executados a partir e de dentro do container
+- Caso esse comando falhe, investigue se o caminho que mencionado, principalmente a parte (mssql-tools18) está correto, pois dependendo da versão do banco de dados (SQL Server), essa escrita pode mudar
+- Mas antes, uma explicação breve sobre o que os comandos querem dizer:
+  - ***_/opt/mssql-tools18/bin/sqlcmd_***: caminho completo para o executável do cliente sqlcmd
+  - ***_S localhost_***: define o servidor de destino como localhost (ou seja, o próprio container onde o SQL Server está rodando)
+  - ***_U sa_***:	usuário de autenticação (sa = System Administrator padrão do SQL Server)
+  - ***_P 'senha'_***: senha correspondente ao usuário sa
+  - ***_N_***: usa uma conexão criptografada (SSL)
+  - ***_C_***: confirma o certificado do servidor mesmo se não for confiável (usado com -N)
 ```
-docker network ls
+/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'insira sua senha ou o arquivo .env*' -N -C
 ```
-- Inspecione uma rede específica, no caso a que você está utilizando na comunicação entre os containers
+- Realize um teste de uma consulta direto no terminal do container do serviço do banco de dados, que é o (sqlserver)
+- Se for utilizado (;) depois do (go), é como se você estivesse informando ao banco de dados (SQL Server) que ainda virá outra consulta, logo, o resultado não irá aparecer
+- Por exemplo, se você digitar as duas consultas abaixo, uma abaixo da outra e só utilizar o (go) depois, as duas consultas serão retornadas em conjunto
 ```
-docker network inspect sirius_net01
-```
-- Realize um ping no container do serviço (sqlserver) via o container do do serviço (apps)
-```
-ping sqlserver
-```
-- Realize um teste na porta do banco de dados (SQL Server), que está no serviço do container do (sqlserver)
-```
-telnet sqlserver 1433
-```
-- Realize a instalação da biblioteca do (pyodbc) do Python no serviço do container (apps)
-```
-python3.11 -m pip install pyodbc
-```
-- Valide se o conector ODBC chamado (ODBC Driver 17 for SQL Server) está instalado no container do serviço (apps)
-- Caso o ODBC não esteja instalado, irá retornar uma mensagem de não encontrado, logo, se a instalação falha, possivelmente retornará um texto de erro ou comando não existente
-- O comando abaixo lista todos os drivers ODBC disponíveis configurados no sistema
-- Sobre os comandos:
-  - odbcinst: é o utilitário de linha de comando para gerenciar drivers e fontes de dados ODBC no Linux
-  - q: query (consulta) – pede ao utilitário para listar algo
-  - d: drivers – especifica que queremos consultar os drivers ODBC instalados no sistema
-  - 
-```
-odbcinst -q -d
-```
--
-```
-```
--
-```
-```
-
-
-
-5. Para visualizar a versão do SQL Server, você precisará entrar no banco de dados e executar uma consulta
-- Você pode, por exemplo, conferir pelo DBeaver, extensão do sql server no Visual Studio Code, Azure Data Studio, ou diretamente por um terminal de sua preferência
-- Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
-select @@version
-
-#executar o script de teste para ler dados do container (sqlserver) pelo container (apps)
-python3.11 teste-con-sqlserver.py
-
-#acessar o sql server diretamente pelo terminal do container do serviço (sqlserver)
-#/opt/mssql-tools18/bin/sqlcmd	Caminho completo para o executável do cliente sqlcmd
-#-S localhost	Define o servidor de destino como localhost (ou seja, o próprio container onde o SQL Server está rodando)
-#-U sa	Usuário de autenticação (sa = System Administrator padrão do SQL Server)
-#-P 'senha'	Senha correspondente ao usuário sa
-#-N	Usa uma conexão criptografada (SSL)
-#-C	Confirma o certificado do servidor mesmo se não for confiável (usado com -N)
-/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'Ap4312856847!*' -N -C
-
-#teste uma consulta direto no terminal do container do serviço (sqlserver)
-#se for utilizado (;) depois do (go), é como se você estivesse informando ao sql server que ainda virá outro comando, logo, o resultado não irá aparecer
-#por exemplo, se você digitar as duas consultas abaixo, uma abaixo da outra e só utilizar o (go) depois, as duas consultas serão retornadas em conjunto
 select @@version;
 go
-
-#outro exemplo
+```
+- Outro de exemplo de consulta para executar no banco de dados
+```
 select name from sys.databases;
 go
-
-#outro exemplo
+```
+- Mais um exemplo de consulta para executar no banco de dados
+- Este é o caso explicao mais acima, sobre a execução de dois comandos sequenciais e só inserir o (go) após essas duas consultas
+```
 select @@version;
 select name from sys.databases;
 go
-
-#para sair do modo interativo do terminal com (sqlcmd)
+```
+- Para sair do modo interativo do terminal com (sqlcmd), ou seja, sair do terminal do banco de dados do (SQL Server)
+```
 quit
+ou
 ctrl+c
-
-#permissões no par de chaves de instâncias ec2 para conseguir conectar remotamente
-chmod 400 aws-instances-key-modulo-iactaad.pem .
-
-#entrar em uma máquina ec2 na aws via terminal do linux dentro de um container no docker
-ssh -i aws-instances-key-modulo-iactaad.pem ec2-user@<ip-public>
-ssh -i aws-instances-key-modulo-iactaad.pem ec2-user@18.217.43.98
-
-#testar conexão com a internet externa da máquina ec2 via terminal do linux dentro de um container no docker, usando o protocolo (ICMP)
-#se somente protocolos de (TCP) estiverem configurados, então haverá erro, pois essa chamada utiliza (ICMP)
-ping -c 4 8.8.8.8
-
-#testar conexão com a internet externa da máquina ec2 via terminal do linux dentro de um container no docker, usando o protocolo (TCP)
-#retorno esperado: HTTP/2 200
-curl -I https://www.google.com
-
-#visualizar grupos de segurança na aws via terminal do linux dentro de um container no docker
-aws ec2 describe-security-groups --group-ids sg-0a432d4557fb73d0f
+```
+---
