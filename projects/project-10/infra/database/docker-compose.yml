@@ -17,7 +17,7 @@ services:
 
   app:
     build:
-      context: C:/Users/pheli/Desktop/github/data-engineering/projects/project-10/infra/apps/dockerfile.app
+      context: C:/Users/pheli/Desktop/github/data-engineering/projects/project-10/infra/apps
       dockerfile: dockerfile.app
     container_name: apps
     volumes:
