@@ -68,37 +68,50 @@ terraform --version
 
 5. Para conseguir visualizar a versão do SQL Server, é necessário realizar algumas etapas para conseguir entrar no banco de dados dentro do container
 
+- Liste todas as redes existentes no Docker
+```
+docker network ls
+```
+- Inspecione uma rede específica, no caso a que você está utilizando na comunicação entre os containers
+```
+docker network inspect sirius_net01
+```
+- Realize um ping no container do serviço (sqlserver) via o container do do serviço (apps)
+```
+ping sqlserver
+```
+- Realize um teste na porta do banco de dados (SQL Server), que está no serviço do container do (sqlserver)
+```
+telnet sqlserver 1433
+```
+- Realize a instalação da biblioteca do (pyodbc) do Python no serviço do container (apps)
+```
+python3.11 -m pip install pyodbc
+```
+- Valide se o conector ODBC chamado (ODBC Driver 17 for SQL Server) está instalado no container do serviço (apps)
+- Caso o ODBC não esteja instalado, irá retornar uma mensagem de não encontrado, logo, se a instalação falha, possivelmente retornará um texto de erro ou comando não existente
+- O comando abaixo lista todos os drivers ODBC disponíveis configurados no sistema
+- Sobre os comandos:
+  - odbcinst: é o utilitário de linha de comando para gerenciar drivers e fontes de dados ODBC no Linux
+  - q: query (consulta) – pede ao utilitário para listar algo
+  - d: drivers – especifica que queremos consultar os drivers ODBC instalados no sistema
+  - 
+```
+odbcinst -q -d
+```
+-
+```
+```
+-
+```
+```
+
 
 
 5. Para visualizar a versão do SQL Server, você precisará entrar no banco de dados e executar uma consulta
 - Você pode, por exemplo, conferir pelo DBeaver, extensão do sql server no Visual Studio Code, Azure Data Studio, ou diretamente por um terminal de sua preferência
 - Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
 select @@version
-
----
-
-#listar todas as redes no docker
-docker network ls
-
-#inspecionar uma rede específica
-docker network inspect sirius_net01
-
-#ping no container do serviço do sqlserver
-ping sqlserver
-
-#teste na porta sql server, que está no serviço do container do sqlserver
-telnet sqlserver 1433
-
-#instalar o pyodbc no serviço do container apps
-python3.11 -m pip install pyodbc
-
-#validar se o conector ODBC (ODBC Driver 17 for SQL Server) está instalado no container do serviço (apps)
-#caso não esteja instalado, irá retornar uma mensagem de não encontrado
-#odbcinst: é o utilitário de linha de comando para gerenciar drivers e fontes de dados ODBC no Linux.
-#-q: query (consulta) – pede ao utilitário para listar algo.
-#-d: drivers – especifica que queremos consultar os drivers ODBC instalados no sistema.
-#Liste todos os drivers ODBC disponíveis configurados no sistema
-odbcinst -q -d
 
 #executar o script de teste para ler dados do container (sqlserver) pelo container (apps)
 python3.11 teste-con-sqlserver.py
