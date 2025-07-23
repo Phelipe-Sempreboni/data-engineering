@@ -21,14 +21,14 @@ docker build -t apps-image:v1 -f dockerfile.app .
 2. Comandos manuais para a construção do container a partir da imagem e com o arquivo do Docker Compose
 - Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
 - Navegue até a pasta com onde está o arquivo docker-compose.yml
-- Execute o comando abaixo para construir e executar os serviços definidos no arquivo do Docker Compose:
+- Execute o comando abaixo para construir e executar os serviços definidos no arquivo do Docker Compose
 
 ```
 docker compose up --build -d
 ```
 
 - Se quisermos construir os containers com um nome pré-definido, por exemplo: sirius 
-- Esse nome (sirius) define o prefixo da stack usada para o nome da rede, volumes e containers.
+- Esse nome (sirius) define o prefixo da stack usada para o nome da rede, volumes e containers
 - Por padrão, se você rodasse docker compose up -p sirius, isso padronizaria os nomes internos como:
   - ***_sirius_sqlserver_***
   - ***_sirius_apps_***
@@ -106,3 +106,11 @@ ou
 ctrl+c
 ```
 ---
+6. Para conseguir visualizar a versão do banco de dados do (SQL Server) via o container do serviço (apps), ou seja, lendo pelo container do serviço (sqlserver), é necessário realizar algumas etapas
+```
+preencher
+```
+---
+
+
+
