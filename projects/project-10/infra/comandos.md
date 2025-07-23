@@ -3,17 +3,17 @@
 ---
 
 1. Comandos manuais para a construção da imagem, ou seja, sem utilizar o docker compose - instalação do python, aws cli e terraform
-- Navegue até o diretório criado e que está o arquivo do dockerfile
+- Navegue até o diretório criado e que está o arquivo do Dockerfile
 - Execute o comando abaixo para construção da imagem no Docker
 - Mas antes, uma explicação breve sobre o que os comandos querem dizer:
-  - ***_docker build_***: Construir a imagem
-  - ***_-t apps-image_***: Atribuí um nome (tag) para a imagem
+  - ***_docker build_***: construir a imagem
+  - ***_-t apps-image_***: atribuí um nome (tag) para a imagem
   - ***_Versão_***: v1 - define a versão atual do container e útil para identificar versões específicas
-  - ***_-f dockerfile.app_***: Especifica o nome do Dockerfile, onde poderia ser somente Dockerfile, mas usamos nome um customizado com (.app) no final, facilitando a identificação do arquivo
+  - ***_-f Dockerfile.app_***: especifica o nome do Dockerfile, onde poderia ser somente Dockerfile, mas usamos nome um customizado com (.app) no final, facilitando a identificação do arquivo
   - ***_. (ponto no final do comando)_***:  Define o contexto de build como o diretório atual, ou seja, onde está o arquivo para construção da imagem no momento da execução do comando
 
 ```
-docker build -t apps-image:v1 -f dockerfile.app .
+docker build -t apps-image:v1 -f Dockerfile.app .
 ```
 
 ---
