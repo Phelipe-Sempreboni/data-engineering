@@ -111,6 +111,45 @@ ctrl+c
 preencher
 ```
 ---
+7. Criar um script Python para testar a leitura de dados via o container do serviço (apps), lendo diretamente o banco de dados do (SQL Server) do container do serviço (sqlserver)
+- Iremos aproveitar e ensinar alguns outros comandos para auxiliar nessa validação
+- Também iremos aprender como criar um script do Python dentro do container do serviço (apps), onde esse script irá realizar a leitura de dados do (SQL Server) que está no container do serviço (sqlserver)
 
-
-
+- Liste todas as redes existentes no Docker
+```
+docker network ls
+```
+- Inspecione uma rede específica, no caso a que você está utilizando na comunicação entre os containers
+```
+docker network inspect sirius_net01
+```
+- Realize um ping no container do serviço (sqlserver) via o container do do serviço (apps)
+```
+ping sqlserver
+```
+- Realize um teste na porta do banco de dados (SQL Server), que está no serviço do container do (sqlserver)
+```
+telnet sqlserver 1433
+```
+- Realize a instalação da biblioteca do (pyodbc) do Python no serviço do container (apps)
+```
+python3.11 -m pip install pyodbc
+```
+- Valide se o conector ODBC chamado (ODBC Driver 17 for SQL Server) está instalado no container do serviço (apps)
+- Caso o ODBC não esteja instalado, irá retornar uma mensagem de não encontrado, logo, se a instalação falha, possivelmente retornará um texto de erro ou comando não existente
+- O comando abaixo lista todos os drivers ODBC disponíveis configurados no sistema
+- Sobre os comandos:
+  - odbcinst: é o utilitário de linha de comando para gerenciar drivers e fontes de dados ODBC no Linux
+  - q: query (consulta) – pede ao utilitário para listar algo
+  - d: drivers – especifica que queremos consultar os drivers ODBC instalados no sistema
+  - 
+```
+odbcinst -q -d
+```
+- Execute o script de teste para ler dados do container (sqlserver) pelo container (apps)
+- Iremos aprender a criar um arquivo no container e executar esse script, para que seja possível ler os dados do (SQL Server) via o container (apps)
+- Essa é uma das maneiras também de testar se as portas, rede e comunicação estão funcionando entre os containers
+```
+python3.11 teste-con-sqlserver.py
+```
+---
