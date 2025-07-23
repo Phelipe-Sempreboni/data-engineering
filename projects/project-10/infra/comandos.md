@@ -41,6 +41,7 @@ docker compose up --build -d
   - ***_sirius_apps_***
   - ***_sirius_net01_***
 - No nosso caso já definimos um nome do próprio arquivo do Docker Compose, logo, não iremos utilizar esse tipo de ação nesse projeto
+- Se executarmos sem o nome configurado no início e no próprio arquivo do Docker Compose, e também não definirmos no comando, então o nome será baseado no nome do diretório
 
 ```
 docker compose -p sirius up --build -d
