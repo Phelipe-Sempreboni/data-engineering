@@ -11,6 +11,8 @@
   - ***_Versão_***: v1 - define a versão atual do container e útil para identificar versões específicas
   - ***_-f Dockerfile.app_***: especifica o nome do Dockerfile, onde poderia ser somente Dockerfile, mas usamos nome um customizado com (.app) no final, facilitando a identificação do arquivo
   - ***_. (ponto no final do comando)_***:  Define o contexto de build como o diretório atual, ou seja, onde está o arquivo para construção da imagem no momento da execução do comando
+- Vale ressaltar que, se estivessemos utilizando o arquivo com o nome (Dockerfile), ou seja, sem a extensão (.app), não seria necessário utilizar a parte (-f Dockerfile.app), pois seria reconhecido automaticamente
+- O uso de extensões em um arquivo (Dockerfile) facilita a diferenciação em projetos, principalmente em casos que você tem múltiplos arquivos (Dockerfile), pois facilitará a visualização e gerenciamento
 
 ```
 docker build -t apps-image:v1 -f Dockerfile.app .
