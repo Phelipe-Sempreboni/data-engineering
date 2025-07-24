@@ -199,7 +199,6 @@ source /db/.env
 - Na sequência você irá executar um e visualizar o arquivo que foi criado e seu conteúdo
 - Pronto, agora temos um script bash criado
 - Os comandos estão sequenciais para execução
-- 
 ```
 cd db
 vim con_sql.sh
