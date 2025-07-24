@@ -240,7 +240,6 @@ mkdir app
 cd app
 mkdir automacao
 cd automacao
-mkdir /app/automacao
 cd db
 ls -la
 cp con_sql.sh /app/automacao
