@@ -134,7 +134,7 @@ apt-get install -y vim
 vim --version
 ```
 - Para criar o arquivo, execute o primeiro comando, onde será aberta uma tela, que é o editor do (vim)
-- Você irá aperta e garantindo que está dentro do terminal, a letra (i), que irá ativar o modo de insert no editor de texto
+- Você irá apertar e garantindo que está dentro do terminal, a letra (i), que irá ativar o modo de insert no editor de texto
 - Você irá digitar o nome da variável e a senha, que seguirá o formato (chave-valor), onde deixamos um exemplo de como seria, e garanta que não ficarão espaços no final da senha, o que é comum acontecer
 - Na sequência você irá apertar a tecla (esc) do seu teclado
 - Na sequência você irá digitar o comando (:w) e aperta (enter), que é para escrever o que você digitou
@@ -177,18 +177,76 @@ cd ..
 - Na sequência executamos o comando que agora possuí a variável (SA_PASSWORD), e não digiando diretamente a senha
 - O símbolo $ no final indica que você está como usuário não privilegiado, no caso, o mssql e não o usuário (root)
 - E nesse caso está sendo utilizado para para referenciar o valor de uma variável
+- Aqui já temos a conexão com o banco de dados (SQL Server) e é possível realizar consultas
+- Utilize as consultas sql abaixo e as orientações para realizar os tests de conexão e versão
 ```
 source /db/.env
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
 ```
+- Vamos ver outra forma de entrar no banco de dados, mas agora com mais automação no processo
+- Iremos criar um script bash dentro do container, onde iremos encapsular esses comandos
+- Mas antes, uma explicação breve sobre o que os comandos querem dizer:
+  - ***_#!/bin/bash_***: diz ao sistema para executar o script usando o Bash Shell
+  - Isso é essencial para que comandos como source e variáveis funcionem corretamente
+  - Sem o shebang, o sistema pode tentar usar o shell padrão (sh), que não suporta todos os recursos do bash
+- Entre no diretório onde está o arquivo (.emv)
+- Para criar o arquivo, execute o primeiro comando, onde será aberta uma tela, que é o editor do (vim)
+- Você irá apertar e garantindo que está dentro do terminal, a letra (i), que irá ativar o modo de insert no editor de texto
+- Você irá digitar o texto com os comandos para o script bash, onde deixamos o texto junto dos comandos
+- Na sequência você irá apertar a tecla (esc) do seu teclado
+- Na sequência você irá digitar o comando (:w) e aperta (enter), que é para escrever o que você digitou
+- Na sequência você irá digitar o comando (:q) e aperta (enter), que é para salvar e sair do arquivo
+- Na sequência você irá executar um e visualizar o arquivo que foi criado e seu conteúdo
+- Pronto, agora temos um script bash criado
+- Os comandos estão sequenciais para execução
 - 
 ```
+cd db
+vim con_sql.sh
+i
+#!/bin/bash
+source /db/.env
+/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
+:w
+:q
+cat con_sql.sh
 ```
+- Precisaremos alterar a permissão do arquivo, para que o usuário consiga executar, caso contrário teremos as permissões negadas
+- Antes execute um comando para lista os arquivos do diretório, e acompanhe como os acessos e permissões serão alterados para permitir a execução
+- Realize a alteração de permissão do arquivo para permitir a execução
+- Execute novamente um comando para lista os arquivos do diretório, e acompanhe como os acessos e permissões serão alterados para permitir a execução
+```
+ls -la
+chmod +x con_sql.sh
+ls -la
+```
+- Execute o comando abaixo para que seja possível executar o script, onde os comandos foram encapsulados
+- Nesse caso o arquivo está no mesmo diretório que o arquivo (.env), mas se não estivesse, você teria que navegar até o diretório e executar
+```
+./con_sql.sh
+```
+- Realize um teste e tente executar das duas formas, onde uma você já executou, que é o arquivo no mesmo diretório, mas agora iremos copiar o arquivo para outro diretório e tentar executar
+- Primeiro vá ou permaneça no diretório onde o script bash que criamos já existe, onde você deve listar o que temos no diretório e confirmar
+- Agora volte ao diretório raíz e crie os diretórios (pastas) em (/app/automacao), onde você deve garantir que os diretórios foram criados
+- Agora entre no diretório onde existe o script bash, garantindo sempre que o arquivo está no diretório
+- Agora copie o script bash para o diretório que foi criado anteriormente (/app/automacao)
+- Vá até o diretório (/app/automacao) e garanta que o arquivo foi criado no diretório
+- Agora execute o script bash e valide que conseguiu entrar no banco de dados do (SQL Server)
+- Siga para os testes das consultas
 - 
 ```
-```
-- 
-```
+ls -la
+mkdir app
+cd app
+mkdir automacao
+cd automacao
+mkdir /app/automacao
+cd db
+ls -la
+cp con_sql.sh /app/automacao
+cd /app/automacao
+ls -la
+/app/automacao/con_sql.sh
 ```
 ---
 - Realize um teste de uma consulta direto no terminal do container do serviço do banco de dados, que é o (sqlserver)
