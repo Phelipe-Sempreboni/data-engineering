@@ -212,6 +212,8 @@ go
 ```
 - Para sair do modo interativo do terminal com (sqlcmd), ou seja, sair do terminal do banco de dados do (SQL Server)
 ```
+exit
+ou
 quit
 ou
 ctrl+c
