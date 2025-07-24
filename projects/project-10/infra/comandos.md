@@ -117,15 +117,13 @@ id -un
 ```
 - Crie uma pasta chamada (db) ou de sua preferência
 - Notar que fizemos esse processo de entrar no usuário (root), pois se você estiver no usuário padrão desse container (sqlserver), ou seja, o usuário (mssql), ele não terá permissão para criação de pastas no sistema operacional
-```
-mkdir db
-```
 - Entre na pasta (db) que foi criada no sistema operacional
 ```
+mkdir db
 cd db
 ```
 - Crie um arquivo chamado (.env) dentro dessa pasta que foi criada
-- Para isso você terá que antes instalar um pacote chamado (vim), que é um editor de texto chamado (vi)
+- Para isso você terá que antes instalar um pacote chamado (vim), que é um editor de texto chamado (vim)
 - Primeiro execute o comando de atualização do sistema operacional, que no caso dessa imagem do (sqlserver), é baseada em (Debian slim), e vem com o (apt) desatualizado e sem repositórios listados
 - Na sequência execute o comando de instalação do (vim)
 - Ambos comandos já estão na sequência para serem executados
