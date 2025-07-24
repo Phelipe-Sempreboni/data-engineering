@@ -140,7 +140,7 @@ vim --version
 - Na sequência você irá digitar o comando (:w) e aperta (enter), que é para escrever o que você digitou
 - Na sequência você irá digitar o comando (:q) e aperta (enter), que é para salvar e sair do arquivo
 - Na sequência você irá executar um e visualizar o arquivo que foi criado e seu conteúdo
-- Notar que na senha, dependendo dos caracteres especiais que tiverem na senha como (*, !, &, ç) entre outros, pode causar erro na leitura via o arquivo (.env) no container, então é aconselhável colocar entre aspas
+- Notar que na senha, dependendo dos caracteres especiais que tiverem na senha como (*, !, &, ç) entre outros, pode causar erro na leitura ou até a exposição da senha via o arquivo (.env) no container, então é aconselhável colocar entre aspas
 - Pronto, agora temos um arquivo de variável de ambiente criado
 - Os comandos estão sequenciais para execução
 ```
