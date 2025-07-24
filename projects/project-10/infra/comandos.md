@@ -311,7 +311,6 @@ python3.11 -m pip install pyodbc
   - odbcinst: é o utilitário de linha de comando para gerenciar drivers e fontes de dados ODBC no Linux
   - q: query (consulta) – pede ao utilitário para listar algo
   - d: drivers – especifica que queremos consultar os drivers ODBC instalados no sistema
-  - 
 ```
 odbcinst -q -d
 ```
