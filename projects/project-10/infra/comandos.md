@@ -98,6 +98,99 @@ terraform --version
 ```
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'insira sua senha ou o arquivo .env*' -N -C
 ```
+- Não é uma boa prática inserir manualmente a senha diretamente no comando, então veremos maneiras de executar esse comando, mas chamando a senha de diretórios e arquivos
+- Vá ao terminal que você executou o Docker Compose, ou seja, por onde construiu os serviços do Docker, que é fora do container do serviço
+- Notar que não é necessário estar no diretório que você executou o Docker Compose, foi somente uma referência, pois você pode estar em qualquer local do seu terminal nesse momento
+- Notar que no comando, já é apontado o container do serviço, nesse caso o (sqlserver)
+- Noar que esse tipo de cenário que iremos executar só funciona em shells interativos (bash, sh). Se o container estiver usando ENTRYPOINT ou CMD, isso não se aplica diretamente a scripts automatizados e não irá funcionar
+```
+docker exec -u 0 -it sqlserver bash
+ou
+docker exec -u root -it sqlserver bash
+```
+- Verifique em qual usuário você está logado e utilizando no momento
+- Isso é para confirmar que você está no usuário (root)
+```
+whoami
+ou
+id -un
+```
+- Crie uma pasta chamada (db) ou de sua preferência
+- Notar que fizemos esse processo de entrar no usuário (root), pois se você estiver no usuário padrão desse container (sqlserver), ou seja, o usuário (mssql), ele não terá permissão para criação de pastas no sistema operacional
+```
+mkdir db
+```
+- Entre na pasta (db) que foi criada no sistema operacional
+```
+cd db
+```
+- Crie um arquivo chamado (.env) dentro dessa pasta que foi criada
+- Para isso você terá que antes instalar um pacote chamado (vim), que é um editor de texto chamado (vi)
+- Primeiro execute o comando de atualização do sistema operacional, que no caso dessa imagem do (sqlserver), é baseada em (Debian slim), e vem com o (apt) desatualizado e sem repositórios listados
+- Na sequência execute o comando de instalação do (vim)
+- Ambos comandos já estão na sequência para serem executados
+- Na sequência verifique a versão do (vim), validando se foi instalado corretamente
+```
+apt-get update
+apt-get install -y vim
+vim --version
+```
+- Para criar o arquivo, execute o primeiro comando, onde será aberta uma tela, que é o editor do (vim)
+- Você irá aperta e garantindo que está dentro do terminal, a letra (i), que irá ativar o modo de insert no editor de texto
+- Você irá digitar o nome da variável e a senha, que seguirá o formato (chave-valor), onde deixamos um exemplo de como seria, e garanta que não ficarão espaços no final da senha, o que é comum acontecer
+- Na sequência você irá apertar a tecla (esc) do seu teclado
+- Na sequência você irá digitar o comando (:w) e aperta (enter), que é para escrever o que você digitou
+- Na sequência você irá digitar o comando (:q) e aperta (enter), que é para salvar e sair do arquivo
+- Na sequência você irá executar um e visualizar o arquivo que foi criado e seu conteúdo
+- Pronto, agora temos um arquivo de variável de ambiente criado
+- Os comandos estão sequenciais para execução
+```
+vim .env
+i
+SA_PASSWORD=<insira sua senha>
+SA_PASSWORD=Senh@forte!
+:w
+:q
+cat .env
+```
+- Você irá agora mudar para o usuário (mssql), que é o usuário padrão desse container de serviço do banco de dados
+- Iremos listar os usuários existentes nesse container
+- Iremos verificar se realmente o usuário do (mssql) existe
+- Iremos alterar para o usuário (mssql) no container
+- Iremos verificar o conteúdo do arquivo (.env) e se realmente a senha foi inserida no arquivo
+- Notar que quando temos senhas inseridas em arquivos do tipo (.env), temos que ter uma ótima gestão de acessos do arquivo (.env) e container e que seja extremamente controlada e restrita
+- Por exemplo, esse arquivo (.env) só deveria ser acessado pelo usuário (root) e/ou por um usuário de serviço, onde a senha desse usuário de serviço estaria em algum cofre seguro
+- Uma boa prática é utilizar cofres de provedoras de Cloud, como da AWS (AWS Secrets Manager) e Azure (Key Vault), onde você pode guardar as senhas e chamar via APIs ou de outras formas
+- Você também pode utilizar cofres ou locais seguro de sua escolha, desde que a gestão de acesso senha bem controlada e gerida
+```
+getent passwd
+su - mssql
+ls -la
+cd db
+ls -la
+cat .env
+cd ..
+```
+- Agora iremos entrar no banco de dados via um comando
+- Notar que a partir de agora não vamos precisar colocar a senha diretamente na linha de comando, mas sim via uma variável de ambiente, que é a mesma do arquivo (.env)
+- Primeiro indicamos o local que está o arquivo (.env)
+- Na sequência executamos o comando que agora possuí a variável (SA_PASSWORD), e não digiando diretamente a senha
+- O símbolo $ no final indica que você está como usuário não privilegiado, no caso, o mssql e não o usuário (root)
+- E nesse caso está sendo utilizado para para referenciar o valor de uma variável
+```
+source /db/.env
+/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
+```
+- 
+```
+```
+- 
+```
+```
+- 
+```
+```
+---
 - Realize um teste de uma consulta direto no terminal do container do serviço do banco de dados, que é o (sqlserver)
 - Se for utilizado (;) depois do (go), é como se você estivesse informando ao banco de dados (SQL Server) que ainda virá outra consulta, logo, o resultado não irá aparecer
 - Por exemplo, se você digitar as duas consultas abaixo, uma abaixo da outra e só utilizar o (go) depois, as duas consultas serão retornadas em conjunto
