@@ -33,6 +33,15 @@ RUN apt-get install -y \
     ca-certificates \
     lsb-release
 
+# Instalação do cliente SQLCMD (Microsoft SQL Server Command Line Tools)
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+    curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
+    apt-get update && \
+    ACCEPT_EULA=Y apt-get install -y mssql-tools18 unixodbc-dev && \
+    echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc && \
+    ln -sfn /opt/mssql-tools18/bin/sqlcmd /usr/bin/sqlcmd && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Instalação do Python 3.11
 RUN add-apt-repository ppa:deadsnakes/ppa -y && \
     apt-get update && \
