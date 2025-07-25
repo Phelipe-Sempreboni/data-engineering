@@ -12,10 +12,11 @@ Vamos de Sirius Hub Educação !
 
 ---
 
-#### Teremos a divisão dessa trilha em três grandes blocos, sendo:
+#### Teremos a divisão dessa trilha em três quatro blocos, sendo:
     - 1. Criação e navegação pelas contas da AWS e Github
-    - 2. Construção do ambiente local com Docker
-    - 3. Construção e deploy do ambiente local com Docker para a Cloud na AWS
+    - 2. Instalação do Docker e configuração do ambiente (vscode e suas extensões)
+    - 3. Construção do ambiente local com Docker
+    - 4. Construção e deploy do ambiente local com Docker para a Cloud na AWS
 
 ---
 
