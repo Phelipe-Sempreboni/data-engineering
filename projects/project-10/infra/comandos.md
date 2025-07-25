@@ -289,7 +289,7 @@ ctrl+c
   - ***_N_***: usa uma conexão criptografada (SSL)
   - ***_C_***: confirma o certificado do servidor mesmo se não for confiável (usado com -N)
 ```
-sqlcmd -S localhost -U sa -P 'insira sua senha ou o arquivo .env*' -N -C
+sqlcmd -S apps -U sa -P 'insira sua senha ou o arquivo .env*' -N -C
 ```
 - Não é uma boa prática inserir manualmente a senha diretamente no comando, então veremos maneiras de executar esse comando, mas chamando a senha de diretórios e arquivos
 - Vá ao terminal que você executou o Docker Compose, ou seja, por onde construiu os serviços do Docker, que é fora do container do serviço
@@ -372,7 +372,7 @@ cd ..
 - Utilize as consultas sql abaixo e as orientações para realizar os tests de conexão e versão
 ```
 source /db/.env
-sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
+sqlcmd -S apps -U sa -P "$SA_PASSWORD" -N -C
 ```
 - Vamos ver outra forma de entrar no banco de dados, mas agora com mais automação no processo
 - Iremos criar um script bash dentro do container, onde iremos encapsular esses comandos
@@ -396,7 +396,7 @@ vim con_sql.sh
 i
 #!/bin/bash
 source /db/.env
-sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
+sqlcmd -S apps -U sa -P "$SA_PASSWORD" -N -C
 :w
 :q
 cat con_sql.sh
