@@ -20,7 +20,7 @@ docker build -t apps-image:v1 -f Dockerfile.app .
 ```
 - Se o arquivo (Dockerfile) não tivesse extensão
 ```
-docker build -t apps-image:v1 -f .
+docker build -t apps-image:v1 .
 ```
 
 ---
