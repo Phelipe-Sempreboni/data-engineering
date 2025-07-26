@@ -1,47 +1,7 @@
 name: sirius
 
-### SERVIÇO DO SQL SERVER
-services:
-  sqlserver:
-    #image: mcr.microsoft.com/mssql/server:2017-latest
-    #image: mcr.microsoft.com/mssql/server:2019-latest
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    #image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: sqlserver
-    ports:
-      - "1433:1433"
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=${SA_PASSWORD}
-      - MSSQL_PID=Developer
-    volumes:
-      - sqlserver_data:/var/opt/mssql
-    networks:
-      - net01
-
-
-### SERVIÇO DO PYTHON, AWS CLI E TERRAFORM
-  app:
-    build:
-      context: C:/Users/pheli/Desktop/github/data-engineering/projects/project-10/infra/apps
-      dockerfile: Dockerfile.app
-      #dockerfile: Dockerfile
-    container_name: apps
-    volumes:
-      - data-quality:/projeto-dq
-    depends_on:
-      - sqlserver
-    networks:
-      - net01
-
-volumes:
-  sqlserver_data:
-  data-quality:
-
-networks:
-  net01:
-
-### SERVIÇO DO AIRFLOW
+### CONFIGURAÇÃO DE VARIÁVEIS DO APACHE AIRFLOW
+### DEVE FICAR FORA DE (SERVICES), VISTO QUE É UM BLOCO DE VARIÁVEIS E CONFIGURAÇÕES
 x-airflow-common:
   &airflow-common
   # In order to add custom dependencies or upgrade provider distributions you can use your extended image.
@@ -83,6 +43,7 @@ x-airflow-common:
     postgres:
       condition: service_healthy
 
+### SERVIÇO DO AIRFLOW
 services:
   postgres:
     image: postgres:13
@@ -329,5 +290,43 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
+### SERVIÇO DO SQL SERVER
+  sqlserver:
+    #image: mcr.microsoft.com/mssql/server:2017-latest
+    #image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    #image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${SA_PASSWORD}
+      - MSSQL_PID=Developer
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - net01
+
+
+### SERVIÇO DO PYTHON, AWS CLI E TERRAFORM
+  app:
+    build:
+      context: C:/Users/pheli/Desktop/github/data-engineering/projects/project-10/infra/apps
+      dockerfile: Dockerfile.app
+      #dockerfile: Dockerfile
+    container_name: apps
+    volumes:
+      - data-quality:/projeto-dq
+    depends_on:
+      - sqlserver
+    networks:
+      - net01
+
 volumes:
   postgres-db-volume:
+  sqlserver_data:
+  data-quality:
+
+networks:
+  net01:
