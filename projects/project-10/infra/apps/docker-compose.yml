@@ -1,0 +1,30 @@
+name: apps
+
+### SERVIÇO DO PYTHON, AWS CLI E TERRAFORM
+services:
+  app:
+    build:
+      context: C:/Users/pheli/Desktop/github/data-engineering/projects/project-10/infra/apps
+      dockerfile: Dockerfile.app
+      #dockerfile: Dockerfile
+    container_name: apps
+    volumes:
+    ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
+    ### Se (SQLSERVER_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
+    ### Caso contrário (:-.), será usado o diretório atual (.) como base
+    ### Se formos avaliar onde está caindo localmente (host), está indo para (./infra/apps), visto que temos o arquivo (.env) configurado
+    ### Se formos avaliar onde está caindo no container (destino), está indo para (/apps), configurado diretamente nesse bloco
+      - ${PLATFORMS_PROJ_DIR:-.}/platforms:/apps
+    depends_on:
+      - sqlserver
+    networks:
+      - net01
+
+#volumes:
+  # Nenhum volume precisa ser declarado, pois todos são bind mounts
+  #postgres-db-volume:
+  #sqlserver_data:
+  #platforms:
+
+networks:
+  net01:

@@ -1,4 +1,4 @@
-name: database-named-volume
+name: database
 
 services:
   sqlserver:
