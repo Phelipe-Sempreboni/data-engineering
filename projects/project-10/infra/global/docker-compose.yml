@@ -35,7 +35,11 @@ x-airflow-common:
     ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
     ### Se (AIRFLOW_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
     ### Caso contrário (:-.), será usado o diretório atual (.) como base
-    ### Nesse caso, está caindo em (AIRFLOW_PROJ_DIR=./infra/global)
+    ### Se formos avaliar onde está caindo localmente (host), está indo para (./infra/airflow), visto que temos o arquivo (.env) configurado
+    ### Se formos avaliar onde está caindo no container (destino), está indo para (/opt/airflow/dags), configurado diretamente nesse bloco
+    ### Se formos avaliar onde está caindo no container (destino), está indo para (/opt/airflow/logs), configurado diretamente nesse bloco
+    ### Se formos avaliar onde está caindo no container (destino), está indo para (/opt/airflow/config), configurado diretamente nesse bloco
+    ### Se formos avaliar onde está caindo no container (destino), está indo para (/opt/airflow/plugins), configurado diretamente nesse bloco
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
@@ -329,12 +333,11 @@ services:
       - SA_PASSWORD=${SA_PASSWORD}
       - MSSQL_PID=Developer
     volumes:
-
     ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
     ### Se (SQLSERVER_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
     ### Caso contrário (:-.), será usado o diretório atual (.) como base
-    ### Se formos avaliar onde está caindo localmente (host), está indo para (SQLSERVER_PROJ_DIR=./infra/global)
-    ### Se formos avaliar onde está caindo no container (destino), está indo para (/var/opt/mssql)
+    ### Se formos avaliar onde está caindo localmente (host), está indo para (./infra/database), visto que temos o arquivo (.env) configurado
+    ### Se formos avaliar onde está caindo no container (destino), está indo para (/var/opt/mssql), configurado diretamente nesse bloco
       #- sqlserver_data:/var/opt/mssql
       - ${SQLSERVER_PROJ_DIR:-.}/sqlserver_data:/var/opt/mssql
     networks:
@@ -348,7 +351,12 @@ services:
       #dockerfile: Dockerfile
     container_name: apps
     volumes:
-      - data-quality:/projeto-dq
+    ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
+    ### Se (SQLSERVER_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
+    ### Caso contrário (:-.), será usado o diretório atual (.) como base
+    ### Se formos avaliar onde está caindo localmente (host), está indo para (./infra/apps), visto que temos o arquivo (.env) configurado
+    ### Se formos avaliar onde está caindo no container (destino), está indo para (/apps), configurado diretamente nesse bloco
+      - ${PLATFORMS_PROJ_DIR:-.}/platforms:/apps
     depends_on:
       - sqlserver
     networks:
