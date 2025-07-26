@@ -32,6 +32,10 @@ x-airflow-common:
     # The following line can be used to set a custom config file, stored in the local config folder
     AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
   volumes:
+    ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
+    ### Se (AIRFLOW_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
+    ### Caso contrário (:-.), será usado o diretório atual (.) como base
+    ### Nesse caso, está caindo em (AIRFLOW_PROJ_DIR=./infra/global)
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
@@ -325,10 +329,15 @@ services:
       - SA_PASSWORD=${SA_PASSWORD}
       - MSSQL_PID=Developer
     volumes:
-      - sqlserver_data:/var/opt/mssql
+
+    ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
+    ### Se (AIRFLOW_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
+    ### Caso contrário (:-.), será usado o diretório atual (.) como base
+    ### Nesse caso, está caindo em (AIRFLOW_PROJ_DIR=./infra/global)
+      - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
+      #- sqlserver_data:/var/opt/mssql
     networks:
       - net01
-
 
 ### SERVIÇO DO PYTHON, AWS CLI E TERRAFORM
   app:
