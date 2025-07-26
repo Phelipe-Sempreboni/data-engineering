@@ -1,3 +1,4 @@
+# NOME QUE O COMPOSE STACK IRÁ ASSUMIR
 name: sirius
 
 ### CONFIGURAÇÃO DE VARIÁVEIS DO APACHE AIRFLOW
@@ -59,6 +60,8 @@ services:
       retries: 5
       start_period: 5s
     restart: always
+    networks:
+      - net01
 
   redis:
     # Redis is limited to 7.2-bookworm due to licencing change
@@ -73,6 +76,8 @@ services:
       retries: 50
       start_period: 30s
     restart: always
+    networks:
+      - net01
 
   airflow-apiserver:
     <<: *airflow-common
@@ -90,6 +95,8 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      - net01
 
   airflow-scheduler:
     <<: *airflow-common
@@ -105,6 +112,8 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      - net01
 
   airflow-dag-processor:
     <<: *airflow-common
@@ -120,6 +129,8 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      - net01
 
   airflow-worker:
     <<: *airflow-common
@@ -145,6 +156,8 @@ services:
         condition: service_healthy
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      - net01
 
   airflow-triggerer:
     <<: *airflow-common
@@ -160,6 +173,8 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      - net01
 
   airflow-init:
     <<: *airflow-common
@@ -252,6 +267,8 @@ services:
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
       _PIP_ADDITIONAL_REQUIREMENTS: ''
     user: "0:0"
+    networks:
+      - net01
 
   airflow-cli:
     <<: *airflow-common
@@ -267,6 +284,8 @@ services:
       - airflow
     depends_on:
       <<: *airflow-common-depends-on
+    networks:
+      - net01
 
   # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
   # or by explicitly targeted on the command line e.g. docker-compose up flower.
@@ -289,6 +308,8 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      - net01
 
 ### SERVIÇO DO SQL SERVER
   sqlserver:
