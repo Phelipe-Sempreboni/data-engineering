@@ -18,7 +18,7 @@ services:
     ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
     ### Se (SQLSERVER_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
     ### Caso contrário (:-.), será usado o diretório atual (.) como base
-    ### Se formos avaliar onde está caindo localmente (host), está indo para (./infra/database), visto que temos o arquivo (.env) configurado
+    ### Se formos avaliar onde está caindo localmente (host), está indo para (./infra/database/testes), visto que temos o arquivo (.env) configurado
     ### Se formos avaliar onde está caindo no container (destino), está indo para (/var/opt/mssql), configurado diretamente nesse bloco
       #- sqlserver_data:/var/opt/mssql
       - ${SQLSERVER_PROJ_DIR:-.}/sqlserver_data:/var/opt/mssql
