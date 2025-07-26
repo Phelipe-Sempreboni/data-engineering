@@ -7,3 +7,4 @@ docker compose -f 'docker-compose-bind-mount.yml' up --build -d
 docker compose -f 'docker-compose-named-volume.yml' up --build -d
 
 ### entrar no serviço do apache airflow na web
+http://localhost:8080
