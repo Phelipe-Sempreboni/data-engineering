@@ -1,6 +1,7 @@
 ### Comandos rápidos
 
 ### construção dos containers
+docker compose up --build -d
 docker compose -f 'nome' up --build -d
 docker compose -f 'docker-compose-bind-mount.yml' up --build -d
 docker compose -f 'docker-compose-named-volume.yml' up --build -d
