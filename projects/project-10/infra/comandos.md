@@ -32,6 +32,7 @@ docker build -t apps-image:v1 .
 
 ```
 docker compose up --build -d
+docker compose -f 'nome' up --build -d
 ```
 
 - Se quisermos construir os containers com um nome pré-definido, por exemplo: sirius 
