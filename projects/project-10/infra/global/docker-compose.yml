@@ -360,6 +360,7 @@ services:
     ports:
       - "1433:1433"
     environment:
+      # Variáveis para configurações no ambiente: https://learn.microsoft.com/pt-br/sql/linux/sql-server-linux-configure-environment-variables?view=sql-server-ver17
       - ACCEPT_EULA=Y
       - SA_PASSWORD=${SA_PASSWORD}
       - MSSQL_PID=Developer
