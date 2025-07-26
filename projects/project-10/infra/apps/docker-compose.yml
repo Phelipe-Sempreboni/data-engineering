@@ -4,7 +4,7 @@ name: apps
 services:
   app:
     build:
-      context: C:/Users/pheli/Desktop/github/data-engineering/projects/project-10/infra/apps
+      context: .
       dockerfile: Dockerfile.app
       #dockerfile: Dockerfile
     container_name: apps
@@ -14,9 +14,10 @@ services:
     ### Caso contrário (:-.), será usado o diretório atual (.) como base
     ### Se formos avaliar onde está caindo localmente (host), está indo para (./infra/apps), visto que temos o arquivo (.env) configurado
     ### Se formos avaliar onde está caindo no container (destino), está indo para (/apps), configurado diretamente nesse bloco
+      #- platforms:/apps
       - ${PLATFORMS_PROJ_DIR:-.}/platforms:/apps
-    depends_on:
-      - sqlserver
+    #depends_on:
+      #- sqlserver
     networks:
       - net01
 
