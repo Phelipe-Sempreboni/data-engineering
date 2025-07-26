@@ -11,7 +11,3 @@ docker exec -u root -it sqlserver-bm bash
 
 ### entrar dentro do banco de da dos do sql server
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'senha' -N -C
-
-### permissões de acesso
-chown -R 10001:0 ./infra/sqlserver_data
-chmod -R 770 ./infra/sqlserver_data
