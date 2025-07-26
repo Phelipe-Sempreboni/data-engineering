@@ -1,4 +1,4 @@
-name: sirius
+name: database
 
 services:
   sqlserver:
