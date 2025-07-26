@@ -76,14 +76,7 @@ services:
       POSTGRES_PASSWORD: airflow
       POSTGRES_DB: airflow
     volumes:
-    ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
-    ### Se (POSTGRES_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
-    ### Caso contrário (:-.), será usado o diretório atual (.) como base
-    ### Se formos avaliar onde está caindo localmente (host), está indo para (./infra/airflow/postgres), visto que temos o arquivo (.env) configurado
-    ### Se formos avaliar onde está caindo no container (destino), está indo para (/var/lib/postgresql/data), configurado diretamente nesse bloco
-    ### ${SQLSERVER_PROJ_DIR:-.}/sqlserver_data:/var/opt/mssql
-      #- postgres-db-volume:/var/lib/postgresql/data
-      - ${POSTGRES_PROJ_DIR:-.}/postgres_data:/var/lib/postgresql/data
+      - postgres-db-volume:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 10s
@@ -365,13 +358,7 @@ services:
       - SA_PASSWORD=${SA_PASSWORD}
       - MSSQL_PID=Developer
     volumes:
-    ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
-    ### Se (SQLSERVER_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
-    ### Caso contrário (:-.), será usado o diretório atual (.) como base
-    ### Se formos avaliar onde está caindo localmente (host), está indo para (./infra/database), visto que temos o arquivo (.env) configurado
-    ### Se formos avaliar onde está caindo no container (destino), está indo para (/var/opt/mssql), configurado diretamente nesse bloco
-      #- sqlserver_data:/var/opt/mssql
-      - ${SQLSERVER_PROJ_DIR:-.}/sqlserver_data:/var/opt/mssql
+      - sqlserver_data:/var/opt/mssql
     depends_on:
       - postgres
       - redis
@@ -397,22 +384,16 @@ services:
       #dockerfile: Dockerfile
     container_name: apps
     volumes:
-    ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
-    ### Se (SQLSERVER_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
-    ### Caso contrário (:-.), será usado o diretório atual (.) como base
-    ### Se formos avaliar onde está caindo localmente (host), está indo para (./infra/apps), visto que temos o arquivo (.env) configurado
-    ### Se formos avaliar onde está caindo no container (destino), está indo para (/apps), configurado diretamente nesse bloco
-      - ${PLATFORMS_PROJ_DIR:-.}/platforms:/apps
+      - platforms:/apps
     depends_on:
       - sqlserver
     networks:
       - net01
 
-#volumes:
-  # Nenhum volume precisa ser declarado, pois todos são bind mounts
-  #postgres-db-volume:
-  #sqlserver_data:
-  #platforms:
+volumes:
+  postgres-db-volume:
+  sqlserver_data:
+  platforms:
 
 networks:
   net01:
