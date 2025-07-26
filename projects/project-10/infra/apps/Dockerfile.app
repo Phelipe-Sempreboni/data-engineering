@@ -70,9 +70,9 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     apt-get update && \
     ACCEPT_EULA=Y apt-get install -y msodbcsql17
 
-# Criar a pasta /lab1 como um ponto de montagem para um volume
-RUN mkdir /projeto-dq
-VOLUME /projeto-dq
+# Criar a pasta como um ponto de montagem para um volume
+#RUN mkdir /projeto-dq
+#VOLUME /projeto-dq
 
 # Ponto de entrada padrão
 CMD ["tail", "-f", "/dev/null"]

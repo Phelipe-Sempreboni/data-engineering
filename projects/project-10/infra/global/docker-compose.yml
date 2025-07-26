@@ -100,6 +100,8 @@ services:
       retries: 50
       start_period: 30s
     restart: always
+    volumes:
+      - redis_data:/data
     networks:
       - net01
 
@@ -384,7 +386,7 @@ services:
       #dockerfile: Dockerfile
     container_name: apps
     volumes:
-      - platforms:/apps
+      - platforms_data:/apps
     depends_on:
       - sqlserver
     networks:
@@ -392,8 +394,9 @@ services:
 
 volumes:
   postgres-db-volume:
+  redis_data:
   sqlserver_data:
-  platforms:
+  platforms_data:
 
 networks:
   net01:
