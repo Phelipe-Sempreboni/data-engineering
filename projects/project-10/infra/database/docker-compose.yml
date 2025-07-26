@@ -18,22 +18,8 @@ services:
     networks:
       - net01
 
-  app:
-    build:
-      context: C:/Users/pheli/Desktop/github/data-engineering/projects/project-10/infra/apps
-      dockerfile: Dockerfile.app
-      #dockerfile: Dockerfile
-    container_name: apps
-    volumes:
-      - data-quality:/projeto-dq
-    depends_on:
-      - sqlserver
-    networks:
-      - net01
-
 volumes:
   sqlserver_data:
-  data-quality:
 
 networks:
   net01:
