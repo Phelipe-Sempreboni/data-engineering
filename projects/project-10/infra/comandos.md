@@ -505,3 +505,7 @@ odbcinst -q -d
 python3.11 teste-con-sqlserver.py
 ```
 ---
+#### Troubleshooting - Solução de possíveis problemas que podem ocorrer no Docker Compose com todos os serviços
+##### Serviços: Python, AWS CLI, Terraform, SQL Server e Apache Ariflow
+
+---
