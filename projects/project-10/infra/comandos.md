@@ -511,7 +511,7 @@ python3.11 teste-con-sqlserver.py
 1 - Possíveis problemas que podem ocorrer com o banco de dados SQL Server quando estiver testando o script (docker-compose-bind-mount.yml), que é configurado somente com (Bind Mount)
 
 - Permissões na máquina local (host) quando utilizamos o Bind Mount
-- ```
+```
 docker compose stop
 docker compose up sqlserver --build
 ```
