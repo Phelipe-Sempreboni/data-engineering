@@ -331,11 +331,12 @@ services:
     volumes:
 
     ### Essa é uma expansão de variável com fallback (padrão do Docker Compose)
-    ### Se (AIRFLOW_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
+    ### Se (SQLSERVER_PROJ_DIR) estiver definido no arquivo (.env), ele será usado
     ### Caso contrário (:-.), será usado o diretório atual (.) como base
-    ### Nesse caso, está caindo em (AIRFLOW_PROJ_DIR=./infra/global)
-      - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
+    ### Se formos avaliar onde está caindo localmente (host), está indo para (SQLSERVER_PROJ_DIR=./infra/global)
+    ### Se formos avaliar onde está caindo no container (destino), está indo para (/var/opt/mssql)
       #- sqlserver_data:/var/opt/mssql
+      - ${SQLSERVER_PROJ_DIR:-.}/sqlserver_data:/var/opt/mssql
     networks:
       - net01
 
