@@ -508,4 +508,12 @@ python3.11 teste-con-sqlserver.py
 #### Troubleshooting - Solução de possíveis problemas que podem ocorrer no Docker Compose com todos os serviços
 ##### Serviços: Python, AWS CLI, Terraform, SQL Server e Apache Ariflow
 
+1 - Possíveis problemas que podem ocorrer com o banco de dados SQL Server quando estiver testando o script (docker-compose-bind-mount.yml), que é configurado somente com (Bind Mount)
+
+- Permissões na máquina local (host) quando utilizamos o Bind Mount
+- ```
+docker compose stop
+docker compose up sqlserver --build
+```
+
 ---
