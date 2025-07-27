@@ -471,11 +471,7 @@ go
 ```
 - Para sair do modo interativo do terminal com (sqlcmd), ou seja, sair do terminal do banco de dados do (SQL Server)
 ```
-exit
-ou
-quit
-ou
-ctrl+c
+exit ou quit ou ctrl+c
 ```
 7. Criar um script Python para testar a leitura de dados via o container do serviço (apps), lendo diretamente o banco de dados do (SQL Server) do container do serviço (sqlserver)
 - Iremos aproveitar e ensinar alguns outros comandos para auxiliar nessa validação
