@@ -28,6 +28,8 @@ docker build -t apps-image:v1 .
 2. Comandos manuais para a construção do container a partir da imagem e com o arquivo do Docker Compose
 - Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
 - Navegue até a pasta com onde está o arquivo docker-compose.yml
+- Caso o arquivo (docker-compose.yaml) esteja nomeado dessa maneira, então não é necessário apontar o nome, visto que o Docker reconhece o comando automaticamente
+- Notar que se o arquivo não estiver nomeado com o padrão (docker-compose), então será necessário executar o comando que aponta para o nome
 - Execute o comando abaixo para construir e executar os serviços definidos no arquivo do Docker Compose
 
 ```
