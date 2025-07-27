@@ -114,16 +114,16 @@ terraform --version
 - Noar que esse tipo de cenário que iremos executar só funciona em shells interativos (bash, sh). Se o container estiver usando ENTRYPOINT ou CMD, isso não se aplica diretamente a scripts automatizados e não irá funcionar
 ```
 docker exec -u <nome-usuario> -it <nome-container> bash
-docker exec -u 0 -it sqlserver bash
-ou
-docker exec -u root -it sqlserver bash
+docker exec -u 0 -it sqlserver bash ou docker exec -u root -it sqlserver bash
 ```
 - Verifique em qual usuário você está logado e utilizando no momento
 - Isso é para confirmar que você está no usuário (root)
+- Você também um comando para verificar os usuários existentes no container
+- Na sequência é um comando para trocar de usuário, nesse exemplo, saindo do (root) e indo para o (mssql) do container (sqlserver)
 ```
-whoami
-ou
-id -un
+whoami ou id -un
+getent passwd
+su - mssql
 ```
 - Crie uma pasta chamada (db) ou de sua preferência
 - Notar que fizemos esse processo de entrar no usuário (root), pois se você estiver no usuário padrão desse container (sqlserver), ou seja, o usuário (mssql), ele não terá permissão para criação de pastas no sistema operacional
