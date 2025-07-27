@@ -168,6 +168,7 @@ cat .env
 - Iremos listar os usuários existentes nesse container
 - Iremos verificar se realmente o usuário do (mssql) existe
 - Iremos alterar para o usuário (mssql) no container
+- Iremos verificar e validar em qual usuário estamos
 - Iremos verificar o conteúdo do arquivo (.env) e se realmente a senha foi inserida no arquivo
 - Notar que quando temos senhas inseridas em arquivos do tipo (.env), temos que ter uma ótima gestão de acessos do arquivo (.env) e container e que seja extremamente controlada e restrita
 - Por exemplo, esse arquivo (.env) só deveria ser acessado pelo usuário (root) e/ou por um usuário de serviço, onde a senha desse usuário de serviço estaria em algum cofre seguro
@@ -176,6 +177,7 @@ cat .env
 ```
 getent passwd
 su - mssql
+whoami ou id -un
 ls -la
 cd db
 ls -la
