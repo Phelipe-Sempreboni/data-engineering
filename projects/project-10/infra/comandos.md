@@ -338,8 +338,12 @@ docker exec -u 0 -it apps bash ou docker exec -u root -it apps bash
 ```
 - Verifique em qual usuário você está logado e utilizando no momento
 - Isso é para confirmar que você está no usuário (root)
+- Você também um comando para verificar os usuários existentes no container
+- Na sequência é um comando para trocar de usuário, nesse exemplo, saindo do (root) e indo para o (mssql) do container (sqlserver)
 ```
 whoami ou id -un
+getent passwd
+su - mssql
 ```
 - Crie uma pasta chamada (db) ou de sua preferência
 - Notar que fizemos esse processo de entrar no usuário (root), pois se você estiver com outro usuário e que não tiver as permissões necessárias, ele não terá permissão para criação de pastas no sistema operacional
@@ -389,6 +393,7 @@ cat .env
 - Você também pode utilizar cofres ou locais seguro de sua escolha, desde que a gestão de acesso senha bem controlada e gerida
 ```
 getent passwd
+whoami ou id -un
 ls -la
 cd db
 ls -la
