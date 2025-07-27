@@ -94,7 +94,30 @@ terraform --version
 ```
 ---
 
-5. Para conseguir visualizar a versão do banco de dados do (SQL Server) via o container do serviço (sqlserver), ou seja, onde está instanciado o banco de dados, é necessário realizar algumas etapas
+5. Vamos realizar alguns testes de rede nos containers que formam o Compose Stack
+- Essas validações são importantes para verificar se os containers realmente estão se comunicando entre si, visto que criamos dentro da mesma rede
+- Liste todas as redes existentes no Docker
+```
+docker network ls
+```
+---
+- Inspecione uma rede específica, no caso a que você está utilizando na comunicação entre os containers
+```
+docker network inspect sirius_net01
+```
+---
+- Realize um ping no container do serviço (sqlserver) via o container do do serviço (apps)
+```
+ping sqlserver
+```
+---
+- Realize um teste na porta do banco de dados (SQL Server), que está no serviço do container do (sqlserver)
+```
+telnet sqlserver 1433
+```
+---
+
+6. Para conseguir visualizar a versão do banco de dados do (SQL Server) via o container do serviço (sqlserver), ou seja, onde está instanciado o banco de dados, é necessário realizar algumas etapas
 - Será necessário entrar no banco de dados e executar uma consulta sql
 - Os comandos precisam ser executados a partir e de dentro do container
 - Caso esse comando falhe, investigue se o caminho que mencionado, principalmente a parte (mssql-tools18) está correto, pois dependendo da versão do banco de dados (SQL Server), essa escrita pode mudar
@@ -289,7 +312,7 @@ ou
 ctrl+c
 ```
 ---
-6. Para conseguir visualizar a versão do banco de dados do (SQL Server) via o container do serviço (apps), ou seja, lendo o container do serviço (sqlserver), é necessário realizar algumas etapas
+7. Para conseguir visualizar a versão do banco de dados do (SQL Server) via o container do serviço (apps), ou seja, lendo o container do serviço (sqlserver), é necessário realizar algumas etapas
 - Notar que a partir de agora, estaremos dentro do container (apps) e não no container do serviço (sqlserver), onde o banco de dados (SQL Server) está instanciado
 - Será necessário entrar no banco de dados e executar uma consulta sql
 - Os comandos precisam ser executados a partir e de dentro do container
@@ -436,7 +459,6 @@ ls -la
 - Vá até o diretório (/app/automacao) e garanta que o arquivo foi criado no diretório
 - Agora execute o script bash e valide que conseguiu entrar no banco de dados do (SQL Server)
 - Siga para os testes das consultas
-- 
 ```
 ls -la
 mkdir app
@@ -473,26 +495,10 @@ go
 ```
 exit ou quit ou ctrl+c
 ```
-7. Criar um script Python para testar a leitura de dados via o container do serviço (apps), lendo diretamente o banco de dados do (SQL Server) do container do serviço (sqlserver)
+---
+8. Criar um script Python para testar a leitura de dados via o container do serviço (apps), lendo diretamente o banco de dados do (SQL Server) do container do serviço (sqlserver)
 - Iremos aproveitar e ensinar alguns outros comandos para auxiliar nessa validação
 - Também iremos aprender como criar um script do Python dentro do container do serviço (apps), onde esse script irá realizar a leitura de dados do (SQL Server) que está no container do serviço (sqlserver)
-
-- Liste todas as redes existentes no Docker
-```
-docker network ls
-```
-- Inspecione uma rede específica, no caso a que você está utilizando na comunicação entre os containers
-```
-docker network inspect sirius_net01
-```
-- Realize um ping no container do serviço (sqlserver) via o container do do serviço (apps)
-```
-ping sqlserver
-```
-- Realize um teste na porta do banco de dados (SQL Server), que está no serviço do container do (sqlserver)
-```
-telnet sqlserver 1433
-```
 - Realize a instalação da biblioteca do (pyodbc) do Python no serviço do container (apps)
 ```
 python3.11 -m pip install pyodbc
