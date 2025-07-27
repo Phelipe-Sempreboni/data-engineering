@@ -77,8 +77,11 @@ docker-compose down && docker compose up -p sirius
 4. Validar se os pacotes foram instalados corretamente e quais as suas versões
 - Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
 - Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
-- Execute os comandos abaixo
+- Execute os comandos abaixo, onde o primeiro pode ser executado a partir de um prompt local na sua máquina
 ```
+docker exec -u <nome-usuario> -it <nome-container> bash
+docker exec -u root -it sqlserver bash
+docker exec -u root -it apps bash
 python3 --version
 aws --version
 terraform --version
@@ -105,6 +108,7 @@ terraform --version
 - Notar que no comando, já é apontado o container do serviço, nesse caso o (sqlserver)
 - Noar que esse tipo de cenário que iremos executar só funciona em shells interativos (bash, sh). Se o container estiver usando ENTRYPOINT ou CMD, isso não se aplica diretamente a scripts automatizados e não irá funcionar
 ```
+docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u 0 -it sqlserver bash
 ou
 docker exec -u root -it sqlserver bash
