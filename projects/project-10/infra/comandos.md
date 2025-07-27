@@ -86,6 +86,7 @@ docker-compose down && docker compose up -p sirius
 ```
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u root -it sqlserver bash
+docker exec -u mssql -it sqlserver bash
 docker exec -u root -it apps bash
 python3 --version
 aws --version
