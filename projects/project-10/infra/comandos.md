@@ -203,7 +203,7 @@ source /db/.env
   - ***_#!/bin/bash_***: diz ao sistema para executar o script usando o Bash Shell
   - Isso é essencial para que comandos como source e variáveis funcionem corretamente
   - Sem o shebang, o sistema pode tentar usar o shell padrão (sh), que não suporta todos os recursos do bash
-- Entre no diretório onde está o arquivo (.emv)
+- Entre no diretório onde está o arquivo (.env)
 - Para criar o arquivo, execute o primeiro comando, onde será aberta uma tela, que é o editor do (vim)
 - Você irá apertar e garantindo que está dentro do terminal, a letra (i), que irá ativar o modo de insert no editor de texto
 - Você irá digitar o texto com os comandos para o script bash, onde deixamos o texto junto dos comandos
@@ -393,7 +393,7 @@ sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -N -C
   - ***_#!/bin/bash_***: diz ao sistema para executar o script usando o Bash Shell
   - Isso é essencial para que comandos como source e variáveis funcionem corretamente
   - Sem o shebang, o sistema pode tentar usar o shell padrão (sh), que não suporta todos os recursos do bash
-- Entre no diretório onde está o arquivo (.emv)
+- Entre no diretório onde está o arquivo (.env)
 - Para criar o arquivo, execute o primeiro comando, onde será aberta uma tela, que é o editor do (vim)
 - Você irá apertar e garantindo que está dentro do terminal, a letra (i), que irá ativar o modo de insert no editor de texto
 - Você irá digitar o texto com os comandos para o script bash, onde deixamos o texto junto dos comandos
