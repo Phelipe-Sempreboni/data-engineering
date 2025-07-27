@@ -69,7 +69,8 @@ docker compose -p sirius up --build -d
 docker-compose down && docker compose up --build -d
 ```
 
-- Se quisermos reconstruir os containers com um nome pré-definido, por exemplo: sirius
+- Se quisermos reconstruir os containers (Compose Stack) com um nome pré-definido, por exemplo: sirius
+- Notar que no arquivo (docker-compose) que estamos utilizando, já temos apontado dentro a variável (name:sirius), para criação do Compose Stack nomeado
 ```
 docker-compose down && docker compose up -p sirius
 ```
