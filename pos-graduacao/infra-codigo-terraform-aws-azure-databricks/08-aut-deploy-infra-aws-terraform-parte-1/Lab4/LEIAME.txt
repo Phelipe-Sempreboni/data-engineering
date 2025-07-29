@@ -13,8 +13,9 @@ docker build -t dsa-terraform-image:lab4 .
 
 docker run -dit --name dsa-lab4 -v ./IaC:/iac dsa-terraform-image:lab4 /bin/bash
 
-NOTA: No Windows você deve substituir ./IaC pelo caminho completo da pasta, por exemplo: C:\DSA\Cap08\IaC
+docker run -dit --name dsa-lab4 -v C:/Users/pheli/Desktop/github/data-engineering/pos-graduacao/infra-codigo-terraform-aws-azure-databricks/08-aut-deploy-infra-aws-terraform-parte-1/Lab4/IaC:/iac dsa-terraform-image:lab4
 
+NOTA: No Windows você deve substituir ./IaC pelo caminho completo da pasta, por exemplo: C:\DSA\Cap08\IaC
 
 # Verifique as versões do Terraform e do AWS CLI com os comandos abaixo
 
