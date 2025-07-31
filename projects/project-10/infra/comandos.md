@@ -335,7 +335,7 @@ sqlcmd -S sqlserver -U sa -P 'insira sua senha ou o arquivo .env*' -N -C
 - Vá ao terminal que você executou o Docker Compose, ou seja, por onde construiu os serviços do Docker, que é fora do container do serviço
 - Notar que não é necessário estar no diretório que você executou o Docker Compose, foi somente uma referência, pois você pode estar em qualquer local do seu terminal nesse momento
 - Notar que no comando, já é apontado o container do serviço, nesse caso o (sqlserver)
-- Noar que esse tipo de cenário que iremos executar só funciona em shells interativos (bash, sh). Se o container estiver usando ENTRYPOINT ou CMD, isso não se aplica diretamente a scripts automatizados e não irá funcionar
+- Notar que esse tipo de cenário que iremos executar só funciona em shells interativos (bash, sh). Se o container estiver usando ENTRYPOINT ou CMD, isso não se aplica diretamente a scripts automatizados e não irá funcionar
 ```
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u 0 -it apps bash ou docker exec -u root -it apps bash
