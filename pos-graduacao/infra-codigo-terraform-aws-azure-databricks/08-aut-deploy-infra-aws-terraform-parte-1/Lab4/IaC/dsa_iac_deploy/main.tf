@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "dsa_bucket_flask" {
-  bucket = "dsa-890582101704-bucket" 
+  bucket = "sirius-hub-tests" 
 
   tags = {
     Name        = "DSA Bucket"
@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "dsa_bucket_flask" {
 
   provisioner "local-exec" {
     when    = destroy
-    command = "aws s3 rm s3://dsa-890582101704-bucket --recursive"
+    command = "aws s3 rm s3://sirius-hub-tests --recursive"
   }
 }
 
@@ -37,7 +37,7 @@ resource "aws_instance" "dsa_ml_api" {
                 sudo yum install -y python3 python3-pip awscli
                 sudo pip3 install flask joblib scikit-learn numpy scipy gunicorn
                 sudo mkdir /dsa_ml_app
-                sudo aws s3 sync s3://dsa-890582101704-bucket /dsa_ml_app
+                sudo aws s3 sync s3://sirius-hub-tests /dsa_ml_app
                 cd /dsa_ml_app
                 nohup gunicorn -w 4 -b 0.0.0.0:5000 app:app &
               EOF
@@ -87,24 +87,6 @@ resource "aws_security_group" "dsa_ml_api_sg" {
   }
 }
 
-resource "aws_iam_role" "ec2_s3_access_role" {
-  
-  name = "ec2_s3_access_role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Action = "sts:AssumeRole",
-        Effect = "Allow",
-        Principal = {
-          Service = "ec2.amazonaws.com"
-        }
-      },
-    ]
-  })
-}
-
 resource "aws_iam_role_policy" "s3_access_policy" {
   
   name = "s3_access_policy"
@@ -130,9 +112,25 @@ resource "aws_iam_role_policy" "s3_access_policy" {
   })
 }
 
+resource "aws_iam_role" "ec2_s3_access_role" {
+  
+  name = "ec2_s3_access_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
 resource "aws_iam_instance_profile" "ec2_s3_profile" {
   name = "ec2_s3_profile"
   role = aws_iam_role.ec2_s3_access_role.name
 }
-
-
