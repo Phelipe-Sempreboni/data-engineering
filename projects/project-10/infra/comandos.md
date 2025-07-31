@@ -109,11 +109,13 @@ docker network inspect sirius_net01
 ```
 ---
 - Realize um ping no container do serviço (sqlserver) via o container do do serviço (apps)
+- Faça via o container do serviço (apps)
 ```
 ping sqlserver
 ```
 ---
 - Realize um teste na porta do banco de dados (SQL Server), que está no serviço do container do (sqlserver)
+- Faça via o container do serviço (apps)
 ```
 telnet sqlserver 1433
 ```
