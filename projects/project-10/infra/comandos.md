@@ -3,6 +3,7 @@
 ---
 
 1. Comandos manuais para a construção da imagem, ou seja, sem utilizar o docker compose - instalação do python, aws cli e terraform
+- Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
 - Navegue até o diretório criado e que está o arquivo do Dockerfile
 - Execute o comando abaixo para construção da imagem no Docker
 - Mas antes, uma explicação breve sobre o que os comandos querem dizer:
