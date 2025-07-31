@@ -81,7 +81,8 @@ docker-compose down && docker compose up -p sirius
 4. Validar se os pacotes foram instalados corretamente e quais as suas versões
 - Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
 - Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
-- Execute os comandos abaixo, onde o primeiro pode ser executado a partir de um prompt local na sua máquina
+- Execute os comandos abaixo, onde podem ser executados a partir de um prompt local na sua máquina
+- Deixaremos aberto um terminal para cada container e usuário conforme os comandos abaixo
 - Notar que você pode entrar com o usuário (root), mas o mais correto é ter um usuário nominal ou de serviço com determinadas permissões em vez de utilizar o (root) diretamente
 - No nosso cenário, vamos seguir com o usuário (root), e posteriormente criaremos um ou mais usuários de serviço
 ```
