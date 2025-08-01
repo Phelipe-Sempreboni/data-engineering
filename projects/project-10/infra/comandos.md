@@ -527,11 +527,7 @@ pip3 list | grep pyodbc
 dpkg -l | grep odbc
 odbcinst -j
 ```
-- Agora iremos realizar a instalação do pacote do (pyodbc) com a execução do comando abaixo
-- Realize a instalação da biblioteca do (pyodbc) do Python no serviço do container (apps)
-```
-python3 -m pip install pyodbc
-```
+---
 - Valide se o conector ODBC chamado (ODBC Driver 17 for SQL Server) está instalado no container do serviço (apps)
 - Caso o ODBC não esteja instalado, irá retornar uma mensagem de não encontrado, logo, se a instalação falha, possivelmente retornará um texto de erro ou comando não existente
 - O comando abaixo lista todos os drivers ODBC disponíveis configurados no sistema
@@ -542,6 +538,13 @@ python3 -m pip install pyodbc
 ```
 odbcinst -q -d
 ```
+---
+- Agora iremos realizar a instalação do pacote do (pyodbc) com a execução do comando abaixo
+- Realize a instalação da biblioteca do (pyodbc) do Python no serviço do container (apps)
+```
+python3 -m pip install pyodbc
+```
+---
 - Execute o script de teste para ler dados do container (sqlserver) pelo container (apps)
 - Iremos aprender a criar um arquivo no container e executar esse script, para que seja possível ler os dados do (SQL Server) via o container (apps)
 - Essa é uma das maneiras também de testar se as portas, rede e comunicação estão funcionando entre os containers
