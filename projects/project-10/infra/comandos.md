@@ -505,9 +505,32 @@ exit ou quit ou ctrl+c
 8. Criar um script Python para testar a leitura de dados via o container do serviço (apps), lendo diretamente o banco de dados do (SQL Server) do container do serviço (sqlserver)
 - Iremos aproveitar e ensinar alguns outros comandos para auxiliar nessa validação
 - Também iremos aprender como criar um script do Python dentro do container do serviço (apps), onde esse script irá realizar a leitura de dados do (SQL Server) que está no container do serviço (sqlserver)
+- Vamos verificar o pacote (pyodbc) já existe instalado com o Python
+- Execute o comando abaixo, onde se o pacote estiver instalado, o comando retornará a versão do pyodbc.
+- Se o pacote não estiver instalado, retornará um erro como: **_ModuleNotFoundError: No module named 'pyodbc'_**
+```
+python3 -c "import pyodbc; print(pyodbc.version)"
+```
+---
+- Liste os pacotes do Python que estão instalados no container do serviço (apps)
+- Depois tente listar se o pacote do (pyodbc) está instalado
+- Se aparecer algo como (pyodbc 4.0.34), então está instalado
+- Se nada for exibido, então o pacote não está instalado
+```
+pip3 list
+pip3 list | grep pyodbc
+```
+---
+- Adicionalmente vamos avaliar se temos drivers ODBCs instalados no serviço do container (apps)
+- Se quiser saber se o driver ODBC do sistema (como unixODBC) está instalado, que é um (requisito do pyodbc), execute um dos comandos abaixo
+```
+dpkg -l | grep odbc
+odbcinst -j
+```
+- Agora iremos realizar a instalação do pacote do (pyodbc) com a execução do comando abaixo
 - Realize a instalação da biblioteca do (pyodbc) do Python no serviço do container (apps)
 ```
-python3.11 -m pip install pyodbc
+python3 -m pip install pyodbc
 ```
 - Valide se o conector ODBC chamado (ODBC Driver 17 for SQL Server) está instalado no container do serviço (apps)
 - Caso o ODBC não esteja instalado, irá retornar uma mensagem de não encontrado, logo, se a instalação falha, possivelmente retornará um texto de erro ou comando não existente
@@ -523,6 +546,6 @@ odbcinst -q -d
 - Iremos aprender a criar um arquivo no container e executar esse script, para que seja possível ler os dados do (SQL Server) via o container (apps)
 - Essa é uma das maneiras também de testar se as portas, rede e comunicação estão funcionando entre os containers
 ```
-python3.11 teste-con-sqlserver.py
+python3 teste.py
 ```
 ---
