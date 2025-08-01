@@ -13,10 +13,17 @@ Vamos de Sirius Hub Educação !
 ---
 
 #### Teremos a divisão dessa trilha em três quatro blocos, sendo:
-    - 1. Criação e navegação pelas contas da AWS e Github
-    - 2. Instalação do Docker e configuração do ambiente (vscode e suas extensões)
-    - 3. Construção do ambiente local com Docker
-    - 4. Construção e deploy do ambiente local com Docker para a Cloud na AWS
+    - 1. Instalação do Docker Desktop para containers
+    - 2. Instalação do Visual Studio Code para códigos e integrações
+    - 3. Instalação das extensões (docker, terraform, sql server, github actions, yam, wsl, txt syntax, entre outros) no Visual Studio Code
+    - 4. Instalação do DBeaver para manipulação de bancos de dados
+    - 5. Instalação da interface do SQL Server - SQL Server Management Studio (SSMS)
+    - 6. Criação e navegação pelas contas da AWS e Github
+    - 7. Integração da conta Github com o Visual Studio Code
+    - 8. Ativação do Github Copilot gratuitamente no Github
+    - 9. Integração do Github Copilot no Visual Studio Code
+    - 10. Construção do ambiente local com Docker
+    - 11. Construção e deploy do ambiente local com Docker para a Cloud na AWS
 
 ---
 
