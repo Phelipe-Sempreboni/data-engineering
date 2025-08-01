@@ -508,7 +508,7 @@ exit ou quit ou ctrl+c
 - Vamos verificar o pacote (pyodbc) já existe instalado com o Python
 - Execute o comando abaixo, onde se o pacote estiver instalado, o comando retornará a versão do pyodbc.
 - Se o pacote não estiver instalado, retornará um erro como: **_ModuleNotFoundError: No module named 'pyodbc'_**
-- Notar que para o nosso caso, nós já instalamos o pacote (pyodbc) via o Dockerfile do container do serviço (apps), mas é interessante mostrar os pontos abaixo
+- Notar que no nosso caso, nós já instalamos o pacote (pyodbc) via o Dockerfile do container do serviço (apps), mas é interessante mostrar os pontos abaixo
 ```
 python3 -c "import pyodbc; print(pyodbc.version)"
 ```
@@ -543,7 +543,7 @@ odbcinst -q -d
 - Agora iremos realizar a instalação do pacote do (pyodbc) com a execução do comando abaixo
 - Retorne para o diretório raiz antes de realizar a instalação
 - Realize a instalação da biblioteca do (pyodbc) do Python no serviço do container (apps)
-- E ocorrer um erro na instalação desse pacote com o (pip install) do Python ?
+- E se ocorrer um erro na instalação desse pacote com o (pip install) do Python ?
 ```
 python3 -m pip install pyodbc
 ```
