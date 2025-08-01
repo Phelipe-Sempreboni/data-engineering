@@ -540,6 +540,7 @@ odbcinst -q -d
 ```
 ---
 - Agora iremos realizar a instalação do pacote do (pyodbc) com a execução do comando abaixo
+- Retorne para o diretório raiz antes de realizar a instalação
 - Realize a instalação da biblioteca do (pyodbc) do Python no serviço do container (apps)
 ```
 python3 -m pip install pyodbc
