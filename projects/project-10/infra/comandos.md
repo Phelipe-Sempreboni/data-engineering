@@ -508,6 +508,7 @@ exit ou quit ou ctrl+c
 - Vamos verificar o pacote (pyodbc) já existe instalado com o Python
 - Execute o comando abaixo, onde se o pacote estiver instalado, o comando retornará a versão do pyodbc.
 - Se o pacote não estiver instalado, retornará um erro como: **_ModuleNotFoundError: No module named 'pyodbc'_**
+- Notar que para o nosso caso, nós já instalamos o pacote (pyodbc) via o Dockerfile do container do serviço (apps), mas é interessante mostrar os pontos abaixo
 ```
 python3 -c "import pyodbc; print(pyodbc.version)"
 ```
@@ -542,8 +543,39 @@ odbcinst -q -d
 - Agora iremos realizar a instalação do pacote do (pyodbc) com a execução do comando abaixo
 - Retorne para o diretório raiz antes de realizar a instalação
 - Realize a instalação da biblioteca do (pyodbc) do Python no serviço do container (apps)
+- E ocorrer um erro na instalação desse pacote com o (pip install) do Python ?
 ```
 python3 -m pip install pyodbc
+```
+---
+- Caso recebermos um erro nessa tentativa de instalação (aconselho a testar), significa que o ambiente Python onde estamos tentando instalar o pacote está sendo gerenciado pelo sistema operacional (como o apt) — e não permite instalações diretas com pip para evitar conflitos com os pacotes do sistema
+- Esse comportamento segue a especificação do PEP 668, adotada por distribuições como o Debian 12+, Ubuntu 22.04+, etc., para proteger a instalação do Python do sistema
+- A ideia é evitar que você quebre o ambiente global do Python ao instalar pacotes diretamente com pip no ambiente do sistema operacional
+- Termos ações que podemos realizar para esse caso
+- Primeira:
+- Usar o APT (recomendado para pacotes disponíveis como .deb)
+- Se o pacote que queremos instalar estiver disponível no repositório Debian
+- Execute os comandos abaixo, onde isso instala o pyodbc gerenciado pelo sistema.
+```
+apt update
+apt install python3-pyodbc ou apt-get install -y python3-pyodbc
+```
+---
+- Segundo:
+- Usar um ambiente virtual (recomendado para projetos Python isolados)
+- Execute os comandos abaixo, e depois disso, estaremos usando os pacotes dentro do ambiente venv sem afetar o sistema operacional
+```
+apt install python3-venv -y
+python3 -m venv venv
+source venv/bin/activate
+pip install pyodbc
+```
+- Terceiro:
+- Usar --break-system-packages (último recurso)
+- É necessário tomar cuidado com essa ação, visto que esse comando força a instalação, mas pode corromper o ambiente Python do sistema. Só use em containers ou VMs isoladas e descartáveis
+- Como estamos utilizando um container no Docker, normalmente é seguro usar o --break-system-packages ou já preparar o Dockerfile (nosso caso) com os pacotes no apt e pip
+```
+python3 -m pip install pyodbc --break-system-packages
 ```
 ---
 - Execute o script de teste para ler dados do container (sqlserver) pelo container (apps)
