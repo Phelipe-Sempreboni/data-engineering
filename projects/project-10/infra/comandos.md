@@ -3,6 +3,7 @@
 ---
 
 1. Comandos manuais para a construção da imagem, ou seja, sem utilizar o docker compose - instalação do python, aws cli e terraform
+- Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
 - Navegue até o diretório criado e que está o arquivo do Dockerfile
 - Execute o comando abaixo para construção da imagem no Docker
 - Mas antes, uma explicação breve sobre o que os comandos querem dizer:
@@ -80,7 +81,8 @@ docker-compose down && docker compose up -p sirius
 4. Validar se os pacotes foram instalados corretamente e quais as suas versões
 - Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
 - Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
-- Execute os comandos abaixo, onde o primeiro pode ser executado a partir de um prompt local na sua máquina
+- Execute os comandos abaixo, onde podem ser executados a partir de um prompt local na sua máquina
+- Deixaremos aberto um terminal para cada container e usuário conforme os comandos abaixo
 - Notar que você pode entrar com o usuário (root), mas o mais correto é ter um usuário nominal ou de serviço com determinadas permissões em vez de utilizar o (root) diretamente
 - No nosso cenário, vamos seguir com o usuário (root), e posteriormente criaremos um ou mais usuários de serviço
 ```
@@ -107,11 +109,13 @@ docker network inspect sirius_net01
 ```
 ---
 - Realize um ping no container do serviço (sqlserver) via o container do do serviço (apps)
+- Faça via o container do serviço (apps)
 ```
 ping sqlserver
 ```
 ---
 - Realize um teste na porta do banco de dados (SQL Server), que está no serviço do container do (sqlserver)
+- Faça via o container do serviço (apps)
 ```
 telnet sqlserver 1433
 ```
@@ -135,7 +139,7 @@ telnet sqlserver 1433
 - Vá ao terminal que você executou o Docker Compose, ou seja, por onde construiu os serviços do Docker, que é fora do container do serviço
 - Notar que não é necessário estar no diretório que você executou o Docker Compose, foi somente uma referência, pois você pode estar em qualquer local do seu terminal nesse momento
 - Notar que no comando, já é apontado o container do serviço, nesse caso o (sqlserver)
-- Noar que esse tipo de cenário que iremos executar só funciona em shells interativos (bash, sh). Se o container estiver usando ENTRYPOINT ou CMD, isso não se aplica diretamente a scripts automatizados e não irá funcionar
+- Notar que esse tipo de cenário que iremos executar só funciona em shells interativos (bash, sh). Se o container estiver usando ENTRYPOINT ou CMD, isso não se aplica diretamente a scripts automatizados e não irá funcionar
 ```
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u 0 -it sqlserver bash ou docker exec -u root -it sqlserver bash
@@ -331,7 +335,7 @@ sqlcmd -S sqlserver -U sa -P 'insira sua senha ou o arquivo .env*' -N -C
 - Vá ao terminal que você executou o Docker Compose, ou seja, por onde construiu os serviços do Docker, que é fora do container do serviço
 - Notar que não é necessário estar no diretório que você executou o Docker Compose, foi somente uma referência, pois você pode estar em qualquer local do seu terminal nesse momento
 - Notar que no comando, já é apontado o container do serviço, nesse caso o (sqlserver)
-- Noar que esse tipo de cenário que iremos executar só funciona em shells interativos (bash, sh). Se o container estiver usando ENTRYPOINT ou CMD, isso não se aplica diretamente a scripts automatizados e não irá funcionar
+- Notar que esse tipo de cenário que iremos executar só funciona em shells interativos (bash, sh). Se o container estiver usando ENTRYPOINT ou CMD, isso não se aplica diretamente a scripts automatizados e não irá funcionar
 ```
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u 0 -it apps bash ou docker exec -u root -it apps bash

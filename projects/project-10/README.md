@@ -1,4 +1,4 @@
-### Projeto de Qualidade de Dados
+### Projeto de Engenharia e Qualidade de Dados
 
 Este é um projeto focado em Qualidade de Dados, mas você irá aprender um pouco mais que isso!
 
