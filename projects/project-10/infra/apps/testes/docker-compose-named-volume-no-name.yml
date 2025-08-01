@@ -1,0 +1,22 @@
+#name: apps
+
+### SERVIÇO DO PYTHON, AWS CLI E TERRAFORM
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+      #dockerfile: Dockerfile
+    container_name: apps
+    volumes:
+      - platforms:/apps
+    #depends_on:
+      #- sqlserver
+    networks:
+      - net01
+
+volumes:
+  platforms:
+
+networks:
+  net01:
