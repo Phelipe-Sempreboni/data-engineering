@@ -45,7 +45,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
 # Instalação do Python 3.11
 RUN add-apt-repository ppa:deadsnakes/ppa -y && \
     apt-get update && \
-    apt-get install -y python3.11 python3.11-venv python3.11-dev python3-pip
+    apt-get install -y python3.11 python3.11-venv python3.11-dev python3-pip python3-pyodbc
 
 # Criar a pasta Downloads e instalar o AWS CLI (para acessar a AWS)
 RUN mkdir Downloads && \

@@ -386,7 +386,8 @@ services:
       #dockerfile: Dockerfile
     container_name: apps
     volumes:
-      - platforms_data:/apps
+      #- platforms_data:/apps
+      - ${PLATFORMS_PROJ_DIR:-.}/platforms:/apps
     depends_on:
       - sqlserver
     networks:
