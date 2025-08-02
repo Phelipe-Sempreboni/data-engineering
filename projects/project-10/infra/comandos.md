@@ -602,9 +602,29 @@ pip install pyodbc
 python3 -m pip install pyodbc --break-system-packages
 ```
 ---
-
-
-
+- Entre na pasta (apps) que está disponível no sistema operacional
+```
+pwd
+ls -la
+cd apps
+ls -la
+```
+---
+- Crie um arquivo chamado (teste.py) dentro dessa pasta chamada (apps) com o editor de texto (vim)
+- Copie o código do python para dentro do arquivo (teste.py)
+- Salve e feche o arquivo (teste.py)
+- Chame e realize a leitura do arquivo (teste.py) para validar se foi escrito corretamente
+- Execute o script (teste.py) para testar a leitura do banco de dados SQL Server, via o container do serviço (apps) utilizando o Python
+```
+```
+---
+- Etapa de troubleshooting - solução de problemas
+```
+```
+---
+- Faremos a mesma etapa que foi realizada acima com o editor de texto chamado (nano), visando abrir mais o conhecimento nesse tema
+```
+```
 ---
 - Execute o script de teste para ler dados do container (sqlserver) pelo container (apps)
 - Iremos aprender a criar um arquivo no container e executar esse script, para que seja possível ler os dados do (SQL Server) via o container (apps)
