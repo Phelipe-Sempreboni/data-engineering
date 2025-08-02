@@ -623,6 +623,7 @@ ls -la
 - Os comandos estão sequenciais para execução
 ```
 vim teste.py
+i
 import pyodbc
 conn = pyodbc.connect(
     "DRIVER={ODBC Driver 17 for SQL Server};"
