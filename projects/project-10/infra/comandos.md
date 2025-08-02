@@ -643,10 +643,14 @@ python3 teste.py
 ```
 ---
 - Etapa de troubleshooting - solução de problemas
+- Vamos utilizar o ChatGPT para tentar entender o que houve e corrigir o problema - seja persistente até encontrar o erro
 - Você deve ter notado que ocorreu um erro ao tentar executar o script e fazer a chamada ao banco de dados
 - Você poderia, por exemplo, tentar criar um (Bind Mount) e simplesmente sincronizar o script da sua máquina local para o container do serviço (apps)
 - Mas antes de fazer isso, veremos como corrigir esse tipo de problema, visto que dependendo do cenário, você não poderá executar esse tipo ação
 - Resolver esse tipo de problema faz parte do dia a dia de quem trabalha com tecnologia
+- Entre na sua conta do ChatGPT da OpenAI
+- Vamos criar um prompt para tentar localizar o problema - prompts completos tendem a localizar o erro e resolve-lo mas rapidamente
+- Prompt:
 - Delete o script (teste.py)
 ```
 ```
