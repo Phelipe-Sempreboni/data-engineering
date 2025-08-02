@@ -17,6 +17,7 @@ RUN apt-get install -y \
     openssh-client \
     iputils-ping \
     vim \
+    nano \
     gnupg \
     gnupg2 \
     gcc \
