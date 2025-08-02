@@ -611,11 +611,34 @@ ls -la
 ```
 ---
 - Crie um arquivo chamado (teste.py) dentro dessa pasta chamada (apps) com o editor de texto (vim)
-- Copie o código do python para dentro do arquivo (teste.py)
-- Salve e feche o arquivo (teste.py)
-- Chame e realize a leitura do arquivo (teste.py) para validar se foi escrito corretamente
+- Para criar o arquivo, execute o primeiro comando, onde será aberta uma tela, que é o editor do (vim)
+- Você irá apertar e garantindo que está dentro do terminal, a letra (i), que irá ativar o modo de insert no editor de texto
+- Copie o código do python e cole dentro do arquivo (teste.py)
+- Na sequência você irá apertar a tecla (esc) do seu teclado
+- Na sequência você irá digitar o comando (:w) e aperta (enter), que é para escrever o que você digitou
+- Na sequência você irá digitar o comando (:q) e aperta (enter), que é para salvar e sair do arquivo
+- Na sequência você irá executar um comando e visualizar o arquivo que foi criado e seu conteúdo
+- Pronto, agora temos um script python criado
 - Execute o script (teste.py) para testar a leitura do banco de dados SQL Server, via o container do serviço (apps) utilizando o Python
+- Os comandos estão sequenciais para execução
 ```
+vim teste.py
+import pyodbc
+conn = pyodbc.connect(
+    "DRIVER={ODBC Driver 17 for SQL Server};"
+    "SERVER=sqlserver,1433;"
+    "DATABASE=master;"
+    "UID=<usuario>;"
+    "PWD=<senha>"
+)
+cursor = conn.cursor()
+cursor.execute("SELECT @@VERSION")
+row = cursor.fetchone()
+print(row[0])
+:w
+:q
+cat teste.py
+python3 teste.py
 ```
 ---
 - Etapa de troubleshooting - solução de problemas
