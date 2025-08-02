@@ -38,14 +38,14 @@ docker compose up --build -d
 docker compose -f <nome-docker-compose> up --build -d
 ```
 
-- Se quisermos construir os containers com um nome pré-definido, por exemplo: sirius 
+- Se quisermos construir os containers com um nome pré-definido no Compose Stack, por exemplo: sirius 
 - Esse nome (sirius) define o prefixo da stack usada para o nome da rede, volumes e containers
 - Por padrão, se você rodasse docker compose up -p sirius, isso padronizaria os nomes internos como:
   - ***_sirius_sqlserver_***
   - ***_sirius_apps_***
   - ***_sirius_net01_***
 - No nosso caso já definimos um nome do próprio arquivo do Docker Compose, logo, não iremos utilizar esse tipo de ação nesse projeto
-- Se executarmos sem o nome configurado no início e no próprio arquivo do Docker Compose, e também não definirmos no comando, então o nome será baseado no nome do diretório
+- Se executarmos sem o nome configurado no início e no próprio arquivo do Docker Compose, e também não definirmos no comando, então o nome será baseado no nome do diretório onde o comando foi executado
 
 ```
 docker compose -p sirius up --build -d
@@ -62,7 +62,7 @@ docker compose -p sirius up --build -d
 
 ---
 
-3. Comandos manuais para a reconstrução do container a partir da imagem e com o arquivo do Docker Compose
+3. Comandos manuais para a reconstrução dos containers a partir da imagem e arquivo do Docker Compose
 - Aguarde cerca de 5 minutos antes de acessar a app pela primeira vez (tempo para baixar o SLM na primeira execução)
 - Caso seja necessário reconstruir os containers, execute o comando abaixo, que desliga e reconstrói os serviços
 
@@ -76,6 +76,30 @@ docker-compose down && docker compose up --build -d
 docker-compose down && docker compose up -p sirius
 ```
 
+- Se quiser reconstruir a imagem de determinado serviço, podemos seguir com os steps e comandos abaixo
+- Esse comando reconstrói a imagem de um determinado serviço, sem precisar que seja feita em todas as imagens do Docker
+- Nesse exemplo, isso recompila a imagem apenas do serviço (app) com base no Dockerfile configurado no seu docker-compose.yml.
+```
+docker compose build <nome do serviço apontado dentro do docker compose>
+docker compose build sqlserver
+docker compose build app
+```
+- Se quiser reconstruir somente o container do serviço (app) com a nova imagem, podemos seguir com os steps e comandos abaixo
+- Vamos utilizar de exemplo o container do serviço (app) com a nova imagem
+- Se for utilizado o comando com (--build), então a imagem será reconstruída antes da ação
+- Se for utilizado sem o comando (--build), então a imagem não será reconstruída antes da ação
+- Essa versão não força rebuild, só reinicia com base na imagem atual. Útil para reinicializar sem alterar nada
+- Mas antes, uma explicação breve sobre o que os comandos querem dizer:
+  - ***_- d_***: executa em segundo plano (detached)
+  - ***_--no-deps_***: evita reiniciar serviços dependentes como sqlserver
+  - ***_--build_***: garante que a imagem seja reconstruída antes de subir
+- Isso garante que apenas o container do serviço (app) será parado, reconstruído e reiniciado
+```
+docker compose up -d --no-deps --build <nome do serviço apontado dentro do docker compose>
+docker compose up -d --no-deps --build app
+docker compose up -d --no-deps <nome do serviço apontado dentro do docker compose>
+docker compose up -d --no-deps app
+```
 ---
 
 4. Validar se os pacotes foram instalados corretamente e quais as suas versões
@@ -577,6 +601,10 @@ pip install pyodbc
 ```
 python3 -m pip install pyodbc --break-system-packages
 ```
+---
+
+
+
 ---
 - Execute o script de teste para ler dados do container (sqlserver) pelo container (apps)
 - Iremos aprender a criar um arquivo no container e executar esse script, para que seja possível ler os dados do (SQL Server) via o container (apps)
