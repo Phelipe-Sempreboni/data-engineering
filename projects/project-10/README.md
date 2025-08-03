@@ -14,7 +14,7 @@ Vamos de Sirius Hub Educação !
 
 #### Teremos a divisão dessa trilha em alguns tópicos de discussão e aprendizado, sendo:
    - Infraestrutura local para desenvolvimento, teste e homologação:
-      - 1. Explicação e instalação do Docker Desktop para containers - O que é Docker, Docker Registry, Docker Hub, padrão da imgem do Docker (linux)
+      - 1. Explicação e instalação do Docker Desktop para containers - O que é Docker, Dockerfile, Docker Compose, Docker Registry, Docker Hub, padrão da imgem do Docker (linux)
       - 2. Instalação do Visual Studio Code para códigos e integrações
       - 3. Instalação das extensões (docker, terraform, sql server, github actions, yam, wsl, txt syntax, entre outros) no Visual Studio Code
       - 4. Instalação do DBeaver para manipulação de bancos de dados

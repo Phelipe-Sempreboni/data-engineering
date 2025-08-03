@@ -764,6 +764,7 @@ print(row[0])
 - Execute o script (teste.py) para testar a leitura do banco de dados SQL Server, via o container do serviço (apps) utilizando o Python
 - Os comandos estão sequenciais para execução
 ```
+rm teste.py
 vim teste.py
 esc
 :set paste
@@ -788,14 +789,42 @@ cat teste.py
 python3 teste.py
 ```
 ---
-- Faremos a mesma etapa que foi realizada acima com o editor de texto chamado (nano), visando abrir mais o conhecimento nesse tema
+- Agora que já usamos o editor de texto (vim), veremos mais uma opção
+- Faremos o mesmo teste de conexão com o script python agora utilizando o editor de texto (nano)
+- Isso é para abrirmos um pouco mais o conhecimento e ter mais opções de ferramentas quando for necessário
+- Delete o script (teste.py)
+- Crie um arquivo chamado (teste.py) dentro dessa pasta chamada (apps) com o editor de texto (nano)
+- Para criar o arquivo, execute o primeiro comando, onde será aberta uma tela, que é o editor do (nano)
+- Copie o código do python e cole dentro do arquivo (teste.py)
+- Diferente do editor de texto (vim), o (nano) mantém as identações corretamente ao colar, e não bagunça como o (vim), sendo outra boa opção para esse tipo de atividade
+- Na sequência você irá apertar o comando (ctrl + o) e pressionar (enter), que é para salvar o arquivo você digitou
+- Pressionar o comando (enter) confirmar o nome do arquivo
+- Na sequência você irá apertar o comando (ctrl + x) para sair do editor
+- Na sequência você irá executar um comando e visualizar o arquivo que foi criado e seu conteúdo
+- Pronto, agora temos um script python criado
+- Execute o script (teste.py) para testar a leitura do banco de dados SQL Server, via o container do serviço (apps) utilizando o Python
+- Os comandos estão sequenciais para execução
 ```
-```
----
-- Execute o script de teste para ler dados do container (sqlserver) pelo container (apps)
-- Iremos aprender a criar um arquivo no container e executar esse script, para que seja possível ler os dados do (SQL Server) via o container (apps)
-- Essa é uma das maneiras também de testar se as portas, rede e comunicação estão funcionando entre os containers
-```
+rm teste.py
+nano teste.py
+import pyodbc
+conn = pyodbc.connect(
+    "DRIVER={ODBC Driver 17 for SQL Server};"
+    "SERVER=sqlserver,1433;"
+    "DATABASE=master;"
+    "UID=<usuario>;"
+    "PWD=<senha>"
+)
+cursor = conn.cursor()
+cursor.execute("SELECT @@VERSION")
+row = cursor.fetchone()
+print(row[0])
+ctrl + o
+enter
+ctrl + x
+cat teste.py
 python3 teste.py
 ```
+---
+- Essa é uma das maneiras também de testar se as portas, rede e comunicação estão funcionando entre os containers
 ---
