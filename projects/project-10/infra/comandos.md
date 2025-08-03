@@ -650,9 +650,142 @@ python3 teste.py
 - Resolver esse tipo de problema faz parte do dia a dia de quem trabalha com tecnologia
 - Entre na sua conta do ChatGPT da OpenAI
 - Vamos criar um prompt para tentar localizar o problema - prompts completos tendem a localizar o erro e resolve-lo mas rapidamente
-- Prompt:
+- Exemplo de prompt abaixo para utilizar no ChatGPT
+
+<div style="background:#0f172a;color:#e2e8f0;border-left:5px solid #38bdf8;padding:16px 20px;margin:24px 0;border-radius:8px;font-family:monospace;font-size:14px;line-height:1.6">
+💡 <strong>Prompt sugerido para troubleshooting:</strong><br>
+
+Estou tentando executar um script do python chamado <strong>(teste.py)</strong>, mas estou recebendo o erro abaixo e da imagem anexa nomeada como <strong>(script-python-erro-execucao.png)</strong>.<br>
+
+Estou deixando abaixo o conteúdo do script original <strong>(teste.py)</strong> e da imagem anexa nomeada como <strong>(script-python-original.png)</strong>.<br>
+
+Estou deixando abaixo o conteúdo do script como foi criado com o <strong>editor de texto (vim)</strong> e da imagem anexa nomeada como <strong>(script-python-criado-editor-vim.png)</strong>.<br>
+
+Preciso que investigue o erro ocorrido e auxilie a mapear uma solução para esse caso.<br>
+
+<strong>Erro recebi ao executar script:</strong><br>
+<pre style="background:#1e293b;padding:12px;border-radius:4px;color:#f8fafc;overflow:auto;">
+root@0785e314d161:/apps# python3 teste.py
+  File "/apps/teste.py", line 12   
+    row = cursor.fetchone()        
+IndentationError: unexpected indent
+root@0785e314d161:/apps# 
+</pre>
+
+<strong>Script (teste.py) original:</strong>
+<pre style="background:#1e293b;padding:12px;border-radius:4px;color:#f8fafc;overflow:auto;">
+import pyodbc
+
+conn = pyodbc.connect(
+    "DRIVER={ODBC Driver 17 for SQL Server};"
+    "SERVER=sqlserver,1433;"
+    "DATABASE=master;"
+    "UID=user001;" 
+    "PWD=SenhaForte@@*91" 
+)
+cursor = conn.cursor()
+cursor.execute("SELECT @@VERSION")
+row = cursor.fetchone()
+print(row[0])
+</pre>
+
+<strong>Script criado com o editor de texto (vim):</strong>
+<pre style="background:#1e293b;padding:12px;border-radius:4px;color:#f8fafc;overflow:auto;">
+import pyodbc
+
+conn = pyodbc.connect(
+            "DRIVER={ODBC Driver 17 for SQL Server};"        
+                "SERVER=sqlserver,1433;"
+                    "DATABASE=master;"
+                        "UID=user001;"
+                            "PWD=SenhaForte@@*91"
+                            )
+cursor = conn.cursor()
+cursor.execute("SELECT @@VERSION")
+               row = cursor.fetchone()
+               print(row[0])
+</pre>
+</div>
+
+---
+- Sabemos que esse erro é sobre identação e a forma como código perde essas posições ao ser copiado e colado no editor de texto (vim)
+- Apagar e recriar esse script, ou validar as linhas com espaços em branco, ou validar se a identação está incorreta, ou remover manualmente os espaços em branco e adequar a identação, talvez não seja a melhor alternativa, visto que, se recorrentemente você tiver que realizar esse processo, não seria uma opção interessante
+- Nesse caso, temos que buscar soluções que, ao copiar e colar o conteúdo de um script de um local para o outro, que ele mantenha seu valor original e funcional
+- Poderíamos simplesmente criar um (Bind Mount) no Docker, onde seria refletido qualquer arquivo que fosse criado na máquina local para o container, porém, estaríamos e nesse caso especifico, "fugindo" de buscar soluções, resolver o problema e aprender algo novo
+- Lembre-se que, em ambientes corporativos, pode ser que você não tenha a opção de criar um (Bind Mount) por questões de política da empresa, então terá que buscar outros meios de resolver o problema
+- Vamos continuar utilizando o ChatGPT para nos apoiar
+- Vamos construir mais um prompt e continuar utilizando o mesmo chat
+- Exemplo de prompt abaixo para utilizar no ChatGPT
+
+<div style="background:#0f172a;color:#e2e8f0;border-left:5px solid #38bdf8;padding:16px 20px;margin:24px 0;border-radius:8px;font-family:monospace;font-size:14px;line-height:1.6">
+💡 <strong>Prompt sugerido para troubleshooting:</strong><br>
+
+Quero copiar e colar o script original utilizando o editor de texto do (vim), mas quero que ele respeite a identação original, pois isso que está causando a falha de execução do script.<br>
+
+Preciso que mapeie uma solução que, quando o script for colado no editor de texto do (vim), seja respeitado essa identação.<br>
+
+Abaixo deixo o script original, junto da imagem anexa nomeada como (script-python-original.png).<br>
+
+<strong>Script original:</strong>
+<pre style="background:#1e293b;padding:12px;border-radius:4px;color:#f8fafc;overflow:auto;">
+import pyodbc
+
+conn = pyodbc.connect(
+    "DRIVER={ODBC Driver 17 for SQL Server};"
+    "SERVER=sqlserver,1433;"
+    "DATABASE=master;"
+    "UID=user001;" 
+    "PWD=SenhaForte@@*91" 
+)
+cursor = conn.cursor()
+cursor.execute("SELECT @@VERSION")
+row = cursor.fetchone()
+print(row[0])
+</pre>
+</div>
+
+---
 - Delete o script (teste.py)
+- Crie um arquivo chamado (teste.py) dentro dessa pasta chamada (apps) com o editor de texto (vim)
+- Para criar o arquivo, execute o primeiro comando, onde será aberta uma tela, que é o editor do (vim)
+- Você irá apertar e garantindo que está dentro do terminal, a tecla (esc), evitando que esteja em algum outro modo de execução do editor de texto
+- O vim tenta ser "inteligente" ao indentá-lo automaticamente ao digitar código, e quando você cola código pronto, ele pode quebrar a indentação, causar (IndentationError) ou até distorcer blocos.
+- A solução é desligar temporariamente o auto-indent, autoformat, linebreaks e outros ajustes automáticos do editor de texto
+- Essa ação é ideal para código Python ou YAML com indentação sensível
+- Você irá aplicar esse comando que desliga temporariamente o auto-indent, autoformat, linebreaks e outros ajustes automáticos
+- Você irá apertar e garantindo que está dentro do terminal, a letra (i), que irá ativar o modo de insert no editor de texto
+- Copie o código do python e cole dentro do arquivo (teste.py)
+- Você irá apertar e garantindo que está dentro do terminal, a tecla (esc), evitando que esteja em algum outro modo de execução do editor de texto
+- Você irá aplicar o comando que retorna as configurações automáticas do editor de texto (vim) ao modo normal
+- Na sequência você irá digitar o comando (:w) e aperta (enter), que é para - escrever o que você digitou
+- Na sequência você irá digitar o comando (:q) e aperta (enter), que é para salvar e sair do arquivo
+- Na sequência você irá executar um comando e visualizar o arquivo que foi criado e seu conteúdo
+- Pronto, agora temos um script python criado
+- Execute o script (teste.py) para testar a leitura do banco de dados SQL Server, via o container do serviço (apps) utilizando o Python
+- Os comandos estão sequenciais para execução
 ```
+vim teste.py
+esc
+:set paste
+i
+import pyodbc
+conn = pyodbc.connect(
+    "DRIVER={ODBC Driver 17 for SQL Server};"
+    "SERVER=sqlserver,1433;"
+    "DATABASE=master;"
+    "UID=<usuario>;"
+    "PWD=<senha>"
+)
+cursor = conn.cursor()
+cursor.execute("SELECT @@VERSION")
+row = cursor.fetchone()
+print(row[0])
+esc
+:set nopaste
+:w
+:q
+cat teste.py
+python3 teste.py
 ```
 ---
 - Faremos a mesma etapa que foi realizada acima com o editor de texto chamado (nano), visando abrir mais o conhecimento nesse tema
