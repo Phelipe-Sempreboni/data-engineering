@@ -12,17 +12,37 @@ Vamos de Sirius Hub Educação !
 
 ---
 
-#### Teremos a divisão dessa trilha em três quatro blocos, sendo:
-    - 1. Instalação do Docker Desktop para containers
-    - 2. Instalação do Visual Studio Code para códigos e integrações
-    - 3. Instalação das extensões (docker, terraform, sql server, github actions, yam, wsl, txt syntax, entre outros) no Visual Studio Code
-    - 4. Instalação do DBeaver para manipulação de bancos de dados
-    - 5. Instalação da interface do SQL Server - SQL Server Management Studio (SSMS)
-    - 6. Criação e navegação pelas contas da AWS e Github
-    - 7. Integração da conta Github com o Visual Studio Code
-    - 8. Ativação do Github Copilot gratuitamente no Github
-    - 9. Integração do Github Copilot no Visual Studio Code
-    - 10. Construção do ambiente local com Docker
+#### Teremos a divisão dessa trilha em alguns tópicos de discussão e aprendizado, sendo:
+   - Infraestrutura local para desenvolvimento, teste e homologação:
+      - 1. Explicação e instalação do Docker Desktop para containers - O que é Docker, Docker Registry, Docker Hub, padrão da imgem do Docker (linux)
+      - 2. Instalação do Visual Studio Code para códigos e integrações
+      - 3. Instalação das extensões (docker, terraform, sql server, github actions, yam, wsl, txt syntax, entre outros) no Visual Studio Code
+      - 4. Instalação do DBeaver para manipulação de bancos de dados
+      - 5. Instalação da interface do SQL Server - SQL Server Management Studio (SSMS)
+      - 6. Criação e navegação pelas contas da AWS, Github e ChatGPT da OpenAI
+      - 7. Integração da conta Github com o Visual Studio Code
+      - 8. Ativação do Github Copilot gratuitamente no Github
+      - 9. Integração do Github Copilot no Visual Studio Code
+      - 10. Construção do ambiente local com Docker
+      - 11. Explicação e utilização de imagens e registry - cuidados com imagens não oficiais do Docker Hub
+      - 12. Explicação e utilização de docker compose
+      - 13. Testes com as imagens por etapas - desde o mais simples até o mais avançado na construção
+      - 14. Testes com os docker composes por etapas - desde o mais simples até o mais avançado na construção
+      - 13. Troubleshooting (solução de problemas) com as imagens por etapas - desde o mais simples até o mais avançado na construção
+      - 14. Troubleshooting (solução de problemas) com os docker compose por etapas - desde o mais simples até o mais avançado na construção
+
+      - segurança
+         - usuários
+         - senhas
+         - variáveis e dados sensíveis
+         - registry do docker
+         - Docker Hub
+         - Imagens oficiais
+         - Imagens não oficiais
+      - boas práticas
+         - em ambientes - desenvolvimento, homologação e produção
+
+
     - 11. Construção e deploy do ambiente local com Docker para a Cloud na AWS
 
 ---
