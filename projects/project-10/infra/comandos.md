@@ -18,14 +18,7 @@
 - Navegue até o diretório onde está o arquivo do `Dockerfile`
 - Execute o comando abaixo para construir a imagem no Docker
 
-Antes, uma explicação breve sobre os parâmetros do comando:
-
-- ***_docker build_***: inicia o processo de construção da imagem
-- ***_-t apps-image:v1_***: define o nome e a tag da imagem, onde "apps-image" é o nome e "v1" representa a versão
-- ***_-f Dockerfile.app_***: especifica o arquivo Dockerfile com nome customizado. Se o nome fosse apenas `Dockerfile`, este parâmetro não seria necessário
-- ***_. (ponto)_***: define o contexto de build como o diretório atual, onde está o Dockerfile
-
-Outras observações:
+Observações:
 
 - O uso de extensões como `.app` em `Dockerfile.app` facilita a organização em projetos com múltiplos Dockerfiles
 - No nosso caso, mesmo com a estrutura de diretórios organizada, optamos por usar a extensão para fins didáticos
@@ -37,6 +30,15 @@ docker build -t apps-image:v1 -f Dockerfile.app .
 ```bash
 docker build -t apps-image:v1 .
 ```
+#
+📘 Explicação dos comandos e parâmetros
+| Comando                                  | Ação executada                                                                                                                 |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `docker build`                           | inicia o processo de construção da imagem                                                                                      |
+| `-t apps-image:v1`                       | define o nome e a tag da imagem, onde "apps-image" é o nome e "v1" representa a versão                                         |
+| `-f Dockerfile.app`                      | especifica o arquivo Dockerfile com nome customizado. Se o nome fosse apenas `Dockerfile`, este parâmetro não seria necessário |
+| `. (ponto)`                              | define o contexto de build como o diretório atual, onde está o Dockerfile                                                      |
+
 ---
 
 ### 🐳 2. Construção de Containers com Docker Compose (modo automatizado)
@@ -73,7 +75,7 @@ O parâmetro `-p` define o nome da stack usada como prefixo dos recursos criados
 docker compose -p sirius up --build -d
 ```
 #
-📊 Tabela de variações de comando
+📘 Variações de comando
 | Comando                                  | Ação executada                                        |
 | ---------------------------------------- | ----------------------------------------------------- |
 | `docker compose up -d`                   | Executa os containers em background (modo detached)   |
