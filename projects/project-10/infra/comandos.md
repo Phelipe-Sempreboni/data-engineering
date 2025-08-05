@@ -10,8 +10,9 @@
 
 ### 📦 1. Construção Manual da Imagem Docker (sem Docker Compose)
 
-\| Comandos para criar a imagem Docker a partir de um Dockerfile customizado (`Dockerfile.app`)  
-\| Inclui explicações sobre os parâmetros do comando `docker build`
+> [!NOTE]
+> Comandos para criar a imagem Docker a partir de um Dockerfile customizado (`Dockerfile.app`)  
+> Inclui explicações sobre os parâmetros do comando `docker build`
 
 - Abra o terminal de sua preferência: bash, prompt cmd ou via Visual Studio Code
 - Navegue até o diretório onde está o arquivo do `Dockerfile`
@@ -40,8 +41,9 @@ docker build -t apps-image:v1 .
 
 ### 🐳 2. Construção de Containers com Docker Compose (modo automatizado)
 
-\| Explica como executar containers com `docker compose up`, com ou sem nome customizado para o projeto  
-\| Inclui tabela comparativa com variações de comando e seus significados
+> [!NOTE]
+> Explica como executar containers com `docker compose up`, com ou sem nome customizado para o projeto  
+> Inclui tabela comparativa com variações de comando e seus significados
 
 - Abra o terminal de sua preferência: bash, prompt cmd ou Visual Studio Code
 - Navegue até a pasta onde está localizado o arquivo `docker-compose.yml`
@@ -54,6 +56,8 @@ Execute um dos comandos abaixo, conforme o caso:
 docker compose up --build -d
 docker compose -f <nome-docker-compose> up --build -d
 ```
+#
+
 ### 🔧 Utilizando nome customizado para o projeto (ex: sirius)
 
 O parâmetro `-p` define o nome da stack usada como prefixo dos recursos criados (rede, volumes, containers)
@@ -68,12 +72,17 @@ O parâmetro `-p` define o nome da stack usada como prefixo dos recursos criados
 ```bash
 docker compose -p sirius up --build -d
 ```
+#
+📊 Tabela de variações de comando
 | Comando                                  | Ação executada                                        |
 | ---------------------------------------- | ----------------------------------------------------- |
 | `docker compose up -d`                   | Executa os containers em background (modo detached)   |
 | `docker compose up --build -d`           | Reconstrói as imagens antes de iniciar os containers  |
 | `docker compose -p sirius up -d`         | Usa o nome de projeto `sirius` (prefixo nos recursos) |
 | `docker compose -p sirius up --build -d` | Reconstrói e executa com nome de projeto `sirius`     |
+
+
+#
 
 Glossário de parâmetros principais:
 - `--build`: força rebuild das imagens antes da execução
@@ -83,47 +92,79 @@ Glossário de parâmetros principais:
 
 ---
 
-### 🔄 3. Reconstrução de Containers com Docker Compose
+### 🔄 3. Reconstrução e Reinicialização de Containers com Docker Compose
 
-\| Instruções para desligar, reconstruir ou reiniciar containers e imagens, com explicações sobre --build, --no-deps, -d, entre outros
+> [!NOTE]
+> Instruções para desligar, reconstruir ou reiniciar containers e imagens, com explicações sobre `--build`, `--no-deps`, `-d`, entre outros parâmetros
 
-- Aguarde cerca de 5 minutos antes de acessar a app pela primeira vez para que haja do tempo do container iniciar os serviços
-- Caso seja necessário reconstruir os containers, execute o comando abaixo, que desliga e reconstrói os serviços
+#
 
-```
+#### 🕒 Tempo de inicialização
+Aguarde cerca de **5 minutos** antes de acessar a aplicação pela primeira vez, para garantir que todos os serviços dentro do container sejam inicializados corretamente.
+
+#
+
+#### 🔁 Reconstrução completa dos containers
+
+O comando abaixo **remove todos os containers existentes** e os **recria a partir da imagem atual**:
+
+```bash
 docker-compose down && docker compose up --build -d
 ```
+#
 
-- Se quisermos reconstruir os containers (Compose Stack) com um nome pré-definido, por exemplo: sirius
-- Notar que no arquivo (docker-compose) que estamos utilizando, já temos apontado dentro a variável (name:sirius), para criação do Compose Stack nomeado
+🧱 Reconstrução com stack nomeada (ex: sirius)
+- Se você estiver usando um nome de projeto definido no próprio arquivo `docker-compose.yml`, como:
+- Então não é necessário nomear a stack com esse nome, visto que será capturado do arquivo
+```yaml
+name: sirius
 ```
-docker-compose down && docker compose up -p sirius
+- Se não estiver usando um nome de projeto definido no próprio arquivo `docker-compose.yml`
+- Então você pode usar o comando abaixo para manter o mesmo nome em toda a stack (containers, rede, volumes):
+```baseh
+docker-compose down && docker compose up -p sirius --build -d
 ```
+#
 
-- Se quiser reconstruir a imagem de determinado serviço, podemos seguir com os steps e comandos abaixo
-- Esse comando reconstrói a imagem de um determinado serviço, sem precisar que seja feita em todas as imagens do Docker
-- Nesse exemplo, isso recompila a imagem apenas do serviço (app) com base no Dockerfile configurado no seu docker-compose.yml.
+🔨 Reconstruir a imagem de um único serviço
+- Se quiser recompilar apenas a imagem de um serviço específico (sem afetar os demais), use:
+```baseh
+docker compose build <nome-do-serviço>
 ```
-docker compose build <nome do serviço apontado dentro do docker compose>
-docker compose build sqlserver
+- Exemplos:
+```baseh
 docker compose build app
+docker compose build sqlserver
 ```
-- Se quiser reconstruir somente o container do serviço (app) com a nova imagem, podemos seguir com os steps e comandos abaixo
-- Vamos utilizar de exemplo o container do serviço (app) com a nova imagem
-- Se for utilizado o comando com (--build), então a imagem será reconstruída antes da ação
-- Se for utilizado sem o comando (--build), então a imagem não será reconstruída antes da ação
-- Essa versão não força rebuild, só reinicia com base na imagem atual. Útil para reinicializar sem alterar nada
-- Mas antes, uma explicação breve sobre o que os comandos querem dizer:
-  - ***_- d_***: executa em segundo plano (detached)
-  - ***_--no-deps_***: evita reiniciar serviços dependentes como sqlserver
-  - ***_--build_***: garante que a imagem seja reconstruída antes de subir
-- Isso garante que apenas o container do serviço (app) será parado, reconstruído e reiniciado
+#
+
+🔄 Reiniciar somente um serviço específico
+- Se quiser reiniciar apenas o container de um serviço, sem afetar os serviços dependentes:
+```baseh
+docker compose up -d --no-deps <nome-do-serviço>
 ```
-docker compose up -d --no-deps --build <nome do serviço apontado dentro do docker compose>
-docker compose up -d --no-deps --build app
-docker compose up -d --no-deps <nome do serviço apontado dentro do docker compose>
+#
+
+- Para forçar o rebuild da imagem antes de reiniciar:
+```baseh
+docker compose up -d --no-deps --build <nome-do-serviço>
+```
+Exemplos:
+```baseh
 docker compose up -d --no-deps app
+docker compose up -d --no-deps --build app
+docker compose up -d --no-deps sqlserver
+docker compose up -d --no-deps --build sqlserver
 ```
+#
+📘 Explicação dos parâmetros
+| Parâmetro   | Função                                                                 |
+| ----------- | ---------------------------------------------------------------------- |
+| `-d`        | Executa os containers em segundo plano (modo "detached")               |
+| `--no-deps` | Evita reiniciar containers dependentes (como `sqlserver`)              |
+| `--build`   | Garante que a imagem do serviço será reconstruída antes de subir       |
+| `-p <nome>` | Define um nome para o projeto (prefixo em redes, volumes e containers) |
+
 ---
 4. Criação de grupo de acesso
 
@@ -132,10 +173,7 @@ docker compose up -d --no-deps app
 5. Criação de usuários e vínculo com o grupo de acesso
 
 ---
-
-
-
-
+# REFAZER
 ---
 4. Validar se os pacotes foram instalados corretamente e quais as suas versões
 - Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
