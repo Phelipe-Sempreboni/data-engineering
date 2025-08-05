@@ -1,69 +1,93 @@
-### Comandos para utilizar durante o módulo
+## Módulo de construção da infraestrutura local com Docker
 
+#### Construção de containers com os serviços:
+  - Python
+  - AWS CLI
+  - Terraform
+  - SQL Server
+  - Apache Airflow
 ---
 
-1. Comandos manuais para a construção da imagem, ou seja, sem utilizar o docker compose - instalação do python, aws cli e terraform
-- Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
-- Navegue até o diretório criado e que está o arquivo do Dockerfile
-- Execute o comando abaixo para construção da imagem no Docker
-- Mas antes, uma explicação breve sobre o que os comandos querem dizer:
-  - ***_docker build_***: construir a imagem
-  - ***_-t apps-image_***: atribuí um nome (tag) para a imagem
-  - ***_Versão_***: v1 - define a versão atual do container e útil para identificar versões específicas
-  - ***_-f Dockerfile.app_***: especifica o nome do Dockerfile, onde poderia ser somente Dockerfile, mas usamos nome um customizado com (.app) no final, facilitando a identificação do arquivo
-  - ***_. (ponto no final do comando)_***:  Define o contexto de build como o diretório atual, ou seja, onde está o arquivo para construção da imagem no momento da execução do comando
-- Vale ressaltar que, se estivessemos utilizando o arquivo com o nome (Dockerfile), ou seja, sem a extensão (.app), não seria necessário utilizar a parte (-f Dockerfile.app), pois seria reconhecido automaticamente
-- O uso de extensões em um arquivo (Dockerfile) facilita a diferenciação em projetos, principalmente em casos que você tem múltiplos arquivos (Dockerfile) no mesmo repositório, pois facilitará a visualização e gerenciamento
-- O nosso caso já tem a estrutura de diretórios via pastas, mas estamos utilizando a extensão para te mostrar que também é possível seguir dessa maneira
+### 📦 1. Construção Manual da Imagem Docker (sem Docker Compose)
 
-```
+\| Comandos para criar a imagem Docker a partir de um Dockerfile customizado (`Dockerfile.app`)  
+\| Inclui explicações sobre os parâmetros do comando `docker build`
+
+- Abra o terminal de sua preferência: bash, prompt cmd ou via Visual Studio Code
+- Navegue até o diretório onde está o arquivo do `Dockerfile`
+- Execute o comando abaixo para construir a imagem no Docker
+
+Antes, uma explicação breve sobre os parâmetros do comando:
+
+- ***_docker build_***: inicia o processo de construção da imagem
+- ***_-t apps-image:v1_***: define o nome e a tag da imagem, onde "apps-image" é o nome e "v1" representa a versão
+- ***_-f Dockerfile.app_***: especifica o arquivo Dockerfile com nome customizado. Se o nome fosse apenas `Dockerfile`, este parâmetro não seria necessário
+- ***_. (ponto)_***: define o contexto de build como o diretório atual, onde está o Dockerfile
+
+Outras observações:
+
+- O uso de extensões como `.app` em `Dockerfile.app` facilita a organização em projetos com múltiplos Dockerfiles
+- No nosso caso, mesmo com a estrutura de diretórios organizada, optamos por usar a extensão para fins didáticos
+
+```bash
 docker build -t apps-image:v1 -f Dockerfile.app .
 ```
-- Se o arquivo (Dockerfile) não tivesse extensão
-```
+- Se o arquivo se chamasse apenas Dockerfile (sem extensão), o comando seria simplificado:
+```bash
 docker build -t apps-image:v1 .
 ```
-
 ---
 
-2. Comandos manuais para a construção do container a partir da imagem e com o arquivo do Docker Compose
-- Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
-- Navegue até a pasta com onde está o arquivo docker-compose.yml
-- Caso o arquivo (docker-compose.yaml) esteja nomeado dessa maneira, então não é necessário apontar o nome, visto que o Docker reconhece o comando automaticamente
-- Notar que se o arquivo não estiver nomeado com o padrão (docker-compose), então será necessário executar o comando que aponta para o nome
-- Execute o comando abaixo para construir e executar os serviços definidos no arquivo do Docker Compose
+### 🐳 2. Construção de Containers com Docker Compose (modo automatizado)
 
-```
+\| Explica como executar containers com `docker compose up`, com ou sem nome customizado para o projeto  
+\| Inclui tabela comparativa com variações de comando e seus significados
+
+- Abra o terminal de sua preferência: bash, prompt cmd ou Visual Studio Code
+- Navegue até a pasta onde está localizado o arquivo `docker-compose.yml`
+- Caso o arquivo esteja nomeado como `docker-compose.yaml` ou `docker-compose.yml`, **não é necessário utilizar a flag `-f`**
+- Caso esteja com outro nome (ex: `compose.dev.yaml`), será necessário informar o nome do arquivo explicitamente usando `-f`
+
+Execute um dos comandos abaixo, conforme o caso:
+
+```bash
 docker compose up --build -d
 docker compose -f <nome-docker-compose> up --build -d
 ```
+### 🔧 Utilizando nome customizado para o projeto (ex: sirius)
 
-- Se quisermos construir os containers com um nome pré-definido no Compose Stack, por exemplo: sirius 
-- Esse nome (sirius) define o prefixo da stack usada para o nome da rede, volumes e containers
-- Por padrão, se você rodasse docker compose up -p sirius, isso padronizaria os nomes internos como:
-  - ***_sirius_sqlserver_***
-  - ***_sirius_apps_***
-  - ***_sirius_net01_***
-- No nosso caso já definimos um nome do próprio arquivo do Docker Compose, logo, não iremos utilizar esse tipo de ação nesse projeto
-- Se executarmos sem o nome configurado no início e no próprio arquivo do Docker Compose, e também não definirmos no comando, então o nome será baseado no nome do diretório onde o comando foi executado
+O parâmetro `-p` define o nome da stack usada como prefixo dos recursos criados (rede, volumes, containers)
 
-```
+- Exemplo: `docker compose -p sirius up --build -d` resultará em nomes como:
+  - `sirius_sqlserver`
+  - `sirius_apps`
+  - `sirius_net01`
+
+- No nosso projeto, o nome da stack já está configurado dentro do arquivo docker-compose, por isso esse parâmetro é opcional neste caso
+- Se nenhum nome for definido, o nome da stack será baseado no nome do diretório onde o comando for executado
+```bash
 docker compose -p sirius up --build -d
 ```
+| Comando                                  | Ação executada                                        |
+| ---------------------------------------- | ----------------------------------------------------- |
+| `docker compose up -d`                   | Executa os containers em background (modo detached)   |
+| `docker compose up --build -d`           | Reconstrói as imagens antes de iniciar os containers  |
+| `docker compose -p sirius up -d`         | Usa o nome de projeto `sirius` (prefixo nos recursos) |
+| `docker compose -p sirius up --build -d` | Reconstrói e executa com nome de projeto `sirius`     |
 
-- Uma breve explicação sobe os comandos:
-
-| Comando                                  | O que faz                                            |
-| ---------------------------------------- | ---------------------------------------------------- |
-| `docker compose up -d`                   | Sobe os containers em segundo plano                  |
-| `docker compose up --build -d`           | Reconstrói as imagens antes de subir os containers   |
-| `docker compose -p sirius up -d`         | Usa o nome de projeto `sirius` (prefixando recursos) |
-| `docker compose -p sirius up --build -d` | Reconstrói e sobe, com nome do projeto `sirius`      |
+Glossário de parâmetros principais:
+- `--build`: força rebuild das imagens antes da execução
+- `-d`: executa em modo detached (segundo plano)
+- `-p`: define nome da stack (prefixo do projeto)
+- `-f`: permite especificar um arquivo docker-compose diferente do padrão
 
 ---
 
-3. Comandos manuais para a reconstrução dos containers a partir da imagem e arquivo do Docker Compose
-- Aguarde cerca de 5 minutos antes de acessar a app pela primeira vez (tempo para baixar o SLM na primeira execução)
+### 🔄 3. Reconstrução de Containers com Docker Compose
+
+\| Instruções para desligar, reconstruir ou reiniciar containers e imagens, com explicações sobre --build, --no-deps, -d, entre outros
+
+- Aguarde cerca de 5 minutos antes de acessar a app pela primeira vez para que haja do tempo do container iniciar os serviços
 - Caso seja necessário reconstruir os containers, execute o comando abaixo, que desliga e reconstrói os serviços
 
 ```
@@ -101,7 +125,18 @@ docker compose up -d --no-deps <nome do serviço apontado dentro do docker compo
 docker compose up -d --no-deps app
 ```
 ---
+4. Criação de grupo de acesso
 
+---
+
+5. Criação de usuários e vínculo com o grupo de acesso
+
+---
+
+
+
+
+---
 4. Validar se os pacotes foram instalados corretamente e quais as suas versões
 - Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
 - Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
