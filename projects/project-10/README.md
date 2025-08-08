@@ -41,6 +41,8 @@ Vamos de Sirius Hub Educação !
          - Imagens não oficiais
       - boas práticas
          - em ambientes - desenvolvimento, homologação e produção
+     - Criação de uma GitPage para a Sirius
+       - Em vez de criar o tutorial inteiro no README.md, criar em uma página do GitPages
 
 
     - 11. Construção e deploy do ambiente local com Docker para a Cloud na AWS
