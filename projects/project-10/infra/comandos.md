@@ -173,24 +173,36 @@ Paraisação e exclusão de container via linha de comando
 Notar que é possível realizar essas ações diretamente no Docker ou via extensões do Visual Studio Code
 
 Pare o container (se estiver em execução):
+```baseh
 docker stop <ID_ou_Nome_do_Container>
+```
 
 Remova o container:
+```baseh
 docker rm <ID_ou_Nome_do_Container>
+```
 
 Para remover um container em execução sem parar primeiro, use a opção -f (force):
+```baseh
 docker rm -f <ID_ou_Nome_do_Container>
+```
 
 Excluir múltiplos containers
 - Remover todos os containers parados - Use o comando prune para limpar todos os containers que não estão sendo usados:
+```baseh
 docker container prune
+```
 
 Remover todos os containers (parados e em execução):
 - Primeiro, pare todos os containers em execução:
+```baseh
 docker stop $(docker ps -q)
+```
 
 Em seguida, remova todos os containers:
+```baseh
 docker rm $(docker ps -a -q)
+```
 
 ---
 
