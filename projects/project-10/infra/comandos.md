@@ -168,6 +168,32 @@ docker compose up -d --no-deps --build sqlserver
 | `-p <nome>` | Define um nome para o projeto (prefixo em redes, volumes e containers) |
 
 ---
+
+Paraisação e exclusão de container via linha de comando 
+Notar que é possível realizar essas ações diretamente no Docker ou via extensões do Visual Studio Code
+
+Pare o container (se estiver em execução):
+docker stop <ID_ou_Nome_do_Container>
+
+Remova o container:
+docker rm <ID_ou_Nome_do_Container>
+
+Para remover um container em execução sem parar primeiro, use a opção -f (force):
+docker rm -f <ID_ou_Nome_do_Container>
+
+Excluir múltiplos containers
+- Remover todos os containers parados - Use o comando prune para limpar todos os containers que não estão sendo usados:
+docker container prune
+
+Remover todos os containers (parados e em execução):
+- Primeiro, pare todos os containers em execução:
+docker stop $(docker ps -q)
+
+Em seguida, remova todos os containers:
+docker rm $(docker ps -a -q)
+
+---
+
 4. Criação de grupo de acesso
 
 ---
