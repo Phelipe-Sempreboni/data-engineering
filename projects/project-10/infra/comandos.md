@@ -169,7 +169,7 @@ docker compose up -d --no-deps --build sqlserver
 
 ---
 
-Paraisação e exclusão de container via linha de comando 
+4. Paralisação e exclusão de container via linha de comando 
 Notar que é possível realizar essas ações diretamente no Docker ou via extensões do Visual Studio Code
 
 Pare o container (se estiver em execução):
@@ -206,11 +206,11 @@ docker rm $(docker ps -a -q)
 
 ---
 
-4. Criação de grupo de acesso
+5. Criação de grupo de acesso
 
 ---
 
-5. Criação de usuários e vínculo com o grupo de acesso
+6. Criação de usuários e vínculo com o grupo de acesso
 
 ---
 # REFAZER
