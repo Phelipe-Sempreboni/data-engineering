@@ -206,8 +206,177 @@ docker rm $(docker ps -a -q)
 
 ---
 
-5. Criação de usuários e grupos de acesso
+# 5. Usuários e Grupos de Acesso (Containers Isolados)
 
+:::note
+**Objetivo:** explicar como funcionam **UID/GID**, como **ver usuários e grupos** dentro de cada container e como **acessar** ou **elevar** permissões quando necessário — no **modo isolado** (sem volumes compartilhados).
+
+**Padrão adotado:**
+- **Apps**: usuário e grupo **criados no Dockerfile** (ex.: `app:app`, UID 20000, GID 20000) e fixados no Compose (`user: "20000:20000"`).
+- **Airflow**: usa o **usuário não-root nativo** da imagem oficial (`airflow`, UID 50000, GID 50000). Ajuste só via Compose se quiser explicitar (`user: "50000:50000"`).
+- **SQL Server**: usa o **usuário não-root nativo** (`mssql`, UID ~10001). Em geral não altera; se quiser, apenas explicite no Compose (`user: "10001:0"`).
+
+**Princípio:** **não manter** “usuário admin” permanente. Para tarefas administrativas, **elevação temporária** para `root` com `docker exec -u 0:0 …`.
+:::
+
+---
+
+## I) O que são **UID** e **GID**
+- **UID** (*User ID*): número inteiro que identifica **um usuário** para o kernel (ex.: `50000`).  
+- **GID** (*Group ID*): número inteiro que identifica **um grupo** (ex.: `50000`).  
+- Arquivos/pastas possuem permissões para **dono (UID)**, **grupo (GID)** e **outros**.  
+- Cada processo carrega **um UID** (dono do processo) e **GIDs** (primário + suplementares).  
+- Avaliação de acesso: **dono → grupo → outros** (nessa ordem).
+
+> No nosso cenário, cada container tem **seu próprio** usuário não-root com posse das pastas internas do serviço; **não há** compartilhamento entre containers.
+
+---
+
+## II) Listar **grupos** dentro de um container
+> Compatível com Debian/Alpine/BusyBox. Se houver `bash`, pode trocar `sh` por `bash`.
+
+**Genérico (substitua `<container>`):**
+```bash
+docker exec -it <container> sh -lc 'id; echo; echo "--- grupos (primeiros 20) ---"; head -n 20 /etc/group'
+```
+
+**Exemplos:**
+```bash
+docker exec -it apps               sh -lc 'id; echo; echo "--- grupos ---"; head -n 20 /etc/group'
+docker exec -it airflow-webserver  sh -lc 'id; echo; echo "--- grupos ---"; head -n 20 /etc/group'
+docker exec -it database           sh -lc 'id; echo; echo "--- grupos ---"; head -n 20 /etc/group'
+```
+
+---
+
+## III) Listar **usuários** dentro de um container
+**Genérico:**
+```bash
+docker exec -it <container> sh -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
+```
+
+**Exemplos:**
+```bash
+docker exec -it apps               sh -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
+docker exec -it airflow-webserver  sh -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
+docker exec -it database           sh -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
+```
+
+> Ver apenas um usuário específico:  
+> `docker exec -it <container> sh -lc 'getent passwd airflow || grep "^airflow:" /etc/passwd || true'`
+
+---
+
+## IV) Acessar o container com o **usuário do serviço** (não-root)
+**Entrar com o usuário padrão do processo:**
+```bash
+# Apps (usuário: app)
+docker exec -it apps sh
+
+# Airflow (usuário: airflow)
+docker exec -it airflow-webserver sh
+
+# SQL Server (usuário: mssql) — normalmente sem shell interativo útil
+docker exec -it database sh -lc 'id && whoami'
+```
+
+**Forçar UID:GID específico:**
+```bash
+# app:app (20000:20000)
+docker exec -u 20000:20000 -it apps sh
+
+# airflow:airflow (50000:50000)
+docker exec -u 50000:50000 -it airflow-webserver sh
+
+# mssql (~10001)
+docker exec -u 10001:0 -it database sh
+```
+
+> Dicas úteis dentro do container: `whoami`, `id -u`, `id -g`, `umask`, `pwd`, `ls -l`.
+
+---
+
+## V) Elevar permissões para **root** (temporariamente)
+> Boa prática: **sem** `sudo` na imagem. Use root só para a ação pontual.
+
+**Abrir um shell root temporário:**
+```bash
+docker exec -u 0:0 -it apps sh
+docker exec -u 0:0 -it airflow-webserver sh
+docker exec -u 0:0 -it database sh
+```
+
+**Executar UM comando como root (sem abrir shell):**
+```bash
+docker exec -u 0:0 apps               sh -lc 'mkdir -p /workspace/teste && ls -ld /workspace/teste'
+docker exec -u 0:0 airflow-webserver  sh -lc 'mkdir -p /opt/airflow/dags && ls -ld /opt/airflow/dags'
+docker exec -u 0:0 database           sh -lc 'ls -la /var/opt/mssql | head'
+```
+
+> Saia do root assim que terminar (`exit`). Mantenha o **processo principal** do serviço sempre **não-root**.
+
+---
+
+## (Opcional) Mapa de identidades recomendadas
+
+| Container  | Usuário   | UID   | GID   | Observações |
+|------------|-----------|------:|------:|-------------|
+| Apps       | `app`     | 20000 | 20000 | Criado no **Dockerfile** (dono de `/workspace`). |
+| Airflow    | `airflow` | 50000 | 50000 | Nativo da imagem oficial; pode apenas explicitar no **Compose**. |
+| SQL Server | `mssql`   | ~10001| 0     | Nativo da imagem oficial; **não** alterar na imagem. |
+
+---
+
+## (Opcional) Referências rápidas (trechos de configuração)
+
+**Dockerfile.app (resumo):**
+```dockerfile
+FROM python:3.11-slim
+ARG APPS_UID=20000 APPS_GID=20000
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates gnupg unzip \
+ && rm -rf /var/lib/apt/lists/*
+RUN groupadd -g ${APPS_GID} app \
+ && useradd -m -u ${APPS_UID} -g ${APPS_GID} -d /home/app -s /usr/sbin/nologin app
+RUN mkdir -p /workspace && chown -R ${APPS_UID}:${APPS_GID} /workspace && chmod 770 /workspace
+USER ${APPS_UID}:${APPS_GID}
+WORKDIR /workspace
+CMD ["sleep","infinity"]
+```
+
+**docker-compose.yml (resumo por serviço):**
+```yaml
+services:
+  apps:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+      args: { APPS_UID: 20000, APPS_GID: 20000 }
+    user: "20000:20000"
+    init: true
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+
+  airflow-webserver:
+    image: apache/airflow:2.9.3
+    user: "50000:50000"           # opcional; a imagem já traz airflow não-root
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW_UID: "50000"
+      AIRFLOW_GID: "50000"
+    init: true
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: "10001:0"               # opcional; a imagem já roda não-root
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong!Passw0rd
+    init: true
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+```
 ---
 6. Validar se os pacotes foram instalados corretamente e quais as suas versões
 - Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
