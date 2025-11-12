@@ -206,14 +206,8 @@ docker rm $(docker ps -a -q)
 
 ---
 
-5. Criação de grupo de acesso
+5. Criação de usuários e grupos de acesso
 
----
-
-6. Criação de usuários e vínculo com o grupo de acesso
-
----
-# REFAZER
 ---
 4. Validar se os pacotes foram instalados corretamente e quais as suas versões
 - Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
