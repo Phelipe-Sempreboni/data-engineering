@@ -383,7 +383,15 @@ services:
     build:
       context: C:/Users/pheli/Desktop/github/data-engineering/projects/project-10/infra/apps
       dockerfile: Dockerfile.app
-      #dockerfile: Dockerfile
+      args:
+        APPS_UID: 20000
+        APPS_GID: 20000
+    user: "20000:20000"   # garante não-root
+    init: true
+    read_only: false      # precisa escrever em /workspace
+    tmpfs: ["/tmp"]
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
     container_name: apps
     volumes:
       - platforms_data:/apps

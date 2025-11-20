@@ -5,6 +5,9 @@ FROM ubuntu:latest
 LABEL maintainer="Sirius Hub Educação"
 LABEL description="Imagem personalizada com Terraform + AWS CLI + Python"
 
+ARG APPS_UID=20000
+ARG APPS_GID=20000
+
 # Atualizar os pacotes do sistema e instalar dependências necessárias
 RUN apt-get update && apt-get upgrade -y
 
@@ -71,9 +74,22 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     apt-get update && \
     ACCEPT_EULA=Y apt-get install -y msodbcsql17
 
+# Cria grupo e usuário "app"
+RUN groupadd -g ${APPS_GID} app \
+ && useradd -m -u ${APPS_UID} -g ${APPS_GID} -d /home/app -s /usr/sbin/nologin app
+
+# Diretório de trabalho com posse do usuário
+RUN mkdir -p /workspace \
+ && chown -R ${APPS_UID}:${APPS_GID} /workspace \
+ && chmod 770 /workspace   # app tem RWX, outros bloqueados
+
+USER ${APPS_UID}:${APPS_GID}
+WORKDIR /workspace
+ENV UMASK=027
+
 # Criar a pasta como um ponto de montagem para um volume
 #RUN mkdir /projeto-dq
 #VOLUME /projeto-dq
 
 # Ponto de entrada padrão
-CMD ["tail", "-f", "/dev/null"]
+CMD ["tail", "-f", "/dev/null"] 
