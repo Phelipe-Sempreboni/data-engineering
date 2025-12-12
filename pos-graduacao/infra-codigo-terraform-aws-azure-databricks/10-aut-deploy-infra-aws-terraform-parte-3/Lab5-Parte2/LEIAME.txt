@@ -1,20 +1,18 @@
 # Instruções do Projeto 1
 
-
 # Abra o terminal ou prompt de comando e navegue até a pasta onde você colocou os arquivos do Lab5 (não use espaço ou acento em nome de pasta)
-
 
 # Execute o comando abaixo para criar a imagem Docker
 
 docker build -t dsa-terraform-image:lab5 .
 
-
 # Execute o comando abaixo para criar o container Docker
 
-docker run -dit --name dsa-lab5 -v ./IaC:/iac dsa-terraform-image:lab5 /bin/bash
+docker run -dit --name dsa-lab5 -v ./IaC:iac dsa-terraform-image:lab5 /bin/bash
+
+docker run -dit --name dsa-lab5 -v C:/Users/pheli/Desktop/github/data-engineering/pos-graduacao/infra-codigo-terraform-aws-azure-databricks/10-aut-deploy-infra-aws-terraform-parte-3/Lab5-Parte2/IaC:/iac dsa-terraform-image:lab5
 
 NOTA: No Windows você deve substituir ./IaC pelo caminho completo da pasta, por exemplo: C:\DSA\Cap10\IaC
-
 
 # Verifique as versões do Terraform e do AWS CLI com os comandos abaixo
 
