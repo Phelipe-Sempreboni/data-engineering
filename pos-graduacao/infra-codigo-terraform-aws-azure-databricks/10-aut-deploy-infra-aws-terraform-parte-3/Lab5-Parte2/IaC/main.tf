@@ -15,8 +15,8 @@ resource "aws_ecs_task_definition" "ecs-task" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.cpu    # Unidades de CPU para a tarefa
   memory                   = var.memory # Memória em MB para a tarefa
-  execution_role_arn       = "arn:aws:iam::890582101704:role/ecsTaskExecutionRole"
-  task_role_arn            = "arn:aws:iam::890582101704:role/ecsTaskExecutionRole"
+  execution_role_arn       = "arn:aws:iam::116489046801:role/ecsTaskExecutionRole"
+  task_role_arn            = "arn:aws:iam::116489046801:role/ecsTaskExecutionRole"
 
   container_definitions = jsonencode([
     {
