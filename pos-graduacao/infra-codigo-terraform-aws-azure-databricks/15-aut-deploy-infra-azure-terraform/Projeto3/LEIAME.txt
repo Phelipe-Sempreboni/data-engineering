@@ -10,6 +10,8 @@ docker build -t dsa-terraform-image:p3 .
 
 docker run -dit --name dsa-p3 -v ./IaC:/iac dsa-terraform-image:p3 /bin/bash
 
+docker run -dit --name dsa-p3 -v C:/Users/pheli/Desktop/github/data-engineering/pos-graduacao/infra-codigo-terraform-aws-azure-databricks/15-aut-deploy-infra-azure-terraform/IaC:/iac dsa-terraform-image:p3
+
 NOTA: No Windows você deve substituir ./IaC pelo caminho completo da pasta, por exemplo: C:\DSA\Cap15\IaC
 
 # Verifique a versão do Terraform
