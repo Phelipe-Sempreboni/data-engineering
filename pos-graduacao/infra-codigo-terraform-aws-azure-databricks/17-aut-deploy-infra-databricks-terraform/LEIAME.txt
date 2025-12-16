@@ -1,0 +1,35 @@
+# Instruções do Projeto 5
+
+
+# Abra o terminal ou prompt de comando e navegue até a pasta onde você colocou os arquivos do projeto (não use espaço ou acento em nome de pasta)
+
+
+# Execute o comando abaixo para criar a imagem Docker
+
+docker build -t dsa-terraform-image:p5 .
+
+
+# Execute o comando abaixo para criar o container Docker
+
+docker run -dit --name dsa-p5 -v ./IaC:/iac dsa-terraform-image:p5 /bin/bash
+
+NOTA: No Windows você deve substituir ./IaC pelo caminho completo da pasta, por exemplo: C:\DSA\Cap17\IaC
+
+
+# Verifique a versão do Terraform
+
+terraform version
+
+
+# Execute as instruções abaixo dentro do container Docker!!!
+
+
+# Instalação do Databricks CLI
+
+curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+
+
+# Configurar a autenticação:
+
+databricks configure --token
+
