@@ -1,0 +1,65 @@
+# Instruções do Projeto 3
+
+
+# Abra o terminal ou prompt de comando e navegue até a pasta onde você colocou os arquivos do projeto (não use espaço ou acento em nome de pasta)
+
+
+# Execute o comando abaixo para criar a imagem Docker
+
+docker build -t dsa-terraform-image:p3 .
+
+
+# Execute o comando abaixo para criar o container Docker
+
+docker run -dit --name dsa-p3 -v ./IaC:/iac dsa-terraform-image:p3 /bin/bash
+
+NOTA: No Windows você deve substituir ./IaC pelo caminho completo da pasta, por exemplo: C:\DSA\Cap15\IaC
+
+
+# Verifique a versão do Terraform
+
+terraform version
+
+
+# Execute as instruções abaixo dentro do container Docker!!!
+
+
+# Instale o Azure CLI
+# Referência: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
+
+
+# Baixe e instale a ferramenta de linha de comando do Azure CLI
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+
+# Atualize a versão do Azure CLI (se necessário)
+az upgrade
+
+
+# Efetue login no Azure
+az login
+
+
+# Deploy
+
+terraform init
+
+terraform validate
+
+terraform plan -out dsa.tfplan
+
+terraform graph
+
+# http://webgraphviz.com/
+
+terraform apply dsa.tfplan
+
+terraform destroy
+
+
+
+
+
+
+
+

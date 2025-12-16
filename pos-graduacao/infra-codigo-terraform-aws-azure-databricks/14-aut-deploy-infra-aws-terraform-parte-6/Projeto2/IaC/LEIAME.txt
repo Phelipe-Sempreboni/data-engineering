@@ -1,0 +1,16 @@
+# Instruções do Projeto 2
+
+# Edite os arquivos config.tf e terraform.tfvars, e coloque seu ID da AWS onde indicado.
+
+# No script projeto2.py adicione seu ID da AWS e suas chaves AWS onde indicado.
+
+# Crie manualmente o bucket S3 chamado: dsa-p2-terraform-<id-aws>  (substitua <id-aws> pelo seu ID da AWS)
+
+# Execute:
+
+terraform init
+terraform apply
+
+# Acompanhe a execução do pipeline pela interface da AWS como mostrado nas aulas.
+
+# Fim!

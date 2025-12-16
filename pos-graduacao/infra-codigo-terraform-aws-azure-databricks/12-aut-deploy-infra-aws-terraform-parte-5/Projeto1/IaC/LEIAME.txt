@@ -1,0 +1,62 @@
+# Projeto 1 - Provisionando Infraestrutura de Processamento de Dados com AWS EMR e Apache Flink
+
+# Crie um bucket no S3 chamado dsa-p1-<account-id> e configure no arquivo emr.tf
+
+# Inicializa o Terraform
+terraform init
+
+# Cria o Plan e salva em disco
+terraform plan -var-file config.tfvars -out terraform.tfplan
+
+# Executa o apply com o arquivo de variáveis (com auto-approve)
+terraform apply -auto-approve -var-file config.tfvars
+
+# Executa o apply com o arquivo de variáveis (sem auto-approve)
+terraform apply -var-file config.tfvars
+
+# Conexão via SSH ao master do cluster
+# No container Docker navegue até a pasta onde estão as chaves criadas no deploy do cluster
+
+# Ajusta o privilégio da chave privada
+chmod 400 deployer
+
+# Conecta via SSH (coloque abaixo o endereço do seu cluster)
+ssh -i deployer hadoop@ec2-3-14-29-59.us-east-2.compute.amazonaws.com
+
+# Crie uma pasta como input no HDFS
+hdfs dfs -mkdir /user/root/input
+
+# Copie o arquivo de dados para o servidor como mostrado nas aulas
+
+# Copie o arquivo para o HDFS
+hdfs dfs -put dados.txt /user/root/input
+
+# Vamos contar o número de ocorrências de cada palavra no arquivo usando Apache Flink
+flink run -m yarn-cluster /usr/lib/flink/examples/streaming/WordCount.jar --input hdfs:///user/root/input/dados.txt --output hdfs:///user/root/saida/
+
+# Copie o arquivo do HDFS para o sistema de arquivos local
+hdfs dfs -get nome-arquivo-no-HDFS
+
+# Os comandos abaixo devem ser executados no container Docker (máquina cliente)
+# Coloque o ID do seu cluster EMR
+
+aws emr add-steps --cluster-id j-32R8POOJ1HIMA \
+--steps Type=CUSTOM_JAR,Name=Job1_P1,Jar=command-runner.jar,\
+Args="flink","run","-m","yarn-cluster",\
+"/usr/lib/flink/examples/streaming/WordCount.jar",\
+"--input","hdfs:///user/root/input/dados.txt","--output","hdfs:///user/root/saidajob1/" \
+--region us-east-2
+
+aws emr add-steps --cluster-id j-32R8POOJ1HIMA \
+--steps Type=CUSTOM_JAR,Name=Job2_P1,Jar=command-runner.jar,\
+Args="flink","run","-m","yarn-cluster",\
+"/usr/lib/flink/examples/streaming/WordCount.jar",\
+"--input","s3://dsa-p1-<account-id>/dados.txt","--output","s3://dsa-p1-<account-id>/" \
+--region us-east-2
+
+# Cria o Plan para o destroy e salva em disco
+terraform plan -destroy -var-file config.tfvars -out terraform.tfplan
+
+# Executa o destroy
+terraform apply terraform.tfplan
+
