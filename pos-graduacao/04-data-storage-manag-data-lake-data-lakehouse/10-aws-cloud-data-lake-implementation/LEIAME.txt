@@ -1,0 +1,22 @@
+# Instruções do Lab 3 - Design e Implementação de Data Lake na Nuvem com IaC e Terraform
+
+
+# Abra o terminal ou prompt de comando e navegue até a pasta onde você colocou os arquivos do Lab (não use espaço ou acento em nome de pasta)
+
+
+# Execute o comando abaixo para criar a imagem Docker
+
+docker build -t dsa-image-terraform-aws:lab3 .
+
+
+# Execute o comando abaixo para criar o container Docker
+
+docker run -dit --name dsa-lab3-data-lake -v ./IaC:/iac dsa-image-terraform-aws:lab3 /bin/bash
+
+NOTA: No Windows você deve substituir ./IaC pelo caminho completo da pasta, por exemplo: C:\DSA\Cap10\IaC
+
+
+# Verifique as versões do Terraform e do AWS CLI com os comandos abaixo
+
+terraform version
+aws --version

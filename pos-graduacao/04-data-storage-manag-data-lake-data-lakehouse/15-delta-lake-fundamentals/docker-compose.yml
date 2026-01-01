@@ -1,0 +1,11 @@
+# Lab 6 - Operações CRUD e Time Travel com Delta Lake
+
+services:
+  spark:
+    build: .
+    container_name: delta-lake-dsa-lab6
+    volumes:
+      - ./dsa:/repositorio
+    ports:
+      - "8888:8888"
+    command: ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''"]

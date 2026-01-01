@@ -1,0 +1,49 @@
+# Construindo e Carregando o Banco de Dados Local Como Origem dos Dados
+
+# Instale o pgAdmin, crie a conexão para o banco de dados e execute as instruções SQL abaixo
+
+https://www.pgadmin.org
+
+-- Cria o schema
+CREATE SCHEMA dbadmin AUTHORIZATION dbadmin;
+
+-- Cria a tabela de clientes
+CREATE TABLE dbadmin.dsa_clientes (
+    cliente_id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    telefone VARCHAR(15),
+    cidade VARCHAR(50),
+    estado VARCHAR(2),
+    data_cadastro DATE DEFAULT CURRENT_DATE
+);
+
+-- Cria a tabela de vendas
+CREATE TABLE dbadmin.dsa_vendas (
+    venda_id SERIAL PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    data_venda DATE NOT NULL,
+    valor_total NUMERIC(10, 2) NOT NULL,
+    produto VARCHAR(100),
+    quantidade INT NOT NULL,
+    FOREIGN KEY (cliente_id) REFERENCES dbadmin.dsa_clientes(cliente_id)
+);
+
+-- Carrega a tabela de clientes
+INSERT INTO dbadmin.dsa_clientes (nome, email, telefone, cidade, estado)
+VALUES 
+    ('Bob Silva', 'joao.silva@dsateste.com', '11999999999', 'Fortaleza', 'CE'),
+    ('Maria Oliveira', 'maria.oliveira@dsateste.com', '21988888888', 'Rio de Janeiro', 'RJ'),
+    ('Carlos Santos', 'carlos.santos@dsateste.com', '31977777777', 'Belo Horizonte', 'MG'),
+    ('Ana Costa', 'ana.costa@dsateste.com', '41966666666', 'Curitiba', 'PR'),
+    ('Paula Souza', 'paula.souza@dsateste.com', '51955555555', 'Porto Alegre', 'RS');
+
+-- Carrega a tabela de vendas
+INSERT INTO dbadmin.dsa_vendas (cliente_id, data_venda, valor_total, produto, quantidade)
+VALUES 
+    (1, '2024-11-20', 150.00, 'Smartphone', 1),
+    (1, '2024-11-21', 300.00, 'Notebook', 1),
+    (2, '2024-11-20', 50.00, 'Livro', 2),
+    (3, '2024-11-19', 200.00, 'Monitor', 1),
+    (4, '2024-11-18', 80.00, 'Teclado', 2),
+    (5, '2024-11-20', 120.00, 'Mouse', 4);

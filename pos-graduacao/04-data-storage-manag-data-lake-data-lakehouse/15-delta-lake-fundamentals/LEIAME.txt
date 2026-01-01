@@ -1,0 +1,7 @@
+# Lab 6 - Operações CRUD e Time Travel com Delta Lake
+
+# Abra o terminal ou prompt de comando, navegue até a pasta onde estão os arquivos e execute:
+
+docker-compose up -d
+
+# Acesse o Jupyter Notebook pelo navegador e acompanhe as instruções das aulas.

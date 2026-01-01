@@ -1,0 +1,19 @@
+# Lab 2 - Design e Implementação de Data Lake Local Para Armazenamento e Processamento Distribuído
+
+# Inicializar o cluster
+docker-compose -f docker-compose.yml up -d --scale dsa-data-lake-worker=3
+
+# Visualizar os logs
+docker-compose logs
+
+# Testar o cluster
+docker exec dsamaster spark-submit --master yarn --deploy-mode cluster ./examples/src/main/python/pi.py
+
+# Derrubar o cluster
+docker-compose down --volumes --remove-orphans
+
+# Spark Master
+http://localhost:9091
+
+# History Server
+http://localhost:18081

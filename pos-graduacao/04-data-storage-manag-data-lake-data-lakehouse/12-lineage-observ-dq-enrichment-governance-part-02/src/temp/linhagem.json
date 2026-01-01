@@ -1,0 +1,7 @@
+{
+    "timestamp": "2024-11-13T00:04:10.756601",
+    "arquivo_origem": "raw-data/dados_brutos.csv",
+    "hash_origem": "72b2b39359248df2f5bc22f89915accf91a0de0c8cddd932e74e280a7602fb23",
+    "transformacoes_aplicadas": "Nenhuma - dados brutos carregados",
+    "arquivo_destino": "processed-data/dados_brutos.csv"
+}

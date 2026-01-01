@@ -1,0 +1,13 @@
+# Comandos que devem ser executados no terminal ou prompt de comando:
+
+# Obter os dados do Cluster 
+
+docker exec dsamaster hdfs dfs -ls /opt/spark/data
+
+docker exec dsamaster hdfs dfs -mkdir /opt/spark/data/teste
+
+docker exec dsamaster hdfs dfs -ls /opt/spark/data
+
+# Treinar o modelo e salvar a métrica AUC
+
+docker exec dsamaster spark-submit --master yarn --deploy-mode cluster ./apps/job.py

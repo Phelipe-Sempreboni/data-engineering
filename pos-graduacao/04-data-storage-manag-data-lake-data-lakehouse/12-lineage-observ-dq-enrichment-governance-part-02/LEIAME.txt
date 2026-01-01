@@ -1,0 +1,21 @@
+# Instruções do Lab 4 - Linhagem, Observabilidade, Qualidade, Enriquecimento e Governança de Dados no Data Lake
+
+# Abra o terminal ou prompt de comando, navegue até a pasta raiz do Lab e execute o comando abaixo para criar a imagem Docker:
+
+docker build -t image_dsa_lab4 .
+
+# Execute o comando abaixo para criar o container:
+
+docker run -dit --name dsa_lab4 -v ./src:/dsalab4 image_dsa_lab4
+
+# Dentro do container, configure as credenciais da AWS:
+
+aws configure
+
+# Execute o comando abaixo para alterar a permissão do arquivo e torná-lo executável:
+
+chmod +x dsa_executa_lab4.sh
+
+# Execute o script de automação:
+
+./dsa_executa_lab4.sh

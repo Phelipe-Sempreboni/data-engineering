@@ -1,0 +1,109 @@
+# Configuração para usar o catálogo e o schema correto
+spark.sql("USE CATALOG dsa_work_env")
+spark.sql("USE dbadmin")
+
+# Listar todas as tabelas no schema dbadmin (usando SQL)
+SHOW TABLES;
+
+# Exemplo de execução em Python
+tables = spark.sql("SHOW TABLES").toPandas()
+display(tables)
+
+# Visualizar as primeiras linhas da tabela
+SELECT * FROM dsa_clientes LIMIT 10;
+
+# Visualizar as primeiras linhas da tabela
+SELECT * FROM dsa_vendas LIMIT 10;
+
+# Carregar a tabela no PySpark DataFrame
+dados_clientes = spark.table("dsa_clientes")
+display(dados_clientes)
+
+# Carregar a tabela no PySpark DataFrame
+dados_vendas = spark.table("dsa_vendas")
+display(dados_vendas)
+
+# Estatísticas descritivas
+SELECT 
+    COUNT(*) AS numero_transacoes,
+    AVG(valor_total) AS media_vendas,
+    MAX(valor_total) AS max_vendas,
+    MIN(valor_total) AS min_vendas
+FROM dsa_vendas;
+
+# Estatísticas descritivas com PySpark
+dados_vendas.describe(["valor_total"]).show()
+
+# Total de vendas por produto (SQL)
+SELECT 
+    produto,
+    SUM(valor_total) AS total_sales
+FROM dsa_vendas
+GROUP BY produto
+ORDER BY total_sales DESC;
+
+# Total de vendas por produto (PySpark)
+vendas_por_produto = dados_vendas.groupBy("produto").sum("valor_total")
+vendas_por_produto = vendas_por_produto.orderBy("sum(valor_total)", ascending=False)
+display(vendas_por_produto)
+
+# Importa o pacote para criação de gráficos
+import matplotlib.pyplot as plt
+
+# Converte para Pandas a fim de facilitar a visualização
+df_dsa_vendas = vendas_por_produto.toPandas()
+
+# Plot do gráfico
+plt.figure(figsize=(10, 6))
+plt.bar(df_dsa_vendas['produto'], df_dsa_vendas['sum(valor_total)'])
+plt.xlabel("Produto")
+plt.ylabel("Total de Vendas")
+plt.title("Vendas por Produto")
+plt.xticks(rotation=45)
+plt.show()
+
+# Top 5 produtos com maior receita com total acima de 130 (usando SQL)
+SELECT 
+    produto,
+    SUM(valor_total) AS faturamento
+FROM dsa_vendas
+GROUP BY produto
+HAVING SUM(valor_total) > 130
+ORDER BY faturamento DESC;
+
+# Top 5 produtos com maior receita com total acima de 130 (usando PySpark)
+from pyspark.sql.functions import col, sum
+resultado = (
+    dados_vendas
+    .groupBy("produto")  
+    .agg(sum("valor_total").alias("faturamento"))  
+    .filter(col("faturamento") > 130)  
+    .orderBy(col("faturamento").desc())  
+)
+display(resultado)
+
+# Ajusta o tipo da coluna para float
+dados_vendas = dados_vendas.withColumn("valor_total", col("valor_total").cast("float"))
+
+# Top 5 produtos com maior receita com total acima de 130 (usando PySpark)
+resultado = (
+    dados_vendas
+    .groupBy("produto")  # Agrupa pelo campo 'produto'
+    .agg(sum("valor_total").alias("faturamento"))  # Soma os valores e renomeia a coluna para 'faturamento'
+    .filter(col("faturamento") > 130)  # Filtra os produtos com faturamento maior que 130
+    .orderBy(col("faturamento").desc())  # Ordena pelo faturamento em ordem decrescente
+)
+display(resultado)
+
+# Salvar os resultados no catálogo dsa_work_env no schema dbadmin
+resultado.write.mode("overwrite").saveAsTable("dbadmin.dsa_vendas_por_produto")
+
+# Excluir tabela temporária
+DROP TABLE IF EXISTS dbadmin.resultado;
+
+
+
+
+
+
+

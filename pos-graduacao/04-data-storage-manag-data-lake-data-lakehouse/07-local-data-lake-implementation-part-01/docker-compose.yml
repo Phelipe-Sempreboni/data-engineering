@@ -1,0 +1,49 @@
+name: dsa-data-lake
+
+services:
+  dsa-data-lake-master:
+    container_name: dsamaster
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: dsa-data-lake-image
+    entrypoint: ['./entrypoint.sh', 'master']
+    volumes:
+      - ./dados:/opt/spark/data
+      - ./jobs:/opt/spark/apps
+      - data-lake-logs:/opt/spark/data-lake-events
+    env_file:
+      - .env.data-lake
+    ports:
+      - '9091:8080'
+      - '9871:9870'
+      - '7071:7077'
+      - '8081:8088'
+
+  dsa-data-lake-history-server:
+    container_name: dsahistoryserver
+    image: dsa-data-lake-image
+    entrypoint: ['./entrypoint.sh', 'history']
+    depends_on:
+      - dsa-data-lake-master
+    env_file:
+      - .env.data-lake
+    volumes:
+      - data-lake-logs:/opt/spark/data-lake-events
+    ports:
+      - '18081:18080'
+
+  dsa-data-lake-worker:
+    image: dsa-data-lake-image
+    entrypoint: ['./entrypoint.sh', 'worker']
+    depends_on:
+      - dsa-data-lake-master
+    env_file:
+      - .env.data-lake
+    volumes:
+      - ./dados:/opt/spark/data
+      - ./jobs:/opt/spark/apps
+      - data-lake-logs:/opt/spark/data-lake-events
+
+volumes:
+  data-lake-logs:

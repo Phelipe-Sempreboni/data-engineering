@@ -1,0 +1,11 @@
+codigo_tipo,desc_tipo
+D001,Cliente Novo
+D002,Cliente Regular
+D003,Cliente VIP
+D004,Cliente Retornando
+D005,Cliente Fiel
+D006,Cliente Que Requer Muito Suporte
+D007,Cliente de Ticket Alto
+D008,Cliente de Ticket Mediano
+D009,Cliente de Ticket Baixo
+D010,Comprador Ocasional

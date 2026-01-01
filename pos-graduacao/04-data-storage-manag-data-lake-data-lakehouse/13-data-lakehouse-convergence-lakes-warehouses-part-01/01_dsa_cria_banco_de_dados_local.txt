@@ -1,0 +1,7 @@
+# Ambiente do Banco de Dados Local
+
+# Instale o Docker Desktop no seu computador.
+
+# Execute o comando abaixo no terminal ou prompt de comando para baixar a imagem e criar o container:
+
+docker run --name db-dsa-fonte -p 5435:5432 -e POSTGRES_USER=dbadmin -e POSTGRES_PASSWORD=dbadmin123 -e POSTGRES_DB=postgresDSADB -d postgres

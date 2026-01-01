@@ -1,0 +1,61 @@
+{
+    "total_linhas": 7,
+    "colunas": [
+        "id",
+        "nome",
+        "idade",
+        "salario"
+    ],
+    "colunas_nulas": {
+        "id": 1,
+        "nome": 1,
+        "idade": 2,
+        "salario": 1
+    },
+    "tipos_dados": {
+        "id": "float64",
+        "nome": "object",
+        "idade": "float64",
+        "salario": "float64"
+    },
+    "estatisticas_quantitativas": {
+        "id": {
+            "count": 6.0,
+            "mean": 3.6666666666666665,
+            "std": 2.160246899469287,
+            "min": 1.0,
+            "25%": 2.25,
+            "50%": 3.5,
+            "75%": 4.75,
+            "max": 7.0
+        },
+        "idade": {
+            "count": 5.0,
+            "mean": 25.6,
+            "std": 18.35211159512714,
+            "min": -5.0,
+            "25%": 25.0,
+            "50%": 29.0,
+            "75%": 37.0,
+            "max": 42.0
+        },
+        "salario": {
+            "count": 6.0,
+            "mean": 75000.0,
+            "std": 18708.286933869706,
+            "min": 50000.0,
+            "25%": 62500.0,
+            "50%": 75000.0,
+            "75%": 87500.0,
+            "max": 100000.0
+        }
+    },
+    "estatisticas_categoricas": {
+        "nome": {
+            "total": 6,
+            "valores_unicos": 6,
+            "valor_mais_frequente": "Alice",
+            "frequencia_do_valor_mais_frequente": 1
+        }
+    }
+}
