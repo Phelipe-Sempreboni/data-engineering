@@ -1,0 +1,32 @@
+# Lab 2 - Usando o ChatGPT Para Construir Um Modelo Dimensional de Forma Segura
+
+# Cenário de Negócio
+
+A loja de roupas "DSA Fashion" opera tanto em lojas físicas quanto em um portal de vendas online. Eles oferecem uma variedade de produtos, incluindo roupas masculinas, femininas, infantis, além de acessórios. 
+
+A empresa deseja analisar as vendas online para tomar decisões estratégicas, como identificar tendências de compra, avaliar o desempenho de diferentes categorias de produtos e otimizar as estratégias de marketing.
+
+Objetivos Analíticos:
+
+- Avaliar o desempenho das vendas ao longo do tempo (diário, mensal, anual).
+- Analisar as vendas por categoria de produto e subcategoria.
+- Identificar os produtos mais vendidos e menos vendidos.
+- Analisar o comportamento do cliente, como frequência de compra e valor médio do pedido.
+- Avaliar o impacto de campanhas promocionais nas vendas.
+- Identificar padrões geográficos nas vendas online.
+
+Dados Que Estão Disponíveis:
+
+- Informações de pedidos: data do pedido, valor total, status do pedido, descontos aplicados.
+- Detalhes do cliente: identificação do cliente, localização, histórico de compras.
+- Detalhes do produto: identificação do produto, categoria, subcategoria, preço.
+- Informações de envio: custo de envio, prazo de entrega, método de envio.
+- Dados de campanhas promocionais: período da campanha, desconto oferecido, produtos incluídos.
+
+
+# Para o ChatGPT:
+
+A partir do cenário abaixo, crie o modelo conceitual descrevendo entidades, atributos e relacionamentos.
+A partir do cenário abaixo, crie o modelo dimensional descrevendo tabela fato e tabelas de dimensão em um modelo star schema.
+Agora crie o modelo lógico considerando tipos de dados e chaves primária e estrangeira.
+Agora crie o modelo físico para implementação no PostgreSQL.

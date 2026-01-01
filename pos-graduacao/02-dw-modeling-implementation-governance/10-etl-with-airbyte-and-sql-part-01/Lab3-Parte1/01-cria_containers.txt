@@ -1,0 +1,11 @@
+# Execute os comandos abaixo para criar os containers dos bancos de dados
+
+# Container para a fonte (banco de dados transacional):
+
+docker run --name dbdsafonte -p 5252:5432 -e POSTGRES_USER=dbadmin -e POSTGRES_PASSWORD=dbadmin123 -e POSTGRES_DB=dbDSAFonte -d postgres:16.1
+
+
+# Container para o destino (DW) e para a staging area:
+
+docker run --name dbdsadestino -p 5253:5432 -e POSTGRES_USER=dbadmin -e POSTGRES_PASSWORD=dbadmin123 -e POSTGRES_DB=dbDSADestino -d postgres:16.1
+

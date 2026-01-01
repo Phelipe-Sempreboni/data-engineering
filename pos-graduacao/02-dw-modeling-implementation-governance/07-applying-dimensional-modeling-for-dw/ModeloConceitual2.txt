@@ -1,0 +1,70 @@
+# Modelo Conceitual Refinado Por Ser Humano
+
+##### Entidades #####
+
+- Clientes
+- Produtos
+- Promoção
+- Entrega
+- Tempo
+- Vendas
+
+##### Atributos #####
+
+- Cliente
+
+ID_Cliente (Chave Primária): Identificador único para cada cliente.
+Localizacao: Localização do cliente.
+
+- Produto
+
+ID_Produto (Chave Primária): Identificador único para cada produto.
+Categoria: Categoria do produto (ou seja: masculino, feminino, infantil).
+Subcategoria: Subcategoria do produto (ou seja: camisetas, calças).
+Preco: Preço unitário do produto.
+
+- Promoção
+
+ID_Promocao (Chave Primária): Identificador único para cada campanha promocional.
+Periodo_Campanha: Duração da campanha promocional (em dias).
+Desconto_Oferecido: Desconto oferecido na campanha.
+
+- Entrega
+
+ID_Entrega (Chave Primária): Identificador único para as informações de entrega.
+Custo_Envio: Custo associado à entrega do produto.
+Prazo_Entrega: Prazo estimado para entrega.
+Metodo_Entrega: Método de entrega utilizado (ou seja: correio normal, expresso).
+
+- Tempo
+
+ID_Tempo (Chave Primária): Identificador único para cada data.
+Data: A data do pedido.
+Mes: Mês do pedido.
+Ano: Ano do pedido.
+Dia_Semana: Dia da semana do pedido.
+
+- Vendas
+
+ID_Venda (Chave Primária): Identificador único para cada transação de venda.
+ID_Cliente: Chave estrangeira ligada à entidade Cliente.
+ID_Produto: Chave estrangeira ligada à entidade Produto.
+ID_Tempo: Chave estrangeira ligada à entidade Tempo.
+ID_Promocao: Chave estrangeira ligada à entidade Promoção.
+ID_Entrega: Chave estrangeira ligada à entidade Envio.
+Valor_Total: O valor total da venda após aplicados os descontos.
+Desconto_Aplicado: Valor do desconto aplicado na venda.
+Quantidade: Número de unidades do produto vendidos na transação.
+
+##### Relacionamentos #####
+
+Cada Venda está associada a um Cliente. Um Cliente pode estar associado a várias Vendas.
+Cada Venda está associada a um Produto. Um Produto pode estar associada a várias Vendas.
+Cada Venda está associada a um tipo de Entrega. Um tipo de Entrega pode estar associado a várias Vendas.
+Cada Venda está associada a uma Promoção. Uma Promoção pode estar associada a várias Vendas.
+Cada Venda está associada a uma Data. Uma Data pode estar associada a várias Vendas.
+
+
+
+
+

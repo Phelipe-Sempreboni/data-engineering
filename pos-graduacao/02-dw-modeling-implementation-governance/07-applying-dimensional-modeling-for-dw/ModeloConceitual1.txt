@@ -1,0 +1,70 @@
+# Modelo Conceitual Criado Pelo ChatGPT
+
+Para atender aos objetivos analíticos da "DSA Fashion" e considerando os dados disponíveis, o modelo conceitual poderia ser estruturado da seguinte maneira:
+
+##### Entidades #####
+
+- Pedido
+
+Atributos: ID do Pedido (chave primária), Data do Pedido, Valor Total, Status do Pedido, Desconto Aplicado, ID do Cliente (chave estrangeira), ID do Envio (chave estrangeira)
+
+Relacionamentos:
+
+Um pedido tem um cliente.
+Um pedido tem um envio.
+Um pedido pode ter vários itens de pedido.
+
+- Cliente
+
+Atributos: ID do Cliente (chave primária), Localização, Histórico de Compras
+
+Relacionamentos:
+
+Um cliente pode fazer vários pedidos.
+
+- Produto
+
+Atributos: ID do Produto (chave primária), Categoria, Subcategoria, Preço
+
+Relacionamentos:
+
+Um produto pode estar em vários itens de pedido.
+Um produto pode estar em várias campanhas promocionais.
+
+- Item de Pedido
+
+Atributos: ID do Item de Pedido (chave primária), ID do Pedido (chave estrangeira), ID do Produto (chave estrangeira), Quantidade, Preço do Item
+
+Relacionamentos:
+
+Um item de pedido pertence a um pedido.
+Um item de pedido está associado a um produto.
+
+- Envio
+
+Atributos: ID do Envio (chave primária), Custo de Envio, Prazo de Entrega, Método de Envio
+
+Relacionamentos:
+
+Um envio está associado a um pedido.
+
+- Campanha Promocional
+
+Atributos: ID da Campanha (chave primária), Período da Campanha, Desconto Oferecido
+
+Relacionamentos:
+
+Uma campanha promocional pode incluir vários produtos.
+
+
+##### Relacionamentos #####
+
+Pedido-Cliente: Um cliente pode fazer vários pedidos, mas cada pedido é feito por um único cliente.
+Pedido-Envio: Cada pedido está associado a um único envio.
+Pedido-Item de Pedido: Um pedido pode conter vários itens de pedido.
+Item de Pedido-Produto: Cada item de pedido está associado a um único produto, mas um produto pode estar em vários itens de pedido.
+Produto-Campanha Promocional: Um produto pode estar em várias campanhas promocionais, e uma campanha promocional pode incluir vários produtos.
+
+Este modelo conceitual permite avaliar o desempenho das vendas ao longo do tempo, analisar vendas por categoria de produto, identificar produtos mais e menos vendidos, analisar o comportamento do cliente, avaliar o impacto de campanhas promocionais e identificar padrões geográficos nas vendas online.
+
+

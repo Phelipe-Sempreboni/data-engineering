@@ -1,0 +1,81 @@
+# Projeto 2 - Data Warehouse na Nuvem com Amazon Redshift e Terraform - Modelagem e Implementação
+
+1- Acesse sua conta AWS e crie um bucket na região de Ohio. Por exemplo: dsa-fonte-p2-<ID-AWS>
+
+2- Dentro do bucket crie uma pasta chamada dados.
+
+3- Faça o upload dos 5 arquivos CSV para essa pasta criada no item anterior (acompanhe o procedimento nas aulas em vídeo).
+
+4- Na sua máquina local abra o terminal ou prompt de comando e navegue até a pasta onde você colocou os arquivos do projeto (não use espaço ou acento em nome de pasta).
+
+5- Execute o comando abaixo para criar a imagem Docker:
+
+docker build -t dsa-imagem-terraform:p2 .
+
+6- Execute o comando abaixo para criar o container Docker:
+
+docker run -dit --name dsa-p2 -v ./IaC:/iac dsa-imagem-terraform:p2 /bin/bash
+
+NOTA: No Windows você deve substituir ./IaC pelo caminho completo da pasta, por exemplo: C:\DSA\Cap15\IaC
+
+7- Execute o "aws configure" e coloque suas credenciais.
+
+8- Verifique as versões do Terraform e do AWS CLI com os comandos abaixo
+
+terraform version
+aws --version
+
+9- Acesse o container e abra o terminal. Na pasta etapa1, execute os comandos abaixo:
+
+terraform init
+terraform validate
+terraform plan
+terraform apply
+
+10- Acesse o painel do Redshift na AWS e confirme que o cluster do Redshift foi criado para o DW.
+
+11- Acesse o painel do IAM na AWS e verifique se a role RedshiftS3AccessRole foi criada. Copie o endereço ARN da role e coloque no arquivo modelo_fisico.sql como mostrado nas aulas em vídeo.
+
+12- Dentro da pasta etapa2 está o arquivo modelo_fisico.sql (fornecido a você). Lembre-se de alterar o ACCOUNT ID para o número da sua conta AWS (como mostrado nas aulas em vídeo) e alterar o nome do bucket.
+
+13- Copie o endpoint do seu cluster Redshift e ajuste o comando abaixo e então execute no terminal do container dentro da pasta etapa2. Digite a senha (dsaS9curePassw2rd) quando solicitado.
+
+psql -h redshift-cluster.cbwssuxzxipm.us-east-2.redshift.amazonaws.com -U adminuser -d dsadb -p 5439 -f modelo_fisico.sql
+
+14- Edite o arquivo redshift.tf e acrescente a linha abaixo como mostrado nas aulas em vídeo. 
+
+iam_roles = [aws_iam_role.redshift_role.arn]
+
+15- Execute novamente o terraform apply na pasta etapa1 para modificar o cluster em tempo real. Repita o passo 13. Seu DW está pronto para uso.
+
+16- Acesse o editor de consultas do Redshift e confira se os dados foram carregados.
+
+17- Crie um container Docker com Metabase: docker run -d -p 3000:3000 --name metabase metabase/metabase
+
+18- Acesse o Metabase pelo navegador e crie uma conexão ao Redshift.
+
+19- Explore os dados e crie relatórios e gráficos. Exemplo de query:
+
+SELECT 
+    p.nome_produto,
+    p.categoria,
+    p.subcategoria,
+    SUM(fv.receita_vendas) AS receita_total
+FROM 
+    dsaschema.fato_vendas fv
+JOIN 
+    dsaschema.dim_produto p ON fv.sk_produto = p.sk_produto
+GROUP BY 
+    p.nome_produto, p.categoria, p.subcategoria
+ORDER BY 
+    receita_total DESC;
+
+20- Quando terminar o trabalho destrua a infra com o comando: terraform destroy
+
+
+Obrigado DSA!
+
+
+
+
+

@@ -1,0 +1,43 @@
+# Modelo Dimensional Criado Pelo ChatGPT
+
+Baseado no cenário fornecido, podemos criar o seguinte modelo dimensional em um esquema estrela (star schema):
+
+Tabela Fato:
+
+Vendas
+
+Chaves Estrangeiras: ID_Cliente, ID_Produto, ID_Tempo, ID_Promocao, ID_Entrega
+Atributos de Medida: Valor_Total, Desconto_Aplicado, Quantidade
+
+Tabelas de Dimensão:
+
+Cliente
+
+Atributos: ID_Cliente (Chave Primária), Localizacao
+
+Produto
+
+Atributos: ID_Produto (Chave Primária), Categoria, Subcategoria, Preco
+
+Promoção
+
+Atributos: ID_Promocao (Chave Primária), Periodo_Campanha, Desconto_Oferecido
+
+Entrega
+
+Atributos: ID_Entrega (Chave Primária), Custo_Envio, Prazo_Entrega, Metodo_Entrega
+
+Tempo
+
+Atributos: ID_Tempo (Chave Primária), Data, Mes, Ano, Dia_Semana
+
+Relacionamentos:
+
+Vendas-Cliente: Cada venda está associada a um cliente. Um cliente pode estar associado a várias vendas.
+Vendas-Produto: Cada venda está associada a um produto. Um produto pode estar associado a várias vendas.
+Vendas-Tempo: Cada venda está associada a uma data. Uma data pode estar associada a várias vendas.
+Vendas-Promoção: Cada venda está associada a uma promoção. Uma promoção pode estar associada a várias vendas.
+Vendas-Entrega: Cada venda está associada a um tipo de entrega. Um tipo de entrega pode estar associado a várias vendas.
+
+
+Este modelo dimensional permite analisar as vendas a partir de diferentes dimensões, como cliente, produto, tempo, promoção e entrega. Isso facilita a realização de consultas analíticas e a geração de insights sobre o desempenho das vendas, comportamento do cliente, eficácia das promoções e eficiência das entregas.

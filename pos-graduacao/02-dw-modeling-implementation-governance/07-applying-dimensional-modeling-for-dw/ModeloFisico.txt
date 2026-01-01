@@ -1,0 +1,46 @@
+# Modelo Físico Criado Pelo ChatGPT
+
+CREATE TABLE Cliente (
+    ID_Cliente SERIAL PRIMARY KEY,
+    Localizacao VARCHAR(255)
+);
+
+CREATE TABLE Produto (
+    ID_Produto SERIAL PRIMARY KEY,
+    Categoria VARCHAR(255),
+    Subcategoria VARCHAR(255),
+    Preco DECIMAL(10, 2)
+);
+
+CREATE TABLE Promocao (
+    ID_Promocao SERIAL PRIMARY KEY,
+    Periodo_Campanha INT,
+    Desconto_Oferecido DECIMAL(10, 2)
+);
+
+CREATE TABLE Entrega (
+    ID_Entrega SERIAL PRIMARY KEY,
+    Custo_Envio DECIMAL(10, 2),
+    Prazo_Entrega INT,
+    Metodo_Entrega VARCHAR(255)
+);
+
+CREATE TABLE Tempo (
+    ID_Tempo SERIAL PRIMARY KEY,
+    Data DATE,
+    Mes INT,
+    Ano INT,
+    Dia_Semana VARCHAR(255)
+);
+
+CREATE TABLE Vendas (
+    ID_Venda SERIAL PRIMARY KEY,
+    ID_Cliente INT REFERENCES Cliente(ID_Cliente),
+    ID_Produto INT REFERENCES Produto(ID_Produto),
+    ID_Tempo INT REFERENCES Tempo(ID_Tempo),
+    ID_Promocao INT REFERENCES Promocao(ID_Promocao),
+    ID_Entrega INT REFERENCES Entrega(ID_Entrega),
+    Valor_Total DECIMAL(10, 2),
+    Desconto_Aplicado DECIMAL(10, 2),
+    Quantidade INT
+);

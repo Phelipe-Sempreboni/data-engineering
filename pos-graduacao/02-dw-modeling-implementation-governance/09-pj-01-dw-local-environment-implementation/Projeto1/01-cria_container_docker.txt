@@ -1,0 +1,16 @@
+# Projeto 1 - Configuração do Ambiente de Banco de Dados
+
+
+# 1- Instale o Docker Desktop.
+
+
+# 2- Abra o terminal ou prompt de comando e execute a instrução abaixo para criar o container Docker:
+
+docker run --name dsadw -p 5431:5432 -e POSTGRES_DB=dsadb -e POSTGRES_USER=dsaadmin -e POSTGRES_PASSWORD=dsa1010 -d postgres:16.1
+
+
+# 3- Instale o pgAdmin.
+
+Obs: Quando acessar o pgAdmin pela primeira vez crie uma senha master, por exemplo: dsa1010
+
+ 

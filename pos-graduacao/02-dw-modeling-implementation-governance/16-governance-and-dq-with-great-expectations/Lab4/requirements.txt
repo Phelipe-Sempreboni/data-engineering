@@ -1,0 +1,4 @@
+great-expectations==0.18.16
+psycopg2==2.9.9
+pyyaml==6.0
+sqlalchemy==1.4.39

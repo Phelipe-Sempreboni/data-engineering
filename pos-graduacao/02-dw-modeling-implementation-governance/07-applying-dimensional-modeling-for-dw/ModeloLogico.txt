@@ -1,0 +1,46 @@
+# Modelo Lógico Criado Pelo ChatGPT
+
+Baseando-se no modelo dimensional anterior, o modelo lógico com tipos de dados e chaves primária e estrangeira pode ser representado da seguinte forma:
+
+Tabelas de Dimensão:
+
+Cliente
+
+ID_Cliente (INT, Chave Primária)
+Localizacao (VARCHAR)
+Produto
+
+ID_Produto (INT, Chave Primária)
+Categoria (VARCHAR)
+Subcategoria (VARCHAR)
+Preco (DECIMAL)
+Promoção
+
+ID_Promocao (INT, Chave Primária)
+Periodo_Campanha (INT)
+Desconto_Oferecido (DECIMAL)
+Entrega
+
+ID_Entrega (INT, Chave Primária)
+Custo_Envio (DECIMAL)
+Prazo_Entrega (INT)
+Metodo_Entrega (VARCHAR)
+Tempo
+
+ID_Tempo (INT, Chave Primária)
+Data (DATE)
+Mes (INT)
+Ano (INT)
+Dia_Semana (VARCHAR)
+Tabela Fato:
+
+Vendas
+ID_Venda (INT, Chave Primária)
+ID_Cliente (INT, Chave Estrangeira, Referencia Cliente(ID_Cliente))
+ID_Produto (INT, Chave Estrangeira, Referencia Produto(ID_Produto))
+ID_Tempo (INT, Chave Estrangeira, Referencia Tempo(ID_Tempo))
+ID_Promocao (INT, Chave Estrangeira, Referencia Promoção(ID_Promocao))
+ID_Entrega (INT, Chave Estrangeira, Referencia Entrega(ID_Entrega))
+Valor_Total (DECIMAL)
+Desconto_Aplicado (DECIMAL)
+Quantidade (INT)
