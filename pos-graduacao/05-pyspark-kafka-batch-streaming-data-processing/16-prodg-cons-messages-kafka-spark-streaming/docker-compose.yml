@@ -1,0 +1,104 @@
+# Data Science Academy
+# Preparação do Ambiente de Trabalho - Multi-Node Cluster Spark, HDFS e Kafka
+
+services:
+  # HDFS Namenode
+  namenode:
+    build:
+      context: .
+      dockerfile: Dockerfile-hdfs
+    hostname: namenode
+    container_name: namenode
+    volumes:
+      - namenode:/hdfs/namenode
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    ports:
+      - 50070:50070
+      - 9000:9000
+
+  # HDFS Datanode
+  datanode:
+    build:
+      context: .
+      dockerfile: Dockerfile-hdfs
+    hostname: datanode
+    container_name: datanode
+    volumes:
+      - datanode:/hdfs/datanode
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    depends_on:
+      - namenode
+    ports:
+      - 50075:50075
+
+  # Spark Master
+  spark-master:
+    build:
+      context: .
+      dockerfile: Dockerfile-spark
+    hostname: spark-master
+    container_name: spark-master
+    environment:
+      - SPARK_MASTER_HOST=spark-master
+    ports:
+      - 7077:7077
+      - 8080:8080
+
+  # Spark Worker 1
+  spark-worker-1:
+    build:
+      context: .
+      dockerfile: Dockerfile-spark
+    hostname: spark-worker-1
+    container_name: spark-worker-1
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+    depends_on:
+      - spark-master
+    ports:
+      - 4041:4040
+
+  # Spark Worker 2
+  spark-worker-2:
+    build:
+      context: .
+      dockerfile: Dockerfile-spark
+    hostname: spark-worker-2
+    container_name: spark-worker-2
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+    depends_on:
+      - spark-master
+    ports:
+      - 4042:4040
+
+  # Kafka Broker
+  kafka:
+    build:
+      context: .
+      dockerfile: Dockerfile-kafka
+    hostname: kafka
+    container_name: kafka
+    environment:
+      - KAFKA_BROKER_ID=1
+    ports:
+      - 9092:9092
+    volumes:
+      - kafka-logs:/tmp/kraft-combined-logs
+
+  # Kafka UI
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - 8081:8080
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+
+volumes:
+  namenode:
+  datanode:
+  kafka-logs:  

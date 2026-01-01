@@ -1,0 +1,41 @@
+# Projeto 5 - Extração, Processamento e Armazenamento de Dados em Tempo Real com Kafka e Spark Streaming
+
+# Abra o terminal ou prompt de comando, acesse a pasta com os arquivos e execute:
+
+docker-compose up --build -d
+
+# No mesmo terminal veja se os containers foram criados e inicializados com o comando abaixo:
+
+docker-compose ps
+
+# No mesmo terminal execute os comandos abaixo (ajuste o caminho da pasta projeto5 se necessário):
+
+docker cp projeto5/dsa_p5_kafka_producer.py kafka:/usr/local/bin/
+docker cp projeto5/dsa_p5_spark_kafka_consumer.py spark-master:/usr/local/bin/
+
+# Abra o terminal ou prompt de comando e execute o comando abaixo:
+
+docker exec -it kafka python /usr/local/bin/dsa_p5_kafka_producer.py
+
+# Abra OUTRO terminal ou prompt de comando e execute o comando abaixo:
+
+docker exec -it spark-master spark-submit \
+  --jars /opt/spark/jars/spark-sql-kafka-0-10_2.12-3.3.0.jar,\
+/opt/spark/jars/kafka-clients-3.3.2.jar,\
+/opt/spark/jars/scala-library-2.12.15.jar,\
+/opt/spark/jars/spark-token-provider-kafka-0-10_2.12-3.3.0.jar \
+  /usr/local/bin/dsa_p5_spark_kafka_consumer.py
+
+# Abra OUTRO terminal ou prompt de comando, acesse a pasta com os arquivos e execute:
+
+docker exec -it namenode hdfs dfs -ls /output/kafka_stream
+
+docker exec -it namenode hdfs dfs -get /output/kafka_stream /tmp/dsa
+
+docker cp namenode:/tmp/dsa /Users/dmpm/Dropbox/DSA4.0/PySpark-Kafka/Cap16/projeto5/parquet_files
+
+
+
+
+
+

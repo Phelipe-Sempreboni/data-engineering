@@ -1,0 +1,41 @@
+# Data Science Academy
+# Preparação do Ambiente de Trabalho - Multi-Node Cluster Spark, HDFS e Kafka
+
+# Base image: Utilizando a imagem oficial do OpenJDK 11 como base
+FROM openjdk:11-jdk
+
+# Definição da versão do Hadoop a ser instalada
+ENV HADOOP_VERSION=3.4.1
+
+# Definição do diretório de instalação do Hadoop
+ENV HADOOP_HOME=/opt/hadoop
+
+# Adicionando o diretório do Hadoop ao PATH do sistema
+ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+# Instalar dependências necessárias (SSH) e Hadoop
+RUN apt-get update && apt-get install -y ssh && \
+    wget https://dlcdn.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
+    tar -xzf hadoop-${HADOOP_VERSION}.tar.gz -C /opt && \
+    mv /opt/hadoop-${HADOOP_VERSION} $HADOOP_HOME && \
+    rm hadoop-${HADOOP_VERSION}.tar.gz && \
+    mkdir -p /hdfs/namenode /hdfs/datanode && \
+    ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N "" && \
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
+    chmod 600 ~/.ssh/authorized_keys
+
+# Copiar os arquivos de configuração do Hadoop para o diretório de configuração
+COPY confighadoop/core-site.xml $HADOOP_HOME/etc/hadoop/
+COPY confighadoop/hdfs-site.xml $HADOOP_HOME/etc/hadoop/
+
+# Copiar o script de inicialização para o container
+COPY start/start-hadoop.sh /usr/local/bin/
+
+# Tornar o script de inicialização executável
+RUN chmod +x /usr/local/bin/start-hadoop.sh
+
+# Expor as portas necessárias para o Hadoop
+EXPOSE 50070 9000 50075
+
+# Comando padrão para iniciar o Hadoop quando o container é executado
+CMD ["start-hadoop.sh"]

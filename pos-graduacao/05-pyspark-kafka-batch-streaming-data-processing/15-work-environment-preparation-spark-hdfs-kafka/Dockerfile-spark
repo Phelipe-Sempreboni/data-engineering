@@ -1,0 +1,41 @@
+# Data Science Academy
+# Preparação do Ambiente de Trabalho - Multi-Node Cluster Spark, HDFS e Kafka
+
+# Base image: Utilizando a imagem oficial do OpenJDK 11 como base
+FROM openjdk:11-jdk
+
+# Definição da versão do Apache Spark e Hadoop a serem instalados
+ENV SPARK_VERSION=3.5.3
+ENV HADOOP_VERSION=3
+
+# Definição do diretório de instalação do Spark
+ENV SPARK_HOME=/opt/spark
+
+# Adicionando o diretório do Spark ao PATH do sistema
+ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
+# Instalar dependências necessárias (Wget) e Spark
+RUN apt-get update && apt-get install -y wget && \
+    wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
+    tar -xzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz -C /opt && \
+    mv /opt/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} $SPARK_HOME && \
+    rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
+
+# Copiar os arquivos de configuração do Spark para o diretório de configuração
+COPY configspark/spark-defaults.conf $SPARK_HOME/conf/
+COPY configspark/log4j.properties $SPARK_HOME/conf/
+
+# Copiar o script de inicialização para o container
+COPY start/start-spark.sh /usr/local/bin/
+
+# Tornar o script de inicialização executável
+RUN chmod +x /usr/local/bin/start-spark.sh
+
+# Expondo as portas necessárias para o Spark
+# 7077: Porta do Spark Master
+# 8080: Interface Web do Spark Master
+# 4040: Interface Web para aplicações Spark
+EXPOSE 7077 8080 4040
+
+# Comando padrão para iniciar o Spark quando o container é executado
+CMD ["start-spark.sh"]

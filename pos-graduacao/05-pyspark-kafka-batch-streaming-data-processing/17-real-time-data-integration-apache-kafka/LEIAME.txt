@@ -1,0 +1,9 @@
+# Projeto 6 - Monitoramento de Criptomoedas em Tempo Real com Kafka, MongoDB e Streamlit
+
+# Abra o terminal ou prompt, navegue até a pasta com os arquivos e execute o comando abaixo para criar os containers Docker:
+
+docker-compose up -d
+
+# Nota: Antes de executar o comando lembre-se de inicializar o docker engine, o que pode ser feito simplesmente abrindo o Docker Desktop.
+
+# Acompanhe as demais instruções nas aulas do capítulo do curso.

@@ -1,0 +1,21 @@
+# Data Science Academy
+
+# Abra o terminal ou prompt de comando, navegue até a pasta com os arquivos e execute o comando abaixo para criar a imagem:
+
+docker build -t kafka-spark-cassandra-consumer .
+
+# Execute o comando abaixo para criar o container:
+
+docker run --name dsa_cliente -dit --network dsaservidor_dsacademy kafka-spark-cassandra-consumer
+
+# Dentro do container execute o comando abaixo para iniciar o Kafka Consumer:
+
+python dsa_consumer_stream.py --mode initial
+
+# Abra o terminal ou prompt de comando e use os comandos abaixo para acessar o Cassandra e verificar o resultado do armazenamento:
+
+docker exec -it cassandra cqlsh
+USE dsa_dados_usuarios;
+SELECT * FROM tb_usuarios;
+
+# Nota: No final do Dockerfile descomentte a última linha e recrie imagem e container para deixar o processo automático.

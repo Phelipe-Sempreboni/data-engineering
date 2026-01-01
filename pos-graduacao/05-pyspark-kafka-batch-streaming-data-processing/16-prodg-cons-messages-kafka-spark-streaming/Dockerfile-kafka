@@ -1,0 +1,45 @@
+# Projeto 5 - Extração, Processamento e Armazenamento de Dados em Tempo Real com Kafka e Spark Streaming
+
+# Base image: Utilizando a imagem oficial do OpenJDK 11 como base
+FROM openjdk:11-jdk
+
+# Definindo a versão do Kafka
+ENV KAFKA_VERSION=3.9.0
+
+# Definindo a versão da Linguagem Scala compatível com o Kafka
+ENV SCALA_VERSION=2.13
+
+# Definindo o diretório de instalação do Kafka
+ENV KAFKA_HOME=/opt/kafka
+
+# Adicionando o diretório do Kafka ao PATH do sistema
+ENV PATH=$PATH:$KAFKA_HOME/bin
+
+# Atualizando o sistema e instalando dependências necessárias
+RUN apt-get update && apt-get install -y wget python3 python3-pip && \
+    wget https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz && \
+    tar -xzf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt && \
+    mv /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION} $KAFKA_HOME && \
+    rm kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz
+
+# Instalação dos pacotes Python necessários
+RUN pip3 install pyspark==3.5.3 confluent-kafka==2.6.1
+
+# Definir o alias do comando 'python'
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+# Copiando o arquivo de configuração do Kafka para o diretório de configuração
+COPY configkafka/server.properties $KAFKA_HOME/config/
+
+# Copiando o script de inicialização para o container
+COPY start/start-kafka.sh /usr/local/bin/
+
+# Tornando os scripts executáveis
+RUN chmod +x /usr/local/bin/start-kafka.sh
+
+# Expondo a porta necessária para o Kafka
+# 9092: Porta padrão do broker Kafka para comunicação com produtores e consumidores
+EXPOSE 9092
+
+# Comando padrão para iniciar o Kafka quando o container é executado
+CMD ["start-kafka.sh"]

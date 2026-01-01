@@ -1,0 +1,54 @@
+
+name: cluster-dsa-spark
+
+services:
+  spark-master-dsa:
+    container_name: spark-master-dsa
+    build: .
+    image: spark-image-dsa
+    entrypoint: ['./entrypoint.sh', 'master']
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080" ]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+    volumes:
+      - ./dados:/opt/spark/dados
+      - ./jobs:/opt/spark/jobs
+      - spark-logs:/opt/spark/spark-events
+    env_file:
+      - .env.spark
+    ports:
+      - '9090:8080'
+      - '7077:7077'
+      - '9999:9999'
+
+  spark-history-dsa:
+    container_name: spark-history-dsa
+    image: spark-image-dsa
+    entrypoint: ['./entrypoint.sh', 'history']
+    depends_on:
+      - spark-master-dsa
+    env_file:
+      - .env.spark
+    volumes:
+      - spark-logs:/opt/spark/spark-events
+    ports:
+      - '18080:18080'
+
+  spark-worker-dsa:
+    image: spark-image-dsa
+    entrypoint: ['./entrypoint.sh', 'worker']
+    depends_on:
+      - spark-master-dsa
+    env_file:
+      - .env.spark
+    volumes:
+      - ./dados:/opt/spark/dados
+      - ./jobs:/opt/spark/jobs
+      - spark-logs:/opt/spark/spark-events
+
+volumes:
+  spark-logs:
+
+

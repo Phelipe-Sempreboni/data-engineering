@@ -1,0 +1,53 @@
+# Projeto 5 - Extração, Processamento e Armazenamento de Dados em Tempo Real com Kafka e Spark Streaming
+
+# Base image: Utilizando a imagem oficial do OpenJDK 11 como base
+FROM openjdk:11-jdk
+
+# Definir a versão do Apache Spark, Hadoop e Scala
+ENV SPARK_VERSION=3.3.0
+ENV HADOOP_VERSION=3
+ENV SCALA_VERSION=2.12
+
+# Definição do diretório de instalação do Spark
+ENV SPARK_HOME=/opt/spark
+
+# Adicionando o diretório do Spark ao PATH do sistema
+ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
+# Baixar e instalar Spark
+RUN wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
+    tar -xzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz -C /opt && \
+    mv /opt/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} /opt/spark && \
+    rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
+
+# Adicionar o conector Kafka e bibliotecas complementares
+RUN wget -P /opt/spark/jars/ https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.3.0/spark-sql-kafka-0-10_2.12-3.3.0.jar && \
+    wget -P /opt/spark/jars/ https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.3.0/spark-token-provider-kafka-0-10_2.12-3.3.0.jar && \
+    wget -P /opt/spark/jars/ https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.3.2/kafka-clients-3.3.2.jar && \
+    wget -P /opt/spark/jars/ https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.15/scala-library-2.12.15.jar && \
+    wget -P /opt/spark/jars/ https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar && \
+    wget -P /opt/spark/jars/ https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-slf4j-impl/2.17.2/log4j-slf4j-impl-2.17.2.jar && \
+    wget -P /opt/spark/jars/ https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.17.2/log4j-core-2.17.2.jar && \
+    wget -P /opt/spark/jars/ https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.17.2/log4j-api-2.17.2.jar
+
+# JAR adicional
+RUN wget -P /opt/spark/jars/ https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar
+
+# Copiar os arquivos de configuração do Spark para o diretório de configuração
+COPY configspark/spark-defaults.conf $SPARK_HOME/conf/
+COPY configspark/log4j.properties $SPARK_HOME/conf/
+
+# Copiar o script de inicialização para o container
+COPY start/start-spark.sh /usr/local/bin/
+
+# Tornar o script de inicialização executável
+RUN chmod +x /usr/local/bin/start-spark.sh
+
+# Expondo as portas necessárias para o Spark
+# 7077: Porta do Spark Master
+# 8080: Interface Web do Spark Master
+# 4040: Interface Web para aplicações Spark
+EXPOSE 7077 8080 4040
+
+# Comando padrão para iniciar o Spark quando o container é executado
+CMD ["start-spark.sh"]

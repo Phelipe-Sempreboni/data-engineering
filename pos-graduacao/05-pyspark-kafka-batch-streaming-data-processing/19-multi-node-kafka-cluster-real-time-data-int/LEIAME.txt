@@ -1,0 +1,20 @@
+# Projeto 8 - Simulação de Erros e Recuperação de Falhas em Multi-Node Kafka Cluster Para Gestão de Vendas em Tempo Real
+
+# Abra a janela do Docker Desktop para inicializar o docker engine e mantenha aberta.
+
+# Abra o terminal ou prompt de comando, navegue até a pasta com os arquivos e execute o comando abaixo:
+
+docker-compose up -d
+
+# Abra o jupyter notebook no navegador e acompanhe as instruções das aulas.
+
+Nota: O arquivo .env (arquivo oculto) deve ter este conteúdo:
+
+# Kafka Brokers
+KAFKA_BROKERS=kafka1:29092,kafka2:29093,kafka3:29094
+
+# Variáveis de conexão ao PostgreSQL 
+POSTGRES_HOST=postgres
+POSTGRES_DB=dsadb
+POSTGRES_USER=dsauser
+POSTGRES_PASSWORD=dsacademy

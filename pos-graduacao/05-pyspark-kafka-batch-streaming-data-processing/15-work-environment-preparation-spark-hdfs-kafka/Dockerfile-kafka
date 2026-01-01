@@ -1,0 +1,40 @@
+# Data Science Academy
+# Preparação do Ambiente de Trabalho - Multi-Node Cluster Spark, HDFS e Kafka
+
+# Base image: Utilizando a imagem oficial do OpenJDK 11 como base
+FROM openjdk:11-jdk
+
+# Definindo a versão do Kafka
+ENV KAFKA_VERSION=3.9.0
+
+# Definindo a versão da Linguagem Scala compatível com o Kafka
+ENV SCALA_VERSION=2.13
+
+# Definindo o diretório de instalação do Kafka
+ENV KAFKA_HOME=/opt/kafka
+
+# Adicionando o diretório do Kafka ao PATH do sistema
+ENV PATH=$PATH:$KAFKA_HOME/bin
+
+# Atualizando o sistema e instalando dependências necessárias
+RUN apt-get update && apt-get install -y wget && \
+    wget https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz && \
+    tar -xzf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt && \
+    mv /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION} $KAFKA_HOME && \
+    rm kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz
+
+# Copiando o arquivo de configuração do Kafka para o diretório de configuração
+COPY configkafka/server.properties $KAFKA_HOME/config/
+
+# Copiando o script de inicialização para o container
+COPY start/start-kafka.sh /usr/local/bin/
+
+# Tornando o script de inicialização executável
+RUN chmod +x /usr/local/bin/start-kafka.sh
+
+# Expondo a porta necessária para o Kafka
+# 9092: Porta padrão do broker Kafka para comunicação com produtores e consumidores
+EXPOSE 9092
+
+# Comando padrão para iniciar o Kafka quando o container é executado
+CMD ["start-kafka.sh"]

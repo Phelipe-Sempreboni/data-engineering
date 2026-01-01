@@ -1,0 +1,50 @@
+name: dsa-cluster-yarn
+
+services:
+  spark-master-yarn:
+    container_name: dsa-spark-master-yarn
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: dsa-spark-image-yarn
+    entrypoint: ['./entrypoint.sh', 'master']
+    volumes:
+      - ./dados:/opt/spark/data
+      - ./jobs:/opt/spark/apps
+      - spark-logs:/opt/spark/spark-events
+    env_file:
+      - .env.spark
+    ports:
+      - '9091:8080'
+      - '9871:9870'
+      - '7071:7077'
+      - '8081:8088'
+      - '8888:8888'
+
+  spark-history-server-yarn:
+    container_name: dsa-spark-history-yarn
+    image: dsa-spark-image-yarn
+    entrypoint: ['./entrypoint.sh', 'history']
+    depends_on:
+      - spark-master-yarn
+    env_file:
+      - .env.spark
+    volumes:
+      - spark-logs:/opt/spark/spark-events
+    ports:
+      - '18081:18080'
+
+  spark-worker-yarn:
+    image: dsa-spark-image-yarn
+    entrypoint: ['./entrypoint.sh', 'worker']
+    depends_on:
+      - spark-master-yarn
+    env_file:
+      - .env.spark
+    volumes:
+      - ./dados:/opt/spark/data
+      - ./jobs:/opt/spark/apps
+      - spark-logs:/opt/spark/spark-events
+
+volumes:
+  spark-logs:

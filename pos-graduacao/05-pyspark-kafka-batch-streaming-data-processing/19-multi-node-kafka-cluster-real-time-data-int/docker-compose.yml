@@ -1,0 +1,156 @@
+# Projeto 8 - Simulação de Erros e Recuperação de Falhas em Multi-Node Kafka Cluster Para Gestão de Vendas em Tempo Real
+
+services:
+
+  zookeeper:
+    image: bitnami/zookeeper:3.9.3
+    hostname: zookeeper
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+    networks:
+      - dsacademy_network
+
+  kafka1:
+    image: bitnami/kafka:3.9.0
+    hostname: kafka1
+    container_name: kafka1
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:29092
+      KAFKA_LISTENERS: PLAINTEXT://:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    networks:
+      - dsacademy_network
+
+  kafka2:
+    image: bitnami/kafka:3.9.0
+    hostname: kafka2
+    container_name: kafka2
+    depends_on:
+      - zookeeper
+    ports:
+      - 9093:9093
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka2:29093
+      KAFKA_LISTENERS: PLAINTEXT://:29093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    networks:
+      - dsacademy_network
+
+  kafka3:
+    image: bitnami/kafka:3.9.0
+    hostname: kafka3
+    container_name: kafka3
+    depends_on:
+      - zookeeper
+    ports:
+      - 9094:9094
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka3:29094
+      KAFKA_LISTENERS: PLAINTEXT://:29094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    networks:
+      - dsacademy_network
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:v0.7.2
+    container_name: kafka-ui
+    ports:
+      - 8080:8080
+    depends_on:
+      - kafka1
+      - kafka2
+      - kafka3
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka1:29092,kafka2:29093,kafka3:29094
+    networks:
+      - dsacademy_network
+
+  postgres:
+    image: postgres:17.2
+    container_name: ${POSTGRES_HOST}
+    restart: unless-stopped
+    hostname: ${POSTGRES_HOST}
+    networks:
+      - dsacademy_network
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 5440:5432
+
+  spark-master:
+    image: bitnami/spark:3.5.4
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    ports:
+      - '8090:8080'
+      - '7077:7077'
+    networks:
+      - dsacademy_network
+
+  spark-worker:
+    image: bitnami/spark:3.5.4
+    container_name: spark-worker
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    depends_on:
+      - spark-master
+    networks:
+      - dsacademy_network
+
+  dsajupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: dsajupyter
+    container_name: dsajupyter
+    environment:
+      KAFKA_BROKER: ${KAFKA_BROKERS}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - 8888:8888
+    volumes:
+      - ./notebooks:/notebooks
+    networks:
+      - dsacademy_network
+
+networks:
+  dsacademy_network:
+    driver: bridge
