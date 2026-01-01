@@ -1,0 +1,146 @@
+# Lab 8 - Automação de Testes de Modelos de Dados no DBT
+
+# Crie a imagem Docker
+
+docker build -t dbt-image:lab8 .
+
+# Crie o container
+
+docker run -dit --name dsa-dbt-lab8 -p 8080:8080 -v ./dsa:/dsa dbt-image:lab8
+
+NOTA: No Windows você deve substituir ./dsa pelo caminho completo da pasta, por exemplo: C:\DSA\Cap16\dsa
+
+# Crie um projeto DBT
+
+dbt init lab8
+
+# Verifique a pasta criada com todos os artefatos
+
+# Acesse a pasta do arquivo de profile do DBT
+
+cd /root/.dbt
+
+# Edite o arquivo profiles.yml (localizado em ~/.dbt/profiles.yml) para adicionar uma configuração para o SQLite como mostrado nas aulas.
+
+vi profiles.yml
+
+lab8:
+  target: dev  # O ambiente padrão será dev, mas você pode trocar para prod durante a execução
+  outputs:
+    dev:
+      type: sqlite
+      threads: 1
+      database: lab8-dev.db
+      schema: 'main'
+      schemas_and_paths:
+        main: '/dsa/lab8/dados-dev/lab8-dev.db'
+      schema_directory: '/dsa/lab8/dados-dev'
+    prod:
+      type: sqlite
+      threads: 1
+      database: lab8-prd.db
+      schema: 'main'
+      schemas_and_paths:
+        main: '/dsa/lab8/dados-prd/lab8-prd.db'
+      schema_directory: '/dsa/lab8/dados-prd'
+
+# Crie as pastas de dados
+
+cd /dsa/lab8
+mkdir dados-dev
+mkdir dados-prd
+cd dados-prd
+
+# Criação do banco de dados (o arquivo está sendo fornecido a você)
+
+sqlite3 lab8-prd.db
+
+-- Tabela de Clientes
+CREATE TABLE tb_clientes (
+  cliente_id INTEGER PRIMARY KEY,
+  nome TEXT NOT NULL,
+  email TEXT UNIQUE,
+  cidade TEXT
+);
+
+INSERT INTO tb_clientes (cliente_id, nome, email, cidade) VALUES
+(1, 'Maria Silva', 'maria.silva@teste.com', 'Fortaleza'),
+(2, 'Josias Santos', 'joao.santos@teste.com', 'Rio de Janeiro'),
+(3, 'Ana Costa', 'ana.costa@teste.com', 'Porto Alegre');
+
+SELECT * FROM tb_clientes;
+
+-- Tabela de Produtos
+CREATE TABLE tb_produtos (
+  produto_id INTEGER PRIMARY KEY,
+  nome TEXT NOT NULL,
+  preco REAL NOT NULL CHECK(preco > 0)
+);
+
+INSERT INTO tb_produtos (produto_id, nome, preco) VALUES
+(1, 'Notebook', 3500.00),
+(2, 'Mouse', 50.00),
+(3, 'Teclado', 100.00);
+
+SELECT * FROM tb_produtos;
+
+-- Tabela de Pedidos
+CREATE TABLE tb_pedidos (
+  pedido_id INTEGER PRIMARY KEY,
+  cliente_id INTEGER,
+  produto_id INTEGER,
+  quantidade INTEGER CHECK(quantidade > 0),
+  data_pedido DATE,
+  FOREIGN KEY (cliente_id) REFERENCES tb_clientes(cliente_id),
+  FOREIGN KEY (produto_id) REFERENCES tb_produtos(produto_id)
+);
+
+INSERT INTO tb_pedidos (pedido_id, cliente_id, produto_id, quantidade, data_pedido) VALUES
+(100, 1, 1, 22, '2025-01-01'),
+(101, 3, 2, 14, '2025-02-12'),
+(102, 2, 3, 10, '2025-02-22'),
+(103, 2, 3, 12, '2025-03-18'),
+(104, 3, 3, 50, '2025-04-14'),
+(105, 2, 1, 23, '2025-05-29'),
+(106, 1, 1, 18, '2025-07-02'),
+(107, 3, 2, 5, '2025-09-11'),
+(108, 1, 1, 4, '2025-09-15'),
+(109, 2, 3, 9, '2025-11-03');
+
+SELECT * FROM tb_pedidos;
+
+.quit
+
+# O banco de dev é uma cópia do banco de produção
+
+# Teste das configurações do DBT
+
+cd /dsa/lab8
+dbt debug
+
+# Acesse a pasta models e delete a pasta example (não precisamos dessa pasta)
+
+# Edite o arquivo dbt_project.yml e remova as últimas linhas como mostrado nas aulas
+
+# Organize os arquivos dos modelos base como demonstrado nas aulas
+
+# Deploy dos modelos
+
+dbt run 
+
+# Limpar e recriar os modelos
+
+dbt run --full-refresh
+
+# Target em produção
+
+dbt run --target prod
+
+# No terminal, execute:
+
+dbt test
+dbt docs generate
+dbt docs serve
+
+
+

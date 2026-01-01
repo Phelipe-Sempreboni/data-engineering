@@ -1,0 +1,78 @@
+# Lab 9 - Analytics Engineering e Linhagem de Dados com Python, DBT, BigQuery e Looker Studio
+
+version: 2
+
+models:
+  - name: dim_clientes
+    description: "Dimensão de clientes que contém informações detalhadas sobre os clientes."
+    columns:
+      - name: id_cliente
+        description: "Identificador único do cliente."
+      - name: nome_cliente
+        description: "Nome completo do cliente."
+      - name: idade_cliente
+        description: "Idade do cliente."
+      - name: genero_cliente
+        description: "Gênero do cliente (M para masculino, F para feminino)."
+
+  - name: dim_data
+    description: "Dimensão de datas que contém informações sobre o calendário."
+    columns:
+      - name: id_data
+        description: "Identificador único da data no formato YYYYMMDD."
+      - name: data_calendario
+        description: "Data completa no formato YYYY-MM-DD."
+      - name: ano_calendario
+        description: "Ano referente à data."
+      - name: mes_calendario
+        description: "Mês referente à data."
+      - name: dia_calendario
+        description: "Dia do mês referente à data."
+      - name: dia_semana
+        description: "Dia da semana (nome do dia)."
+      - name: trimestre_calendario
+        description: "Trimestre do ano ao qual a data pertence."
+      - name: fim_de_semana_flag
+        description: "Indica se a data corresponde a um fim de semana (True ou False)."
+
+  - name: dim_localidades
+    description: "Dimensão de localidades contendo informações sobre cidades e estados."
+    columns:
+      - name: id_localidade
+        description: "Identificador único da localidade."
+      - name: cidade_localidade
+        description: "Nome da cidade."
+      - name: estado_localidade
+        description: "Nome do estado."
+      - name: pais_localidade
+        description: "Nome do país."
+      - name: cep_localidade
+        description: "Código postal (CEP) da localidade."
+
+  - name: dim_produtos
+    description: "Dimensão de produtos que contém informações sobre os produtos disponíveis."
+    columns:
+      - name: id_produto
+        description: "Identificador único do produto."
+      - name: nome_produto
+        description: "Nome do produto."
+      - name: categoria_produto
+        description: "Categoria do produto."
+      - name: preco_produto
+        description: "Preço unitário do produto."
+
+  - name: fato_vendas
+    description: "Fato de vendas contendo informações sobre as transações realizadas."
+    columns:
+      - name: id_data
+        description: "Identificador da data da venda, referenciando a dimensão de data."
+      - name: id_cliente
+        description: "Identificador do cliente que realizou a compra, referenciando a dimensão de clientes."
+      - name: id_localidade
+        description: "Identificador da localidade onde a venda ocorreu, referenciando a dimensão de localidades."
+      - name: id_produto
+        description: "Identificador do produto vendido, referenciando a dimensão de produtos."
+      - name: quantidade_venda
+        description: "Quantidade de unidades do produto vendidas na transação."
+      - name: valor_total_venda
+        description: "Valor total da venda, calculado com base na quantidade e no preço unitário do produto."

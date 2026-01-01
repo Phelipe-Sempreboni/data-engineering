@@ -1,0 +1,150 @@
+# Lab 6 - Deploy e Re-Deploy de Modelo de Dados com DBT
+
+# Crie a imagem Docker
+
+docker build -t dbt-image:lab6 .
+
+# Crie o container
+
+docker run -dit --name dsa-dbt-lab6 -p 8080:8080 -v ./dsa:/dsa dbt-image:lab6
+
+NOTA: No Windows você deve substituir ./dsa pelo caminho completo da pasta, por exemplo: C:\DSA\Cap14\dsa
+
+# Crie um projeto DBT
+
+dbt init lab6
+
+# Verifique a pasta criada com todos os artefatos
+
+# Acesse a pasta do arquivo de profile do DBT
+
+cd /root/.dbt
+
+# Edite o arquivo profiles.yml (localizado em ~/.dbt/profiles.yml) para adicionar uma configuração para o SQLite como mostrado nas aulas.
+
+vi profiles.yml
+
+lab6:
+  outputs:
+
+    dev:
+      type: sqlite
+      threads: 1
+      database: lab6.db
+      schema: 'main'
+      schemas_and_paths:
+        main: '/dsa/lab6/dados/lab6.db'
+      schema_directory: '/dsa/lab6/dados'
+
+    prod:
+      type: sqlite
+      threads: 1
+      database: <database name>
+      schema: 'main'
+      schemas_and_paths:
+        main: '/my_project/data/etl.db'
+      schema_directory: '/my_project/data'
+      extensions:
+        - '/path/to/sqlite-digest/digest.so'
+
+  target: dev
+
+# Crie a pasta de dados
+
+cd /dsa/lab6
+mkdir dados
+cd dados
+
+# Criação do banco de dados (o arquivo está sendo fornecido a você)
+
+sqlite3 lab6.db
+
+CREATE TABLE tb_clientes (
+    id INTEGER PRIMARY KEY,
+    nome TEXT,
+    sobrenome TEXT,
+    email TEXT,
+    status TEXT,
+    data_cadastro TEXT
+);
+
+INSERT INTO tb_clientes (id, nome, sobrenome, email, status, data_cadastro) VALUES
+(1000, 'John', 'Doe', 'john.doe@example.com', 'ativo', '2024-01-11'),
+(1001, 'Jane', 'Smith', 'jane.smith@example.com', 'inativo', '2024-02-14'),
+(1002, 'Alice', 'Johnson', 'alice.johnson@example.com', 'ativo', '2024-03-21'),
+(1003, 'Bob', 'Brown', 'bob.brown@example.com', 'ativo', '2024-04-15');
+
+select * from tb_clientes;
+
+CREATE TABLE tb_pedidos (
+    id_pedido INTEGER PRIMARY KEY,
+    id_cliente TEXT,
+    data_pedido TEXT,
+    valor_total DECIMAL(10, 2)
+);
+
+INSERT INTO tb_pedidos (id_pedido, id_cliente, data_pedido, valor_total) VALUES
+(001, 1003, '2024-08-01', 150.50),
+(002, 1000, '2024-08-02', 200.75),
+(003, 1003, '2024-08-03', 300.20),
+(004, 1001, '2024-08-04', 450.00),
+(005, 1001, '2024-08-05', 125.99),
+(006, 1002, '2024-08-06', 220.40),
+(007, 1002, '2024-08-07', 330.10),
+(008, 1000, '2024-08-08', 400.00),
+(009, 1002, '2024-08-09', 550.75),
+(010, 1001, '2024-08-10', 275.25);
+
+select * from tb_pedidos;
+
+.quit
+
+# Teste das configurações do DBT
+
+cd /dsa/lab6
+dbt debug
+
+# Acesse a pasta models e delete a pasta example (não precisamos dessa pasta)
+
+# Edite o arquivo dbt_project.yml e remova as últimas linhas como mostrado nas aulas
+
+# Copie o arquivo fornecido para:
+
+-- models/clientes.sql
+
+# Faça o deploy do modelo:
+
+dbt run --models clientes
+
+# Copie o arquivo fornecido para:
+
+-- models/pedidos.sql
+
+dbt run --models pedidos
+
+# Crie a pasta e arquivo conforme abaixo:
+
+-- models/mart/pedidos_clientes.sql
+
+# Use os arquivos fornecidos e siga as instruções das aulas
+
+# Deploy do modelo
+
+dbt run 
+
+# Limpar e recriar os modelos
+
+dbt run --full-refresh
+
+# Copie o arquivo fornecido para:
+
+-- models/schema.yml
+
+# No terminal, execute:
+
+dbt test
+dbt docs generate
+dbt docs serve
+
+
+

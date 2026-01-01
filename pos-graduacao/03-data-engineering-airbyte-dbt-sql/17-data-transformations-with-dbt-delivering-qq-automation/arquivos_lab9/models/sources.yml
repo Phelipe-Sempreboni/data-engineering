@@ -1,0 +1,82 @@
+# Lab 9 - Analytics Engineering e Linhagem de Dados com Python, DBT, BigQuery e Looker Studio
+
+version: 2
+
+sources:
+  - name: dsastaging
+    database: "dsalab9"
+    schema: "dsastaging"
+    tables:
+      - name: stg_clientes
+        description: "Tabela de clientes contendo informações básicas dos clientes da base de dados."
+        columns:
+          - name: cliente_id
+            description: "Identificador único do cliente."
+          - name: nome
+            description: "Nome completo do cliente."
+          - name: idade
+            description: "Idade do cliente."
+          - name: genero
+            description: "Gênero do cliente (M para masculino, F para feminino)."
+
+      - name: stg_data
+        description: "Tabela contendo informações detalhadas sobre datas."
+        columns:
+          - name: data_id
+            description: "Identificador único da data no formato YYYYMMDD."
+          - name: data
+            description: "Data no formato completo (YYYY-MM-DD)."
+          - name: ano
+            description: "Ano da data."
+          - name: mes
+            description: "Mês da data."
+          - name: dia
+            description: "Dia do mês da data."
+          - name: dia_da_semana
+            description: "Dia da semana (nome do dia)."
+          - name: trimestre
+            description: "Trimestre do ano em que a data se encontra."
+          - name: fim_de_semana
+            description: "Indica se a data corresponde a um fim de semana (True ou False)."
+
+      - name: stg_localidades
+        description: "Tabela de localidades com informações sobre cidades e estados."
+        columns:
+          - name: localidade_id
+            description: "Identificador único da localidade."
+          - name: cidade
+            description: "Nome da cidade."
+          - name: estado
+            description: "Nome do estado."
+          - name: pais
+            description: "Nome do país."
+          - name: cep
+            description: "Código postal (CEP) da localidade."
+
+      - name: stg_produtos
+        description: "Tabela de produtos disponíveis para venda."
+        columns:
+          - name: produto_id
+            description: "Identificador único do produto."
+          - name: nome_produto
+            description: "Nome do produto."
+          - name: categoria
+            description: "Categoria à qual o produto pertence."
+          - name: preco
+            description: "Preço do produto."
+
+      - name: stg_vendas
+        description: "Tabela de vendas registradas, contendo informações sobre transações de produtos."
+        columns:
+          - name: data_id
+            description: "Referência da data da venda, ligando à dimensão de data."
+          - name: cliente_id
+            description: "Referência do cliente que realizou a compra."
+          - name: localidade_id
+            description: "Referência da localidade onde a venda ocorreu."
+          - name: produto_id
+            description: "Referência do produto vendido."
+          - name: quantidade
+            description: "Quantidade de unidades do produto vendidas."
+          - name: total_venda
+            description: "Valor total da venda, calculado com base na quantidade e no preço do produto."

@@ -1,0 +1,9 @@
+# Data Science Academy
+
+# Instale o Docker Desktop local no seu computador.
+
+# Instale o Airbyte localmente conforme instruções da documentação e como orientação das aulas. Use a opção de low-resource se tiver equipamento com baixa capacidade computacional. Lembre-se de abrir a janela do Docker Desktop para iniciar o docker engine antes de instalar o Airbyte.
+
+Link da documentação:
+
+https://docs.airbyte.com/using-airbyte/getting-started/oss-quickstart

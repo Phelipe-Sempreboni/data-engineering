@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: vendas
+    description: "View que retorna todas as vendas com valor menor que 500."
+    tests:
+      - unique:
+          column_name: venda_id
+      - not_null:
+          column_name: venda_id
+      - not_null:
+          column_name: cliente_id
+      - not_null:
+          column_name: valor
+    columns:
+      - name: venda_id
+        description: "Identificador único da venda."
+      - name: cliente_id
+        description: "Identificador único do cliente que realizou a venda."
+      - name: data_venda
+        description: "Data em que a venda foi realizada."
+      - name: valor
+        description: "Valor da venda (deve ser inferior a 500)."
+
+  - name: clientes
+    description: "View que retorna os dados dos clientes."
+    tests:
+      - unique:
+          column_name: cliente_id
+      - not_null:
+          column_name: cliente_id
+      - not_null:
+          column_name: nome
+    columns:
+      - name: cliente_id
+        description: "Identificador único do cliente."
+      - name: nome
+        description: "Nome completo do cliente."
+      - name: cidade
+        description: "Cidade onde o cliente reside."
+      - name: estado
+        description: "Estado onde o cliente reside."
+
+  - name: clientes_sudeste
+    description: "View que retorna os dados dos clientes localizados no sudeste."
+    tests:
+      - unique:
+          column_name: cliente_id
+      - not_null:
+          column_name: cliente_id
+      - not_null:
+          column_name: nome
+    columns:
+      - name: cliente_id
+        description: "Identificador único do cliente."
+      - name: nome
+        description: "Nome completo do cliente."
+      - name: cidade
+        description: "Cidade onde o cliente reside."
+      - name: estado
+        description: "Estado onde o cliente reside (SP ou RJ)."
+        tests:
+          - accepted_values:
+              values: ['SP', 'RJ', 'MG', 'ES']

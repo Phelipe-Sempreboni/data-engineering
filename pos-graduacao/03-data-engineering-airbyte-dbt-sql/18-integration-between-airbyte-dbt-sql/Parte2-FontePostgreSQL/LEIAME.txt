@@ -1,0 +1,23 @@
+# Data Science Academy
+
+# Lembre-se de abrir a janela do Docker Desktop para iniciar o docker engine.
+
+# Execute o comando abaixo no terminal ou prompt de comando para criar o container Docker:
+
+docker run -d --name dbdsa_fonte -p 5783:5432 -e POSTGRES_DB=dbfonte -e POSTGRES_USER=dsa -e POSTGRES_PASSWORD=dsa5783 postgres:17.2
+
+# Instale o pgAdmin e acesse o banco de dados criado.
+
+# No pgAdmin, execute o comando abaixo para criar a role chamada postgres:
+
+CREATE ROLE postgres WITH
+	NOLOGIN
+	SUPERUSER
+	CREATEDB
+	CREATEROLE
+	INHERIT
+	NOREPLICATION
+	BYPASSRLS
+	CONNECTION LIMIT -1;
+
+# Restaure o banco de dados fonte como mostrado nas aulas.

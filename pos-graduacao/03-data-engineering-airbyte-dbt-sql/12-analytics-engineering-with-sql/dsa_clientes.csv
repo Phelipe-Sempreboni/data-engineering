@@ -1,0 +1,21 @@
+id_cliente,nome,email,criado_em
+1,John Doe,johndoe@teste.com,2024-01-15 10:30:00
+2,Jane Smith,janesmith@teste.com,2024-02-20 14:45:00
+3,Emily Johnson,emilyj@teste.com,2024-03-12 08:15:00
+4,Michael Brown,michaelb@teste.com,2025-04-05 17:20:00
+5,David Wilson,davidwilson@teste.com,2025-05-10 09:30:00
+6,Sarah Davis,sarahdavis@teste.com,2025-06-22 11:45:00
+7,James Martinez,jamesm@teste.com,2025-07-14 13:50:00
+8,Patricia Garcia,patriciag@teste.com,2025-08-18 15:10:00
+9,Robert Rodriguez,robertr@teste.com,2025-09-25 16:25:00
+10,Linda Martinez,lindam@teste.com,2025-10-30 12:00:00
+11,Charles Harris,charlesh@teste.com,2025-12-05 14:30:00
+12,Barbara Clark,barbarac@teste.com,2025-12-11 09:45:00
+13,Paul Lewis,paull@teste.com,2026-01-20 07:50:00
+14,Nancy Lee,nancyl@teste.com,2026-02-28 13:16:00
+15,Mark Walker,markw@teste.com,2026-03-10 10:41:00
+16,Elizabeth Hall,elizabethh@teste.com,2026-04-21 14:05:00
+17,Thomas Allen,thomasa@teste.com,2026-05-17 08:32:00
+18,Mary Young,maryy@teste.com,2026-06-30 11:35:00
+19,Christopher King,christopherk@teste.com,2026-07-09 16:50:00
+20,Jessica Wright,jessicaw@teste.com,2026-08-23 09:10:00

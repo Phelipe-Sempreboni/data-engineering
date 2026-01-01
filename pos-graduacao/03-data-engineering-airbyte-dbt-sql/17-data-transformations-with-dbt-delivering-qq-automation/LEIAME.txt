@@ -1,0 +1,46 @@
+# Lab 9 - Analytics Engineering e Linhagem de Dados com Python, DBT, BigQuery e Looker Studio
+
+# Crie a imagem Docker
+
+docker build -t dbt-image:lab9 .
+
+# Crie o container
+
+docker run -dit --name dsa-dbt-lab9 -p 8080:8080 -v ./dsa:/dsa dbt-image:lab9
+
+NOTA: No Windows você deve substituir ./dsa pelo caminho completo da pasta, por exemplo: C:\DSA\Cap17\dsa
+
+# Crie um projeto DBT e faça a configuração como mostrado nas aulas
+
+dbt init lab9
+
+# Verifique a pasta criada com todos os artefatos
+
+# Acesse a pasta e execute o debug para testar a configuração
+
+cd /dsa/lab9
+dbt debug
+
+# Copie os arquivos para as respectivas pastas conforme mostrado nas aulas
+
+# Deploy dos modelos
+
+dbt run 
+
+# Limpar e recriar os modelos
+
+dbt run --full-refresh
+
+# Target em produção
+
+dbt run --target prod
+
+# Documentação
+
+dbt docs generate
+dbt docs serve --host 0.0.0.0 --port 8080
+
+
+
+
+

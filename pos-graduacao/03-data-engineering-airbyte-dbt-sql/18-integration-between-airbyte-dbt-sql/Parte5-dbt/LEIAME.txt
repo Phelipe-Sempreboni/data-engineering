@@ -1,0 +1,39 @@
+# Data Science Academy
+
+# Abra o Docker Desktop e mantenha a janela aberta.
+
+# Abra o terminal ou prompt de comando e crie a imagem Docker com o comando abaixo:
+
+docker build -t dbt-image:projetodsa .
+
+# Crie o container:
+
+docker run -dit --name dsa-dbt-projetodsa -p 8080:8080 -p 3333:3333 -v ./dsa:/dsa dbt-image:projetodsa
+
+NOTA: No Windows você deve substituir ./dsa pelo caminho completo da pasta, por exemplo: C:\DSA\projetodsa
+
+# Crie um projeto DBT:
+
+dbt init projetodsa
+
+# Configure as variáveis conforme mostrado nas aulas.
+
+# Dentro da pasta do projeto, execute o comando abaixo para efetuar o Debug e testar a configuração:
+
+dbt debug
+
+# Deploy dos modelos (na pasta do projeto):
+
+dbt run 
+
+# Limpar e recriar os modelos (na pasta do projeto):
+
+dbt run --full-refresh
+
+# Target em produção (na pasta do projeto):
+
+dbt run --target prod
+
+
+
+

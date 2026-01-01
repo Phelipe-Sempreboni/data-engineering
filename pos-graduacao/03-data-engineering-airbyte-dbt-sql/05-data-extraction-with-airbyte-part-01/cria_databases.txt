@@ -1,0 +1,11 @@
+# Lab 1 - Movimentação de Dados Entre Bancos de Dados com Airbyte
+
+
+# Cria o container Docker com o banco de dados fonte
+
+docker run -d --name dbdsa_fonte -p 5780:5432 -e POSTGRES_DB=dsadbFonte -e POSTGRES_USER=dsa -e POSTGRES_PASSWORD=dsa5780 postgres:16.1
+
+
+# Cria o container Docker com o banco de dados destino
+
+docker run -d --name dbdsa_destino -p 5785:5432 -e POSTGRES_DB=dsadbDestino -e POSTGRES_USER=dsa -e POSTGRES_PASSWORD=dsa5785 postgres:16.1

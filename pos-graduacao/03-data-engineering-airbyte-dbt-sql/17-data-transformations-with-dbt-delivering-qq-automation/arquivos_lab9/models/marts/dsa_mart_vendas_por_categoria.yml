@@ -1,0 +1,14 @@
+# Lab 9 - Analytics Engineering e Linhagem de Dados com Python, DBT, BigQuery e Looker Studio
+
+version: 2
+
+models:
+  - name: dsa_mart_vendas_por_categoria
+    description: "Relatório que apresenta o total de vendas por categoria de produto, detalhando a quantidade vendida e o valor total arrecadado para cada categoria."
+    columns:
+      - name: categoria_produto
+        description: "Categoria à qual os produtos vendidos pertencem."
+      - name: quantidade_vendida
+        description: "Quantidade total vendida de todos os produtos dentro da categoria."
+      - name: valor_total_vendas
+        description: "Valor total arrecadado com as vendas de todos os produtos na categoria."

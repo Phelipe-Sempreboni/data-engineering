@@ -1,0 +1,142 @@
+# Lab 7 - Criação de Macros, Refatoramento e Deploy em Produção com DBT
+
+# Crie a imagem Docker
+
+docker build -t dbt-image:lab7 .
+
+# Crie o container
+
+docker run -dit --name dsa-dbt-lab7 -p 8080:8080 -v ./dsa:/dsa dbt-image:lab7
+
+NOTA: No Windows você deve substituir ./dsa pelo caminho completo da pasta, por exemplo: C:\DSA\Cap15\dsa
+
+# Crie um projeto DBT
+
+dbt init lab7
+
+# Verifique a pasta criada com todos os artefatos
+
+# Acesse a pasta do arquivo de profile do DBT
+
+cd /root/.dbt
+
+# Edite o arquivo profiles.yml (localizado em ~/.dbt/profiles.yml) para adicionar uma configuração para o SQLite como mostrado nas aulas.
+
+vi profiles.yml
+
+lab7:
+  target: dev  # O ambiente padrão será dev, mas você pode trocar para prod durante a execução
+  outputs:
+    dev:
+      type: sqlite
+      threads: 1
+      database: lab7-dev.db
+      schema: 'main'
+      schemas_and_paths:
+        main: '/dsa/lab7/dados-dev/lab7-dev.db'
+      schema_directory: '/dsa/lab7/dados-dev'
+    prod:
+      type: sqlite
+      threads: 1
+      database: lab7-prd.db
+      schema: 'main'
+      schemas_and_paths:
+        main: '/dsa/lab7/dados-prd/lab7-prd.db'
+      schema_directory: '/dsa/lab7/dados-prd'
+
+# Crie as pastas de dados
+
+cd /dsa/lab7
+mkdir dados-dev
+mkdir dados-prd
+cd dados-prd
+
+# Criação do banco de dados (o arquivo está sendo fornecido a você)
+
+sqlite3 lab7-prd.db
+
+-- Criando a tabela tb_clientes
+CREATE TABLE tb_clientes (
+    cliente_id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    cidade TEXT NOT NULL,
+    estado TEXT NOT NULL
+);
+
+-- Inserindo dados na tabela tb_clientes
+INSERT INTO tb_clientes (cliente_id, nome, cidade, estado) VALUES
+(1, 'João Silva', 'São Paulo', 'SP'),
+(2, 'Maria Souza', 'Rio de Janeiro', 'RJ'),
+(3, 'Pedro Santos', 'Belo Horizonte', 'MG'),
+(4, 'Matias Teixeira', 'Vila Velha', 'ES'),
+(5, 'Carolina Tavares', 'Campos', 'RJ'),
+(6, 'Otávio Moreira', 'Curitiba', 'PR');
+
+SELECT * FROM tb_clientes;
+
+-- Criando a tabela tb_vendas
+CREATE TABLE tb_vendas (
+    venda_id INTEGER PRIMARY KEY,
+    cliente_id INTEGER,
+    data_venda DATE,
+    valor REAL,
+    FOREIGN KEY (cliente_id) REFERENCES tb_clientes(cliente_id)
+);
+
+-- Inserindo dados na tabela tb_vendas
+INSERT INTO tb_vendas (venda_id, cliente_id, data_venda, valor) VALUES
+(1, 1, '2025-09-01', 100.50),
+(2, 1, '2025-09-10', 250.00),
+(3, 2, '2025-09-12', 300.00),
+(4, 3, '2025-09-15', 150.00),
+(5, 4, '2025-09-16', 435.00),
+(6, 4, '2025-09-16', 78.00),
+(7, 5, '2025-09-16', 168.00),
+(8, 6, '2025-10-14', 179.00),
+(9, 4, '2025-10-22', 290.00),
+(10, 2, '2025-10-27', 110.00);
+
+SELECT * FROM tb_vendas;
+
+.quit
+
+# O banco de dev é uma cópia do banco de produção
+
+# Teste das configurações do DBT
+
+cd /dsa/lab7
+dbt debug
+
+# Acesse a pasta models e delete a pasta example (não precisamos dessa pasta)
+
+# Edite o arquivo dbt_project.yml e remova as últimas linhas como mostrado nas aulas
+
+# Organize os arquivos como demonstrado nas aulas
+
+# Deploy do modelo
+
+dbt run 
+
+# Limpar e recriar os modelos
+
+dbt run --full-refresh
+
+# Target em produção
+
+dbt run --target prod
+
+dbt run --select clientes --target prod
+
+# Copie o arquivo fornecido para:
+
+-- models/schema.yml
+-- tests/less_than_vendas_valor.sql
+
+# No terminal, execute:
+
+dbt test
+dbt docs generate
+dbt docs serve
+
+
+

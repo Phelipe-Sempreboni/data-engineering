@@ -1,0 +1,89 @@
+Plano 1:
+
+"Limit  (cost=302539.85..302539.87 rows=10 width=78) (actual time=459.785..459.789 rows=10 loops=1)"
+"  ->  Sort  (cost=302539.85..302548.18 rows=3333 width=78) (actual time=444.573..444.576 rows=10 loops=1)"
+"        Sort Key: ((SubPlan 1)) DESC"
+"        Sort Method: top-N heapsort  Memory: 27kB"
+"        ->  Seq Scan on clientes c  (cost=0.00..302467.82 rows=3333 width=78) (actual time=0.093..439.654 rows=8811 loops=1)"
+"              Filter: ((SubPlan 2) > '1000'::numeric)"
+"              Rows Removed by Filter: 1189"
+"              SubPlan 1"
+"                ->  Aggregate  (cost=22.66..22.67 rows=1 width=32) (actual time=0.012..0.012 rows=1 loops=8811)"
+"                      ->  Bitmap Heap Scan on pedidos o  (cost=4.33..22.64 rows=5 width=6) (actual time=0.005..0.009 rows=5 loops=8811)"
+"                            Recheck Cond: (id_cliente = c.id_cliente)"
+"                            Heap Blocks: exact=47387"
+"                            ->  Bitmap Index Scan on idx_id_cliente_pedido  (cost=0.00..4.33 rows=5 width=0) (actual time=0.003..0.003 rows=5 loops=8811)"
+"                                  Index Cond: (id_cliente = c.id_cliente)"
+"              SubPlan 2"
+"                ->  Aggregate  (cost=22.66..22.67 rows=1 width=32) (actual time=0.031..0.031 rows=1 loops=10000)"
+"                      ->  Bitmap Heap Scan on pedidos o_1  (cost=4.33..22.64 rows=5 width=6) (actual time=0.005..0.010 rows=5 loops=10000)"
+"                            Recheck Cond: (id_cliente = c.id_cliente)"
+"                            Heap Blocks: exact=49668"
+"                            ->  Bitmap Index Scan on idx_id_cliente_pedido  (cost=0.00..4.33 rows=5 width=0) (actual time=0.003..0.003 rows=5 loops=10000)"
+"                                  Index Cond: (id_cliente = c.id_cliente)"
+"Planning Time: 0.578 ms"
+"JIT:"
+"  Functions: 21"
+"  Options: Inlining false, Optimization false, Expressions true, Deforming true"
+"  Timing: Generation 1.085 ms, Inlining 0.000 ms, Optimization 0.736 ms, Emission 14.489 ms, Total 16.311 ms"
+"Execution Time: 461.253 ms"
+
+
+Plano 2:
+
+"Limit  (cost=1645.01..1645.04 rows=10 width=78) (actual time=75.123..75.128 rows=10 loops=1)"
+"  ->  Sort  (cost=1645.01..1653.08 rows=3229 width=78) (actual time=75.120..75.124 rows=10 loops=1)"
+"        Sort Key: t.total_pedidos DESC"
+"        Sort Method: top-N heapsort  Memory: 27kB"
+"        ->  Hash Join  (cost=1335.97..1575.23 rows=3229 width=78) (actual time=66.905..72.079 rows=8811 loops=1)"
+"              Hash Cond: (c.id_cliente = t.id_cliente)"
+"              ->  Seq Scan on clientes c  (cost=0.00..213.00 rows=10000 width=46) (actual time=0.017..1.209 rows=10000 loops=1)"
+"              ->  Hash  (cost=1295.61..1295.61 rows=3229 width=36) (actual time=66.876..66.877 rows=8811 loops=1)"
+"                    Buckets: 16384 (originally 4096)  Batches: 1 (originally 1)  Memory Usage: 507kB"
+"                    ->  Subquery Scan on t  (cost=1118.00..1295.61 rows=3229 width=36) (actual time=52.627..63.594 rows=8811 loops=1)"
+"                          ->  HashAggregate  (cost=1118.00..1263.32 rows=3229 width=36) (actual time=52.626..61.740 rows=8811 loops=1)"
+"                                Group Key: o.id_cliente"
+"                                Filter: (sum(o.valor_pedido) > '1000'::numeric)"
+"                                Batches: 1  Memory Usage: 4241kB"
+"                                Rows Removed by Filter: 1119"
+"                                ->  Seq Scan on pedidos o  (cost=0.00..868.00 rows=50000 width=10) (actual time=0.006..6.209 rows=50000 loops=1)"
+"Planning Time: 1.530 ms"
+"Execution Time: 75.577 ms"
+
+
+Diferenças de Performance
+
+Custo Total e Tempo de Execução:
+
+Plano 1: Execution Time: 461.253 ms
+Plano 2: Execution Time: 75.577 ms
+
+O segundo plano é significativamente mais rápido, com um tempo de execução total muito menor.
+
+Método de Ordenação:
+
+Ambos os planos utilizam top-N heapsort para limitar e ordenar os resultados, mas a diferença no tempo de execução da ordenação é evidente.
+
+Seq Scan e SubPlan:
+
+Plano 1:
+
+- Realiza uma varredura sequencial na tabela clientes.
+- Executa dois subplanos (SubPlan 1 e SubPlan 2) para cada linha em clientes, o que resulta em um número elevado de loops e operações de agregação para calcular o valor máximo dos pedidos.
+
+Plano 2:
+
+- Realiza uma varredura sequencial na tabela clientes.
+- Utiliza uma junção hash (Hash Join) com uma subconsulta pré-agregada (Subquery Scan on t), que já calcula o total de pedidos para cada cliente de uma só vez, reduzindo a quantidade de operações repetitivas.
+
+Operações de Junção:
+
+Plano 1: Executa junções baseadas em scans de índices bitmap para cada cliente, o que é mais caro em termos de tempo de execução devido ao número de loops.
+
+Plano 2: Utiliza um Hash Join, que é mais eficiente quando as chaves de junção cabem na memória, resultando em uma operação mais rápida.
+
+Conclusão
+
+O segundo plano é claramente superior em termos de performance. Ele evita a repetição de operações subconsultas para cada linha da tabela clientes, utilizando uma agregação prévia e um hash join para realizar as junções de maneira mais eficiente. A principal razão para a diferença de performance é a maneira como os dados são pré-agregados e como as junções são realizadas, resultando em um tempo de execução muito menor.
+
+

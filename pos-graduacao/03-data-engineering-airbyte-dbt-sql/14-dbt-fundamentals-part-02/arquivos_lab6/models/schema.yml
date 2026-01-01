@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: clientes
+    description: "Tabela de clientes"
+    columns:
+      - name: id
+        description: "Identificador único do cliente"
+        tests:
+          - unique
+          - not_null
+      - name: nome
+        description: "Nome do cliente"
+      - name: email
+        description: "E-mail do cliente"
+        tests:
+          - not_null
+      - name: data_cadastro
+        description: "Data de cadastro do cliente"
+      - name: tipo_cliente
+        description: "Classificação do cliente (Ativo ou Inativo)"
+
+  - name: pedidos
+    description: "Tabela de pedidos"
+    columns:
+      - name: id_pedido
+        description: "Identificador único do pedido"
+        tests:
+          - unique
+          - not_null
+      - name: id_cliente
+        description: "ID do cliente que fez o pedido"
+        tests:
+          - relationships:
+              to: ref('clientes')
+              field: id
+      - name: data_pedido
+        description: "Data do pedido"
+      - name: valor_total
+        description: "Valor total do pedido"
+      - name: nome_cliente
+        description: "Nome do cliente que fez o pedido"

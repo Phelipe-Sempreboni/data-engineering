@@ -1,0 +1,13 @@
+# Lab 4 - Plano de Execução e Otimização de Consultas em Pipelines de Engenharia de Dados
+
+# Preparando o Ambiente de Trabalho
+
+# 1- Instale o Docker Desktop conforme instruções das aulas.
+
+# 2- Abra o terminal ou prompt de comando e execute a instrução abaixo para criar o container Docker:
+
+docker run --name dsa-sql -p 5559:5432 -e POSTGRES_USER=dsa -e POSTGRES_PASSWORD=dsa1010 -e POSTGRES_DB=dsadb -d postgres:16.1
+
+# 3- Instale o pgAdmin conforme instruções das aulas.
+
+# Obs: Quando acessar o pgAdmin pela primeira vez crie uma senha master, por exemplo: dsa1010

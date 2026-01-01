@@ -1,0 +1,9 @@
+# Data Science Academy
+
+# Acesse o Airbyte local pelo navegador.
+
+# Crie fonte, destino e conexão conforme mostrado nas aulas.
+
+# Execute o processo EL (Extração e Carga).
+
+# O processo T (Transformação) será feito com dbt sendo executado no Snowflake.

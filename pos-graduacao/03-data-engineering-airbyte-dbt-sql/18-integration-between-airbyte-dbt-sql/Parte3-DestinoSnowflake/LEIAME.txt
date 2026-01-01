@@ -1,0 +1,18 @@
+# Data Science Academy
+
+# Crie sua conta gratuita no Snowflake acessando o link abaixo:
+
+https://signup.snowflake.com/
+
+# Explore a interface do Snowflake para se familiarizar com a plataforma.
+
+# Crie banco de dados e schema no Snowflake.
+
+# Preencha as variáveis abaixo com seus dados. Usaremos estas variáveis mais tarde durante a configuração do Airbyte e do dbt.
+
+role = 'ACCOUNTADMIN';
+warehouse = 'COMPUTE_WH';
+database = 'DSA_DATABASE';
+schema = 'DSA_SCHEMA';
+username = 'usuario_snowflake';
+password = 'senha_snowflake';

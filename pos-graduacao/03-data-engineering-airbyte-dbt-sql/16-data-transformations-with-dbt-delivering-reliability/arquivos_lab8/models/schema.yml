@@ -1,0 +1,92 @@
+# Lab 8 - Automação de Testes de Modelos de Dados no DBT
+# Neste arquivo definimos os testes nativos do DBT e os testes em que usamos macros
+
+# Definindo a versão do arquivo de configuração
+version: 2
+
+# Definição do modelo "clientes"
+models:
+  # Primeiro modelo: clientes
+  - name: clientes
+    # Definição das colunas do modelo "clientes"
+    columns:
+      # Coluna "cliente_id" com os testes aplicados
+      - name: cliente_id
+        # Testes aplicados à coluna "cliente_id"
+        tests:
+          # O valor de "cliente_id" não pode ser nulo
+          - not_null
+          # O valor de "cliente_id" deve ser único
+          - unique
+      # Coluna "email" com os testes aplicados
+      - name: email
+        # Testes aplicados à coluna "email"
+        tests:
+          # O valor de "email" deve ser único
+          - unique
+      # Coluna "cidade" com os testes aplicados
+      - name: cidade
+        # Testes aplicados à coluna "cidade"
+        tests:
+          # Aceita apenas valores específicos para a coluna "cidade"
+          - accepted_values:
+              # Lista de cidades aceitas
+              values: ['Fortaleza', 'Rio de Janeiro', 'Porto Alegre']
+
+  # Segundo modelo: produtos
+  - name: produtos
+    # Definição das colunas do modelo "produtos"
+    columns:
+      # Coluna "produto_id" com os testes aplicados
+      - name: produto_id
+        # Testes aplicados à coluna "produto_id"
+        tests:
+          # O valor de "produto_id" não pode ser nulo
+          - not_null
+          # O valor de "produto_id" deve ser único
+          - unique
+      # Coluna "preco" com os testes aplicados
+      - name: preco
+        # Testes aplicados à coluna "preco"
+        tests:
+          # O valor de "preco" não pode ser nulo
+          - not_null
+          # Teste de range via macro
+          - accepted_range:
+              min_value: 10    # Define o valor mínimo aceito para o preço
+              max_value: 5000  # Define o valor máximo aceito para o preço
+
+  # Terceiro modelo: pedidos
+  - name: pedidos
+    # Definição das colunas do modelo "pedidos"
+    columns:
+      # Coluna "pedido_id" com os testes aplicados
+      - name: pedido_id
+        # Testes aplicados à coluna "pedido_id"
+        tests:
+          # O valor de "pedido_id" não pode ser nulo
+          - not_null
+          # O valor de "pedido_id" deve ser único
+          - unique
+      # Coluna "cliente_id" com os testes aplicados
+      - name: cliente_id
+        # Testes aplicados à coluna "cliente_id"
+        tests:
+          # Relacionamento com a coluna "cliente_id" do modelo "clientes"
+          - relationships:
+              to: ref('clientes')
+              field: cliente_id
+      # Coluna "produto_id" com os testes aplicados
+      - name: produto_id
+        # Testes aplicados à coluna "produto_id"
+        tests:
+          # Relacionamento com a coluna "produto_id" do modelo "produtos"
+          - relationships:
+              to: ref('produtos')
+              field: produto_id
+      - name: quantidade
+        tests:
+          # Verifica se a quantidade é maior que 0
+          - accepted_range:
+              min_value: 0     # Quantidade mínima permitida
+              max_value: 1000  # Define um limite superior de segurança para o valor da quantidade

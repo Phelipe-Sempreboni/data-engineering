@@ -1,0 +1,19 @@
+# Lab 5 - Analytics Engineering - Python, SQL e LLM Para Extrair Insights em Pipelines de Engenharia de Dados
+
+# Instruções:
+
+# 1- Instale o Docker Desktop conforme instruções das aulas.
+
+# 2- Abra o terminal ou prompt de comando e execute a instrução abaixo para criar o container Docker:
+
+docker run --name dsa-lab5-sql-python-llm -p 5959:5432 -e POSTGRES_USER=dsa -e POSTGRES_PASSWORD=dsa1010 -e POSTGRES_DB=dsadb -d postgres:16.1
+
+# 3- Instale o Anaconda Python conforme instruções das aulas.
+
+# 4- Abra o terminal ou prompt de comando, navegue até a pasta onde estão os arquivos e instale as dependências: 
+
+pip install -r requirements.txt
+
+# 5- Abra o terminal ou prompt de comando, navegue até a pasta onde estão os arquivos e execute o pipeline assim:
+
+python Lab5-07-Run-Pipeline.py

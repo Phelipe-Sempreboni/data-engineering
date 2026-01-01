@@ -1,0 +1,11 @@
+cliente_id,nome,idade,genero,email
+1,Cliente 1,67,M,cliente1@exemplo.com
+2,Cliente 2,26,M,cliente2@exemplo.com
+3,Cliente 3,64,F,cliente3@exemplo.com
+4,Cliente 4,20,M,cliente4@exemplo.com
+5,Cliente 5,49,F,cliente5@exemplo.com
+6,Cliente 6,27,M,cliente6@exemplo.com
+7,Cliente 7,46,F,cliente7@exemplo.com
+8,Cliente 8,42,M,cliente8@exemplo.com
+9,Cliente 9,26,F,cliente9@exemplo.com
+10,Cliente 10,18,F,cliente10@exemplo.com

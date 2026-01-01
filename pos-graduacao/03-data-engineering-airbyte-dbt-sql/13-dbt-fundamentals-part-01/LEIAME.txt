@@ -1,0 +1,152 @@
+# Executando Transformação de Dados com DBT
+
+# Crie a imagem Docker
+docker build -t dbt-image .
+
+# Crie o container
+docker run -dit --name dsa-dbt -p 8080:8080 dbt-image
+
+# Crie um projeto DBT
+dbt init projeto_dsa
+
+# Acesse a pasta do projeto para verificar os artefatos criados
+cd projeto_dsa
+ls -la
+
+# Acesse a pasta do arquivo de profile do DBT
+cd /root/.dbt
+
+# Edite o arquivo profiles.yml (localizado em ~/.dbt/profiles.yml) para adicionar uma configuração para o SQLite como mostrado nas aulas.
+
+vi profiles.yml
+
+projeto_dsa:
+  outputs:
+
+    dev:
+      type: sqlite
+      threads: 1
+      database: etl.db
+      schema: 'main'
+      schemas_and_paths:
+        main: '/dsa/projeto_dsa/dados/etl.db'
+      schema_directory: '/dsa/projeto_dsa/dados'
+
+    prod:
+      type: sqlite
+      threads: 1
+      database: <database name>
+      schema: 'main'
+      schemas_and_paths:
+        main: '/my_project/data/etl.db'
+      schema_directory: '/my_project/data'
+      extensions:
+        - '/path/to/sqlite-digest/digest.so'
+
+  target: dev
+
+
+# Crie a pasta de dados
+cd /dsa/projeto_dsa
+mkdir dados
+
+# Adicione seu arquivo CSV (dados.csv) no diretório do projeto (/dsa/projeto_dsa/dados).
+
+cd dados
+vi dados.csv
+
+id,nome,salario
+1,Alice,3000
+2,Bob,2500
+3,Charlie,3500
+
+# Acesse o banco de dados
+sqlite3 /dsa/projeto_dsa/dados/etl.db
+
+# Cria a tabela
+
+CREATE TABLE dados_originais (
+    id INTEGER,
+    nome TEXT,
+    salario INTEGER
+);
+
+.mode csv
+.import /dsa/projeto_dsa/dados/dados.csv dados_originais
+.quit
+
+# Acesse o banco de dados
+sqlite3 /dsa/projeto_dsa/dados/etl.db
+
+select * from dados_originais;
+select salario from dados_originais;
+.quit
+
+# Agora, crie um modelo DBT para processar e transformar os dados. Crie um arquivo SQL no diretório models do seu projeto DBT, por exemplo processa_dados.sql:
+
+cd /dsa/projeto_dsa/models
+vi processa_dados.sql
+
+WITH source AS (
+    SELECT * 
+    FROM dados_originais
+)
+
+SELECT
+    id,
+    nome,
+    salario,
+    salario * 0.10 AS bonus
+FROM source
+
+# Acesse a pasta do projeto e execute o DBT para rodar o modelo e aplicar a transformação:
+
+cd /dsa/projeto_dsa
+dbt run
+
+# Acesse o banco de dados e verifique a transformação feita pelo DBT:
+
+sqlite3 /dsa/projeto_dsa/dados/etl.db
+
+select * from main.dados_originais;
+select * from main.processa_dados;
+.quit
+
+# Vamos gerar e acessar a documentação:
+
+cd /dsa/projeto_dsa
+dbt docs generate
+dbt docs serve
+
+Acesse a documentação pelo navegador: http://localhost:8080
+
+# Vamos melhorar a documentação:
+
+cd /dsa/projeto_dsa/models
+rm -rf example
+vi schema.yml
+
+version: 2
+
+models:
+  - name: processa_dados
+    description: "Este modelo processa os dados para análise."
+    columns:
+      - name: id
+        description: "O identificador único para cada registro."
+      - name: nome
+        description: "O nome da pessoa."
+      - name: salario
+        description: "O salário da pessoa."
+      - name: bonus
+        description: "O bônus calculado como 10% do salário."
+
+# Vamos gerar e acessar a documentação:
+
+cd /dsa/projeto_dsa
+dbt docs generate
+dbt docs serve
+
+Acesse a documentação pelo navegador: http://localhost:8080
+
+

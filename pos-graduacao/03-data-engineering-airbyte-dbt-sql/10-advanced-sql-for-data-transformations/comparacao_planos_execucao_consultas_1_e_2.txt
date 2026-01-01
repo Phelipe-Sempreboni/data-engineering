@@ -1,0 +1,101 @@
+Plano 1:
+
+"Sort  (cost=2286.02..2311.02 rows=10000 width=33) (actual time=59.269..59.974 rows=9154 loops=1)"
+"  Sort Key: (count(o.id_pedido)) DESC"
+"  Sort Method: quicksort  Memory: 956kB"
+"  ->  HashAggregate  (cost=1521.63..1621.63 rows=10000 width=33) (actual time=53.106..55.775 rows=9154 loops=1)"
+"        Group Key: c.id_cliente"
+"        Batches: 1  Memory Usage: 1425kB"
+"        ->  Hash Join  (cost=338.00..1396.64 rows=24998 width=29) (actual time=6.248..37.488 rows=25023 loops=1)"
+"              Hash Cond: (o.id_cliente = c.id_cliente)"
+"              ->  Seq Scan on pedidos o  (cost=0.00..993.00 rows=24998 width=8) (actual time=0.060..14.404 rows=25023 loops=1)"
+"                    Filter: ((status)::text = 'concluido'::text)"
+"                    Rows Removed by Filter: 24977"
+"              ->  Hash  (cost=213.00..213.00 rows=10000 width=25) (actual time=6.165..6.167 rows=10000 loops=1)"
+"                    Buckets: 16384  Batches: 1  Memory Usage: 703kB"
+"                    ->  Seq Scan on clientes c  (cost=0.00..213.00 rows=10000 width=25) (actual time=0.009..2.510 rows=10000 loops=1)"
+"Planning Time: 0.331 ms"
+"Execution Time: 60.632 ms"
+
+
+Plano 2:
+
+"Sort  (cost=2284.88..2308.42 rows=9417 width=33) (actual time=29.155..29.979 rows=9154 loops=1)"
+"  Sort Key: sub.num_pedidos DESC"
+"  Sort Method: quicksort  Memory: 956kB"
+"  ->  Hash Join  (cost=1424.04..1663.30 rows=9417 width=33) (actual time=21.401..26.671 rows=9154 loops=1)"
+"        Hash Cond: (c.id_cliente = sub.id_cliente)"
+"        ->  Seq Scan on clientes c  (cost=0.00..213.00 rows=10000 width=25) (actual time=0.010..1.276 rows=10000 loops=1)"
+"        ->  Hash  (cost=1306.33..1306.33 rows=9417 width=12) (actual time=21.376..21.379 rows=9154 loops=1)"
+"              Buckets: 16384  Batches: 1  Memory Usage: 522kB"
+"              ->  Subquery Scan on sub  (cost=1117.99..1306.33 rows=9417 width=12) (actual time=16.331..19.816 rows=9154 loops=1)"
+"                    ->  HashAggregate  (cost=1117.99..1212.16 rows=9417 width=12) (actual time=16.330..18.716 rows=9154 loops=1)"
+"                          Group Key: o.id_cliente"
+"                          Batches: 1  Memory Usage: 1169kB"
+"                          ->  Seq Scan on pedidos o  (cost=0.00..993.00 rows=24998 width=8) (actual time=0.006..8.316 rows=25023 loops=1)"
+"                                Filter: ((status)::text = 'concluido'::text)"
+"                                Rows Removed by Filter: 24977"
+"Planning Time: 0.168 ms"
+"Execution Time: 30.660 ms"
+
+
+Comparação dos Planos:
+
+Sort:
+
+Plano 1: actual time=59.269..59.974
+Plano 2: actual time=29.155..29.979
+
+O segundo plano executa a operação de ordenação quase duas vezes mais rápido.
+
+HashAggregate:
+
+Plano 1: actual time=53.106..55.775
+Plano 2: actual time=16.330..18.716
+
+O segundo plano também executa a agregação de hash de forma significativamente mais rápida.
+
+Hash Join:
+
+Plano 1: actual time=6.248..37.488
+Plano 2: actual time=21.401..26.671
+
+O segundo plano é mais eficiente na execução do Hash Join.
+
+Seq Scan em pedidos:
+
+Plano 1: actual time=0.060..14.404
+Plano 2: actual time=0.006..8.316
+
+Ambos os planos utilizam uma varredura sequencial em pedidos, mas o segundo plano realiza essa operação de forma mais rápida.
+
+Seq Scan em clientes:
+
+Plano 1: actual time=0.009..2.510
+Plano 2: actual time=0.010..1.276
+
+O segundo plano é ligeiramente mais eficiente na varredura sequencial em clientes.
+
+Conclusão
+
+O segundo plano é claramente melhor. Ele é mais eficiente em todas as etapas críticas, resultando em um tempo de execução total significativamente menor:
+
+Plano 1: Execution Time: 60.632 ms
+Plano 2: Execution Time: 30.660 ms
+
+Razões para o Desempenho Melhor do Segundo Plano
+
+Otimização da Subconsulta:
+
+O segundo plano utiliza uma subconsulta que agrupa e filtra pedidos antes de realizar a junção com clientes. Isso reduz a quantidade de dados que precisam ser processados no Hash Join.
+
+Melhor Uso de Recursos:
+
+Menor uso de memória e tempo nas operações de agregação e ordenação.
+
+Eficiência na Ordenação:
+
+A ordenação no segundo plano é realizada de forma mais eficiente devido à redução no número de linhas e colunas processadas.
+Portanto, o segundo plano é preferível devido ao seu desempenho superior em termos de tempo de execução e eficiência de recursos.
+
+

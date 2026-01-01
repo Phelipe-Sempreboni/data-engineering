@@ -1,0 +1,18 @@
+# Lab 9 - Analytics Engineering e Linhagem de Dados com Python, DBT, BigQuery e Looker Studio
+
+version: 2
+
+models:
+  - name: dsa_mart_vendas_por_mes
+    description: "Relatório que agrupa as vendas por mês, mostrando o total de vendas e o valor total arrecadado, além do trimestre correspondente."
+    columns:
+      - name: mes_calendario
+        description: "Mês do ano em que as vendas ocorreram."
+      - name: ano_calendario
+        description: "Ano em que as vendas ocorreram."
+      - name: trimestre_calendario
+        description: "Trimestre do ano em que as vendas ocorreram."
+      - name: total_vendas_mensal
+        description: "Quantidade total de produtos vendidos no mês."
+      - name: valor_total_mensal
+        description: "Valor total arrecadado com as vendas no mês."
