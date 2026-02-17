@@ -399,27 +399,203 @@ terraform --version
 ---
 
 ### 🌐 7. Testes de rede nos containers que formam o Compose Stack
-- Essas validações são importantes para verificar se os containers realmente estão se comunicando entre si, visto que criamos dentro da mesma rede
 
-Liste todas as redes existentes no Docker
+Essas validações são fundamentais para verificar se os containers realmente estão se comunicando entre si dentro da mesma rede criada pelo Docker Compose.
+
+> 💡 Importante: Em ambientes modernos (microservices, cloud, Kubernetes), validar apenas com `ping` não é suficiente. Aplicações utilizam TCP, não ICMP. Portanto, o teste correto é validar a porta do serviço.
+
+---
+
+## 📡 7.1 Listando as redes existentes no Docker
+
+Liste todas as redes existentes:
+
 ```bash
 docker network ls
 ```
 
-Inspecione uma rede específica, no caso a que você está utilizando na comunicação entre os containers
+Você verá algo como:
+
+```text
+NETWORK ID     NAME                DRIVER    SCOPE
+xxxxx          bridge              bridge    local
+xxxxx          host                host      local
+xxxxx          none                null      local
+xxxxx          sirius_net01        bridge    local
+```
+
+A rede `sirius_net01` é a rede criada pelo Compose Stack.
+
+---
+
+## 🔍 7.2 Inspecionando a rede utilizada pelo Compose
+
+Para visualizar detalhes da rede:
+
 ```bash
 docker network inspect sirius_net01
 ```
 
-Realize um ping no container do serviço (sqlserver) via o container do serviço (apps)
+Esse comando permite verificar:
+
+- Containers conectados
+- Endereços IP internos
+- Gateway
+- Configuração do driver (bridge)
+- Subnet utilizada
+
+Isso confirma que os containers `apps` e `sqlserver` estão na mesma rede.
+
+---
+
+## 🧠 7.3 Entendendo o teste de conectividade correto
+
+Muitas vezes se utiliza:
+
 ```bash
 ping sqlserver
 ```
 
-Realize um teste na porta do banco de dados (SQL Server), que está no serviço do container do (sqlserver), a partir do container (apps)
+Porém:
+
+- `ping` utiliza ICMP (camada 3)
+- Aplicações utilizam TCP (camada 4)
+- Alguns containers bloqueiam ICMP por padrão
+- ICMP não valida se a porta da aplicação está aberta
+
+Portanto, o teste correto é validar a porta do serviço.
+
+---
+
+## 🚀 7.4 Teste profissional de conectividade com Netcat (nc)
+
+O `nc` (Netcat) é conhecido como:
+
+> "The Swiss Army Knife of Networking"
+
+Ele permite testar portas TCP sem enviar dados.
+
+Dentro do container `apps`, execute:
+
+```bash
+nc -zv sqlserver 1433
+```
+
+### 📌 O que significa esse comando?
+
+- `nc` → executa o Netcat
+- `-z` → modo "zero I/O" (apenas testa a conexão, não envia dados)
+- `-v` → modo verbose (exibe detalhes)
+- `sqlserver` → nome do container (resolvido via DNS interno do Docker)
+- `1433` → porta padrão do SQL Server
+
+---
+
+### ✅ Se a conexão estiver funcionando:
+
+```text
+Connection to sqlserver 1433 port [tcp/ms-sql-s] succeeded!
+```
+
+Isso confirma que:
+
+- O DNS interno do Docker está funcionando
+- Os containers estão na mesma rede
+- O SQL Server está escutando na porta 1433
+- A comunicação TCP entre os containers está ativa
+
+---
+
+### ❌ Possíveis erros e significados
+
+**Connection refused**
+- O serviço ainda não subiu
+- A porta não está aberta
+
+**Name or service not known**
+- Containers não estão na mesma rede
+
+**Operation timed out**
+- Firewall
+- Problema de rede
+- Serviço travado
+
+---
+
+## 📦 7.5 Alternativa moderna ao Telnet
+
+Antigamente era comum utilizar:
+
 ```bash
 telnet sqlserver 1433
 ```
+
+Porém:
+
+- Telnet é antigo
+- Nem sempre vem instalado
+- Não é recomendado para troubleshooting moderno
+
+Hoje, o recomendado é:
+
+```bash
+nc -zv sqlserver 1433
+```
+
+Ou, se for testar HTTP:
+
+```bash
+curl http://nome-do-servico:porta
+```
+
+---
+
+## 🧪 7.6 Teste usando Python (caso não tenha nc instalado)
+
+Se o container `apps` possuir Python, é possível testar a conexão TCP assim:
+
+```bash
+python3 - <<'PY'
+import socket
+host="sqlserver"
+port=1433
+s=socket.socket()
+s.settimeout(3)
+try:
+    s.connect((host,port))
+    print("OK: conexão estabelecida com", host, port)
+except Exception as e:
+    print("ERRO:", e)
+finally:
+    s.close()
+PY
+```
+
+Esse teste valida:
+
+- DNS
+- Rede Docker
+- Porta aberta
+- Handshake TCP
+
+---
+
+## 🎯 Conclusão Técnica
+
+Em ambientes modernos:
+
+- ICMP (ping) ≠ validação real de aplicação
+- O teste correto é validar a porta TCP
+- `nc` é ferramenta padrão profissional para troubleshooting
+- Sempre teste a porta do serviço, não apenas a conectividade básica
+
+Essa abordagem está alinhada com boas práticas de:
+
+- Engenharia de Software
+- DevOps
+- DevSecOps
+- Cloud Native Architecture
+- Microservices
 
 ---
 
