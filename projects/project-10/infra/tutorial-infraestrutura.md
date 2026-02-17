@@ -833,6 +833,76 @@ source .env
 sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -N -C
 ```
 
+Crie um script bash para automatizar a conexão:
+
+✅ **Por que usar `source .env` antes de conectar?**
+
+> O comando `source .env` carrega as variáveis do arquivo `.env` no shell atual (ex.: `SA_PASSWORD`), permitindo que o `sqlcmd` use `"$SA_PASSWORD"` sem você precisar digitar a senha diretamente no comando.
+
+> 💡 **Observação rápida (importante):** como copiamos o script para outro diretório depois, devemos usar o **caminho absoluto** no `source` (ex.: `/workspace/db/.env`) para não depender do diretório atual.
+```bash
+ls -la
+vim con_sql.sh
+i
+#!/bin/bash
+source /workspace/db/.env
+sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -N -C
+ESC
+:w
+:q
+cat con_sql.sh
+```
+
+Ajuste permissão do arquivo para não somente leitura, mas para conseguir executar e então execute:
+```bash
+ls -la
+./con_sql.sh
+chmod +x con_sql.sh
+ls -la
+./con_sql.sh
+```
+
+Teste copiar o script para outro diretório e executar:
+```bash
+ls -la
+cd /workspace
+ls -la
+mkdir app
+cd app
+ls -la
+cp /workspace/db/con_sql.sh /workspace/app/
+cd app
+ls -la
+./con_sql.sh
+```
+
+Consultas de teste no `sqlcmd`:
+```sql
+select @@version;
+go
+```
+
+```sql
+select name from sys.databases;
+go
+```
+
+Duas consultas na mesma execução:
+```sql
+select @@version;
+select name from sys.databases;
+go
+```
+
+Sair do `sqlcmd`:
+```
+exit
+ou
+quit
+ou
+ctrl+c
+```
+
 ---
 
 ### 🐍 10. Script Python no container (apps) para testar leitura no SQL Server (container sqlserver)
