@@ -675,6 +675,7 @@ cat .env
 
 Crie um script bash para automatizar a conexão:
 ```bash
+ls -la
 vim con_sql.sh
 i
 #!/bin/bash
