@@ -219,6 +219,8 @@ docker rm $(docker ps -a -q)
 > - **SQL Server**: usa o **usuário não-root nativo** (`mssql`, UID ~10001). Em geral não altera; se quiser, apenas explicite no Compose (`user: "10001:0"`).
 >
 > **Princípio:** **não manter** “usuário admin” permanente. Para tarefas administrativas, **elevação temporária** para `root` com `docker exec -u 0:0 …`.
+> 
+> **Uso do container do Airflow** Não iremos e não precisamos acessar diretamente o container do Airflow, onde só iremos seguir utilizando a interface na web.
 
 ---
 
@@ -234,18 +236,18 @@ docker rm $(docker ps -a -q)
 ---
 
 #### II) Listar **grupos** dentro de um container
-> Compatível com Debian/Alpine/BusyBox. Se houver `bash`, pode trocar `sh` por `bash`.
+> Compatível com Debian/Alpine/BusyBox. Se houver `bash`, pode trocar `sh` por `bash` - nesse caso iremos manter o uso do `bash`.
 
 **Genérico (substitua `<container>`):**
 ```bash
-docker exec -it <container> sh -lc 'id; echo; echo "--- grupos (primeiros 20) ---"; head -n 20 /etc/group'
+docker exec -it <container> bash -lc 'id; echo; echo "--- grupos (primeiros 20) ---"; head -n 20 /etc/group'
 ```
 
 **Exemplos:**
 ```bash
-docker exec -it apps               sh -lc 'id; echo; echo "--- grupos ---"; head -n 20 /etc/group'
-docker exec -it airflow-webserver  sh -lc 'id; echo; echo "--- grupos ---"; head -n 20 /etc/group'
-docker exec -it database           sh -lc 'id; echo; echo "--- grupos ---"; head -n 20 /etc/group'
+docker exec -it apps bash -lc 'id; echo; echo "--- grupos ---"; head -n 20 /etc/group'
+
+docker exec -it sqlserver bash -lc 'id; echo; echo "--- grupos ---"; head -n 20 /etc/group'
 ```
 
 ---
@@ -253,18 +255,20 @@ docker exec -it database           sh -lc 'id; echo; echo "--- grupos ---"; head
 #### III) Listar **usuários** dentro de um container
 **Genérico:**
 ```bash
-docker exec -it <container> sh -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
+docker exec -it <container> bash -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
 ```
 
 **Exemplos:**
 ```bash
-docker exec -it apps               sh -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
-docker exec -it airflow-webserver  sh -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
-docker exec -it database           sh -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
+docker exec -it apps bash -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
+
+docker exec -it sqlserver bash -lc 'echo "user:uid:gid:shell"; awk -F: "{print \$1\":\"\$3\":\"\$4\":\"\$7}" /etc/passwd | head -n 20'
 ```
 
-> Ver apenas um usuário específico:  
-> `docker exec -it <container> sh -lc 'getent passwd airflow || grep "^airflow:" /etc/passwd || true'`
+**Ver apenas um usuário específico - exemplo:**
+```bash
+docker exec -it sqlserver bash -lc 'getent passwd mssql || grep "^mssql:" /etc/passwd || true'
+```
 
 ---
 
@@ -272,25 +276,19 @@ docker exec -it database           sh -lc 'echo "user:uid:gid:shell"; awk -F: "{
 **Entrar com o usuário padrão do processo:**
 ```bash
 # Apps (usuário: app)
-docker exec -it apps sh
-
-# Airflow (usuário: airflow)
-docker exec -it airflow-webserver sh
+docker exec -it apps bash
 
 # SQL Server (usuário: mssql) — normalmente sem shell interativo útil
-docker exec -it database sh
+docker exec -it sqlserver bash
 ```
 
 **Forçar UID:GID específico:**
 ```bash
 # app:app (20000:20000)
-docker exec -u 20000:20000 -it apps sh
-
-# airflow:airflow (50000:50000)
-docker exec -u 50000:50000 -it airflow-webserver sh
+docker exec -u 20000:20000 -it apps bash
 
 # mssql (~10001)
-docker exec -u 10001:0 -it database sh
+docker exec -u 10001:0 -it database bash
 ```
 
 > Dicas úteis dentro do container: `whoami`, `id -u`, `id -g`, `umask`, `pwd`, `ls -l`.
