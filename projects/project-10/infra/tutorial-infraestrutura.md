@@ -653,9 +653,10 @@ mkdir -p /var/opt/mssql/db
 cd /var/opt/mssql/db
 ```
 
-Crie o arquivo e preencha a variável (no `vim`):
+Crie o arquivo `.env` que irá conter a senha do banco de dados utiliando o `vim`:
 ```bash
 vim --version
+ls -la
 vim .env
 i
 SA_PASSWORD=<insira sua senha> | SA_PASSWORD=Senh@forte! | SA_PASSWORD="Senh@forte!"
