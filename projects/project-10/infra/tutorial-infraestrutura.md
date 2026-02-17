@@ -274,11 +274,12 @@ docker exec -it sqlserver bash -lc 'getent passwd mssql || grep "^mssql:" /etc/p
 
 #### IV) Acessar o container com o **usuário do serviço** (não-root)
 **Entrar com o usuário padrão do processo:**
+> docker exec -it <container> bash abre um shell com o usuário padrão do container (definido por USER ou root por default).
 ```bash
 # Apps (usuário: app)
 docker exec -it apps bash
 
-# SQL Server (usuário: mssql) — normalmente sem shell interativo útil
+# SQL Server (usuário: mssql)
 docker exec -it sqlserver bash
 ```
 
@@ -288,7 +289,7 @@ docker exec -it sqlserver bash
 docker exec -u 20000:20000 -it apps bash
 
 # mssql (~10001)
-docker exec -u 10001:0 -it database bash
+docker exec -u 10001:10001 -it sqlserver bash
 ```
 
 > Dicas úteis dentro do container: `whoami`, `id -u`, `id -g`, `umask`, `pwd`, `ls -l`.
@@ -300,9 +301,8 @@ docker exec -u 10001:0 -it database bash
 
 **Abrir um shell root temporário:**
 ```bash
-docker exec -u 0:0 -it apps sh
-docker exec -u 0:0 -it airflow-webserver sh
-docker exec -u 0:0 -it database sh
+docker exec -u 0:0 -it apps bash
+docker exec -u 0:0 -it sqlserver bash
 ```
 
 **Executar UM comando como root (sem abrir shell):**
@@ -351,8 +351,8 @@ terraform --version
 > docker exec -u <usuario> -it <container> bash abre o shell como um usuário específico, forçando UID/GID e permitindo testar permissões e comportamento exatamente como o processo do container roda.
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
-docker exec -u app -it apps bash
-docker exec -u mssql -it sqlserver bash
+docker exec -u app -it apps bash | docker exec -u 20000:20000 -it apps bash
+docker exec -u mssql -it sqlserver bash | docker exec -u 10001:10001 -it sqlserver bash
 python3 --version
 aws --version
 terraform --version
