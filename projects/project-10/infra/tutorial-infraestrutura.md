@@ -337,7 +337,7 @@ docker exec -u 0:0 sqlserver bash -lc 'ls -la /var/opt/mssql | head'
 
 > Não iremos e não precisamos acessar diretamente o container do Airflow, onde só iremos seguir utilizando a interface na web
 
-**Utilizando o usuário do container - Método 1:**
+**Utilizando o usuário do container - Método 1 - abre diretamente o usuário padrão:**
 > docker exec -it <container> bash abre um shell com o usuário padrão do container (definido por USER ou root por default).
 ```bash
 docker exec -it <nome-container> bash
@@ -369,12 +369,23 @@ aws --version
 terraform --version
 ```
 
-**Utilizando o usuário root:**
+**Utilizando o usuário root - com nome de usuário:**
 > docker exec -u <usuario> -it <container> bash abre o shell como um usuário específico, forçando UID/GID e permitindo testar permissões e comportamento exatamente como o processo do container roda.
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
-docker exec -u root -it sqlserver bash
 docker exec -u root -it apps bash
+docker exec -u root -it sqlserver bash
+python3 --version
+aws --version
+terraform --version
+```
+
+**Utilizando o usuário root - com número de usuário:**
+> docker exec -u <usuario> -it <container> bash abre o shell como um usuário específico, forçando UID/GID e permitindo testar permissões e comportamento exatamente como o processo do container roda.
+```bash
+docker exec -u <nome-usuario> -it <nome-container> bash
+docker exec -u 0:0 -it apps bash
+docker exec -u 0:0 -it sqlserver bash
 python3 --version
 aws --version
 terraform --version
