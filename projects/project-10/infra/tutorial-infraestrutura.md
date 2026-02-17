@@ -216,7 +216,7 @@ docker rm $(docker ps -a -q)
 > **Padrão adotado:**
 > - **Apps**: usuário e grupo **criados no Dockerfile** (ex.: `app:app`, UID 20000, GID 20000) e fixados no Compose (`user: "20000:20000"`).
 > - **Airflow**: usa o **usuário não-root nativo** da imagem oficial (`airflow`, UID 50000, GID 50000). Ajuste só via Compose se quiser explicitar (`user: "50000:50000"`).
-> - **SQL Server**: usa o **usuário não-root nativo** (`mssql`, UID ~10001). Em geral não altera; se quiser, apenas explicite no Compose (`user: "10001:0"`).
+> - **SQL Server**: usa o **usuário não-root nativo** (`mssql`, UID ~10001). Em geral não altera; se quiser, apenas explicite no Compose (`user: "10001:10001"`).
 >
 > **Princípio:** **não manter** “usuário admin” permanente. Para tarefas administrativas, **elevação temporária** para `root` com `docker exec -u 0:0 …`.
 > 
@@ -302,6 +302,7 @@ docker exec -u 10001:10001 -it sqlserver bash
 **Abrir um shell root temporário:**
 ```bash
 docker exec -u 0:0 -it apps bash
+
 docker exec -u 0:0 -it sqlserver bash
 ```
 
