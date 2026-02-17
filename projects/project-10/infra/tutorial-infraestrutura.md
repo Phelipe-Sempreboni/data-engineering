@@ -348,12 +348,22 @@ aws --version
 terraform --version
 ```
 
-**Utilizando o usuário do container - Método 2:**
+**Utilizando o usuário do container - Método 2 - com nome de usuário:**
 > docker exec -u <usuario> -it <container> bash abre o shell como um usuário específico, forçando UID/GID e permitindo testar permissões e comportamento exatamente como o processo do container roda.
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
-docker exec -u app -it apps bash | docker exec -u 20000:20000 -it apps bash
-docker exec -u mssql -it sqlserver bash | docker exec -u 10001:10001 -it sqlserver bash
+docker exec -u app -it apps bash
+docker exec -u mssql -it sqlserver bash
+python3 --version
+aws --version
+terraform --version
+```
+
+**Utilizando o usuário do container - Método 2 - com número de usuário:**
+```bash
+docker exec -u <nome-usuario> -it <nome-container> bash
+docker exec -u 20000:20000 -it apps bash
+docker exec -u 10001:10001 -it sqlserver bash
 python3 --version
 aws --version
 terraform --version
