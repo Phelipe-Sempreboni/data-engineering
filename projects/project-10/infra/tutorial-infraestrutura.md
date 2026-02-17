@@ -658,6 +658,7 @@ cd /var/opt/mssql/db
 ```
 
 Crie o arquivo `.env` que irá conter a senha do banco de dados utiliando o `vim`:
+> Em ambientes de produção, em vez de usar esse método, é mais seguro utilizar cofres, por exemplo da AWS ou Microsoft, onde o armazanamento de senhas, variáveis e outros objetos estará mais seguro e com acessso restrito somente a quem tiver as permissões necessárias.
 ```bash
 vim --version
 ls -la
