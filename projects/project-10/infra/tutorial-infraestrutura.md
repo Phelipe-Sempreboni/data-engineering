@@ -328,6 +328,11 @@ docker exec -u 0:0 sqlserver bash -lc 'ls -la /var/opt/mssql | head'
 ---
 
 ### 🧪 6. Validar se os pacotes foram instalados corretamente e quais as suas versões
+
+> [!NOTE]
+> Esta etapa valida se os pacotes e ferramentas essenciais (Python, AWS CLI e Terraform) foram instalados corretamente dentro dos containers, confirmando também as versões.  
+> Os comandos serão executados **de dentro do container**, usando o usuário padrão, um usuário específico (nome/UID:GID) ou `root`, para comparar permissões e comportamento.
+
 - Os comandos terão que ser a partir de dentro do container, ou seja, o que foi criado e o serviço iniciado
 - Abra o terminal de sua preferência: bash, prompt cmd, via visual studio code
 - Execute os comandos abaixo, onde podem ser executados a partir de um prompt local na sua máquina
