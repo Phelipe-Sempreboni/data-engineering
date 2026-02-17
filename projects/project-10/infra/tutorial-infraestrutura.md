@@ -308,7 +308,7 @@ docker exec -u 0:0 -it apps bash
 docker exec -u 0:0 -it sqlserver bash
 ```
 
-**Executar UM comando como root (sem abrir um shell):**
+**Executar um comando como root (sem abrir um shell):**
 ```bash
 docker exec -u 0:0 sqlserver bash -lc 'ls -la /var/opt/mssql | head'
 ```
