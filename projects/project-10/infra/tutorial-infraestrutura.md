@@ -792,6 +792,27 @@ ls -ld /
 id
 ```
 
+Crie a pasta `db`, entre nela e crie um `.env` com `vim`:
+```bash
+ls -la
+mkdir db
+cd db
+```
+
+Crie o arquivo `.env` que irá conter a senha do banco de dados utiliando o `vim`:
+> Em ambientes de produção, em vez de usar esse método, é mais seguro utilizar cofres, por exemplo da AWS ou Microsoft, onde o armazanamento de senhas, variáveis e outros objetos estará mais seguro e com acessso restrito somente a quem tiver as permissões necessárias.
+```bash
+vim --version
+ls -la
+vim .env
+i
+SA_PASSWORD=<insira sua senha> | SA_PASSWORD=Senh@forte! | SA_PASSWORD="Senh@forte!"
+ESC
+:w
+:q
+cat .env
+```
+
 ---
 
 ### 🐍 10. Script Python no container (apps) para testar leitura no SQL Server (container sqlserver)
