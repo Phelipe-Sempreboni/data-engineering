@@ -14,11 +14,13 @@ RUN apt-get update && apt-get upgrade -y
 # Instalação de utilitários essenciais
 RUN apt-get install -y \
     curl \
+    netcat-openbsd \
     wget \
     unzip \
     telnet \
     openssh-client \
     iputils-ping \
+    dnsutils \
     vim \
     nano \
     gnupg \
