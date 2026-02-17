@@ -667,33 +667,24 @@ cat .env
 
 Valide e leia o arquivo `.env`, analisando se a senha foi inserida corretamente, e depois conecte no banco de dados:
 ```bash
-getent passwd
-su - mssql
-whoami #ou
-id -un
-ls -la
-cd db
 ls -la
 cat .env
-cd ..
-source /db/.env
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
 ```
 
 Crie um script bash para automatizar a conexão:
 ```bash
-cd db
 vim con_sql.sh
 i
 #!/bin/bash
-source /db/.env
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
+ESC
 :w
 :q
 cat con_sql.sh
 ```
 
-Ajuste permissão e execute:
+Ajuste permissão do arquivo para não somente leitura, mas para conseguir executar e então execute:
 ```bash
 ls -la
 chmod +x con_sql.sh
