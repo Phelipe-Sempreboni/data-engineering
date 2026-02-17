@@ -278,7 +278,7 @@ docker exec -it apps sh
 docker exec -it airflow-webserver sh
 
 # SQL Server (usuário: mssql) — normalmente sem shell interativo útil
-docker exec -it database sh -lc 'id && whoami'
+docker exec -it database sh
 ```
 
 **Forçar UID:GID específico:**
@@ -334,11 +334,37 @@ docker exec -u 0:0 database           sh -lc 'ls -la /var/opt/mssql | head'
 - Execute os comandos abaixo, onde podem ser executados a partir de um prompt local na sua máquina
 - Deixaremos aberto um terminal para cada container e usuário conforme os comandos abaixo
 - Notar que você pode entrar com o usuário (root), mas o mais correto é ter um usuário nominal ou de serviço com determinadas permissões em vez de utilizar o (root) diretamente
-- No nosso cenário, vamos seguir com o usuário (root), e posteriormente criaremos um ou mais usuários de serviço
+- Iremos deixar abaixo como entrar com o usuário do container, igual comentamos no item, e também como utilizamos o usuário (root)
+
+> Não iremos e não precisamos acessar diretamente o container do Airflow, onde só iremos seguir utilizando a interface na web
+
+**Utilizando o usuário do container - Método 1:**
+> docker exec -it <container> bash abre um shell com o usuário padrão do container (definido por USER ou root por default).
+```bash
+docker exec -it <nome-container> bash
+docker exec -it apps bash
+docker exec -it sqlserver bash
+python3 --version
+aws --version
+terraform --version
+```
+
+**Utilizando o usuário do container - Método 2:**
+> docker exec -u <usuario> -it <container> bash abre o shell como um usuário específico, forçando UID/GID e permitindo testar permissões e comportamento exatamente como o processo do container roda.
+```bash
+docker exec -u <nome-usuario> -it <nome-container> bash
+docker exec -u app -it apps bash
+docker exec -u mssql -it sqlserver bash
+python3 --version
+aws --version
+terraform --version
+```
+
+**Utilizando o usuário root:**
+> docker exec -u <usuario> -it <container> bash abre o shell como um usuário específico, forçando UID/GID e permitindo testar permissões e comportamento exatamente como o processo do container roda.
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u root -it sqlserver bash
-docker exec -u mssql -it sqlserver bash
 docker exec -u root -it apps bash
 python3 --version
 aws --version
