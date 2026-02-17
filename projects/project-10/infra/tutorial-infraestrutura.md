@@ -587,6 +587,10 @@ Essa abordagem está alinhada com boas práticas de:
 
 ### 🗄️ 8. Visualizar a versão do SQL Server via o próprio container do serviço (sqlserver)
 
+> [!NOTE]
+> Esta etapa valida a versão do SQL Server **diretamente no container do serviço** (`sqlserver`), conectando via `sqlcmd` e executando consultas SQL.  
+> O objetivo é confirmar que o banco está acessível internamente, e também ensinar um padrão mais seguro para senha usando `.env` e automação com script bash.
+
 - Será necessário entrar no banco de dados e executar uma consulta SQL
 - Os comandos precisam ser executados a partir e de dentro do container
 - Caso esse comando falhe, investigue se o caminho mencionado, principalmente a parte `mssql-tools18`, está correto (pode variar por versão)
