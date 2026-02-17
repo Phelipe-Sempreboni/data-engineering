@@ -608,6 +608,7 @@ Explicação dos parâmetros:
 ```
 
 - Não é boa prática inserir a senha diretamente no comando; veremos como ler de um arquivo `.env`
+
 - No host (fora do container), invoque o container interativamente
 
 Com usuário root:
@@ -742,118 +743,53 @@ ctrl+c
 
 ---
 
-### 🔗 9. Ver a versão do SQL Server via o container do serviço (apps), acessando o container (sqlserver)
+### 🔗 9. Visualizar a versão do SQL Server via o container do serviço (apps), acessando o container (sqlserver)
 
-- Agora dentro do container `apps` (não no `sqlserver`)
-- Conecte com `sqlcmd` de `apps` para `sqlserver`:
+> [!NOTE]
+> Esta etapa valida a versão do SQL Server **diretamente no container do serviço** (`apps`), conectando via `sqlcmd` e executando consultas SQL.  
+> O objetivo é confirmar que o banco está acessível internamente, e também ensinar um padrão mais seguro para senha usando `.env` e automação com script bash, além de realizar a visualização via outro container, que não é onde está hospedado o SQL Server.
+
+- Será necessário entrar no banco de dados e executar uma consulta SQL
+- Os comandos precisam ser executados a partir e de dentro do container
+- Caso esse comando falhe, investigue se o caminho mencionado, principalmente a parte `mssql-tools18`, está correto (pode variar por versão)
+
+- Vamos conectar com o `sqlcmd` do container do serviço `apps` para visualizar o serviço do container do `sqlserver`:
 ```bash
 sqlcmd -S sqlserver -U sa -P 'insira sua senha ou o arquivo .env*' -N -C
 ```
+- Não é boa prática inserir a senha diretamente no comando; veremos como ler de um arquivo `.env`
 
-Abra shell no `apps`:
+- No host (fora do container), invoque o container interativamente:
+
+Com usuário root:
+> Por boas práticas, não é recomendado ficar utilizando o usuário root para ações convencionais como criar pastas no container, somente se essa estiver sendo criada na raiz do filesystem, o que não faremos neste caso, mas deixaremos abaixo caso tenhamos que utilizar para algo específico.
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
-docker exec -u 0 -it apps bash   # ou
 docker exec -u root -it apps bash
+docker exec -u 0:0 -it apps bash
 ```
 
-Confirme usuário atual, crie pasta `db` e `.env` (se necessário):
+Com usuário do container:
+> Por boas práticas, iremos utilizar este usuário para seguir com o tutorial, e não criaremos pastas na raiz do filesystem, mas sim no caminho do próprio SQL Server.
 ```bash
-whoami   # ou: id -un
+docker exec -u <nome-usuario> -it <nome-container> bash
+docker exec -u app -it apps bash
+docker exec -u 20000:20000 -it apps bash
+```
+
+Valide o usuário atual e liste todos os usuários disponíveis no container:
+```bash
+whoami #ou
+id -un
 getent passwd
-su - mssql
-
-mkdir db
-cd db
-
-apt-get update
-apt-get install -y vim
-vim --version
 ```
 
-Crie o `.env` com `vim`:
+Validando usuário com permissão para ações na raiz do filesystem:
+> Antes de criar a pasta, vamos verificar qual usuário tem permissão para realizar ações na raiz do filesystem, confirmando que é o usuário root.
 ```bash
-vim .env
-i
-SA_PASSWORD=<insira sua senha>
-SA_PASSWORD=Senh@forte!
-SA_PASSWORD="Senh@forte!"
-:w
-:q
-cat .env
-```
-
-Validações e leitura do `.env`:
-```bash
-getent passwd
-whoami   # ou: id -un
-ls -la
-cd db
-ls -la
-cat .env
-cd ..
-
-source /db/.env
-sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -N -C
-```
-
-Script bash no `apps` para automatizar:
-```bash
-cd db
-vim con_sql.sh
-i
-#!/bin/bash
-source /db/.env
-sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -N -C
-:w
-:q
-cat con_sql.sh
-```
-
-Permissão e execução:
-```bash
-ls -la
-chmod +x con_sql.sh
-ls -la
-./con_sql.sh
-```
-
-Copiar e executar de outro diretório:
-```bash
-ls -la
-mkdir app
-cd app
-mkdir automacao
-cd automacao
-cd db
-ls -la
-cp con_sql.sh /app/automacao
-cd /app/automacao
-ls -la
-/app/automacao/con_sql.sh
-```
-
-Consultas de teste:
-```sql
-select @@version;
-go
-```
-
-```sql
-select name from sys.databases;
-go
-```
-
-Execução de duas consultas:
-```sql
-select @@version;
-select name from sys.databases;
-go
-```
-
-Sair do `sqlcmd`:
-```
-exit ou quit ou ctrl+c
+pwd
+ls -ld /
+id
 ```
 
 ---
