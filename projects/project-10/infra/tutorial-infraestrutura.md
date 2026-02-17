@@ -607,7 +607,7 @@ Explicação dos parâmetros:
 - No host (fora do container), invoque o container interativamente
 
 Com usuário root:
-> Por boas práticas, não é recomendado ficar utilizando o usuário `root` para ações convencionais como criar pastas no container, somente se essa estiver sendo criada na raiz do filesystem `/$`, o que não faremos neste caso, mas deixaremos abaixo caso tenhamos que utilizar para algo específico.
+> Por boas práticas, não é recomendado ficar utilizando o usuário `root` para ações convencionais como criar pastas no container, somente se essa estiver sendo criada na raiz do filesystem, o que não faremos neste caso, mas deixaremos abaixo caso tenhamos que utilizar para algo específico.
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u root -it sqlserver bash
@@ -615,7 +615,7 @@ docker exec -u 0:0 -it sqlserver bash
 ```
 
 Com usuário do container:
-> Por boas práticas, iremos utilizar este usuário para seguir com o tutorial, e não criaremos pastas na raiz do filesystem `/$`, mas sim no caminho do próprio SQL Server.
+> Por boas práticas, iremos utilizar este usuário para seguir com o tutorial, e não criaremos pastas na raiz do filesystem, mas sim no caminho do próprio SQL Server.
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u mssql -it sqlserver bash
@@ -629,14 +629,31 @@ id -un
 getent passwd
 ```
 
-Permissionamento para o usuário `mssql` conseguir realizar ações no container:
-
-
-Crie pasta `db`, entre nela e crie um `.env` com `vim`:
+Validando usuário com permissão para ações na raiz do filesystem:
+> Antes de criar a pasta, vamos verificar qual usuário tem permissão para realizar ações na raiz do filesystem, confirmando que é o usuário `root`.
 ```bash
+pwd
+ls -ld /
+id
+```
+
+Crie a pasta `db`, entre nela e crie um `.env` com `vim`:
+> Iremos criar a pasta fora da raiz do filesystem, mas sim no caminho do próprio SQL Server.
+
+Opção 1:
+```bash
+cd /var/opt/mssql
 mkdir db
 cd db
+apt-get update
+apt-get install -y vim
+vim --version
+```
 
+Opção 2:
+```bash
+mkdir -p /var/opt/mssql/db
+cd /var/opt/mssql/db
 apt-get update
 apt-get install -y vim
 vim --version
@@ -653,17 +670,17 @@ ESC
 cat .env
 ```
 
-Troque para o usuário `mssql` (se ainda não estiver), valide e leia o `.env`, depois conecte:
+Valide e leia o arquivo `.env`, analisando se a senha foi inserida corretamente, e depois conecte no banco de dados:
 ```bash
 getent passwd
 su - mssql
-whoami   # ou: id -un
+whoami #ou
+id -un
 ls -la
 cd db
 ls -la
 cat .env
 cd ..
-
 source /db/.env
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
 ```
