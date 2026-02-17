@@ -585,7 +585,7 @@ Essa abordagem está alinhada com boas práticas de:
 
 ---
 
-### 🗄️ 8. Ver a versão do SQL Server via o próprio container do serviço (sqlserver)
+### 🗄️ 8. Visualizar a versão do SQL Server via o próprio container do serviço (sqlserver)
 
 - Será necessário entrar no banco de dados e executar uma consulta SQL
 - Os comandos precisam ser executados a partir e de dentro do container
