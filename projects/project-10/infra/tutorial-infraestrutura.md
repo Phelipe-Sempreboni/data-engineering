@@ -673,18 +673,30 @@ cat .env
 ```
 
 Valide e leia o arquivo `.env`, analisando se a senha foi inserida corretamente, e depois conecte no banco de dados:
+
+✅ **Por que usar `source .env` antes de conectar?**
+
+> O comando `source .env` carrega as variáveis do arquivo `.env` no shell atual (ex.: `SA_PASSWORD`), permitindo que o `sqlcmd` use `"$SA_PASSWORD"` sem você precisar digitar a senha diretamente no comando.
 ```bash
 ls -la
 cat .env
+source .env
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
 ```
 
 Crie um script bash para automatizar a conexão:
+
+✅ **Por que usar `source .env` antes de conectar?**
+
+> O comando `source .env` carrega as variáveis do arquivo `.env` no shell atual (ex.: `SA_PASSWORD`), permitindo que o `sqlcmd` use `"$SA_PASSWORD"` sem você precisar digitar a senha diretamente no comando.
+
+> 💡 **Observação rápida (importante):** como copiamos o script para outro diretório depois, devemos usar o **caminho absoluto** no `source` (ex.: `/var/opt/mssql/db/.env`) para não depender do diretório atual.
 ```bash
 ls -la
 vim con_sql.sh
 i
 #!/bin/bash
+source /var/opt/mssql/db/.env
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
 ESC
 :w
@@ -811,6 +823,14 @@ ESC
 :w
 :q
 cat .env
+```
+
+Valide e leia o arquivo `.env`, analisando se a senha foi inserida corretamente, e depois conecte no banco de dados:
+```bash
+ls -la
+cat .env
+source .env
+sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -N -C
 ```
 
 ---
