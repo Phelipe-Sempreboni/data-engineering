@@ -400,6 +400,10 @@ terraform --version
 
 ### 🌐 7. Testes de rede nos containers que formam o Compose Stack
 
+> [!NOTE]
+> Esta etapa valida se os containers do Compose Stack estão realmente se comunicando entre si dentro da mesma rede criada pelo Docker Compose.  
+> O foco é confirmar **resolução de DNS interna do Docker**, **rede compartilhada** e principalmente **conectividade TCP na porta do serviço** (ex.: SQL Server 1433).
+
 Essas validações são fundamentais para verificar se os containers realmente estão se comunicando entre si dentro da mesma rede criada pelo Docker Compose.
 
 > 💡 Importante: Em ambientes modernos (microservices, cloud, Kubernetes), validar apenas com `ping` não é suficiente. Aplicações utilizam TCP, não ICMP. Portanto, o teste correto é validar a porta do serviço.
