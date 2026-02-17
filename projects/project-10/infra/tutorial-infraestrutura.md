@@ -267,6 +267,8 @@ docker exec -it sqlserver bash -lc 'echo "user:uid:gid:shell"; awk -F: "{print \
 
 **Ver apenas um usuário específico - exemplo:**
 ```bash
+docker exec -it apps bash -lc 'getent passwd app || grep "^app:" /etc/passwd || true'
+
 docker exec -it sqlserver bash -lc 'getent passwd mssql || grep "^mssql:" /etc/passwd || true'
 ```
 
