@@ -317,13 +317,13 @@ docker exec -u 0:0 sqlserver bash -lc 'ls -la /var/opt/mssql | head'
 
 ---
 
-#### (Opcional) Mapa de identidades recomendadas
+#### Mapa de identidades do nosso cenário:
 
 | Container  | Usuário   | UID   | GID   | Observações |
 |------------|-----------|------:|------:|-------------|
 | Apps       | `app`     | 20000 | 20000 | Criado no **Dockerfile** (dono de `/workspace`). |
 | Airflow    | `airflow` | 50000 | 50000 | Nativo da imagem oficial; pode apenas explicitar no **Compose**. |
-| SQL Server | `mssql`   | ~10001| 0     | Nativo da imagem oficial; **não** alterar na imagem. |
+| SQL Server | `mssql`   | 10001| 10001     | Nativo da imagem oficial; **não** alterar na imagem. |
 
 ---
 
