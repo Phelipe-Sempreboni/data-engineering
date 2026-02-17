@@ -404,7 +404,7 @@ Essas validações são fundamentais para verificar se os containers realmente e
 
 > 💡 Importante: Em ambientes modernos (microservices, cloud, Kubernetes), validar apenas com `ping` não é suficiente. Aplicações utilizam TCP, não ICMP. Portanto, o teste correto é validar a porta do serviço.
 
-**📡 7.1 Listando as redes existentes no Docker**
+**📡 Listando as redes existentes no Docker**
 
 Liste todas as redes existentes:
 
@@ -424,7 +424,7 @@ xxxxx          sirius_net01        bridge    local
 
 A rede `sirius_net01` é a rede criada pelo Compose Stack.
 
-**🔍 7.2 Inspecionando a rede utilizada pelo Compose**
+**🔍 Inspecionando a rede utilizada pelo Compose**
 
 Para visualizar detalhes da rede:
 
@@ -442,7 +442,7 @@ Esse comando permite verificar:
 
 Isso confirma que os containers `apps` e `sqlserver` estão na mesma rede.
 
-**🧠 7.3 Entendendo o teste de conectividade correto**
+**🧠 Entendendo o teste de conectividade correto**
 
 Muitas vezes se utiliza:
 
@@ -459,7 +459,7 @@ Porém:
 
 Portanto, o teste correto é validar a porta do serviço.
 
-**🚀 7.4 Teste profissional de conectividade com Netcat (nc)**
+**🚀 Teste profissional de conectividade com Netcat (nc)**
 
 O `nc` (Netcat) é conhecido como:
 
@@ -508,7 +508,7 @@ Isso confirma que:
 - Problema de rede
 - Serviço travado
 
-**📦 7.5 Alternativa moderna ao Telnet**
+**📦 Alternativa moderna ao Telnet**
 
 Antigamente era comum utilizar:
 
@@ -534,7 +534,7 @@ Ou, se for testar HTTP:
 curl http://nome-do-servico:porta
 ```
 
-**🧪 7.6 Teste usando Python (caso não tenha nc instalado)**
+**🧪 Teste usando Python (caso não tenha nc instalado)**
 
 Se o container `apps` possuir Python, é possível testar a conexão TCP assim:
 
