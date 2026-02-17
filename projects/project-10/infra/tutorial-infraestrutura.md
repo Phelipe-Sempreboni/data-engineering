@@ -645,22 +645,17 @@ Opção 1:
 cd /var/opt/mssql
 mkdir db
 cd db
-apt-get update
-apt-get install -y vim
-vim --version
 ```
 
 Opção 2:
 ```bash
 mkdir -p /var/opt/mssql/db
 cd /var/opt/mssql/db
-apt-get update
-apt-get install -y vim
-vim --version
 ```
 
 Crie o arquivo e preencha a variável (no `vim`):
 ```bash
+vim --version
 vim .env
 i
 SA_PASSWORD=<insira sua senha> | SA_PASSWORD=Senh@forte! | SA_PASSWORD="Senh@forte!"
