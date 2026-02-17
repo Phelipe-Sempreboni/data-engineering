@@ -308,11 +308,9 @@ docker exec -u 0:0 -it apps bash
 docker exec -u 0:0 -it sqlserver bash
 ```
 
-**Executar UM comando como root (sem abrir shell):**
+**Executar UM comando como root (sem abrir um shell):**
 ```bash
-docker exec -u 0:0 apps               sh -lc 'mkdir -p /workspace/teste && ls -ld /workspace/teste'
-docker exec -u 0:0 airflow-webserver  sh -lc 'mkdir -p /opt/airflow/dags && ls -ld /opt/airflow/dags'
-docker exec -u 0:0 database           sh -lc 'ls -la /var/opt/mssql | head'
+docker exec -u 0:0 sqlserver bash -lc 'ls -la /var/opt/mssql | head'
 ```
 
 > Saia do root assim que terminar (`exit`). Mantenha o **processo principal** do serviço sempre **não-root**.
