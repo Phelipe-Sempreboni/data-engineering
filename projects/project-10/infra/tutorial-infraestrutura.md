@@ -604,11 +604,20 @@ Explicação dos parâmetros:
 ```
 
 - Não é boa prática inserir a senha diretamente no comando; veremos como ler de um arquivo `.env`
-- No host (fora do container), invoque o container interativamente:
+- No host (fora do container), invoque o container interativamente
+
+**Com usuário root:**
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
-docker exec -u 0 -it sqlserver bash   # ou
 docker exec -u root -it sqlserver bash
+docker exec -u 0:0 -it sqlserver bash
+```
+
+**Com usuário do container:**
+```bash
+docker exec -u <nome-usuario> -it <nome-container> bash
+docker exec -u mssql -it sqlserver bash
+docker exec -u 10001:10001 -it sqlserver bash
 ```
 
 Verifique usuário atual, liste usuários e altere para `mssql`:
@@ -632,9 +641,8 @@ Crie o arquivo e preencha a variável (no `vim`):
 ```bash
 vim .env
 i
-SA_PASSWORD=<insira sua senha>
-SA_PASSWORD=Senh@forte!
-SA_PASSWORD="Senh@forte!"
+SA_PASSWORD=<insira sua senha> | SA_PASSWORD=Senh@forte! | SA_PASSWORD="Senh@forte!"
+ESC
 :w
 :q
 cat .env
