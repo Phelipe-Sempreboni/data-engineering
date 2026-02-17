@@ -124,7 +124,7 @@ name: sirius
 - Se não estiver usando um nome de projeto definido no próprio arquivo `docker-compose.yml`
 - Então você pode usar o comando abaixo para manter o mesmo nome em toda a stack (containers, rede, volumes):
 ```bash
-docker-compose down && docker compose up -p sirius --build -d
+docker-compose down && docker compose -p sirius up --build -d
 ```
 #
 
