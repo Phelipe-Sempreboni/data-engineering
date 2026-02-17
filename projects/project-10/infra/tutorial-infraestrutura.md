@@ -606,25 +606,25 @@ Explicação dos parâmetros:
 - Não é boa prática inserir a senha diretamente no comando; veremos como ler de um arquivo `.env`
 - No host (fora do container), invoque o container interativamente
 
-**Com usuário root:**
+Com usuário root:
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u root -it sqlserver bash
 docker exec -u 0:0 -it sqlserver bash
 ```
 
-**Com usuário do container:**
+Com usuário do container:
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u mssql -it sqlserver bash
 docker exec -u 10001:10001 -it sqlserver bash
 ```
 
-Verifique usuário atual, liste usuários e altere para `mssql`:
+Valide o usuário atual e liste todos os usuários disponíveis no container:
 ```bash
-whoami   # ou: id -un
+whoami #ou
+id -un
 getent passwd
-su - mssql
 ```
 
 Crie pasta `db`, entre nela e crie um `.env` com `vim`:
