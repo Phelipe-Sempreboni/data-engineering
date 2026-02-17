@@ -607,6 +607,7 @@ Explicação dos parâmetros:
 - No host (fora do container), invoque o container interativamente
 
 Com usuário root:
+> Por boas práticas, não é recomendado ficar utilizando o usuário `root` para ações convencionais como criar pastas no container, somente se essa estiver sendo criada na raiz do filesystem `/$`, o que não faremos neste caso, mas deixaremos abaixo caso tenhamos que utilizar para algo específico.
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u root -it sqlserver bash
@@ -614,6 +615,7 @@ docker exec -u 0:0 -it sqlserver bash
 ```
 
 Com usuário do container:
+> Por boas práticas, iremos utilizar este usuário para seguir com o tutorial, e não criaremos pastas na raiz do filesystem `/$`, mas sim no caminho do próprio SQL Server.
 ```bash
 docker exec -u <nome-usuario> -it <nome-container> bash
 docker exec -u mssql -it sqlserver bash
@@ -626,6 +628,9 @@ whoami #ou
 id -un
 getent passwd
 ```
+
+Permissionamento para o usuário `mssql` conseguir realizar ações no container:
+
 
 Crie pasta `db`, entre nela e crie um `.env` com `vim`:
 ```bash
