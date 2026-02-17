@@ -689,6 +689,7 @@ cat con_sql.sh
 Ajuste permissão do arquivo para não somente leitura, mas para conseguir executar e então execute:
 ```bash
 ls -la
+./con_sql.sh
 chmod +x con_sql.sh
 ls -la
 ./con_sql.sh
@@ -697,16 +698,14 @@ ls -la
 Teste copiar o script para outro diretório e executar:
 ```bash
 ls -la
+cd /var/opt/mssql
+ls -la
 mkdir app
 cd app
-mkdir automacao
-cd automacao
-cd db
 ls -la
-cp con_sql.sh /app/automacao
-cd /app/automacao
+cp /var/opt/mssql/db/con_sql.sh /var/opt/mssql/app/
 ls -la
-/app/automacao/con_sql.sh
+./con_sql.sh
 ```
 
 Consultas de teste no `sqlcmd`:
