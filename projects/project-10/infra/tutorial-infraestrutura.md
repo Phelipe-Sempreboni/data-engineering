@@ -338,7 +338,7 @@ docker exec -u 0:0 sqlserver bash -lc 'ls -la /var/opt/mssql | head'
 - Execute os comandos abaixo, onde podem ser executados a partir de um prompt local na sua máquina
 - Deixaremos aberto um terminal para cada container e usuário conforme os comandos abaixo
 - Notar que você pode entrar com o usuário (root), mas o mais correto é ter um usuário nominal ou de serviço com determinadas permissões em vez de utilizar o (root) diretamente
-- Iremos deixar abaixo como entrar com o usuário do container, igual comentamos no item, e também como utilizamos o usuário (root)
+- Iremos deixar abaixo como entrar com o usuário do container, igual comentamos no item 5, e também como utilizamos o usuário (root)
 
 > Não iremos e não precisamos acessar diretamente o container do Airflow, onde só iremos seguir utilizando a interface na web
 
