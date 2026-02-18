@@ -1038,7 +1038,8 @@ Microsoft SQL Server 2022 (RTM-CU23) (KB5078297) - 16.0.4236.2 (X64)
 
 #### Troubleshooting em casos de erros com indentação do script no `vim`:
 
-> Para fortalecer o aprendizado efetivo no uso de Agentes de IA como o ChatGPT ou Gemini, crie e inseira um prompt que inclua: erro recebido, script original e script colado no `vim`, onde a identação foi perdida e alterada no arquivo.  
+> Para fortalecer o aprendizado efetivo no uso de Agentes de IA como o ChatGPT ou Gemini, crie e insira um prompt que inclua: erro recebido, script original e script colado no `vim`, onde a identação foi perdida e alterada no arquivo.
+
 > **Exemplo de erro para casos de identação:** `IndentationError: unexpected indent`
 
 Para colar no `vim` mantendo indentação:
