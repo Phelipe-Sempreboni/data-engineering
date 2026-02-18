@@ -603,6 +603,9 @@ Explicação dos parâmetros:
 - `-N`: usa conexão criptografada (SSL)  
 - `-C`: confirma o certificado mesmo se não for confiável (usado com `-N`)
 
+> `-S localhost` → conecta no SQL Server dentro do mesmo container
+> 
+> `-S sqlserver` → conecta pela rede Docker para o container sqlserver
 ```bash
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'insira sua senha ou o arquivo .env*' -N -C
 ```
@@ -683,6 +686,11 @@ Valide e leia o arquivo `.env`, analisando se a senha foi inserida corretamente,
 ✅ **Por que usar `source .env` antes de conectar?**
 
 > O comando `source .env` carrega as variáveis do arquivo `.env` no shell atual (ex.: `SA_PASSWORD`), permitindo que o `sqlcmd` use `"$SA_PASSWORD"` sem você precisar digitar a senha diretamente no comando.
+
+> `-S localhost` → conecta no SQL Server dentro do mesmo container
+> 
+> `-S sqlserver` → conecta pela rede Docker para o container sqlserver
+
 ```bash
 ls -la
 cat .env
@@ -778,6 +786,11 @@ ctrl+c
 - Caso esse comando falhe, investigue se o caminho mencionado, principalmente a parte `mssql-tools18`, está correto (pode variar por versão)
 
 - Vamos conectar com o `sqlcmd` do container do serviço `apps` para visualizar o serviço do container do `sqlserver`:
+
+> `-S localhost` → conecta no SQL Server dentro do mesmo container
+> 
+> `-S sqlserver` → conecta pela rede Docker para o container sqlserver
+
 ```bash
 sqlcmd -S sqlserver -U sa -P 'insira sua senha ou o arquivo .env*' -N -C
 ```
@@ -1023,8 +1036,8 @@ Criar o script `python` para executar as ações no banco de dados com `vim`:
 ```bash
 pwd
 ls -la
-mkdir scripts-ptyhon
-cd scripts-ptyhon
+mkdir scripts-python
+cd scripts-python
 ls -la
 vim teste.py
 i
