@@ -1004,6 +1004,9 @@ cd scripts-ptyhon
 ls -la
 vim teste.py
 i
+```
+
+```bash
 import pyodbc
 conn = pyodbc.connect(
     "DRIVER={ODBC Driver 17 for SQL Server};"
