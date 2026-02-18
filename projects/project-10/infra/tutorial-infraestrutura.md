@@ -1067,6 +1067,23 @@ Microsoft SQL Server 2022 (RTM-CU23) (KB5078297) - 16.0.4236.2 (X64)
 
 > **Exemplo de erro para casos de identação:** `IndentationError: unexpected indent`
 
+**🔍 O que faz o comando `:set paste`?:**
+> `:set paste` habilita o modo de colagem no `vim`. Nesse modo, o `vim` desativa várias configurações automáticas, como formatação e identação automáticas, que podem interferir ao colar o conteúdo.
+> 
+> Quando você ativa esse modo, o `vim` não altera a indentação do conteúdo colado. Ele simplesmente "cola o texto" exatamente como está na área de transferência, preservando a indentação original.
+>
+> Isso é especialmente útil ao colar código ou scripts com indentação, porque impede que o vim faça ajustes indesejados, que são comuns quando ele tenta ajustar a indentação automaticamente conforme o estilo configurado.
+>
+**O que faz o comando `:set nopaste`?**
+> `:set nopaste` desabilita o modo de colagem que foi ativado com `:set paste`.
+>
+> Quando desativamos o modo `paste`, o vim volta a funcionar normalmente, aplicando as regras de formatação e indentação configuradas, além de realizar a indentação automática padrão do editor.
+>
+> Isso é útil para que, depois de colar o código, você retome as configurações de indentação normais do `vim` e continue editando o código de maneira estruturada.
+
+**🛠️ Por que isso é importante?**
+> Python é muito sensível à indentação, e se a indentação não for preservada corretamente, você provavelmente enfrentará erros como `IndentationError: unexpected indent`. O `:set paste` evita que o `vim` modifique a indentação ao colar, garantindo que o código colado seja executado corretamente.
+
 Para colar no `vim` mantendo indentação:
 ```bash
 rm teste.py
