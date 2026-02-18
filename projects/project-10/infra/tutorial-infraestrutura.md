@@ -871,7 +871,6 @@ mkdir app
 cd app
 ls -la
 cp /workspace/db/con_sql.sh /workspace/app/
-cd app
 ls -la
 ./con_sql.sh
 ```
@@ -905,9 +904,50 @@ ctrl+c
 
 ---
 
-### 🐍 10. Script Python no container (apps) para testar leitura no SQL Server (container sqlserver)
+### 🐍 10. Visualizar a versão do SQL Server via o container do serviço (apps), acessando o container (sqlserver) - Via script Python
 
-Verificar se o `pyodbc` está instalado:
+> [!NOTE]
+> Esta etapa valida a versão do SQL Server **diretamente no container do serviço** (`apps`), conectando via `Python` e executando consultas SQL.  
+> O objetivo é confirmar que o banco está acessível internamente, e também ensinar um padrão mais seguro para senha usando `.env` e automação com script bash, além de realizar a visualização via outro container e com um script Python.
+
+- Será necessário entrar no banco de dados e executar uma consulta SQL
+- Os comandos precisam ser executados a partir e de dentro do container
+- Caso esse comando falhe, investigue se o caminho mencionado, principalmente a parte `mssql-tools18`, está correto (pode variar por versão)
+
+- No host (fora do container), invoque o container interativamente:
+
+Com usuário root:
+> Por boas práticas, não é recomendado ficar utilizando o usuário root para ações convencionais como criar pastas no container, somente se essa estiver sendo criada na raiz do filesystem, o que não faremos neste caso, mas deixaremos abaixo caso tenhamos que utilizar para algo específico.
+```bash
+docker exec -u <nome-usuario> -it <nome-container> bash
+docker exec -u root -it apps bash
+docker exec -u 0:0 -it apps bash
+```
+
+Com usuário do container:
+> Por boas práticas, iremos utilizar este usuário para seguir com o tutorial, e não criaremos pastas na raiz do filesystem, mas sim no caminho do próprio SQL Server.
+```bash
+docker exec -u <nome-usuario> -it <nome-container> bash
+docker exec -u app -it apps bash
+docker exec -u 20000:20000 -it apps bash
+```
+
+Valide o usuário atual e liste todos os usuários disponíveis no container:
+```bash
+whoami #ou
+id -un
+getent passwd
+```
+
+Validando usuário com permissão para ações na raiz do filesystem:
+> Antes de criar a pasta, vamos verificar qual usuário tem permissão para realizar ações na raiz do filesystem, confirmando que é o usuário root.
+```bash
+pwd
+ls -ld /
+id
+```
+
+Validar se temos o conector `pyodbc` instalado no container `apps`:
 ```bash
 python3 -c "import pyodbc; print(pyodbc.version)"
 ```
