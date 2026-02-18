@@ -948,17 +948,20 @@ id
 ```
 
 Validar se temos o conector `pyodbc` instalado no container `apps`:
+> É essencial que tenhamos esse conector instalado.
 ```bash
 python3 -c "import pyodbc; print(pyodbc.version)"
 ```
 
 Listar pacotes Python e filtrar `pyodbc`:
+> É essencial que tenhamos esse conector instalado.
 ```bash
 pip3 list
 pip3 list | grep pyodbc
 ```
 
 Checar drivers ODBC:
+> É essencial que tenhamos esse conector instalado.
 ```bash
 dpkg -l | grep odbc
 odbcinst -j
@@ -991,13 +994,14 @@ pip install pyodbc
 python3 -m pip install pyodbc --break-system-packages
 ```
 
-Criar `apps/teste.py` com `vim`:
+Criar o script `python` para executar as ações no banco de dados com `vim`:
+> Nesse caso devemos copiar o script, inserir as informações de usuário e senha, e então somente depois colar no arquivo `teste.py` com o `vim`.
 ```bash
 pwd
 ls -la
-cd apps
+mkdir scripts-ptyhon
+cd scripts-ptyhon
 ls -la
-
 vim teste.py
 i
 import pyodbc
@@ -1018,10 +1022,18 @@ cat teste.py
 python3 teste.py
 ```
 
-#### Troubleshooting (exemplo com erro de indentação)
+Caso uma mensagem como a abaixo seja retornada, quer dizer que o script Python conseguiu conectar corretamente no banco de dados:
+```bash
+Microsoft SQL Server 2022 (RTM-CU23) (KB5078297) - 16.0.4236.2 (X64) 
+        Jan 22 2026 17:50:56 
+        Copyright (C) 2022 Microsoft Corporation
+        Developer Edition (64-bit) on Linux (Ubuntu 22.04.5 LTS) <X64>
+```
 
-> Use o ChatGPT com um prompt que inclua: erro recebido, script original e script colado no `vim` (com indentação alterada).  
-> **Erro exemplo:** `IndentationError: unexpected indent`
+#### Troubleshooting em casos de erros com indentação do script no `vim`
+
+> Para fortalecer o aprendizado efetivo no uso de Agentes de IA como o ChatGPT ou Gemini, crie e inseira um prompt que inclua: erro recebido, script original e script colado no `vim`, onde a identação foi perdida e alterada no arquivo.  
+> **Exemplo de erro para casos de identação:** `IndentationError: unexpected indent`
 
 Para colar no `vim` mantendo indentação:
 ```bash
