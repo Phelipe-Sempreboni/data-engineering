@@ -1117,15 +1117,16 @@ cat teste.py
 python3 teste.py
 ```
 
-Criar o mesmo arquivo com **nano** (mantém indentação ao colar):
+Também podemos criar o mesmo arquivo com o editor **nano**, que por padrão já mantém indentação ao colar:
 ```bash
 rm teste.py
 nano teste.py
 # cole o conteúdo do script
-# salve com: ctrl + o  (enter para confirmar o nome)
+# salve com: ctrl + o
+# pressione enter para confirmar
 # saia com:  ctrl + x
 cat teste.py
 python3 teste.py
 ```
 
-> Essa é uma das maneiras também de testar se as portas, rede e comunicação estão funcionando entre os containers.
+> Essas são algumas das maneiras de testar se as portas, rede e comunicação estão funcionando entre os containers e suas aplicações hospedadas.
