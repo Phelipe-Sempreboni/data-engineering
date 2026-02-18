@@ -1019,6 +1019,9 @@ cursor = conn.cursor()
 cursor.execute("SELECT @@VERSION")
 row = cursor.fetchone()
 print(row[0])
+```
+
+```bash
 :w
 :q
 cat teste.py
