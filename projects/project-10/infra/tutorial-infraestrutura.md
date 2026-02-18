@@ -665,7 +665,13 @@ vim --version
 ls -la
 vim .env
 i
-SA_PASSWORD=<insira sua senha> | SA_PASSWORD=Senh@forte! | SA_PASSWORD="Senh@forte!"
+```
+
+```bash
+SA_PASSWORD=<"insira sua senha">
+```
+
+```bash
 ESC
 :w
 :q
@@ -695,9 +701,15 @@ Crie um script bash para automatizar a conexão:
 ls -la
 vim con_sql.sh
 i
+```
+
+```bash
 #!/bin/bash
 source /var/opt/mssql/db/.env
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -N -C
+```
+
+```bash
 ESC
 :w
 :q
@@ -818,7 +830,13 @@ vim --version
 ls -la
 vim .env
 i
-SA_PASSWORD=<insira sua senha> | SA_PASSWORD=Senh@forte! | SA_PASSWORD="Senh@forte!"
+```
+
+```bash
+SA_PASSWORD=<"insira sua senha">
+```
+
+```bash
 ESC
 :w
 :q
@@ -844,9 +862,15 @@ Crie um script bash para automatizar a conexão:
 ls -la
 vim con_sql.sh
 i
+```
+
+```bash
 #!/bin/bash
 source /workspace/db/.env
 sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -N -C
+```
+
+```bash
 ESC
 :w
 :q
@@ -1022,6 +1046,7 @@ print(row[0])
 ```
 
 ```bash
+ESC
 :w
 :q
 cat teste.py
@@ -1046,9 +1071,12 @@ Para colar no `vim` mantendo indentação:
 ```bash
 rm teste.py
 vim teste.py
-esc
+ESC
 :set paste
 i
+```
+
+```bash
 import pyodbc
 conn = pyodbc.connect(
     "DRIVER={ODBC Driver 17 for SQL Server};"
@@ -1061,7 +1089,10 @@ cursor = conn.cursor()
 cursor.execute("SELECT @@VERSION")
 row = cursor.fetchone()
 print(row[0])
-esc
+```
+
+```bash
+ESC
 :set nopaste
 :w
 :q
