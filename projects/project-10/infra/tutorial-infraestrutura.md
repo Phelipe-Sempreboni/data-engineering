@@ -995,7 +995,7 @@ python3 -m pip install pyodbc --break-system-packages
 ```
 
 Criar o script `python` para executar as ações no banco de dados com `vim`:
-> Nesse caso devemos copiar o script, inserir as informações de usuário e senha, e então somente depois colar no arquivo `teste.py` com o `vim`.
+> Nesse caso devemos copiar o script, inserir as informações de usuário e senha, e somente depois colar no arquivo `teste.py` com o `vim`.
 ```bash
 pwd
 ls -la
