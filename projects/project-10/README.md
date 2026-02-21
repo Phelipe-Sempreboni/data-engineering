@@ -15,8 +15,6 @@
 
 ---
 
-#### Trilha de aprendizado do módulo: 2. Construção do ambiente local com Docker
-
 1. Criação do dockerfile.app com:
    - SQL Server local
    - Terraform
@@ -36,6 +34,8 @@
    - Container 3: Python, AWS CLI e Terraform
    - Comunicação entre os três via rede interna no Docker
    - Mapeamento de volumes locais
+
+---
 
 4. Versionamento de código com GitHub e CI/CD com GitHub Actions:
    - Build automático das imagens
