@@ -1,39 +1,8 @@
-### Projeto de Engenharia e Qualidade de Dados
-
-Este é um projeto focado em Qualidade de Dados, mas você irá aprender um pouco mais que isso!
-
-Irá aprender sobre conceitos de Engenharia de Dados, Engenharia de Analytics e plataformas como Docker, Terraform, AWS, SQL Server, DQX DQ e GreatExpecations para Data Quality e muito mais!
-
-Construímos essa trilha com detalhes e tópicos para enriquecer seu aprendizado e ligar os conceitos de negócios de técnicos!
-
-Esperamos que essa trilha enriqueça seus conhecimentos e que saia podendo executar projetos no seu dia a dia!
-
-Vamos de Sirius Hub Educação !
-
----
-
 #### Teremos a divisão dessa trilha em alguns tópicos de discussão e aprendizado, sendo:
    - Infraestrutura local para desenvolvimento, teste e homologação:
-      - 1. Explicação e instalação do Docker Desktop para containers - O que é Docker, Dockerfile, Docker Compose, Docker Registry, Docker Hub, padrão da imgem do Docker (linux)
-      - 2. Instalação do Visual Studio Code para códigos e integrações
-      - 3. Instalação das extensões (docker, terraform, sql server, github actions, yam, wsl, txt syntax, entre outros) no Visual Studio Code
-      - 4. Instalação do DBeaver para manipulação de bancos de dados
-      - 5. Instalação da interface do SQL Server - SQL Server Management Studio (SSMS)
-      - 6. Criação e navegação pelas contas da AWS, Github e ChatGPT da OpenAI
-      - 7. Integração da conta Github com o Visual Studio Code
-      - 8. Ativação do Github Copilot gratuitamente no Github
-      - 9. Integração do Github Copilot no Visual Studio Code
-      - 10. Construção do ambiente local com Docker
-      - 11. Explicação e utilização de imagens e registry - cuidados com imagens não oficiais do Docker Hub
-      - 12. Explicação e utilização de docker compose
-      - 13. Testes com as imagens por etapas - desde o mais simples até o mais avançado na construção
-      - 14. Testes com os docker composes por etapas - desde o mais simples até o mais avançado na construção
-      - 13. Troubleshooting (solução de problemas) com as imagens por etapas - desde o mais simples até o mais avançado na construção
-      - 14. Troubleshooting (solução de problemas) com os docker compose por etapas - desde o mais simples até o mais avançado na construção
-
-      - segurança
-         - usuários
-         - senhas
+      - segurança:
+         - usuários e grupos de acesso
+         - armazenamento de senhas
          - variáveis e dados sensíveis
          - registry do docker
          - Docker Hub
@@ -41,19 +10,9 @@ Vamos de Sirius Hub Educação !
          - Imagens não oficiais
       - boas práticas
          - em ambientes - desenvolvimento, homologação e produção
-     - Criação de uma GitPage para a Sirius
-       - Em vez de criar o tutorial inteiro no README.md, criar em uma página do GitPages
+    - 11. Construção e deploy do ambiente local com Docker para a Cloud na AWS e Azure
+    - 12. Demonstração da plataforma
 
-
-    - 11. Construção e deploy do ambiente local com Docker para a Cloud na AWS
-
----
-
-#### Trilha de aprendizado do módulo: 1. Criação e navegação pelas contas da AWS e GithHub
-    - Criação e navegação pela conta na Cloud na AWS
-    - Criação e navegação pela conta do Github
-    - Aprender a instalar e sincronizar o Github Desktop
-    - Dicas sobre a conta na AWS e Github
 ---
 
 #### Trilha de aprendizado do módulo: 2. Construção do ambiente local com Docker
@@ -106,10 +65,6 @@ Vamos de Sirius Hub Educação !
 10. Estrutura de diretórios e repositórios (com boas práticas)
 
 11. Avaliação crítica do projeto (notas, sugestões e recomendações)
-
----
-
-#### Trilha de aprendizado do módulo: 3. Construção e deploy do ambiente local com Docker para a Cloud na AWS
 
 ---
 
